@@ -27,7 +27,6 @@ const variantStyle: Record<CardVariant, React.CSSProperties> = {
   },
   flat: {
     background: "var(--neu-bg)",
-    border: "1px solid var(--neu-border)",
     borderRadius: "var(--neu-radius-lg)",
   },
 };

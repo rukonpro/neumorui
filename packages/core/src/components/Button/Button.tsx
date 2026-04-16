@@ -31,7 +31,7 @@ const sizeClasses: Record<ButtonSize, string> = {
 const variantClasses: Record<ButtonVariant, string> = {
   raised:
     "neu-raised neu-transition hover:-translate-y-0.5 active:shadow-neu-inset active:translate-y-0",
-  flat: "neu-flat border border-[var(--neu-border)] neu-transition hover:shadow-neu-raised-sm",
+  flat: "neu-flat neu-transition hover:shadow-neu-raised-sm",
   inset: "neu-inset neu-transition",
   pill: "neu-raised-sm neu-transition rounded-full hover:-translate-y-0.5 active:shadow-neu-inset",
   icon: "neu-raised-sm neu-transition hover:-translate-y-0.5 active:shadow-neu-inset rounded-neu aspect-square !px-0",

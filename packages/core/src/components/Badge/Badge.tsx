@@ -17,27 +17,22 @@ const variantStyle: Record<BadgeVariant, React.CSSProperties> = {
   primary: {
     background: "var(--neu-tint-primary)",
     color: "var(--neu-tint-primary-text)",
-    border: "1px solid var(--neu-tint-primary-border)",
   },
   success: {
     background: "var(--neu-tint-success)",
     color: "var(--neu-tint-success-text)",
-    border: "1px solid var(--neu-tint-success-border)",
   },
   danger: {
     background: "var(--neu-tint-danger)",
     color: "var(--neu-tint-danger-text)",
-    border: "1px solid var(--neu-tint-danger-border)",
   },
   warning: {
     background: "var(--neu-tint-warning)",
     color: "var(--neu-tint-warning-text)",
-    border: "1px solid var(--neu-tint-warning-border)",
   },
   info: {
     background: "var(--neu-tint-info)",
     color: "var(--neu-tint-info-text)",
-    border: "1px solid var(--neu-tint-info-border)",
   },
 };
 
