@@ -31,10 +31,14 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill"
             disabled={tab.disabled}
             className={cn(
               "flex-1 px-4 py-2 text-sm font-medium rounded-neu neu-transition cursor-pointer",
-              "outline-none disabled:opacity-50 disabled:cursor-not-allowed",
+              "bg-transparent border-0 outline-none disabled:opacity-50 disabled:cursor-not-allowed",
               "data-[state=active]:neu-raised data-[state=active]:font-semibold"
             )}
-            style={{ color: "var(--neu-text-secondary)" }}
+            style={{
+              background: "transparent",
+              color: "var(--neu-text-secondary)",
+              font: "inherit",
+            }}
           >
             {tab.label}
           </RadixTabs.Trigger>

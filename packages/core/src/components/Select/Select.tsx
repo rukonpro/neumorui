@@ -36,8 +36,12 @@ export const Select: React.FC<SelectProps> = ({
       )}
       <RadixSelect.Root value={value} onValueChange={onValueChange} disabled={disabled}>
         <RadixSelect.Trigger
-          className="w-full flex items-center justify-between px-4 py-3 rounded-neu text-sm outline-none cursor-pointer neu-inset neu-transition"
-          style={{ color: value ? "var(--neu-text-primary)" : "var(--neu-text-muted)" }}
+          className="w-full flex items-center justify-between px-4 py-3 rounded-neu text-sm outline-none cursor-pointer neu-inset neu-transition border-0"
+          style={{
+            background: "var(--neu-bg)",
+            color: value ? "var(--neu-text-primary)" : "var(--neu-text-muted)",
+            font: "inherit",
+          }}
         >
           <RadixSelect.Value placeholder={placeholder} />
           <RadixSelect.Icon>

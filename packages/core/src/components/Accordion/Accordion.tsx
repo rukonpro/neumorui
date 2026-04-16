@@ -69,11 +69,15 @@ export const Accordion: React.FC<AccordionProps> = ({
             <RadixAccordion.Trigger
               className={cn(
                 "group flex w-full items-center justify-between px-4 py-3 text-sm font-medium",
-                "cursor-pointer outline-none neu-transition",
+                "cursor-pointer outline-none neu-transition bg-transparent border-0",
                 "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
                 "disabled:opacity-50 disabled:cursor-not-allowed"
               )}
-              style={{ color: "var(--neu-text-primary)" }}
+              style={{
+                background: "transparent",
+                color: "var(--neu-text-primary)",
+                font: "inherit",
+              }}
             >
               {item.title}
               <Chevron />
