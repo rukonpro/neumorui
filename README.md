@@ -12,7 +12,7 @@ Neumorphic UI component library for React — TypeScript, Tailwind CSS, Radix pr
 ```bash
 pnpm install
 pnpm build
-pnpm --filter storybook dev
+pnpm --filter @neumorui/storybook dev
 ```
 
 ## Scripts
@@ -23,7 +23,7 @@ pnpm --filter storybook dev
 | `pnpm test` | Run tests across the monorepo |
 | `pnpm lint` | Lint all packages |
 | `pnpm dev` | Watch mode (all packages) |
-| `pnpm --filter storybook dev` | Start Storybook at http://localhost:6006 |
+| `pnpm --filter @neumorui/storybook dev` | Start Storybook at http://localhost:6006 |
 | `pnpm changeset` | Create a new changeset for release |
 
 ## Tech

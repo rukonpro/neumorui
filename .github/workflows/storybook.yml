@@ -26,7 +26,7 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter neumorui build
-      - run: pnpm --filter storybook build
+      - run: pnpm --filter @neumorui/storybook build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
