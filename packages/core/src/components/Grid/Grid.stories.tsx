@@ -10,24 +10,29 @@ const meta: Meta<typeof Grid> = {
 export default meta;
 type Story = StoryObj<typeof Grid>;
 
-const Box = ({ children, color }: { children: React.ReactNode; color?: string }) => (
+const Box = ({ children, color, h }: { children: React.ReactNode; color?: string; h?: string }) => (
   <div
     style={{
       padding: "16px",
       borderRadius: "14px",
       background: color || "var(--neu-tint-primary)",
-      color: "var(--neu-tint-primary-text)",
+      color: color ? "var(--neu-text-primary)" : "var(--neu-tint-primary-text)",
       fontSize: "13px",
       fontWeight: 700,
       textAlign: "center",
       boxShadow: "var(--neu-shadow-raised-sm)",
+      height: h,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     }}
   >
     {children}
   </div>
 );
 
-export const Default: Story = {
+export const BasicGrid: Story = {
+  name: "Basic 3-Column",
   render: () => (
     <Grid cols={3} gap={16}>
       <Box>1</Box>
@@ -40,38 +45,144 @@ export const Default: Story = {
   ),
 };
 
-export const AutoFit: Story = {
+export const CustomGap: Story = {
+  name: "Custom Gap (row vs col)",
   render: () => (
-    <Grid minChildWidth="200px" gap={16}>
-      <Card>Card 1</Card>
-      <Card>Card 2</Card>
-      <Card>Card 3</Card>
-      <Card>Card 4</Card>
+    <Grid cols={4} rowGap={24} colGap={8}>
+      <Box>rowGap: 24</Box>
+      <Box>colGap: 8</Box>
+      <Box>rowGap: 24</Box>
+      <Box>colGap: 8</Box>
+      <Box>row 2</Box>
+      <Box>row 2</Box>
+      <Box>row 2</Box>
+      <Box>row 2</Box>
     </Grid>
   ),
 };
 
-export const ColSpan: Story = {
+export const AutoFitResponsive: Story = {
+  name: "Auto-Fit Responsive",
+  render: () => (
+    <Grid minChildWidth="200px" gap={16}>
+      <Card>Auto 1</Card>
+      <Card>Auto 2</Card>
+      <Card>Auto 3</Card>
+      <Card>Auto 4</Card>
+      <Card>Auto 5</Card>
+    </Grid>
+  ),
+};
+
+export const ColSpanLayout: Story = {
+  name: "12-Column Span",
   render: () => (
     <Grid cols={12} gap={16}>
-      <Col span={7}>
-        <Card>Main content (span 7)</Card>
-      </Col>
-      <Col span={5}>
-        <Card>Sidebar (span 5)</Card>
+      <Col span={8}>
+        <Box color="var(--neu-tint-primary)">span 8</Box>
       </Col>
       <Col span={4}>
-        <Box>4 cols</Box>
+        <Box color="var(--neu-tint-success)">span 4</Box>
       </Col>
-      <Col span={4}>
-        <Box color="var(--neu-tint-success)">4 cols</Box>
+      <Col span={3}>
+        <Box color="var(--neu-tint-danger)">3</Box>
       </Col>
-      <Col span={4}>
-        <Box color="var(--neu-tint-danger)">4 cols</Box>
+      <Col span={3}>
+        <Box color="var(--neu-tint-warning)">3</Box>
+      </Col>
+      <Col span={3}>
+        <Box color="var(--neu-tint-info)">3</Box>
+      </Col>
+      <Col span={3}>
+        <Box color="var(--neu-tint-primary)">3</Box>
       </Col>
       <Col span={12}>
-        <Card variant="inset">Full width (span 12)</Card>
+        <Box>Full width — span 12</Box>
       </Col>
+    </Grid>
+  ),
+};
+
+export const RowSpan: Story = {
+  name: "Row Span",
+  render: () => (
+    <Grid cols={3} gap={16} autoRows="80px">
+      <Col rowSpan={2}>
+        <Box color="var(--neu-tint-primary)" h="100%">Row span 2</Box>
+      </Col>
+      <Box>A</Box>
+      <Box>B</Box>
+      <Box>C</Box>
+      <Box>D</Box>
+    </Grid>
+  ),
+};
+
+export const Alignment: Story = {
+  name: "Align & Justify",
+  render: () => (
+    <Grid cols={3} gap={16} alignItems="center" justifyItems="center" style={{ minHeight: "200px" }}>
+      <Box h="40px">Short</Box>
+      <Box h="100px">Tall</Box>
+      <Box h="60px">Medium</Box>
+    </Grid>
+  ),
+};
+
+export const ColAlignment: Story = {
+  name: "Col Self-Alignment",
+  render: () => (
+    <Grid cols={3} gap={16} style={{ minHeight: "200px" }}>
+      <Col alignSelf="start">
+        <Box>align: start</Box>
+      </Col>
+      <Col alignSelf="center">
+        <Box color="var(--neu-tint-success)">align: center</Box>
+      </Col>
+      <Col alignSelf="end">
+        <Box color="var(--neu-tint-danger)">align: end</Box>
+      </Col>
+    </Grid>
+  ),
+};
+
+export const ColOrder: Story = {
+  name: "Col Order",
+  render: () => (
+    <Grid cols={3} gap={16}>
+      <Col order={3}><Box color="var(--neu-tint-danger)">Order 3 (1st in DOM)</Box></Col>
+      <Col order={1}><Box color="var(--neu-tint-success)">Order 1 (2nd in DOM)</Box></Col>
+      <Col order={2}><Box color="var(--neu-tint-primary)">Order 2 (3rd in DOM)</Box></Col>
+    </Grid>
+  ),
+};
+
+export const GridAreas: Story = {
+  name: "Grid Areas",
+  render: () => (
+    <Grid
+      templateColumns="1fr 1fr 1fr"
+      templateRows="auto auto"
+      areas={`"header header header" "sidebar main main"`}
+      gap={16}
+    >
+      <Col area="header"><Box>Header</Box></Col>
+      <Col area="sidebar"><Box color="var(--neu-tint-success)" h="120px">Sidebar</Box></Col>
+      <Col area="main"><Box color="var(--neu-tint-primary)" h="120px">Main Content</Box></Col>
+    </Grid>
+  ),
+};
+
+export const DenseFlow: Story = {
+  name: "Dense Auto-Flow",
+  render: () => (
+    <Grid cols={3} gap={12} flow="row dense" autoRows="60px">
+      <Col span={2}><Box color="var(--neu-tint-primary)">Span 2</Box></Col>
+      <Box>A</Box>
+      <Box>B</Box>
+      <Col span={2}><Box color="var(--neu-tint-success)">Span 2</Box></Col>
+      <Box>C</Box>
+      <Box>D</Box>
     </Grid>
   ),
 };
