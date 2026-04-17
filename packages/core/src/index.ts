@@ -107,4 +107,25 @@ export { AnnouncementBar } from "./components/AnnouncementBar/AnnouncementBar";
 export { CookieConsent } from "./components/CookieConsent/CookieConsent";
 export type { CookieOption } from "./components/CookieConsent/CookieConsent";
 
+// Data visualization (batch 3)
+export { LineChart } from "./components/LineChart/LineChart";
+export type { LineChartDataItem } from "./components/LineChart/LineChart";
+export { KanbanBoard } from "./components/KanbanBoard/KanbanBoard";
+export { Heatmap } from "./components/Heatmap/Heatmap";
+export { TreeView } from "./components/TreeView/TreeView";
+export type { TreeNode } from "./components/TreeView/TreeView";
+export { ActivityFeed } from "./components/ActivityFeed/ActivityFeed";
+export { ComparisonTable } from "./components/ComparisonTable/ComparisonTable";
+
+// Feedback (batch 3)
+export { LoadingOverlay } from "./components/LoadingOverlay/LoadingOverlay";
+export { ConfirmDialog } from "./components/ConfirmDialog/ConfirmDialog";
+
+// Navigation (batch 3)
+export { BrowserTabs } from "./components/BrowserTabs/BrowserTabs";
+
+// Layout (batch 3)
+export { Hero } from "./components/Hero/Hero";
+export { PricingCard } from "./components/PricingCard/PricingCard";
+
 export { cn } from "./utils/cn";
