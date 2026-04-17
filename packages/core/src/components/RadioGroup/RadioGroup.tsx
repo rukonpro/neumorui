@@ -61,8 +61,8 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
                 "neu-transition focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]"
               )}
               style={{
-                background: "var(--neu-bg)",
-                boxShadow: "var(--neu-shadow-inset-sm)",
+                background: "var(--neu-bg-light, var(--neu-bg))",
+                boxShadow: "var(--neu-shadow-inset)",
               }}
             >
               <RadixRadio.Indicator
