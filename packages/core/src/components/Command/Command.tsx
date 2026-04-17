@@ -36,11 +36,75 @@ const groupBy = <T, K extends string>(arr: T[], key: (item: T) => K | undefined)
 };
 
 const SearchIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+  <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
     <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.3" />
     <path d="M10 10l3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
   </svg>
 );
+
+const CommandItemRow: React.FC<{
+  item: CommandItem;
+  onSelect: () => void;
+}> = ({ item, onSelect }) => {
+  return (
+    <Cmdk.Item
+      value={item.value}
+      keywords={item.keywords}
+      onSelect={onSelect}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        padding: "10px 14px",
+        borderRadius: "12px",
+        cursor: "pointer",
+        fontSize: "14px",
+        fontWeight: 600,
+        color: "var(--neu-text-primary)",
+        transition: "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)",
+        border: "none",
+        outline: "none",
+      }}
+    >
+      {item.icon && (
+        <span
+          style={{
+            width: "32px",
+            height: "32px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "10px",
+            background: "var(--neu-bg)",
+            boxShadow: "var(--neu-shadow-raised-sm)",
+            fontSize: "14px",
+            flexShrink: 0,
+            color: "var(--neu-accent)",
+          }}
+        >
+          {item.icon}
+        </span>
+      )}
+      <span style={{ flex: 1 }}>{item.label}</span>
+      {item.shortcut && (
+        <span
+          style={{
+            fontSize: "11px",
+            fontWeight: 700,
+            padding: "3px 8px",
+            borderRadius: "8px",
+            background: "var(--neu-bg)",
+            boxShadow: "var(--neu-shadow-raised-sm)",
+            color: "var(--neu-text-muted)",
+            letterSpacing: "0.05em",
+          }}
+        >
+          {item.shortcut}
+        </span>
+      )}
+    </Cmdk.Item>
+  );
+};
 
 export const Command: React.FC<CommandProps> = ({
   open,
@@ -59,38 +123,105 @@ export const Command: React.FC<CommandProps> = ({
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
       <RadixDialog.Portal>
         <RadixDialog.Overlay
-          className="fixed inset-0 z-40 backdrop-blur-sm animate-[fadeIn_0.2s_ease]"
-          style={{ background: "rgba(0,0,0,0.35)" }}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 40,
+            background: "rgba(0,0,0,0.35)",
+            backdropFilter: "blur(6px)",
+            animation: "fadeIn 0.2s ease",
+          }}
         />
         <RadixDialog.Content
-          className={cn("neu-scale-in fixed left-1/2 top-[20%] -translate-x-1/2 z-50 w-full max-w-lg outline-none", className)}
+          className={cn(className)}
           style={{
+            position: "fixed",
+            left: "50%",
+            top: "20%",
+            transform: "translateX(-50%)",
+            zIndex: 50,
+            width: "100%",
+            maxWidth: "520px",
+            outline: "none",
             background: "var(--neu-bg)",
-            borderRadius: "20px",
+            borderRadius: "22px",
             boxShadow: "var(--neu-shadow-raised-lg)",
+            overflow: "hidden",
+            animation: "fadeUp 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
             ...style,
           }}
           {...rest}
         >
-          <RadixDialog.Title className="sr-only">{title}</RadixDialog.Title>
-          <Cmdk label={title} className="flex flex-col overflow-hidden rounded-[inherit]">
+          <RadixDialog.Title
+            style={{
+              position: "absolute",
+              width: "1px",
+              height: "1px",
+              overflow: "hidden",
+              clip: "rect(0,0,0,0)",
+            }}
+          >
+            {title}
+          </RadixDialog.Title>
+          <Cmdk
+            label={title}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              overflow: "hidden",
+            }}
+          >
+            {/* Search input area */}
             <div
-              className="flex items-center gap-2.5 px-4 py-[14px]"
-              style={{ borderBottom: "1px solid var(--neu-border)" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                padding: "16px 18px",
+                borderBottom: "1px solid var(--neu-border)",
+              }}
             >
-              <span style={{ color: "var(--neu-text-secondary)" }}>
+              <span
+                style={{
+                  color: "var(--neu-accent)",
+                  display: "flex",
+                  alignItems: "center",
+                  flexShrink: 0,
+                }}
+              >
                 <SearchIcon />
               </span>
               <Cmdk.Input
                 placeholder={placeholder}
-                className="flex-1 bg-transparent outline-none text-sm"
-                style={{ color: "var(--neu-text-primary)" }}
+                style={{
+                  flex: 1,
+                  background: "transparent",
+                  outline: "none",
+                  border: "none",
+                  fontSize: "15px",
+                  fontWeight: 600,
+                  fontFamily: "inherit",
+                  color: "var(--neu-text-primary)",
+                }}
               />
             </div>
-            <Cmdk.List className="max-h-80 overflow-y-auto p-2">
+
+            {/* Results list */}
+            <Cmdk.List
+              style={{
+                maxHeight: "320px",
+                overflowY: "auto",
+                padding: "10px",
+              }}
+            >
               <Cmdk.Empty
-                className="py-6 text-center text-sm"
-                style={{ color: "var(--neu-text-muted)" }}
+                style={{
+                  padding: "24px",
+                  textAlign: "center",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  color: "var(--neu-text-muted)",
+                }}
               >
                 {emptyMessage}
               </Cmdk.Empty>
@@ -98,40 +229,44 @@ export const Command: React.FC<CommandProps> = ({
                 <Cmdk.Group
                   key={group}
                   heading={group === "__default__" ? undefined : group}
-                  className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pt-2 [&_[cmdk-group-heading]]:pb-1 [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-widest [&_[cmdk-group-heading]]:font-semibold"
-                  style={{ ["--heading-color" as any]: "var(--neu-text-muted)" }}
                 >
                   {groupItems.map((item) => (
-                    <Cmdk.Item
+                    <CommandItemRow
                       key={item.value}
-                      value={item.value}
-                      keywords={item.keywords}
+                      item={item}
                       onSelect={() => {
                         item.onSelect?.();
                         onOpenChange?.(false);
                       }}
-                      className={cn(
-                        "flex items-center gap-2.5 text-sm rounded-neu cursor-pointer neu-transition",
-                        "data-[selected=true]:shadow-neu-inset-sm"
-                      )}
-                      style={{ color: "var(--neu-text-primary)", padding: "9px 14px" }}
-                    >
-                      {item.icon && <span className="w-4 h-4 shrink-0">{item.icon}</span>}
-                      <span className="flex-1">{item.label}</span>
-                      {item.shortcut && (
-                        <span
-                          className="text-xs tracking-wider"
-                          style={{ color: "var(--neu-text-muted)" }}
-                        >
-                          {item.shortcut}
-                        </span>
-                      )}
-                    </Cmdk.Item>
+                    />
                   ))}
                 </Cmdk.Group>
               ))}
             </Cmdk.List>
           </Cmdk>
+
+          {/* Style for cmdk internals */}
+          <style>{`
+            [cmdk-group-heading] {
+              padding: 8px 14px 4px;
+              font-size: 10px;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.1em;
+              color: var(--neu-text-muted);
+            }
+            [cmdk-item][data-selected="true"] {
+              background: var(--neu-bg);
+              box-shadow: var(--neu-shadow-inset-sm);
+              color: var(--neu-accent) !important;
+            }
+            [cmdk-item]:not([data-selected="true"]):hover {
+              transform: translateX(4px);
+            }
+            [cmdk-input]::placeholder {
+              color: var(--neu-text-muted);
+            }
+          `}</style>
         </RadixDialog.Content>
       </RadixDialog.Portal>
     </RadixDialog.Root>

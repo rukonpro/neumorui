@@ -232,7 +232,7 @@ function CardDemo() {
 
 function GridDemo() {
   return (
-    <Grid cols={3} gap={12}>
+    <Grid cols={3} gap={24}>
       {[1, 2, 3, 4, 5, 6].map((i) => (
         <div
           key={i}
@@ -255,7 +255,7 @@ function GridDemo() {
 
 function ColDemo() {
   return (
-    <Grid cols={12} gap={12}>
+    <Grid cols={12} gap={24}>
       <Col span={4}>
         <div style={{ padding: "12px", borderRadius: "12px", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-sm)", textAlign: "center", fontWeight: 700, fontSize: "13px" }}>
           span=4
@@ -310,6 +310,7 @@ function PricingCardDemo() {
             { label: "5 projects", included: true },
             { label: "Basic support", included: true },
             { label: "API access", included: false },
+            { label: "Custom domain", included: false },
           ],
           cta: { label: "Start free" },
         },
@@ -323,8 +324,21 @@ function PricingCardDemo() {
             { label: "Unlimited projects", included: true },
             { label: "Priority support", included: true },
             { label: "API access", included: true },
+            { label: "Custom domain", included: false },
           ],
           cta: { label: "Upgrade", variant: "primary" },
+        },
+        {
+          name: "Enterprise",
+          price: "$49",
+          period: "/mo",
+          features: [
+            { label: "Unlimited projects", included: true },
+            { label: "24/7 support", included: true },
+            { label: "API access", included: true },
+            { label: "Custom domain", included: true },
+          ],
+          cta: { label: "Contact us" },
         },
       ]}
     />
@@ -1022,30 +1036,37 @@ function CarouselDemo() {
   return (
     <div style={{ maxWidth: "500px" }}>
       <Carousel
+        autoPlay
+        interval={5000}
+        showProgress
+        pauseOnHover
+        slideHeight={200}
         slides={[
           {
             content: (
               <div style={{ padding: "40px", textAlign: "center" }}>
-                <h3 style={{ fontWeight: 800, fontSize: "18px", marginBottom: "8px" }}>Slide 1</h3>
-                <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)" }}>First slide content</p>
+                <h3 style={{ fontWeight: 800, fontSize: "18px", marginBottom: "8px", color: "#fff" }}>Slide 1</h3>
+                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)" }}>Drag or swipe to navigate</p>
               </div>
             ),
           },
           {
             content: (
               <div style={{ padding: "40px", textAlign: "center" }}>
-                <h3 style={{ fontWeight: 800, fontSize: "18px", marginBottom: "8px" }}>Slide 2</h3>
-                <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)" }}>Second slide content</p>
+                <h3 style={{ fontWeight: 800, fontSize: "18px", marginBottom: "8px", color: "#fff" }}>Slide 2</h3>
+                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)" }}>Use arrow keys too</p>
               </div>
             ),
+            background: "linear-gradient(135deg, var(--neu-success-light), var(--neu-success-dark))",
           },
           {
             content: (
               <div style={{ padding: "40px", textAlign: "center" }}>
-                <h3 style={{ fontWeight: 800, fontSize: "18px", marginBottom: "8px" }}>Slide 3</h3>
-                <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)" }}>Third slide content</p>
+                <h3 style={{ fontWeight: 800, fontSize: "18px", marginBottom: "8px", color: "#fff" }}>Slide 3</h3>
+                <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)" }}>Hover to pause autoplay</p>
               </div>
             ),
+            background: "linear-gradient(135deg, var(--neu-danger-light), var(--neu-danger-dark))",
           },
         ]}
       />
@@ -1369,7 +1390,7 @@ function App() {
     preview: <GridDemo />,
     code: `import { Grid } from "neumorui";
 
-<Grid cols={3} gap={12}>
+<Grid cols={3} gap={24}>
   <div>Cell 1</div>
   <div>Cell 2</div>
   <div>Cell 3</div>
@@ -1473,7 +1494,7 @@ function App() {
     preview: <ColDemo />,
     code: `import { Grid, Col } from "neumorui";
 
-<Grid cols={12} gap={12}>
+<Grid cols={12} gap={24}>
   <Col span={4}><div>span=4</div></Col>
   <Col span={8}><div>span=8</div></Col>
 </Grid>`,
@@ -1621,6 +1642,8 @@ const data = [
       { name: "trend", type: '{ value: string; direction: "up" | "down" }', default: "-" },
       { name: "color", type: "string", default: "-" },
       { name: "description", type: "string", default: "-" },
+      { name: "animate", type: "boolean", default: "true" },
+      { name: "duration", type: "number", default: "1200" },
     ],
   },
   {
@@ -2525,13 +2548,16 @@ function App() {
     slug: "carousel",
     name: "Carousel",
     category: "Animation",
-    description: "Slide carousel with prev/next buttons, dot indicators, and autoplay.",
+    description: "Slide carousel with drag/swipe, keyboard nav, autoplay with progress bar, and dot indicators.",
     preview: <CarouselDemo />,
     code: `import { Carousel } from "neumorui";
 
 <Carousel
   autoPlay
   interval={4000}
+  pauseOnHover
+  showProgress
+  slideHeight={200}
   slides={[
     { content: <div>Slide 1</div> },
     { content: <div>Slide 2</div> },
@@ -2542,6 +2568,12 @@ function App() {
       { name: "slides", type: "CarouselSlide[]", default: "[]" },
       { name: "autoPlay", type: "boolean", default: "false" },
       { name: "interval", type: "number", default: "4000" },
+      { name: "pauseOnHover", type: "boolean", default: "true" },
+      { name: "loop", type: "boolean", default: "true" },
+      { name: "showArrows", type: "boolean", default: "true" },
+      { name: "showDots", type: "boolean", default: "true" },
+      { name: "showProgress", type: "boolean", default: "false" },
+      { name: "slideHeight", type: "number | string", default: "200" },
     ],
   },
 ];

@@ -32,7 +32,7 @@ export const ComponentPreview: React.FC<ComponentPreviewProps> = ({ preview, cod
           borderBottom: "1px solid rgba(0,0,0,0.05)",
         }}
       >
-        <div style={{ width: "100%", maxWidth: "600px" }}>
+        <div style={{ width: "100%" }}>
           {preview}
         </div>
       </div>

@@ -17,6 +17,8 @@ interface DatePickerProps {
   style?: React.CSSProperties;
 }
 
+const transition = "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)";
+
 const CalendarIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
     <rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" strokeWidth="1.3" />
@@ -38,13 +40,55 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   ...rest
 }) => {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const triggerStyle: React.CSSProperties = {
+    display: "flex",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "8px",
+    padding: "14px 18px",
+    borderRadius: "14px",
+    fontSize: "14px",
+    fontWeight: 600,
+    fontFamily: "inherit",
+    border: "none",
+    outline: "none",
+    cursor: disabled ? "not-allowed" : "pointer",
+    opacity: disabled ? 0.5 : 1,
+    background: "var(--neu-bg)",
+    color: value ? "var(--neu-text-primary)" : "var(--neu-text-muted)",
+    boxShadow: open
+      ? "var(--neu-shadow-inset-sm)"
+      : hovered
+        ? "var(--neu-shadow-raised)"
+        : "var(--neu-shadow-raised-sm)",
+    transform: hovered && !open ? "translateY(-1px)" : "none",
+    transition,
+  };
 
   return (
-    <div className={cn("flex flex-col gap-1.5 w-full", className)} style={style} {...rest}>
+    <div
+      className={cn(className)}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+        width: "100%",
+        ...style,
+      }}
+      {...rest}
+    >
       {label && (
         <label
-          className="text-xs font-semibold uppercase tracking-widest"
-          style={{ color: "var(--neu-text-secondary)" }}
+          style={{
+            fontSize: "11px",
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            color: "var(--neu-text-secondary)",
+          }}
         >
           {label}
         </label>
@@ -52,19 +96,28 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       <RadixPopover.Root open={open} onOpenChange={setOpen}>
         <RadixPopover.Trigger
           disabled={disabled}
-          className={cn(
-            "w-full flex items-center justify-between gap-2 px-4 py-3 rounded-neu text-sm",
-            "outline-none cursor-pointer neu-inset neu-transition",
-            "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]/40",
-            "disabled:opacity-50 disabled:cursor-not-allowed"
-          )}
-          style={{
-            background: "var(--neu-bg)",
-            color: value ? "var(--neu-text-primary)" : "var(--neu-text-muted)",
-          }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          style={triggerStyle}
         >
           <span>{value ? format(value, dateFormat) : placeholder}</span>
-          <span style={{ color: "var(--neu-text-secondary)" }}>
+          <span
+            style={{
+              width: "32px",
+              height: "32px",
+              borderRadius: "10px",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "var(--neu-bg)",
+              boxShadow: open
+                ? "var(--neu-shadow-inset-sm)"
+                : "var(--neu-shadow-raised-sm)",
+              color: open ? "var(--neu-accent)" : "var(--neu-text-secondary)",
+              flexShrink: 0,
+              transition,
+            }}
+          >
             <CalendarIcon />
           </span>
         </RadixPopover.Trigger>
@@ -72,11 +125,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           <RadixPopover.Content
             sideOffset={8}
             align="start"
-            className="z-50 outline-none animate-[fadeUp_0.18s_ease]"
             style={{
+              zIndex: 50,
+              outline: "none",
               background: "var(--neu-bg)",
-              borderRadius: "var(--neu-radius-lg)",
+              borderRadius: "20px",
               boxShadow: "var(--neu-shadow-raised-lg)",
+              animation: "fadeUp 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
             <Calendar

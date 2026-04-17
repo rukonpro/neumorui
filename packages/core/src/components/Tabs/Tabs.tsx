@@ -38,7 +38,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill"
             key={tab.value}
             value={tab.value}
             disabled={tab.disabled}
-            className="data-[state=active]:neu-tab-active"
+            className="neu-tab-active"
             style={{
               flex: 1,
               padding: "9px 16px",

@@ -85,7 +85,8 @@ function LoginPage() {
 - **Clay/Neumorphic design** — Soft shadows, no hard borders, depth through light
 - **Dark mode** — `<NeuProvider followSystemTheme>` or manual `toggleTheme()`
 - **Fully customizable** — Every component accepts `className`, `style`, and `...rest` props
-- **Animations** — Hover lifts, press effects, scroll reveal, entrance animations, spring easing
+- **Animations** — Hover lifts, press effects, scroll reveal, count-up numbers, spring easing
+- **Interactive feedback** — Raised/inset shadow states, drag/swipe, keyboard navigation
 - **TypeScript** — Full type definitions, no `any`
 - **Radix UI** — Accessible primitives for overlays, forms, and navigation
 - **Pure inline styles** — No Tailwind required, zero CSS conflicts
