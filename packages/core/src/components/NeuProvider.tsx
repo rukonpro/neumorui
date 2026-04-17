@@ -34,23 +34,22 @@ export const NeuProvider: React.FC<NeuProviderProps> = ({
   defaultAccent = "violet",
   followSystemTheme = false,
 }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("neu-theme") as Theme | null;
-      if (saved === "light" || saved === "dark") return saved;
+  const [theme, setThemeState] = useState<Theme>(defaultTheme);
+  const [accent, setAccentState] = useState<AccentColor>(defaultAccent);
+
+  // Restore from localStorage after mount (avoids SSR hydration mismatch)
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("neu-theme") as Theme | null;
+    if (savedTheme === "light" || savedTheme === "dark") {
+      setThemeState(savedTheme);
+    } else if (followSystemTheme) {
+      setThemeState(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     }
-    if (followSystemTheme && typeof window !== "undefined") {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    const savedAccent = localStorage.getItem("neu-accent") as AccentColor | null;
+    if (savedAccent && savedAccent in accentMap) {
+      setAccentState(savedAccent);
     }
-    return defaultTheme;
-  });
-  const [accent, setAccentState] = useState<AccentColor>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("neu-accent") as AccentColor | null;
-      if (saved && saved in accentMap) return saved;
-    }
-    return defaultAccent;
-  });
+  }, [followSystemTheme]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
