@@ -199,6 +199,7 @@ export const DocsSidebar: React.FC<{
           borderRadius: "16px",
           boxShadow: "var(--neu-shadow-raised-sm)",
           textDecoration: "none",
+          marginBottom: "10px",
           transition: "all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)",
         }}
       >
