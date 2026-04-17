@@ -54,8 +54,11 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
             </svg>
           </button>
 
-          <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--neu-text-muted)" }}>
-            NeumorUI Docs
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <img src="/favicon.svg" alt="NeumorUI" style={{ width: "28px", height: "28px" }} />
+            <span style={{ fontSize: "14px", fontWeight: 900, color: "var(--neu-text-primary)", letterSpacing: "-0.02em" }}>
+              NeumorUI
+            </span>
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -195,6 +198,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <title>NeumorUI - Documentation</title>
         <meta name="description" content="Documentation for NeumorUI - 61 clay-style React components" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body>
         <NeuProvider defaultTheme="light" defaultAccent="violet">

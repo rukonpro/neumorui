@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Outer clay circle -->
+  <circle cx="32" cy="32" r="30" fill="#f0f4ff"/>
+  <circle cx="32" cy="32" r="30" fill="url(#shadow)"/>
+
+  <!-- Inner raised N shape -->
+  <path d="M20 44V20h4l16 18V20h4v24h-4L24 26v18h-4z" fill="url(#grad)" />
+
+  <!-- Subtle highlight on N -->
+  <path d="M20 44V20h4l16 18V20h4v24h-4L24 26v18h-4z" fill="url(#highlight)" opacity="0.3"/>
+
+  <defs>
+    <!-- Clay shadow gradient -->
+    <radialGradient id="shadow" cx="0.35" cy="0.35" r="0.7">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
+      <stop offset="100%" stop-color="rgba(180,190,220,0.4)"/>
+    </radialGradient>
+
+    <!-- Accent gradient for N -->
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8490fa"/>
+      <stop offset="100%" stop-color="#5a6cf5"/>
+    </linearGradient>
+
+    <!-- Top-left highlight -->
+    <linearGradient id="highlight" x1="0" y1="0" x2="0.5" y2="0.5">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
+  </defs>
+</svg>
