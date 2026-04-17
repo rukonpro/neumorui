@@ -164,13 +164,30 @@ export const DocsSidebar: React.FC<{
         position: "sticky",
         top: 0,
         overflowY: "auto",
-        padding: "16px 12px",
+        padding: "0 12px 16px",
         background: "var(--neu-bg)",
         borderRight: "1px solid rgba(0,0,0,0.04)",
         transition: "background 0.35s ease",
       }}
     >
-      {/* Brand */}
+      {/* Brand + Search — sticky */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+          background: "var(--neu-bg)",
+          paddingTop: "16px",
+          paddingBottom: "12px",
+          marginBottom: "4px",
+          marginLeft: "-12px",
+          marginRight: "-12px",
+          paddingLeft: "12px",
+          paddingRight: "12px",
+          boxShadow: "0 8px 16px var(--neu-bg)",
+          transition: "background 0.35s ease",
+        }}
+      >
       <Link
         href="/"
         onClick={onClose}
@@ -179,7 +196,6 @@ export const DocsSidebar: React.FC<{
           alignItems: "center",
           gap: "10px",
           padding: "12px",
-          marginBottom: "12px",
           borderRadius: "16px",
           boxShadow: "var(--neu-shadow-raised-sm)",
           textDecoration: "none",
@@ -241,6 +257,7 @@ export const DocsSidebar: React.FC<{
         />
       </div>
 
+      </div>
       {/* Home link */}
       <Link
         href="/"
