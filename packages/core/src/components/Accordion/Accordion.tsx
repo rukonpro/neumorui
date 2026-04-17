@@ -99,6 +99,7 @@ export const Accordion: React.FC<AccordionProps> = ({
               overflow: "hidden",
               fontSize: "14px",
               color: "var(--neu-text-secondary)",
+              animation: "neu-accordion-expand 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
             <div style={{ padding: "0 18px 18px", lineHeight: 1.6 }}>{item.content}</div>

@@ -71,6 +71,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
                   background:
                     "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
                   boxShadow: "0 0 6px var(--neu-accent-glow)",
+                  animation: "neu-radio-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
                 }}
               />
             </RadixRadio.Item>

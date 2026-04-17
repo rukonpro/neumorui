@@ -30,6 +30,8 @@ export const DonutChart: React.FC<DonutChartProps> = ({
   const total = segments.reduce((sum, s) => sum + s.value, 0) || 1;
 
   let cumulativeOffset = 0;
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => { setMounted(true); }, []);
 
   return (
     <div
@@ -74,6 +76,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
                 strokeLinecap="round"
                 style={{
                   transition: "stroke-dashoffset 0.6s cubic-bezier(0.34, 1.2, 0.64, 1)",
+                  strokeDashoffset: mounted ? undefined : circumference,
                 }}
               />
             );

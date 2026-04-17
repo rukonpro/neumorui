@@ -33,19 +33,25 @@ export const Alert: React.FC<AlertProps> = ({
   style,
   ...props
 }) => {
+  const [hovered, setHovered] = React.useState(false);
   const { bg, text } = paletteMap[variant];
   return (
     <div
       role="alert"
       className={className}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         display: "flex",
         alignItems: "flex-start",
         gap: "12px",
         padding: "12px 14px",
         borderRadius: "14px",
-        boxShadow: "var(--neu-shadow-raised-sm)",
+        boxShadow: hovered ? "var(--neu-shadow-raised)" : "var(--neu-shadow-raised-sm)",
         background: bg,
+        transform: hovered ? "translateY(-2px)" : undefined,
+        transition:
+          "transform 0.2s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.2s ease",
         ...style,
       }}
       {...props}

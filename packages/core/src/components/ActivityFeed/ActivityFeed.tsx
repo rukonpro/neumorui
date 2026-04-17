@@ -72,7 +72,14 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
         }}
       >
         {items.map((item, i) => (
-          <FeedItem key={i} item={item} />
+          <div
+            key={i}
+            style={{
+              animation: `neu-feed-fade-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.04}s both`,
+            }}
+          >
+            <FeedItem item={item} />
+          </div>
         ))}
       </div>
       {onLoadMore && (

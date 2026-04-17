@@ -31,7 +31,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
               background: "var(--neu-bg)",
               boxShadow: "var(--neu-shadow-raised-sm)",
               color: "var(--neu-text-primary)",
-              animation: "fadeIn 0.15s ease",
+              animation: "neu-slide-down 0.15s cubic-bezier(0.34, 1.2, 0.64, 1)",
             }}
           >
             {content}

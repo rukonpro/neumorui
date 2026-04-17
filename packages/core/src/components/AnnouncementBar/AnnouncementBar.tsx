@@ -42,6 +42,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
           boxShadow: "var(--neu-shadow-raised-sm)",
           color: "var(--neu-text-primary)",
         }),
+    animation: "neu-slide-down 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
     ...style,
   };
 

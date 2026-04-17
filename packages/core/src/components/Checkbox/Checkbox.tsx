@@ -44,7 +44,12 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           boxShadow: isChecked
             ? "3px 3px 9px rgba(108,126,248,.4), -2px -2px 7px var(--neu-shadow-light)"
             : "var(--neu-shadow-inset-sm)",
-          transition: "all 0.2s",
+          transition: "all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
+        }}
+        onClick={(e) => {
+          const el = e.currentTarget as HTMLElement;
+          el.style.transform = "scale(0.85)";
+          setTimeout(() => { el.style.transform = ""; }, 150);
         }}
       >
         <RadixCheckbox.Indicator>

@@ -44,7 +44,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
           align={align}
           side={side}
           sideOffset={8}
-          className="z-50 min-w-[200px] p-1.5 outline-none animate-[fadeUp_0.18s_ease]"
+          className="z-50 min-w-[200px] p-1.5 outline-none animate-[neu-slide-down_0.2s_cubic-bezier(0.34,1.2,0.64,1)]"
           style={{
             background: "var(--neu-bg)",
             borderRadius: "16px",

@@ -34,7 +34,7 @@ export const Popover: React.FC<PopoverProps> = ({
             boxShadow: "var(--neu-shadow-raised-lg)",
             color: "var(--neu-text-primary)",
             minWidth: 200,
-            animation: "fadeUp 0.2s ease",
+            animation: "neu-slide-down 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)",
           }}
         >
           {children}

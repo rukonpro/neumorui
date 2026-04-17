@@ -62,6 +62,7 @@ export const Select: React.FC<SelectProps> = ({
               background: "var(--neu-bg)",
               boxShadow: "var(--neu-shadow-raised-lg)",
               minWidth: "var(--radix-select-trigger-width)",
+              animation: "neu-slide-down 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)",
             }}
           >
             <RadixSelect.Viewport>

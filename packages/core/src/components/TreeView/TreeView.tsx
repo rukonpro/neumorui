@@ -70,7 +70,13 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
         </span>
       </div>
       {open && (
-        <div style={{ paddingLeft: "18px", marginTop: "3px" }}>
+        <div
+          style={{
+            paddingLeft: "18px",
+            marginTop: "3px",
+            animation: "neu-accordion-expand 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+        >
           {node.children!.map((child, i) => (
             <TreeNodeItem key={i} node={child} depth={depth + 1} />
           ))}

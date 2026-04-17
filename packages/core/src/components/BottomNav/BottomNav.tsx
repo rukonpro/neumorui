@@ -114,7 +114,10 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 ? { color: "var(--neu-accent)" }
                 : {}),
             }}
-            onClick={() => {
+            onClick={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.transform = "scale(0.9)";
+              setTimeout(() => { el.style.transform = ""; }, 150);
               item.onClick?.();
               onActiveChange?.(i);
             }}

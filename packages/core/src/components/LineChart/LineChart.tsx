@@ -86,9 +86,10 @@ export const LineChart: React.FC<LineChartProps> = ({
           fill="none"
           stroke={color}
           strokeWidth="2"
+          strokeDasharray="2000"
           style={
             animate
-              ? { opacity: 0, animation: "neuLineIn 0.6s ease forwards" }
+              ? { animation: "neuLineDraw 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards" }
               : undefined
           }
         />
@@ -132,7 +133,10 @@ export const LineChart: React.FC<LineChartProps> = ({
           </span>
         ))}
       </div>
-      <style>{`@keyframes neuLineIn { from { opacity: 0; } to { opacity: 1; } }`}</style>
+      <style>{`
+        @keyframes neuLineIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes neuLineDraw { from { stroke-dashoffset: 2000; } to { stroke-dashoffset: 0; } }
+      `}</style>
     </div>
   );
 };

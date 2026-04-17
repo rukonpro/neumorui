@@ -89,6 +89,11 @@ export const Progress: React.FC<ProgressProps> = ({
             borderRadius: "999px",
             background: fillColors[variant],
             transition: "width 1s cubic-bezier(0.22, 1, 0.36, 1)",
+            ...(animate
+              ? {
+                  animation: "neu-grow-bar 1.1s cubic-bezier(0.22, 1, 0.36, 1) both",
+                }
+              : {}),
           }}
         />
       </div>

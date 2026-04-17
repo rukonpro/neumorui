@@ -27,6 +27,8 @@ export const BarChart: React.FC<BarChartProps> = ({
 }) => {
   const maxValue = Math.max(...data.map((d) => d.value), 1);
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => { setMounted(true); }, []);
 
   return (
     <div className={className} style={style}>
@@ -92,8 +94,15 @@ export const BarChart: React.FC<BarChartProps> = ({
                   transition:
                     "all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1)",
                   filter: isHovered ? "brightness(1.1)" : undefined,
-                  transform: isHovered ? "scaleY(1.05)" : undefined,
+                  transform: mounted
+                    ? isHovered
+                      ? "scaleY(1.05)"
+                      : "scaleY(1)"
+                    : "scaleY(0)",
                   transformOrigin: "bottom",
+                  animation: mounted
+                    ? `neu-bar-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.06}s both`
+                    : undefined,
                   cursor: "pointer",
                 }}
               />

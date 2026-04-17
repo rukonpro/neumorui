@@ -79,7 +79,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 maxWidth: "380px",
                 padding: "12px 14px",
                 borderRadius: "16px",
-                animation: "fadeUp 0.3s ease",
+                animation: "neu-slide-in-right 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)",
                 ...variantStyle[variant],
               }}
             >

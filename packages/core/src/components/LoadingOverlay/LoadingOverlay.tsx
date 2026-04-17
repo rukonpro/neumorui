@@ -37,6 +37,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
             flexDirection: "column",
             gap: "8px",
             zIndex: 10,
+            animation: "neu-overlay-fade-in 0.25s ease both",
           }}
         >
           <div

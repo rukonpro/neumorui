@@ -53,6 +53,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     "flex items-center justify-center font-medium rounded-[10px] neu-transition cursor-pointer outline-none",
     "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
     "disabled:opacity-40 disabled:cursor-not-allowed",
+    "hover:-translate-y-0.5 active:scale-95",
     sizeClasses[size]
   );
 

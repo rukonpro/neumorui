@@ -40,6 +40,8 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   color,
   description,
 }) => {
+  const [hovered, setHovered] = React.useState(false);
+
   const valueStyle: React.CSSProperties = {
     fontSize: "1.8rem",
     fontWeight: 900,
@@ -57,7 +59,16 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   };
 
   return (
-    <div style={containerStyle} data-testid="stats-card">
+    <div
+      style={{
+        ...containerStyle,
+        transform: hovered ? "translateY(-3px)" : undefined,
+        boxShadow: hovered ? "var(--neu-shadow-raised-lg)" : containerStyle.boxShadow,
+      }}
+      data-testid="stats-card"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div style={labelStyle}>{label}</div>
       <div style={valueStyle}>{value}</div>
       {trend && (

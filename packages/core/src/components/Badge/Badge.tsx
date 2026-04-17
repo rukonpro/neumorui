@@ -48,9 +48,12 @@ export const Badge: React.FC<BadgeProps> = ({
   style,
   ...props
 }) => {
+  const [hovered, setHovered] = React.useState(false);
   return (
     <span
       className={className}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         display: "inline-flex",
         alignItems: "center",
@@ -59,6 +62,9 @@ export const Badge: React.FC<BadgeProps> = ({
         fontWeight: 800,
         padding: "4px 13px",
         borderRadius: "999px",
+        transition:
+          "transform 0.2s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.2s ease",
+        transform: hovered ? "translateY(-1px)" : undefined,
         ...variantStyle[variant],
         ...style,
       }}

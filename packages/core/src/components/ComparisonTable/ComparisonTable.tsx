@@ -70,6 +70,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                   padding: "8px 10px",
                   borderRadius: "8px 0 0 8px",
                   background: hoveredRow === rowIdx ? "rgba(108,126,248,.04)" : undefined,
+                  transition: "background 0.2s ease",
                 }}
               >
                 {feature}
@@ -94,6 +95,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                           : "var(--neu-text-secondary)",
                       padding: "8px 10px",
                       background: hoveredRow === rowIdx ? "rgba(108,126,248,.04)" : undefined,
+                      transition: "background 0.2s ease",
                       borderRadius:
                         colIdx === plans.length - 1
                           ? "0 8px 8px 0"

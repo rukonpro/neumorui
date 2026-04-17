@@ -63,6 +63,7 @@ export const Heatmap: React.FC<HeatmapProps> = ({
                 borderRadius: "3px",
                 cursor: "pointer",
                 transition,
+                animation: `neu-cell-fade 0.3s cubic-bezier(0.22, 1, 0.36, 1) ${(i % cols) * 0.015 + Math.floor(i / cols) * 0.02}s both`,
                 boxShadow: isLow ? "var(--neu-shadow-inset-sm)" : "none",
                 background: colorBase
                   ? `rgba(${colorBase}, ${op})`
