@@ -28,7 +28,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {leftIcon && (
             <span
               className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base pointer-events-none"
-              style={{ color: "var(--neu-text-secondary)" }}
+              style={{ color: "var(--neu-text-muted)" }}
             >
               {leftIcon}
             </span>
@@ -37,12 +37,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             className={cn(
-              "w-full font-[inherit] text-sm outline-none border-none rounded-neu",
-              "py-3 px-4 neu-inset neu-transition",
-              "placeholder:opacity-60",
-              "focus:ring-2 focus:ring-[var(--neu-accent)]/30",
-              leftIcon && "pl-10",
-              rightIcon && "pr-10",
+              "w-full font-[inherit] text-sm font-semibold outline-none border-none rounded-neu",
+              "py-[13px] px-4 neu-inset neu-transition",
+              "placeholder:font-medium",
+              "focus:ring-[3px] focus:ring-[var(--neu-accent)]/20",
+              leftIcon && "pl-[42px]",
+              rightIcon && "pr-[42px]",
               error && "ring-2 ring-[var(--neu-danger)]/40",
               className
             )}
@@ -55,7 +55,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {rightIcon && (
             <span
               className="absolute right-3.5 top-1/2 -translate-y-1/2 text-base pointer-events-none"
-              style={{ color: "var(--neu-text-secondary)" }}
+              style={{ color: "var(--neu-text-muted)" }}
             >
               {rightIcon}
             </span>

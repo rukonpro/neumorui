@@ -59,7 +59,7 @@ export const Accordion: React.FC<AccordionProps> = ({
           key={item.value}
           value={item.value}
           disabled={item.disabled}
-          className="rounded-neu overflow-hidden"
+          className="rounded-neu-lg overflow-hidden"
           style={{
             background: "var(--neu-bg)",
             boxShadow: "var(--neu-shadow-raised-sm)",
@@ -68,7 +68,7 @@ export const Accordion: React.FC<AccordionProps> = ({
           <RadixAccordion.Header>
             <RadixAccordion.Trigger
               className={cn(
-                "group flex w-full items-center justify-between px-4 py-3 text-sm font-medium",
+                "group flex w-full items-center justify-between px-[18px] py-[14px] text-sm font-bold",
                 "cursor-pointer outline-none neu-transition bg-transparent border-0",
                 "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
                 "disabled:opacity-50 disabled:cursor-not-allowed"
@@ -87,7 +87,7 @@ export const Accordion: React.FC<AccordionProps> = ({
             className="overflow-hidden text-sm data-[state=open]:animate-[fadeUp_0.25s_ease] data-[state=closed]:hidden"
             style={{ color: "var(--neu-text-secondary)" }}
           >
-            <div className="px-4 pb-4">{item.content}</div>
+            <div className="px-[18px] pb-[14px] leading-relaxed">{item.content}</div>
           </RadixAccordion.Content>
         </RadixAccordion.Item>
       ))}

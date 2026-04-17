@@ -54,26 +54,25 @@ export const Slider: React.FC<SliderProps> = ({
         max={max}
         step={step}
         disabled={disabled}
-        className="relative flex items-center w-full h-6 cursor-pointer"
+        className="relative flex items-center w-full h-7 cursor-pointer"
       >
         <RadixSlider.Track
-          className="relative flex-1 h-1.5 rounded-full"
+          className="relative flex-1 h-2 rounded-full"
           style={{ boxShadow: "var(--neu-shadow-inset-sm)", background: "var(--neu-bg)" }}
         >
           <RadixSlider.Range
             className="absolute h-full rounded-full"
             style={{
               background:
-                "linear-gradient(90deg, var(--neu-accent-light), var(--neu-accent))",
-              boxShadow: "2px 0 8px var(--neu-accent-glow)",
+                "linear-gradient(90deg, var(--neu-accent-light), var(--neu-accent-dark))",
             }}
           />
         </RadixSlider.Track>
         <RadixSlider.Thumb
-          className="block w-6 h-6 rounded-full outline-none neu-transition hover:scale-110 focus-visible:scale-110"
+          className="block w-[26px] h-[26px] rounded-full outline-none neu-transition hover:scale-110 focus-visible:scale-110"
           style={{
             background: "var(--neu-gradient-primary)",
-            boxShadow: "3px 3px 8px var(--neu-accent-glow), -2px -2px 5px var(--neu-shadow-light)",
+            boxShadow: "3px 3px 9px var(--neu-accent-glow), -2px -2px 6px var(--neu-shadow-light)",
           }}
         />
       </RadixSlider.Root>

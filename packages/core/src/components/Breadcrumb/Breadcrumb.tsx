@@ -18,9 +18,21 @@ const DefaultSeparator = () => (
     style={{ color: "var(--neu-text-muted)" }}
     aria-hidden="true"
   >
-    /
+    ›
   </span>
 );
+
+const linkChipStyle: React.CSSProperties = {
+  background: "var(--neu-bg)",
+  boxShadow: "var(--neu-shadow-raised-sm)",
+  color: "var(--neu-accent)",
+};
+
+const activeChipStyle: React.CSSProperties = {
+  background: "var(--neu-bg)",
+  boxShadow: "var(--neu-shadow-inset-sm)",
+  color: "var(--neu-text-secondary)",
+};
 
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   items,
@@ -30,35 +42,37 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 }) => {
   return (
     <nav aria-label="Breadcrumb" className={cn("flex items-center", className)} {...props}>
-      <ol className="flex items-center gap-2 flex-wrap text-sm">
+      <ol className="flex items-center gap-1.5 flex-wrap text-sm">
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
+          const chipClass =
+            "inline-flex items-center px-[10px] py-[5px] rounded-[8px] font-bold neu-transition";
           const content =
             item.href && !isLast ? (
               <a
                 href={item.href}
                 onClick={item.onClick}
-                className="hover:underline neu-transition"
-                style={{ color: "var(--neu-text-secondary)" }}
+                className={cn(chipClass, "hover:-translate-y-0.5")}
+                style={linkChipStyle}
               >
                 {item.label}
               </a>
             ) : isLast ? (
-              <span className="font-semibold" style={{ color: "var(--neu-text-primary)" }}>
+              <span className={chipClass} style={activeChipStyle}>
                 {item.label}
               </span>
             ) : (
               <button
                 onClick={item.onClick}
-                className="hover:underline neu-transition"
-                style={{ color: "var(--neu-text-secondary)" }}
+                className={cn(chipClass, "hover:-translate-y-0.5")}
+                style={linkChipStyle}
               >
                 {item.label}
               </button>
             );
 
           return (
-            <li key={i} className="flex items-center gap-2">
+            <li key={i} className="flex items-center gap-1.5">
               {content}
               {!isLast && (separator ?? <DefaultSeparator />)}
             </li>

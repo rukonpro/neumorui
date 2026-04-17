@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Clay UI — Navigation</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f0f4ff;--shadow-d:rgba(180,190,220,0.8);--shadow-l:rgba(255,255,255,0.95);--text:#2a2d4a;--muted:#7880a8;--hint:#b0b8d8;--accent:#6c7ef8;--accent2:#f87c6c;--accent3:#5ecba1;--accent4:#f9c74f;--clay:7px 7px 18px var(--shadow-d),-5px -5px 14px var(--shadow-l);--clay-sm:4px 4px 12px var(--shadow-d),-3px -3px 9px var(--shadow-l);--clay-lg:12px 12px 28px var(--shadow-d),-8px -8px 20px var(--shadow-l);--clay-in:inset 5px 5px 12px var(--shadow-d),inset -4px -4px 10px var(--shadow-l);--clay-in-sm:inset 3px 3px 8px var(--shadow-d),inset -2px -2px 6px var(--shadow-l)}
+[data-theme=dark]{--bg:#181c2e;--shadow-d:rgba(8,10,22,0.85);--shadow-l:rgba(50,58,100,0.45);--text:#dde2f8;--muted:#7880a8;--hint:#3e4668;--accent:#7c8ffa}
+*{box-sizing:border-box;margin:0;padding:0}
+html{transition:background .3s}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1.5rem 4rem}
+.page{max-width:980px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.col-6{grid-column:span 6}.col-4{grid-column:span 4}.col-8{grid-column:span 8}.col-12{grid-column:span 12}.col-7{grid-column:span 7}.col-5{grid-column:span 5}
+@media(max-width:720px){.col-6,.col-4,.col-8,.col-7,.col-5{grid-column:span 12}}
+.card{border-radius:24px;padding:1.75rem;box-shadow:var(--clay-lg);background:var(--bg);transition:background .35s,box-shadow .35s}
+.sec{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--hint);margin-bottom:1.1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;outline:none;position:relative;overflow:hidden;transition:all .2s cubic-bezier(.34,1.4,.64,1)}
+.btn-blue{padding:10px 22px;border-radius:12px;color:#fff;background:linear-gradient(145deg,#8490fa,#5a6cf5);box-shadow:5px 5px 14px rgba(108,126,248,.45),-3px -3px 10px var(--shadow-l)}
+.btn-blue:hover{transform:translateY(-2px)}
+.btn-clay{padding:10px 22px;border-radius:12px;background:var(--bg);color:var(--text);box-shadow:var(--clay-sm)}
+.btn-clay:hover{transform:translateY(-2px)}
+.btn-clay:active{box-shadow:var(--clay-in-sm);transform:scale(.97)}
+.inp{width:100%;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;color:var(--text);background:var(--bg);border:none;outline:none;border-radius:12px;padding:11px 14px;box-shadow:var(--clay-in);transition:box-shadow .2s}
+.inp:focus{box-shadow:var(--clay-in),0 0 0 3px rgba(108,126,248,.2)}
+.inp::placeholder{color:var(--hint);font-weight:500}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+.reveal{opacity:0}.reveal.visible{animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);animation:rippleOut .55s ease-out forwards;background:rgba(255,255,255,.3);pointer-events:none}
+@keyframes rippleOut{to{transform:scale(4);opacity:0}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Clay UI · Navigation</div>
+      <h1 style="font-size:2rem;font-weight:900;letter-spacing:-.03em">Navigation components</h1>
+    </div>
+    <button onclick="toggleTheme()" style="display:inline-flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;border:none;cursor:pointer;padding:10px 20px;border-radius:999px;background:var(--bg);color:var(--muted);box-shadow:var(--clay-sm)"><span id="ti">🌙</span><span id="tl">Dark</span></button>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. TOP NAVBAR -->
+    <div class="card col-12 reveal" style="padding:0;overflow:visible">
+      <p class="sec" style="padding:1.2rem 1.75rem 0">Top navbar</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:0 0 20px 20px;box-shadow:var(--clay-sm);background:var(--bg);gap:16px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(145deg,#8490fa,#5a6cf5);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:var(--clay-sm);flex-shrink:0">◈</div>
+          <span style="font-size:15px;font-weight:900;color:var(--text);letter-spacing:-.02em">NeumorUI</span>
+        </div>
+        <div style="display:flex;gap:4px" id="nav-links">
+          <a href="#" class="nav-link active-link" onclick="setLink(this)">Home</a>
+          <a href="#" class="nav-link" onclick="setLink(this)">Components</a>
+          <a href="#" class="nav-link" onclick="setLink(this)">Docs</a>
+          <a href="#" class="nav-link" onclick="setLink(this)">Blog</a>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn-clay btn" style="padding:8px 16px;font-size:12px;border-radius:10px">Login</button>
+          <button class="btn-blue btn" style="padding:8px 16px;font-size:12px;border-radius:10px">Sign up</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. VERTICAL SIDEBAR -->
+    <div class="card col-5 reveal">
+      <p class="sec">Vertical sidebar</p>
+      <div style="border-radius:18px;box-shadow:var(--clay-in);padding:12px;background:var(--bg)">
+        <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;margin-bottom:8px;box-shadow:var(--clay-sm)">
+          <div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(145deg,#8490fa,#5a6cf5);display:flex;align-items:center;justify-content:center;font-size:15px">◈</div>
+          <span style="font-size:13px;font-weight:900;color:var(--accent)">NeumorUI</span>
+        </div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--hint);padding:6px 10px;margin-bottom:2px">Main</div>
+        <div class="v-nav active-vnav" onclick="setVnav(this)"><span style="font-size:16px">🏠</span><span>Dashboard</span><span style="margin-left:auto;background:var(--accent);color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:999px">3</span></div>
+        <div class="v-nav" onclick="setVnav(this)"><span style="font-size:16px">📦</span><span>Components</span></div>
+        <div class="v-nav" onclick="setVnav(this)"><span style="font-size:16px">🎨</span><span>Themes</span></div>
+        <div class="v-nav" onclick="setVnav(this)"><span style="font-size:16px">📊</span><span>Analytics</span></div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--hint);padding:10px 10px 4px;margin-top:4px">Account</div>
+        <div class="v-nav" onclick="setVnav(this)"><span style="font-size:16px">👤</span><span>Profile</span></div>
+        <div class="v-nav" onclick="setVnav(this)"><span style="font-size:16px">⚙️</span><span>Settings</span></div>
+        <div style="height:1px;background:var(--hint);opacity:.2;margin:8px 0"></div>
+        <div class="v-nav" style="color:var(--accent2)"><span style="font-size:16px">🚪</span><span>Sign out</span></div>
+      </div>
+    </div>
+
+    <!-- 3. COMMAND PALETTE -->
+    <div class="card col-7 reveal">
+      <p class="sec">Command palette</p>
+      <div style="border-radius:20px;overflow:hidden;box-shadow:var(--clay-lg)">
+        <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(176,184,216,.2)">
+          <span style="font-size:16px;color:var(--hint)">⌘</span>
+          <input id="cmd-inp" class="inp" type="text" placeholder="Type a command or search..." style="box-shadow:none;padding:4px 0;font-size:14px" oninput="filterCmd(this.value)"/>
+          <span style="font-size:11px;font-weight:700;color:var(--hint);padding:3px 8px;border-radius:6px;box-shadow:var(--clay-sm);white-space:nowrap">ESC</span>
+        </div>
+        <div id="cmd-list" style="padding:8px;max-height:220px;overflow-y:auto"></div>
+      </div>
+    </div>
+
+    <!-- 4. BOTTOM NAV (mobile) -->
+    <div class="card col-6 reveal">
+      <p class="sec">Bottom navigation (mobile)</p>
+      <div style="background:var(--bg);border-radius:20px;overflow:hidden;box-shadow:var(--clay);padding:8px 4px;max-width:340px;margin:0 auto">
+        <div style="display:flex;justify-content:space-around">
+          <div class="bot-nav active-bot" onclick="setBotNav(this)"><span style="font-size:22px">🏠</span><span>Home</span></div>
+          <div class="bot-nav" onclick="setBotNav(this)"><span style="font-size:22px">🔍</span><span>Search</span></div>
+          <div class="bot-nav" onclick="setBotNav(this)" style="position:relative">
+            <div style="width:48px;height:48px;border-radius:16px;background:linear-gradient(145deg,#8490fa,#5a6cf5);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:var(--clay);margin-bottom:2px">+</div>
+            <span style="font-size:10px">Create</span>
+          </div>
+          <div class="bot-nav" onclick="setBotNav(this)" style="position:relative"><span style="font-size:22px">🔔</span><div style="position:absolute;top:2px;right:8px;width:8px;height:8px;border-radius:50%;background:#f87c6c;border:2px solid var(--bg)"></div><span>Alerts</span></div>
+          <div class="bot-nav" onclick="setBotNav(this)"><span style="font-size:22px">👤</span><span>Profile</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. TABS VERTICAL -->
+    <div class="card col-6 reveal">
+      <p class="sec">Vertical tabs</p>
+      <div style="display:flex;gap:12px">
+        <div style="display:flex;flex-direction:column;gap:4px;min-width:110px">
+          <div class="v-tab active-vtab" onclick="setVtab(this,'vt1')">🎨 Design</div>
+          <div class="v-tab" onclick="setVtab(this,'vt2')">⚡ Motion</div>
+          <div class="v-tab" onclick="setVtab(this,'vt3')">🧩 Components</div>
+          <div class="v-tab" onclick="setVtab(this,'vt4')">📦 Tokens</div>
+        </div>
+        <div style="flex:1;padding:14px;border-radius:14px;box-shadow:var(--clay-in);min-height:140px">
+          <div id="vt1"><p style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px">Design system</p><p style="font-size:12px;color:var(--muted);line-height:1.6">Clay UI follows a soft neumorphic design language with consistent shadows, radius, and depth across all components.</p></div>
+          <div id="vt2" style="display:none"><p style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px">Motion guidelines</p><p style="font-size:12px;color:var(--muted);line-height:1.6">Spring easing curves, scroll reveals, ripple effects, and microinteractions make every interaction feel alive.</p></div>
+          <div id="vt3" style="display:none"><p style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px">30+ components</p><p style="font-size:12px;color:var(--muted);line-height:1.6">Buttons, inputs, modals, tables, forms, navigation, and more — all built with the same clay aesthetic.</p></div>
+          <div id="vt4" style="display:none"><p style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px">Design tokens</p><p style="font-size:12px;color:var(--muted);line-height:1.6">CSS variables for shadows, colors, radius, and spacing enable instant theming and dark mode support.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. MEGA MENU -->
+    <div class="card col-12 reveal">
+      <p class="sec">Mega menu</p>
+      <div style="display:flex;gap:4px;position:relative" id="mega-wrap">
+        <div class="mega-trigger" onmouseenter="showMega('m1')" onmouseleave="hideMega()">Products ▾</div>
+        <div class="mega-trigger" onmouseenter="showMega('m2')" onmouseleave="hideMega()">Developers ▾</div>
+        <div class="mega-trigger" onmouseenter="showMega('m3')" onmouseleave="hideMega()">Company ▾</div>
+        <div class="mega-trigger" style="margin-left:auto" onmouseenter="showMega('m4')" onmouseleave="hideMega()">Resources ▾</div>
+        <div id="m1" class="mega-panel" onmouseenter="keepMega('m1')" onmouseleave="hideMega()">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">🎨</div><p style="font-size:13px;font-weight:800;color:var(--text)">Clay UI</p><p style="font-size:11px;color:var(--muted)">Component library</p></div>
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">⚡</div><p style="font-size:13px;font-weight:800;color:var(--text)">Motion Kit</p><p style="font-size:11px;color:var(--muted)">Animation system</p></div>
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">🎭</div><p style="font-size:13px;font-weight:800;color:var(--text)">Theme Studio</p><p style="font-size:11px;color:var(--muted)">Visual editor</p></div>
+          </div>
+        </div>
+        <div id="m2" class="mega-panel" style="display:none" onmouseenter="keepMega('m2')" onmouseleave="hideMega()">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">📖</div><p style="font-size:13px;font-weight:800;color:var(--text)">Docs</p><p style="font-size:11px;color:var(--muted)">Full documentation</p></div>
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">🔌</div><p style="font-size:13px;font-weight:800;color:var(--text)">API Reference</p><p style="font-size:11px;color:var(--muted)">Props & hooks</p></div>
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">📦</div><p style="font-size:13px;font-weight:800;color:var(--text)">npm package</p><p style="font-size:11px;color:var(--muted)">Install & setup</p></div>
+          </div>
+        </div>
+        <div id="m3" class="mega-panel" style="display:none" onmouseenter="keepMega('m3')" onmouseleave="hideMega()">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">👥</div><p style="font-size:13px;font-weight:800;color:var(--text)">About</p><p style="font-size:11px;color:var(--muted)">Our story</p></div>
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">💼</div><p style="font-size:13px;font-weight:800;color:var(--text)">Careers</p><p style="font-size:11px;color:var(--muted)">Join the team</p></div>
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">📰</div><p style="font-size:13px;font-weight:800;color:var(--text)">Blog</p><p style="font-size:11px;color:var(--muted)">Latest updates</p></div>
+          </div>
+        </div>
+        <div id="m4" class="mega-panel" style="display:none;right:0;left:auto" onmouseenter="keepMega('m4')" onmouseleave="hideMega()">
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">🎓</div><p style="font-size:13px;font-weight:800;color:var(--text)">Tutorials</p><p style="font-size:11px;color:var(--muted)">Step by step</p></div>
+            <div class="mega-item"><div style="font-size:24px;margin-bottom:6px">💬</div><p style="font-size:13px;font-weight:800;color:var(--text)">Community</p><p style="font-size:11px;color:var(--muted)">Discord & GitHub</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. CONTEXT MENU -->
+    <div class="card col-6 reveal">
+      <p class="sec">Context menu</p>
+      <div id="ctx-area" style="height:140px;border-radius:16px;box-shadow:var(--clay-in);display:flex;align-items:center;justify-content:center;cursor:context-menu;position:relative;overflow:visible" oncontextmenu="showCtx(event)">
+        <p style="font-size:13px;font-weight:700;color:var(--hint)">Right-click anywhere here</p>
+        <div id="ctx-menu" style="display:none;position:absolute;z-index:50;border-radius:16px;overflow:hidden;box-shadow:var(--clay-lg);background:var(--bg);min-width:180px;animation:scaleIn .2s cubic-bezier(.34,1.2,.64,1)">
+          <div class="ctx-item" onclick="ctxAct('Copy')">📋 Copy</div>
+          <div class="ctx-item" onclick="ctxAct('Cut')">✂️ Cut</div>
+          <div class="ctx-item" onclick="ctxAct('Paste')">📌 Paste</div>
+          <div style="height:1px;background:var(--hint);opacity:.2;margin:4px 0"></div>
+          <div class="ctx-item" onclick="ctxAct('Rename')">✏️ Rename</div>
+          <div class="ctx-item" onclick="ctxAct('Share')">🔗 Share</div>
+          <div style="height:1px;background:var(--hint);opacity:.2;margin:4px 0"></div>
+          <div class="ctx-item" onclick="ctxAct('Delete')" style="color:var(--accent2)">🗑 Delete</div>
+        </div>
+      </div>
+      <p id="ctx-result" style="font-size:12px;color:var(--muted);margin-top:10px;font-weight:700;text-align:center;min-height:18px"></p>
+    </div>
+
+    <!-- 8. SPEED DIAL FAB -->
+    <div class="card col-6 reveal">
+      <p class="sec">Speed dial / FAB</p>
+      <div style="height:160px;border-radius:16px;box-shadow:var(--clay-in);position:relative;display:flex;align-items:center;justify-content:center">
+        <p style="font-size:13px;font-weight:700;color:var(--hint)">Click the + button</p>
+        <div id="fab-wrap" style="position:absolute;bottom:16px;right:16px">
+          <div id="fab-actions" style="display:flex;flex-direction:column-reverse;gap:8px;margin-bottom:8px;align-items:flex-end">
+            <div class="fab-action" style="display:none;animation:fadeUp .2s .0s ease both"><span style="font-size:11px;font-weight:700;color:var(--muted);margin-right:6px">Edit</span><div style="width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#78dbb8,#3db88a);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:var(--clay);cursor:pointer">✏️</div></div>
+            <div class="fab-action" style="display:none;animation:fadeUp .2s .06s ease both"><span style="font-size:11px;font-weight:700;color:var(--muted);margin-right:6px">Share</span><div style="width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#8490fa,#5a6cf5);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:var(--clay);cursor:pointer">🔗</div></div>
+            <div class="fab-action" style="display:none;animation:fadeUp .2s .12s ease both"><span style="font-size:11px;font-weight:700;color:var(--muted);margin-right:6px">Delete</span><div style="width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#fa9080,#f5604a);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:var(--clay);cursor:pointer">🗑</div></div>
+          </div>
+          <button id="fab-btn" onclick="toggleFab()" style="width:52px;height:52px;border-radius:16px;border:none;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;background:linear-gradient(145deg,#8490fa,#5a6cf5);color:#fff;box-shadow:6px 6px 16px rgba(108,126,248,.5),-4px -4px 12px var(--shadow-l);transition:transform .3s cubic-bezier(.34,1.56,.64,1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. BREADCRUMB ADVANCED -->
+    <div class="card col-6 reveal">
+      <p class="sec">Breadcrumb variants</p>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div>
+          <p style="font-size:11px;color:var(--hint);font-weight:700;margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase">Default</p>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <a href="#" class="bc-link">Home</a><span style="color:var(--hint)">›</span>
+            <a href="#" class="bc-link">Components</a><span style="color:var(--hint)">›</span>
+            <span class="bc-active">Navigation</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:11px;color:var(--hint);font-weight:700;margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase">With icons</p>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <a href="#" class="bc-link">🏠 Home</a><span style="color:var(--hint)">/</span>
+            <a href="#" class="bc-link">📦 Library</a><span style="color:var(--hint)">/</span>
+            <a href="#" class="bc-link">🎨 UI</a><span style="color:var(--hint)">/</span>
+            <span class="bc-active">Navigation</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:11px;color:var(--hint);font-weight:700;margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase">Collapsed (long path)</p>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <a href="#" class="bc-link">Home</a><span style="color:var(--hint)">›</span>
+            <span class="bc-link" onclick="expandCrumb(this)" style="cursor:pointer">···</span><span style="color:var(--hint)">›</span>
+            <a href="#" class="bc-link">Components</a><span style="color:var(--hint)">›</span>
+            <span class="bc-active">Breadcrumb</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. TABS WITH BADGE + CLOSE -->
+    <div class="card col-6 reveal">
+      <p class="sec">Browser-style tabs</p>
+      <div id="browser-tabs" style="display:flex;gap:4px;overflow-x:auto;padding-bottom:2px;margin-bottom:14px">
+        <div class="btab active-btab">
+          <span>🏠</span><span>Home</span>
+          <span onclick="closeBtab(this.parentElement)" style="margin-left:4px;opacity:.5;cursor:pointer;line-height:1">✕</span>
+        </div>
+        <div class="btab" onclick="setActiveBtab(this)">
+          <span>📦</span><span>Components</span>
+          <span class="btab-badge">12</span>
+          <span onclick="closeBtab(this.parentElement)" style="margin-left:4px;opacity:.5;cursor:pointer;line-height:1">✕</span>
+        </div>
+        <div class="btab" onclick="setActiveBtab(this)">
+          <span>🎨</span><span>Themes</span>
+          <span onclick="closeBtab(this.parentElement)" style="margin-left:4px;opacity:.5;cursor:pointer;line-height:1">✕</span>
+        </div>
+        <button onclick="addBtab()" style="min-width:32px;height:36px;border-radius:10px;border:none;cursor:pointer;background:var(--bg);color:var(--muted);box-shadow:var(--clay-sm);font-size:18px;font-weight:700;flex-shrink:0;transition:all .2s">+</button>
+      </div>
+      <div style="padding:12px 14px;border-radius:14px;box-shadow:var(--clay-in-sm)">
+        <p id="btab-content" style="font-size:13px;color:var(--muted);font-weight:600">🏠 You are on the Home tab</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.nav-link{padding:8px 14px;border-radius:10px;font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;transition:all .2s}
+.nav-link:hover{color:var(--accent);box-shadow:var(--clay-sm)}
+.nav-link.active-link{box-shadow:var(--clay-in-sm);color:var(--accent)}
+.v-nav{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s;margin-bottom:2px}
+.v-nav:hover{color:var(--accent);transform:translateX(3px)}
+.v-nav.active-vnav{box-shadow:var(--clay-in-sm);color:var(--accent);font-weight:800}
+.mega-trigger{padding:9px 16px;border-radius:11px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s}
+.mega-trigger:hover{color:var(--accent);box-shadow:var(--clay-sm)}
+.mega-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:50;border-radius:20px;box-shadow:var(--clay-lg);background:var(--bg);padding:14px;min-width:300px;animation:scaleIn .2s ease}
+.mega-item{padding:10px;border-radius:12px;cursor:pointer;transition:all .2s}
+.mega-item:hover{box-shadow:var(--clay-sm);transform:translateY(-2px)}
+.ctx-item{padding:9px 14px;font-size:13px;font-weight:700;color:var(--text);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px}
+.ctx-item:hover{box-shadow:var(--clay-in-sm)}
+.bot-nav{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;border-radius:14px;cursor:pointer;transition:all .2s;font-size:10px;font-weight:700;color:var(--muted)}
+.bot-nav:hover{color:var(--accent)}
+.bot-nav.active-bot{color:var(--accent);box-shadow:var(--clay-in-sm)}
+.v-tab{padding:9px 12px;border-radius:11px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s}
+.v-tab:hover{color:var(--accent);transform:translateX(2px)}
+.v-tab.active-vtab{box-shadow:var(--clay-in-sm);color:var(--accent)}
+.bc-link{font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;padding:5px 10px;border-radius:8px;box-shadow:var(--clay-sm);transition:all .2s}
+.bc-link:hover{transform:translateY(-2px)}
+.bc-active{font-size:13px;font-weight:700;color:var(--muted);padding:5px 10px;border-radius:8px;box-shadow:var(--clay-in-sm)}
+.btab{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:11px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;box-shadow:var(--clay-sm);transition:all .2s;white-space:nowrap;flex-shrink:0}
+.btab:hover{color:var(--accent)}
+.btab.active-btab{box-shadow:var(--clay-in-sm);color:var(--accent)}
+.btab-badge{font-size:9px;font-weight:800;background:var(--accent);color:#fff;padding:2px 6px;border-radius:999px}
+</style>
+
+<script>
+function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'light':'dark');document.getElementById('ti').textContent=d?'🌙':'☀️';document.getElementById('tl').textContent=d?'Dark':'Light'}
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+document.addEventListener('click',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),sz=Math.max(r.width,r.height)*1.4,x=e.clientX-r.left-sz/2,y=e.clientY-r.top-sz/2;const rp=document.createElement('span');rp.className='ripple';rp.style.cssText=`width:${sz}px;height:${sz}px;left:${x}px;top:${y}px`;b.appendChild(rp);setTimeout(()=>rp.remove(),600)});
+function setLink(el){event.preventDefault();document.querySelectorAll('.nav-link').forEach(n=>n.classList.remove('active-link'));el.classList.add('active-link')}
+function setVnav(el){document.querySelectorAll('.v-nav').forEach(n=>n.classList.remove('active-vnav'));el.classList.add('active-vnav')}
+/* Command palette */
+const CMD=[{icon:'🏠',label:'Go to Dashboard',cat:'Navigation'},{icon:'📦',label:'Browse Components',cat:'Navigation'},{icon:'🎨',label:'Open Theme Editor',cat:'Tools'},{icon:'🔍',label:'Search docs',cat:'Search'},{icon:'⚙️',label:'Open Settings',cat:'Settings'},{icon:'🌙',label:'Toggle Dark Mode',cat:'Settings',action:toggleTheme},{icon:'📖',label:'Read Documentation',cat:'Resources'},{icon:'💬',label:'Join Discord',cat:'Community'},{icon:'🐛',label:'Report a Bug',cat:'Support'},{icon:'⭐',label:'Star on GitHub',cat:'Community'}];
+function renderCmd(items){document.getElementById('cmd-list').innerHTML=items.map(c=>`<div class="ctx-item" style="padding:10px 12px;display:flex;gap:10px;align-items:center" onclick="${c.action?'('+c.action.toString()+')()':''}"><span style="font-size:16px">${c.icon}</span><div style="flex:1"><p style="margin:0;font-size:13px;font-weight:700;color:var(--text)">${c.label}</p></div><span style="font-size:10px;font-weight:700;color:var(--hint);padding:2px 8px;border-radius:6px;box-shadow:4px 4px 8px var(--shadow-d),-2px -2px 6px var(--shadow-l)">${c.cat}</span></div>`).join('')}
+function filterCmd(q){renderCmd(q?CMD.filter(c=>c.label.toLowerCase().includes(q.toLowerCase())):CMD)}
+renderCmd(CMD);
+/* Context menu */
+function showCtx(e){e.preventDefault();const m=document.getElementById('ctx-menu');const a=document.getElementById('ctx-area').getBoundingClientRect();m.style.display='block';m.style.left=(e.clientX-a.left)+'px';m.style.top=(e.clientY-a.top)+'px'}
+function ctxAct(a){document.getElementById('ctx-result').textContent='Action: '+a;document.getElementById('ctx-menu').style.display='none'}
+document.addEventListener('click',()=>document.getElementById('ctx-menu').style.display='none');
+/* Speed dial */
+let fabOpen=false;
+function toggleFab(){fabOpen=!fabOpen;document.getElementById('fab-btn').style.transform=fabOpen?'rotate(45deg)':'rotate(0)';document.querySelectorAll('.fab-action').forEach((a,i)=>{a.style.display=fabOpen?'flex':'none'})}
+/* Mega menu */
+let megaTimer;
+function showMega(id){clearTimeout(megaTimer);document.querySelectorAll('.mega-panel').forEach(p=>p.style.display='none');document.getElementById(id).style.display='block'}
+function hideMega(){megaTimer=setTimeout(()=>document.querySelectorAll('.mega-panel').forEach(p=>p.style.display='none'),150)}
+function keepMega(id){clearTimeout(megaTimer)}
+/* Bottom nav */
+function setBotNav(el){document.querySelectorAll('.bot-nav').forEach(n=>n.classList.remove('active-bot'));el.classList.add('active-bot')}
+/* Vertical tabs */
+function setVtab(el,id){document.querySelectorAll('.v-tab').forEach(t=>t.classList.remove('active-vtab'));el.classList.add('active-vtab');['vt1','vt2','vt3','vt4'].forEach(t=>document.getElementById(t).style.display='none');document.getElementById(id).style.display='block'}
+/* Browser tabs */
+let tabCount=3;
+function setActiveBtab(el){document.querySelectorAll('.btab').forEach(t=>t.classList.remove('active-btab'));el.classList.add('active-btab');const name=el.querySelectorAll('span')[1].textContent;document.getElementById('btab-content').textContent=el.querySelectorAll('span')[0].textContent+' You are on the '+name+' tab'}
+function closeBtab(el){el.style.transform='scale(0)';el.style.opacity='0';el.style.transition='all .2s';setTimeout(()=>el.remove(),200)}
+function addBtab(){const icons=['🔥','💎','🌈','🎯','🚀'];const names=['New Tab','Explore','Playground','Sandbox','Preview'];const t=document.createElement('div');t.className='btab';t.innerHTML=`<span>${icons[tabCount%5]}</span><span>${names[tabCount%5]}</span><span onclick="closeBtab(this.parentElement)" style="margin-left:4px;opacity:.5;cursor:pointer;line-height:1">✕</span>`;t.onclick=()=>setActiveBtab(t);document.getElementById('browser-tabs').insertBefore(t,document.querySelector('#browser-tabs button'));tabCount++}
+</script>
+</body>
+</html>

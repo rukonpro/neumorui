@@ -17,22 +17,27 @@ const variantStyle: Record<BadgeVariant, React.CSSProperties> = {
   primary: {
     background: "var(--neu-tint-primary)",
     color: "var(--neu-tint-primary-text)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
   },
   success: {
     background: "var(--neu-tint-success)",
     color: "var(--neu-tint-success-text)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
   },
   danger: {
     background: "var(--neu-tint-danger)",
     color: "var(--neu-tint-danger-text)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
   },
   warning: {
     background: "var(--neu-tint-warning)",
     color: "var(--neu-tint-warning-text)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
   },
   info: {
     background: "var(--neu-tint-info)",
     color: "var(--neu-tint-info-text)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
   },
 };
 
@@ -47,7 +52,7 @@ export const Badge: React.FC<BadgeProps> = ({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full",
+        "inline-flex items-center gap-1.5 text-[11px] font-extrabold px-[13px] py-1 rounded-full",
         className
       )}
       style={{ ...variantStyle[variant], ...style }}

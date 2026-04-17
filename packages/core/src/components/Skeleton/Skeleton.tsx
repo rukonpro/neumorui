@@ -19,14 +19,16 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   style,
   ...props
 }) => {
+  const insetShadow = "var(--neu-shadow-inset-sm)";
+
   if (variant === "text") {
     return (
       <div className={cn("flex flex-col gap-2", className)} {...props}>
         {Array.from({ length: lines }).map((_, i) => (
           <div
             key={i}
-            className="neu-shimmer h-3 rounded-full"
-            style={{ width: i === lines - 1 ? "60%" : "100%" }}
+            className="neu-shimmer h-2.5 rounded-full"
+            style={{ width: i === lines - 1 ? "60%" : "100%", boxShadow: insetShadow }}
           />
         ))}
       </div>
@@ -37,7 +39,12 @@ export const Skeleton: React.FC<SkeletonProps> = ({
     return (
       <div
         className={cn("neu-shimmer rounded-full", className)}
-        style={{ width: width ?? 40, height: height ?? 40, ...style }}
+        style={{
+          width: width ?? 40,
+          height: height ?? 40,
+          boxShadow: insetShadow,
+          ...style,
+        }}
         {...props}
       />
     );
@@ -46,7 +53,12 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   return (
     <div
       className={cn("neu-shimmer rounded-neu", className)}
-      style={{ width: width ?? "100%", height: height ?? 80, ...style }}
+      style={{
+        width: width ?? "100%",
+        height: height ?? 80,
+        boxShadow: insetShadow,
+        ...style,
+      }}
       {...props}
     />
   );

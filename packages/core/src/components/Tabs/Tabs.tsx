@@ -30,9 +30,10 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill"
             value={tab.value}
             disabled={tab.disabled}
             className={cn(
-              "flex-1 px-4 py-2 text-sm font-medium rounded-neu neu-transition cursor-pointer",
+              "flex-1 px-4 py-2 text-sm font-bold rounded-neu neu-transition cursor-pointer",
               "bg-transparent border-0 outline-none disabled:opacity-50 disabled:cursor-not-allowed",
-              "data-[state=active]:neu-raised data-[state=active]:font-semibold"
+              "hover:text-[var(--neu-accent)]",
+              "data-[state=active]:neu-raised-sm data-[state=active]:!text-[var(--neu-accent)]"
             )}
             style={{
               background: "transparent",

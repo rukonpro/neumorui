@@ -24,14 +24,8 @@ export const Divider: React.FC<DividerProps> = ({
         aria-orientation="vertical"
         className={cn("w-px self-stretch", className)}
         style={{
-          background:
-            variant === "solid"
-              ? "var(--neu-border)"
-              : "linear-gradient(180deg, transparent, var(--neu-shadow-dark), transparent)",
-          boxShadow:
-            variant === "inset"
-              ? "1px 0 0 var(--neu-shadow-light)"
-              : undefined,
+          background: "var(--neu-text-muted)",
+          opacity: variant === "solid" ? 0.4 : 0.2,
           ...style,
         }}
         {...props}
@@ -48,23 +42,17 @@ export const Divider: React.FC<DividerProps> = ({
       >
         <div
           className="flex-1 h-px"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, var(--neu-shadow-dark), transparent)",
-          }}
+          style={{ background: "var(--neu-text-muted)", opacity: 0.25 }}
         />
         <span
-          className="text-xs uppercase tracking-widest font-semibold"
+          className="text-xs uppercase tracking-widest font-bold"
           style={{ color: "var(--neu-text-muted)" }}
         >
           {label}
         </span>
         <div
           className="flex-1 h-px"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, var(--neu-shadow-dark), transparent)",
-          }}
+          style={{ background: "var(--neu-text-muted)", opacity: 0.25 }}
         />
       </div>
     );
@@ -76,12 +64,8 @@ export const Divider: React.FC<DividerProps> = ({
       aria-orientation="horizontal"
       className={cn("h-px w-full", className)}
       style={{
-        background:
-          variant === "solid"
-            ? "var(--neu-border)"
-            : "linear-gradient(90deg, transparent, var(--neu-shadow-dark), transparent)",
-        boxShadow:
-          variant === "inset" ? "0 1px 0 var(--neu-shadow-light)" : undefined,
+        background: "var(--neu-text-muted)",
+        opacity: variant === "solid" ? 0.4 : 0.2,
         ...style,
       }}
       {...props}

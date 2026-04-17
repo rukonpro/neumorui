@@ -44,9 +44,9 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
         value={opt.value}
         disabled={opt.disabled}
         className={cn(
-          "font-medium rounded-neu neu-transition cursor-pointer outline-none",
-          "data-[state=on]:shadow-neu-inset data-[state=on]:font-semibold",
-          "data-[state=off]:hover:-translate-y-0.5",
+          "font-bold rounded-neu neu-transition cursor-pointer outline-none",
+          "data-[state=on]:shadow-neu-inset-sm data-[state=on]:!text-[var(--neu-accent)] data-[state=on]:font-extrabold",
+          "data-[state=off]:hover:-translate-y-0.5 data-[state=off]:hover:text-[var(--neu-accent)]",
           "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none",
           "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
           sizeClasses[size]

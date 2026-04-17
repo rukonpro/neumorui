@@ -28,7 +28,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         onCheckedChange={onCheckedChange}
         disabled={disabled}
         className={cn(
-          "w-6 h-6 rounded-lg flex items-center justify-center cursor-pointer outline-none",
+          "w-[26px] h-[26px] rounded-[9px] flex items-center justify-center cursor-pointer outline-none shrink-0",
           "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           "neu-transition"
@@ -36,16 +36,16 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         style={{
           background: isChecked ? "var(--neu-gradient-primary)" : "var(--neu-bg)",
           boxShadow: isChecked
-            ? "3px 3px 8px var(--neu-accent-glow), -2px -2px 6px var(--neu-shadow-light)"
+            ? "3px 3px 9px var(--neu-accent-glow), -2px -2px 7px var(--neu-shadow-light)"
             : "var(--neu-shadow-inset-sm)",
         }}
       >
         <RadixCheckbox.Indicator>
-          <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+          <svg width="13" height="11" viewBox="0 0 13 11" fill="none">
             <path
-              d="M1 5L4.5 8.5L11 1"
+              d="M1.5 5.5L5 9 11.5 1.5"
               stroke="white"
-              strokeWidth="2"
+              strokeWidth="2.2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />

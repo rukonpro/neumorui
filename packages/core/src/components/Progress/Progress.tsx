@@ -13,10 +13,10 @@ interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   animate?: boolean;
 }
 
-const trackHeight = { sm: "h-1", md: "h-2", lg: "h-3" };
+const trackHeight = { sm: "h-1.5", md: "h-2.5", lg: "h-[10px]" };
 
 const fillColors: Record<ProgressVariant, string> = {
-  default: "linear-gradient(90deg, var(--neu-accent-light), var(--neu-accent))",
+  default: "linear-gradient(90deg, var(--neu-accent-light), var(--neu-accent-dark))",
   success: "linear-gradient(90deg, var(--neu-success-light), var(--neu-success-dark))",
   danger: "linear-gradient(90deg, var(--neu-danger-light), var(--neu-danger-dark))",
   warning: "linear-gradient(90deg, var(--neu-warning-light), var(--neu-warning-dark))",
@@ -69,7 +69,6 @@ export const Progress: React.FC<ProgressProps> = ({
           style={{
             width: `${pct}%`,
             background: fillColors[variant],
-            boxShadow: "2px 0 8px var(--neu-accent-glow)",
           }}
         />
       </div>

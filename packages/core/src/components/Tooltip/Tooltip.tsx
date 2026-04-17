@@ -22,10 +22,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
           <RadixTooltip.Content
             side={side}
             sideOffset={8}
-            className="text-xs font-medium px-3 py-1.5 rounded-neu z-50 animate-[fadeIn_0.15s_ease]"
+            className="text-xs font-bold px-3 py-1.5 rounded-[10px] z-50 animate-[fadeIn_0.15s_ease]"
             style={{
               background: "var(--neu-bg)",
-              boxShadow: "var(--neu-shadow-raised)",
+              boxShadow: "var(--neu-shadow-raised-sm)",
               color: "var(--neu-text-primary)",
             }}
           >

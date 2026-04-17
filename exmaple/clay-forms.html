@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Clay UI — Forms</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f0f4ff;--shadow-d:rgba(180,190,220,0.8);--shadow-l:rgba(255,255,255,0.95);--text:#2a2d4a;--muted:#7880a8;--hint:#b0b8d8;--accent:#6c7ef8;--accent2:#f87c6c;--accent3:#5ecba1;--accent4:#f9c74f;--clay:7px 7px 18px var(--shadow-d),-5px -5px 14px var(--shadow-l);--clay-sm:4px 4px 12px var(--shadow-d),-3px -3px 9px var(--shadow-l);--clay-lg:12px 12px 28px var(--shadow-d),-8px -8px 20px var(--shadow-l);--clay-in:inset 5px 5px 12px var(--shadow-d),inset -4px -4px 10px var(--shadow-l);--clay-in-sm:inset 3px 3px 8px var(--shadow-d),inset -2px -2px 6px var(--shadow-l);--tag-green-bg:#d4f3e8;--tag-green-text:#1f8a5e;--tag-coral-bg:#fde0dc;--tag-coral-text:#c93a28;--cover-grad:linear-gradient(135deg,#c8d0fd 0%,#f9c9c4 50%,#c8f3e4 100%)}
+[data-theme=dark]{--bg:#181c2e;--shadow-d:rgba(8,10,22,0.85);--shadow-l:rgba(50,58,100,0.45);--text:#dde2f8;--muted:#7880a8;--hint:#3e4668;--accent:#7c8ffa;--tag-green-bg:#0e2e22;--tag-green-text:#6ed8b0;--tag-coral-bg:#3a1a16;--tag-coral-text:#f9a090;--cover-grad:linear-gradient(135deg,#1e2560 0%,#3a1a30 50%,#0e2e22 100%)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{transition:background .3s}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1.5rem 4rem}
+.page{max-width:980px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.col-6{grid-column:span 6}.col-4{grid-column:span 4}.col-8{grid-column:span 8}.col-12{grid-column:span 12}
+@media(max-width:720px){.col-6,.col-4,.col-8{grid-column:span 12}}
+.card{border-radius:24px;padding:1.75rem;box-shadow:var(--clay-lg);background:var(--bg);transition:background .35s,box-shadow .35s}
+.sec{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--hint);margin-bottom:1.1rem}
+.label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:block}
+.inp{width:100%;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;color:var(--text);background:var(--bg);border:none;outline:none;border-radius:14px;padding:13px 16px;box-shadow:var(--clay-in);transition:box-shadow .2s}
+.inp:focus{box-shadow:var(--clay-in),0 0 0 3px rgba(108,126,248,.2)}
+.inp::placeholder{color:var(--hint);font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;outline:none;user-select:none;position:relative;overflow:hidden;transition:all .2s cubic-bezier(.34,1.4,.64,1)}
+.btn-blue{padding:12px 26px;border-radius:14px;color:#fff;background:linear-gradient(145deg,#8490fa,#5a6cf5);box-shadow:6px 6px 16px rgba(108,126,248,.45),-4px -4px 12px var(--shadow-l)}
+.btn-blue:hover{transform:translateY(-2px)}
+.btn-blue:active{box-shadow:inset 4px 4px 10px rgba(60,78,200,.4);transform:scale(.97)}
+.btn-clay{padding:12px 26px;border-radius:14px;background:var(--bg);color:var(--text);box-shadow:var(--clay)}
+.btn-clay:hover{transform:translateY(-2px);box-shadow:var(--clay-lg)}
+.btn-clay:active{box-shadow:var(--clay-in);transform:scale(.97)}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 13px;border-radius:999px;box-shadow:var(--clay-sm)}
+.tag-green{background:var(--tag-green-bg);color:var(--tag-green-text)}
+.tag-coral{background:var(--tag-coral-bg);color:var(--tag-coral-text)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0}.reveal.visible{animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both}
+/* Ripple */
+.ripple{position:absolute;border-radius:50%;transform:scale(0);animation:rippleOut .55s ease-out forwards;background:rgba(255,255,255,.3);pointer-events:none}
+@keyframes rippleOut{to{transform:scale(4);opacity:0}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Clay UI · Forms</div>
+      <h1 style="font-size:2rem;font-weight:900;letter-spacing:-.03em">Form components</h1>
+    </div>
+    <button onclick="toggleTheme()" style="display:inline-flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;border:none;cursor:pointer;padding:10px 20px;border-radius:999px;background:var(--bg);color:var(--muted);box-shadow:var(--clay-sm)"><span id="ti">🌙</span><span id="tl">Dark</span></button>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. TEXTAREA -->
+    <div class="card col-6 reveal">
+      <p class="sec">Textarea with auto-resize</p>
+      <div style="margin-bottom:14px">
+        <label class="label">Message</label>
+        <textarea id="auto-ta" class="inp" placeholder="Type your message..." style="resize:none;overflow:hidden;min-height:80px;line-height:1.6" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span id="char-count" style="font-size:12px;color:var(--hint);font-weight:600">0 / 280</span>
+        <button class="btn btn-blue" style="padding:10px 20px;font-size:13px">Send →</button>
+      </div>
+    </div>
+
+    <!-- 2. DUAL RANGE SLIDER -->
+    <div class="card col-6 reveal">
+      <p class="sec">Dual range slider</p>
+      <div style="margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+          <label class="label" style="margin:0">Price range</label>
+          <span style="font-size:13px;font-weight:800;color:var(--accent)" id="range-label">$200 — $800</span>
+        </div>
+        <div style="position:relative;height:30px;margin:0 8px">
+          <div style="position:absolute;top:50%;transform:translateY(-50%);left:0;right:0;height:6px;border-radius:999px;box-shadow:var(--clay-in-sm);background:var(--bg)"></div>
+          <div id="range-fill" style="position:absolute;top:50%;transform:translateY(-50%);height:6px;border-radius:999px;background:linear-gradient(90deg,#8490fa,#5a6cf5)"></div>
+          <input type="range" id="range-min" min="0" max="1000" value="200" oninput="updateRange()" style="-webkit-appearance:none;appearance:none;position:absolute;width:100%;height:6px;background:transparent;outline:none;pointer-events:none">
+          <input type="range" id="range-max" min="0" max="1000" value="800" oninput="updateRange()" style="-webkit-appearance:none;appearance:none;position:absolute;width:100%;height:6px;background:transparent;outline:none;pointer-events:none">
+        </div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1"><label class="label">Min</label><input class="inp" id="rmin-inp" type="number" value="200" style="font-size:13px;padding:10px" oninput="document.getElementById('range-min').value=this.value;updateRange()"/></div>
+        <div style="flex:1"><label class="label">Max</label><input class="inp" id="rmax-inp" type="number" value="800" style="font-size:13px;padding:10px" oninput="document.getElementById('range-max').value=this.value;updateRange()"/></div>
+      </div>
+    </div>
+
+    <!-- 3. DATE PICKER -->
+    <div class="card col-6 reveal">
+      <p class="sec">Date picker</p>
+      <label class="label">Select date</label>
+      <div style="position:relative;margin-bottom:14px">
+        <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--hint)">📅</span>
+        <input class="inp" type="date" id="date-inp" style="padding-left:42px;cursor:pointer" oninput="updateDateDisplay()"/>
+      </div>
+      <div id="date-display" style="display:none;padding:12px 14px;border-radius:14px;box-shadow:var(--clay-sm)">
+        <p style="font-size:13px;font-weight:700;color:var(--text)">Selected: <span id="date-val" style="color:var(--accent)"></span></p>
+      </div>
+      <div style="margin-top:14px">
+        <label class="label">Date range</label>
+        <div style="display:flex;gap:10px;align-items:center">
+          <input class="inp" type="date" style="flex:1;font-size:13px;padding:10px;cursor:pointer"/>
+          <span style="color:var(--hint);font-weight:700;flex-shrink:0">→</span>
+          <input class="inp" type="date" style="flex:1;font-size:13px;padding:10px;cursor:pointer"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. TIME PICKER -->
+    <div class="card col-6 reveal">
+      <p class="sec">Time picker</p>
+      <label class="label">Select time</label>
+      <div style="position:relative;margin-bottom:16px">
+        <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--hint)">🕐</span>
+        <input class="inp" type="time" style="padding-left:42px;cursor:pointer"/>
+      </div>
+      <label class="label">Quick select</label>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button class="btn btn-clay" onclick="setTime(this,'09:00')" style="font-size:12px;padding:7px 14px;border-radius:10px">9:00 AM</button>
+        <button class="btn btn-clay" onclick="setTime(this,'10:30')" style="font-size:12px;padding:7px 14px;border-radius:10px">10:30 AM</button>
+        <button class="btn btn-clay" onclick="setTime(this,'12:00')" style="font-size:12px;padding:7px 14px;border-radius:10px">12:00 PM</button>
+        <button class="btn btn-clay" onclick="setTime(this,'14:00')" style="font-size:12px;padding:7px 14px;border-radius:10px">2:00 PM</button>
+        <button class="btn btn-clay" onclick="setTime(this,'17:00')" style="font-size:12px;padding:7px 14px;border-radius:10px">5:00 PM</button>
+        <button class="btn btn-clay" onclick="setTime(this,'20:00')" style="font-size:12px;padding:7px 14px;border-radius:10px">8:00 PM</button>
+      </div>
+    </div>
+
+    <!-- 5. SEARCH AUTOCOMPLETE -->
+    <div class="card col-6 reveal">
+      <p class="sec">Search autocomplete</p>
+      <div style="position:relative">
+        <span style="position:absolute;left:14px;top:16px;font-size:16px;color:var(--hint)">🔍</span>
+        <input class="inp" id="auto-inp" type="text" placeholder="Search frameworks..." style="padding-left:42px" oninput="showAuto(this.value)" onblur="setTimeout(()=>hideAuto(),200)" autocomplete="off"/>
+        <div id="auto-list" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;border-radius:16px;overflow:hidden;box-shadow:var(--clay-lg);background:var(--bg);z-index:20;max-height:200px;overflow-y:auto"></div>
+      </div>
+    </div>
+
+    <!-- 6. MULTI SELECT -->
+    <div class="card col-6 reveal">
+      <p class="sec">Multi-select</p>
+      <label class="label">Select skills</label>
+      <div id="multi-selected" style="display:flex;flex-wrap:wrap;gap:6px;min-height:36px;padding:10px;border-radius:14px;box-shadow:var(--clay-in);margin-bottom:10px;cursor:text" onclick="document.getElementById('multi-inp').focus()">
+        <input id="multi-inp" type="text" placeholder="Type to search..." style="border:none;outline:none;background:transparent;font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text);min-width:100px;flex:1" oninput="multiSearch(this.value)"/>
+      </div>
+      <div id="multi-opts" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+
+    <!-- 7. TAG INPUT -->
+    <div class="card col-6 reveal">
+      <p class="sec">Tag input</p>
+      <label class="label">Add tags</label>
+      <div id="tag-inp-wrap" style="display:flex;flex-wrap:wrap;gap:6px;padding:10px;border-radius:14px;box-shadow:var(--clay-in);min-height:50px;cursor:text" onclick="document.getElementById('tag-inp').focus()">
+        <span class="tag tag-green" style="display:inline-flex;align-items:center;gap:4px;cursor:default">React <span onclick="removeTag(this.parentElement)" style="cursor:pointer;font-size:14px;line-height:1">✕</span></span>
+        <span class="tag tag-green" style="display:inline-flex;align-items:center;gap:4px;cursor:default">TypeScript <span onclick="removeTag(this.parentElement)" style="cursor:pointer;font-size:14px;line-height:1">✕</span></span>
+        <input id="tag-inp" type="text" placeholder="Add tag, press Enter" style="border:none;outline:none;background:transparent;font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text);min-width:140px;flex:1" onkeydown="addTag(event)"/>
+      </div>
+      <p style="font-size:11px;color:var(--hint);margin-top:6px;font-weight:600">Press Enter or comma to add · Click × to remove</p>
+    </div>
+
+    <!-- 8. FORM VALIDATION -->
+    <div class="card col-6 reveal">
+      <p class="sec">Form validation</p>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div>
+          <label class="label">Username</label>
+          <input class="inp" id="v-user" type="text" placeholder="At least 3 characters" oninput="validateField(this,'user')"/>
+          <p class="v-msg" id="msg-user" style="font-size:11px;margin-top:5px;font-weight:700;display:none"></p>
+        </div>
+        <div>
+          <label class="label">Email</label>
+          <input class="inp" id="v-email" type="email" placeholder="you@example.com" oninput="validateField(this,'email')"/>
+          <p class="v-msg" id="msg-email" style="font-size:11px;margin-top:5px;font-weight:700;display:none"></p>
+        </div>
+        <div>
+          <label class="label">Password</label>
+          <input class="inp" id="v-pass" type="password" placeholder="Min 8 chars" oninput="validateField(this,'pass');updateStrength(this.value)"/>
+          <p class="v-msg" id="msg-pass" style="font-size:11px;margin-top:5px;font-weight:700;display:none"></p>
+          <div id="strength-bar" style="display:flex;gap:4px;margin-top:8px">
+            <div class="sb" style="flex:1;height:4px;border-radius:999px;background:var(--hint);transition:background .3s"></div>
+            <div class="sb" style="flex:1;height:4px;border-radius:999px;background:var(--hint);transition:background .3s"></div>
+            <div class="sb" style="flex:1;height:4px;border-radius:999px;background:var(--hint);transition:background .3s"></div>
+            <div class="sb" style="flex:1;height:4px;border-radius:999px;background:var(--hint);transition:background .3s"></div>
+          </div>
+          <p id="strength-lbl" style="font-size:11px;color:var(--hint);font-weight:700;margin-top:4px"></p>
+        </div>
+        <button class="btn btn-blue" onclick="submitForm()" style="width:100%;justify-content:center;padding:13px">Validate & Submit</button>
+      </div>
+    </div>
+
+    <!-- 9. PASSWORD STRENGTH -->
+    <div class="card col-6 reveal">
+      <p class="sec">Password strength meter</p>
+      <label class="label">Create password</label>
+      <div style="position:relative;margin-bottom:14px">
+        <input class="inp" id="ps-inp" type="password" placeholder="Enter password..." oninput="psUpdate(this.value)" style="padding-right:48px"/>
+        <button id="ps-eye" onclick="togglePs()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;font-size:18px;color:var(--hint)">👁</button>
+      </div>
+      <div style="display:flex;gap:5px;margin-bottom:8px" id="ps-bars">
+        <div style="flex:1;height:6px;border-radius:999px;box-shadow:var(--clay-in-sm);transition:background .3s"></div>
+        <div style="flex:1;height:6px;border-radius:999px;box-shadow:var(--clay-in-sm);transition:background .3s"></div>
+        <div style="flex:1;height:6px;border-radius:999px;box-shadow:var(--clay-in-sm);transition:background .3s"></div>
+        <div style="flex:1;height:6px;border-radius:999px;box-shadow:var(--clay-in-sm);transition:background .3s"></div>
+        <div style="flex:1;height:6px;border-radius:999px;box-shadow:var(--clay-in-sm);transition:background .3s"></div>
+      </div>
+      <p id="ps-lbl" style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:12px">Enter a password</p>
+      <div style="display:flex;flex-direction:column;gap:6px" id="ps-checks">
+        <div class="ps-check" data-rule="len"><span class="pc-icon">○</span> <span style="font-size:12px;color:var(--muted);font-weight:600">At least 8 characters</span></div>
+        <div class="ps-check" data-rule="upper"><span class="pc-icon">○</span> <span style="font-size:12px;color:var(--muted);font-weight:600">One uppercase letter</span></div>
+        <div class="ps-check" data-rule="num"><span class="pc-icon">○</span> <span style="font-size:12px;color:var(--muted);font-weight:600">One number</span></div>
+        <div class="ps-check" data-rule="sym"><span class="pc-icon">○</span> <span style="font-size:12px;color:var(--muted);font-weight:600">One special character</span></div>
+      </div>
+    </div>
+
+    <!-- 10. FULL CONTACT FORM -->
+    <div class="card col-12 reveal">
+      <p class="sec">Full contact form</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div><label class="label">First name</label><input class="inp" type="text" placeholder="Rafat"/></div>
+        <div><label class="label">Last name</label><input class="inp" type="text" placeholder="Islam"/></div>
+        <div><label class="label">Email</label><input class="inp" type="email" placeholder="you@example.com"/></div>
+        <div><label class="label">Phone</label>
+          <div style="display:flex;gap:8px">
+            <select class="inp" style="width:90px;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22%3E%3Cpath d=%22M1 1l5 5 5-5%22 stroke=%22%23b0b8d8%22 stroke-width=%221.8%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 10px center;padding-right:30px">
+              <option>🇧🇩 +880</option><option>🇺🇸 +1</option><option>🇬🇧 +44</option>
+            </select>
+            <input class="inp" type="tel" placeholder="017..." style="flex:1"/>
+          </div>
+        </div>
+        <div style="grid-column:span 2"><label class="label">Subject</label>
+          <select class="inp" style="appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22%3E%3Cpath d=%22M1 1l5 5 5-5%22 stroke=%22%23b0b8d8%22 stroke-width=%221.8%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 14px center;padding-right:36px">
+            <option>General inquiry</option><option>Technical support</option><option>Billing</option><option>Partnership</option>
+          </select>
+        </div>
+        <div style="grid-column:span 2"><label class="label">Message</label><textarea class="inp" placeholder="Write your message..." style="min-height:100px;resize:none;line-height:1.6" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea></div>
+        <div style="grid-column:span 2;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="this.querySelector('.cb').classList.toggle('on')">
+            <div class="cb" style="width:22px;height:22px;border-radius:7px;box-shadow:var(--clay-in-sm);display:flex;align-items:center;justify-content:center;transition:all .2s">
+              <svg class="cbt" width="12" height="10" viewBox="0 0 13 11" fill="none" style="display:none"><path d="M1.5 5.5L5 9 11.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:var(--muted)">I agree to the <a href="#" style="color:var(--accent)">privacy policy</a></span>
+          </label>
+          <button class="btn btn-blue" style="padding:13px 32px;font-size:15px">Send message →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(145deg,#9aa2fb,#5a6cf5);box-shadow:3px 3px 8px rgba(108,126,248,.45),-2px -2px 5px var(--shadow-l);cursor:pointer;pointer-events:all;position:relative}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;border:none;background:linear-gradient(145deg,#9aa2fb,#5a6cf5);box-shadow:3px 3px 8px rgba(108,126,248,.45),-2px -2px 5px var(--shadow-l);cursor:pointer;pointer-events:all}
+.auto-item{padding:10px 14px;font-size:13px;font-weight:700;color:var(--text);cursor:pointer;transition:box-shadow .15s}
+.auto-item:hover{box-shadow:var(--clay-in-sm)}
+.multi-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;box-shadow:var(--clay-sm);background:var(--bg);color:var(--accent)}
+.multi-opt{padding:7px 12px;font-size:13px;font-weight:700;color:var(--text);cursor:pointer;border-radius:10px;box-shadow:var(--clay-sm);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.multi-opt:hover{transform:translateY(-2px)}
+.multi-opt.sel{box-shadow:var(--clay-in-sm);color:var(--accent)}
+.v-msg.ok{color:var(--accent3)}.v-msg.err{color:var(--accent2)}
+.cb.on{background:linear-gradient(145deg,#8490fa,#5a6cf5);box-shadow:3px 3px 8px rgba(108,126,248,.4),-2px -2px 6px var(--shadow-l)}
+.cb.on .cbt{display:block!important}
+.ps-check.pass .pc-icon{color:var(--accent3)}
+.ps-check.pass span:last-child{color:var(--text)}
+</style>
+
+<script>
+/* Dark mode */
+function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'light':'dark');document.getElementById('ti').textContent=d?'🌙':'☀️';document.getElementById('tl').textContent=d?'Dark':'Light'}
+
+/* Reveal */
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* Ripple */
+document.addEventListener('click',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),sz=Math.max(r.width,r.height)*1.4,x=e.clientX-r.left-sz/2,y=e.clientY-r.top-sz/2;const rp=document.createElement('span');rp.className='ripple';rp.style.cssText=`width:${sz}px;height:${sz}px;left:${x}px;top:${y}px`;b.appendChild(rp);setTimeout(()=>rp.remove(),600)});
+
+/* Textarea char count */
+document.getElementById('auto-ta').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length+' / 280'});
+
+/* Dual range */
+function updateRange(){
+  const mn=parseInt(document.getElementById('range-min').value),mx=parseInt(document.getElementById('range-max').value);
+  const lo=Math.min(mn,mx),hi=Math.max(mn,mx);
+  document.getElementById('range-label').textContent='$'+lo+' — $'+hi;
+  document.getElementById('rmin-inp').value=lo;document.getElementById('rmax-inp').value=hi;
+  const pct1=lo/1000*100,pct2=hi/1000*100;
+  document.getElementById('range-fill').style.left=pct1+'%';
+  document.getElementById('range-fill').style.width=(pct2-pct1)+'%';
+}
+updateRange();
+
+/* Date display */
+function updateDateDisplay(){
+  const v=document.getElementById('date-inp').value;
+  if(!v)return;
+  const d=new Date(v);
+  document.getElementById('date-val').textContent=d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('date-display').style.display='block';
+}
+
+/* Time quick select */
+function setTime(btn,t){document.querySelector('input[type=time]').value=t;document.querySelectorAll('.btn-clay[onclick^="setTime"]').forEach(b=>{b.style.boxShadow='var(--clay)'});btn.style.boxShadow='var(--clay-in-sm)'}
+
+/* Autocomplete */
+const AC_DATA=['React','Vue','Svelte','Angular','Nuxt','Next.js','Remix','Astro','SvelteKit','Solid.js','Qwik','Ember'];
+function showAuto(q){
+  const list=document.getElementById('auto-list');
+  if(!q){list.style.display='none';return}
+  const matches=AC_DATA.filter(x=>x.toLowerCase().includes(q.toLowerCase()));
+  if(!matches.length){list.style.display='none';return}
+  list.innerHTML=matches.map(m=>`<div class="auto-item" onmousedown="pickAuto('${m}')">${m.replace(new RegExp(q,'gi'),s=>`<strong style="color:var(--accent)">${s}</strong>`)}</div>`).join('');
+  list.style.display='block';
+}
+function pickAuto(v){document.getElementById('auto-inp').value=v;document.getElementById('auto-list').style.display='none'}
+function hideAuto(){document.getElementById('auto-list').style.display='none'}
+
+/* Multi select */
+const MS_OPTS=['JavaScript','TypeScript','React','Vue','Node.js','Python','Go','Rust','CSS','Tailwind','GraphQL','Docker'];
+let ms_selected=[];
+function renderMultiOpts(filter=''){
+  const wrap=document.getElementById('multi-opts');
+  wrap.innerHTML=MS_OPTS.filter(o=>o.toLowerCase().includes(filter.toLowerCase())).map(o=>`<div class="multi-opt${ms_selected.includes(o)?' sel':''}" onclick="toggleMulti('${o}')">${ms_selected.includes(o)?'✓ ':''} ${o}</div>`).join('');
+}
+function toggleMulti(o){
+  ms_selected.includes(o)?ms_selected.splice(ms_selected.indexOf(o),1):ms_selected.push(o);
+  renderMultiTags();renderMultiOpts(document.getElementById('multi-inp').value);
+}
+function renderMultiTags(){
+  const wrap=document.getElementById('multi-selected');
+  wrap.querySelectorAll('.multi-tag').forEach(t=>t.remove());
+  ms_selected.forEach(o=>{const t=document.createElement('div');t.className='multi-tag';t.innerHTML=`${o} <span onclick="toggleMulti('${o}')" style="cursor:pointer">✕</span>`;wrap.insertBefore(t,document.getElementById('multi-inp'))});
+}
+function multiSearch(v){renderMultiOpts(v)}
+renderMultiOpts();
+
+/* Tag input */
+function addTag(e){
+  if(e.key==='Enter'||e.key===','){
+    e.preventDefault();
+    const v=e.target.value.trim().replace(',','');
+    if(!v)return;
+    const wrap=document.getElementById('tag-inp-wrap');
+    const tag=document.createElement('span');
+    tag.className='tag tag-green';
+    tag.style.cssText='display:inline-flex;align-items:center;gap:4px;cursor:default';
+    tag.innerHTML=`${v} <span onclick="removeTag(this.parentElement)" style="cursor:pointer;font-size:14px;line-height:1">✕</span>`;
+    wrap.insertBefore(tag,e.target);e.target.value='';
+  }
+}
+function removeTag(el){el.style.transform='scale(0)';el.style.opacity='0';el.style.transition='all .2s';setTimeout(()=>el.remove(),200)}
+
+/* Form validation */
+function validateField(inp,type){
+  let ok=false,msg='';
+  if(type==='user'){ok=inp.value.length>=3;msg=ok?'✓ Looks good!':'✗ At least 3 characters required'}
+  if(type==='email'){ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value);msg=ok?'✓ Valid email':'✗ Enter a valid email address'}
+  if(type==='pass'){ok=inp.value.length>=8;msg=ok?'✓ Strong enough':'✗ At least 8 characters required'}
+  const m=document.getElementById('msg-'+type);
+  m.textContent=msg;m.className='v-msg '+(ok?'ok':'err');m.style.display=msg?'block':'none';
+  inp.style.boxShadow=inp.value?`var(--clay-in),0 0 0 2px ${ok?'rgba(94,203,161,.4)':'rgba(248,124,108,.4)'}`:'var(--clay-in)';
+}
+function updateStrength(v){
+  const bars=document.querySelectorAll('.sb');
+  const score=[v.length>=8,/[A-Z]/.test(v),/[0-9]/.test(v),/[^A-Za-z0-9]/.test(v)].filter(Boolean).length;
+  const colors=['','#e07070','#f9c74f','#5ecba1','#5ecba1'];
+  bars.forEach((b,i)=>b.style.background=i<score?colors[score]:getComputedStyle(document.documentElement).getPropertyValue('--hint'));
+  const labels=['','Weak','Fair','Good','Strong'];
+  document.getElementById('strength-lbl').textContent=v?labels[score]:'';
+  document.getElementById('strength-lbl').style.color=colors[score]||'var(--hint)';
+}
+function submitForm(){alert('Validated! ✓')}
+
+/* Password strength */
+function psUpdate(v){
+  const rules={len:v.length>=8,upper:/[A-Z]/.test(v),num:/[0-9]/.test(v),sym:/[^A-Za-z0-9]/.test(v)};
+  const score=Object.values(rules).filter(Boolean).length;
+  const bars=document.querySelectorAll('#ps-bars div');
+  const colors={0:'',1:'#e07070',2:'#f9c74f',3:'#5ecba1',4:'#5ecba1'};
+  bars.forEach((b,i)=>b.style.background=i<score?(i<2?'#e07070':i<3?'#f9c74f':'#5ecba1'):'');
+  const lbls={0:'Enter a password',1:'Very weak',2:'Weak',3:'Good',4:'Strong 💪'};
+  const clrs={0:'var(--hint)',1:'#e07070',2:'#f9c74f',3:'#5ecba1',4:'#5ecba1'};
+  const lbl=document.getElementById('ps-lbl');lbl.textContent=lbls[score];lbl.style.color=clrs[score];
+  document.querySelectorAll('.ps-check').forEach(c=>{
+    const r=c.dataset.rule;const ok=rules[r];
+    c.classList.toggle('pass',ok);c.querySelector('.pc-icon').textContent=ok?'✓':'○';
+  });
+}
+function togglePs(){const i=document.getElementById('ps-inp');i.type=i.type==='password'?'text':'password'}
+</script>
+</body>
+</html>

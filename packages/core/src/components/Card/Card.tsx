@@ -11,23 +11,23 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 const paddingClasses = {
   sm: "p-4",
   md: "p-5",
-  lg: "p-6 md:p-8",
+  lg: "p-6 md:p-7",
 };
 
 const variantStyle: Record<CardVariant, React.CSSProperties> = {
   raised: {
     background: "var(--neu-bg)",
-    boxShadow: "var(--neu-shadow-raised)",
-    borderRadius: "var(--neu-radius-lg)",
+    boxShadow: "var(--neu-shadow-raised-lg)",
+    borderRadius: "var(--neu-radius-xl)",
   },
   inset: {
     background: "var(--neu-bg)",
     boxShadow: "var(--neu-shadow-inset)",
-    borderRadius: "var(--neu-radius-lg)",
+    borderRadius: "var(--neu-radius-xl)",
   },
   flat: {
     background: "var(--neu-bg)",
-    borderRadius: "var(--neu-radius-lg)",
+    borderRadius: "var(--neu-radius-xl)",
   },
 };
 

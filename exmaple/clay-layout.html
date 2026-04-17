@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Clay UI — Layout</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f0f4ff;--shadow-d:rgba(180,190,220,0.8);--shadow-l:rgba(255,255,255,0.95);--text:#2a2d4a;--muted:#7880a8;--hint:#b0b8d8;--accent:#6c7ef8;--accent2:#f87c6c;--accent3:#5ecba1;--accent4:#f9c74f;--clay:7px 7px 18px var(--shadow-d),-5px -5px 14px var(--shadow-l);--clay-sm:4px 4px 12px var(--shadow-d),-3px -3px 9px var(--shadow-l);--clay-lg:12px 12px 28px var(--shadow-d),-8px -8px 20px var(--shadow-l);--clay-in:inset 5px 5px 12px var(--shadow-d),inset -4px -4px 10px var(--shadow-l);--clay-in-sm:inset 3px 3px 8px var(--shadow-d),inset -2px -2px 6px var(--shadow-l);--tag-green-bg:#d4f3e8;--tag-green-text:#1f8a5e;--tag-blue-bg:#dde2fd;--tag-blue-text:#3d4fd4;--cover-grad:linear-gradient(135deg,#c8d0fd 0%,#f9c9c4 50%,#c8f3e4 100%)}
+[data-theme=dark]{--bg:#181c2e;--shadow-d:rgba(8,10,22,0.85);--shadow-l:rgba(50,58,100,0.45);--text:#dde2f8;--muted:#7880a8;--hint:#3e4668;--accent:#7c8ffa;--tag-green-bg:#0e2e22;--tag-green-text:#6ed8b0;--tag-blue-bg:#1e2560;--tag-blue-text:#a8b4fb;--cover-grad:linear-gradient(135deg,#1e2560 0%,#3a1a30 50%,#0e2e22 100%)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{transition:background .3s}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1.5rem 4rem}
+.page{max-width:980px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.col-6{grid-column:span 6}.col-4{grid-column:span 4}.col-8{grid-column:span 8}.col-12{grid-column:span 12}.col-7{grid-column:span 7}.col-5{grid-column:span 5}
+@media(max-width:720px){.col-6,.col-4,.col-8,.col-7,.col-5{grid-column:span 12}}
+.card{border-radius:24px;padding:1.75rem;box-shadow:var(--clay-lg);background:var(--bg);transition:background .35s,box-shadow .35s}
+.sec{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--hint);margin-bottom:1.1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;outline:none;position:relative;overflow:hidden;transition:all .2s cubic-bezier(.34,1.4,.64,1)}
+.btn-blue{padding:10px 22px;border-radius:12px;color:#fff;background:linear-gradient(145deg,#8490fa,#5a6cf5);box-shadow:5px 5px 14px rgba(108,126,248,.45),-3px -3px 10px var(--shadow-l)}
+.btn-blue:hover{transform:translateY(-2px)}
+.btn-blue:active{transform:scale(.97);box-shadow:inset 3px 3px 8px rgba(60,78,200,.4)}
+.btn-clay{padding:10px 22px;border-radius:12px;background:var(--bg);color:var(--text);box-shadow:var(--clay-sm)}
+.btn-clay:hover{transform:translateY(-2px)}
+.btn-clay:active{box-shadow:var(--clay-in-sm);transform:scale(.97)}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 13px;border-radius:999px;box-shadow:var(--clay-sm)}
+.tag-green{background:var(--tag-green-bg);color:var(--tag-green-text)}
+.tag-blue{background:var(--tag-blue-bg);color:var(--tag-blue-text)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.reveal{opacity:0}.reveal.visible{animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);animation:rippleOut .55s ease-out forwards;background:rgba(255,255,255,.3);pointer-events:none}
+@keyframes rippleOut{to{transform:scale(4);opacity:0}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Clay UI · Layout</div>
+      <h1 style="font-size:2rem;font-weight:900;letter-spacing:-.03em">Layout & misc</h1>
+    </div>
+    <button onclick="toggleTheme()" style="display:inline-flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;border:none;cursor:pointer;padding:10px 20px;border-radius:999px;background:var(--bg);color:var(--muted);box-shadow:var(--clay-sm)"><span id="ti">🌙</span><span id="tl">Dark</span></button>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. HERO SECTION -->
+    <div class="card col-12 reveal" style="padding:0;overflow:hidden">
+      <div style="background:var(--cover-grad);padding:3rem 2rem;text-align:center;position:relative">
+        <div style="position:absolute;inset:0;background:var(--bg);opacity:.1;pointer-events:none"></div>
+        <div style="position:relative;z-index:1">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);padding:5px 16px;border-radius:999px;box-shadow:var(--clay-sm);margin-bottom:16px">New · Clay UI v2.0</span>
+          <h2 style="font-size:clamp(1.6rem,5vw,2.8rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:12px">Build faster with<br><span style="color:var(--accent)">soft clay components</span></h2>
+          <p style="font-size:14px;color:var(--muted);max-width:400px;margin:0 auto 24px;line-height:1.7">A beautiful React UI library with neumorphic design, dark mode, animations, and 50+ components.</p>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <button class="btn btn-blue" style="padding:13px 28px;font-size:15px">Get started →</button>
+            <button class="btn btn-clay" style="padding:13px 28px;font-size:15px">View docs</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PRICING CARDS -->
+    <div class="card col-12 reveal">
+      <p class="sec" style="text-align:center;margin-bottom:20px">Pricing cards</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+        <div style="padding:20px;border-radius:20px;box-shadow:var(--clay)">
+          <p style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:10px">Free</p>
+          <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:14px"><span style="font-size:2.2rem;font-weight:900;color:var(--text)">$0</span><span style="font-size:13px;color:var(--muted)">/mo</span></div>
+          <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:16px">
+            <div class="pc-feat">✓ 10 components</div><div class="pc-feat">✓ Light mode</div><div class="pc-feat muted-feat">✗ Dark mode</div><div class="pc-feat muted-feat">✗ Storybook</div>
+          </div>
+          <button class="btn btn-clay" style="width:100%;justify-content:center;padding:11px;font-size:13px">Start free</button>
+        </div>
+        <div style="padding:20px;border-radius:20px;box-shadow:var(--clay-lg);border:2px solid rgba(108,126,248,.3);position:relative">
+          <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:800;padding:4px 16px;border-radius:999px;background:linear-gradient(135deg,#8490fa,#5a6cf5);color:#fff;white-space:nowrap">Most popular</div>
+          <p style="font-size:13px;font-weight:800;color:var(--accent);margin-bottom:10px">Pro</p>
+          <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:14px"><span style="font-size:2.2rem;font-weight:900;color:var(--text)">$12</span><span style="font-size:13px;color:var(--muted)">/mo</span></div>
+          <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:16px">
+            <div class="pc-feat">✓ 50+ components</div><div class="pc-feat">✓ Dark mode</div><div class="pc-feat">✓ Storybook</div><div class="pc-feat">✓ Custom themes</div>
+          </div>
+          <button class="btn btn-blue" style="width:100%;justify-content:center;padding:11px;font-size:13px">Get Pro →</button>
+        </div>
+        <div style="padding:20px;border-radius:20px;box-shadow:var(--clay)">
+          <p style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:10px">Team</p>
+          <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:14px"><span style="font-size:2.2rem;font-weight:900;color:var(--text)">$49</span><span style="font-size:13px;color:var(--muted)">/mo</span></div>
+          <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:16px">
+            <div class="pc-feat">✓ Everything in Pro</div><div class="pc-feat">✓ Unlimited seats</div><div class="pc-feat">✓ Priority support</div><div class="pc-feat">✓ Private Slack</div>
+          </div>
+          <button class="btn btn-clay" style="width:100%;justify-content:center;padding:11px;font-size:13px">Contact us</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. TESTIMONIALS CAROUSEL -->
+    <div class="card col-12 reveal">
+      <p class="sec">Testimonials</p>
+      <div style="position:relative;overflow:hidden">
+        <div id="testimonials" style="display:flex;gap:14px;transition:transform .4s cubic-bezier(.22,1,.36,1)">
+          <div class="t-card">
+            <div style="font-size:20px;margin-bottom:10px">★★★★★</div>
+            <p style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:14px;font-weight:600">"Clay UI transformed how we build products. The neumorphic design is stunning and the components are incredibly well thought out."</p>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#8490fa,#5a6cf5);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;box-shadow:var(--clay-sm)">RI</div>
+              <div><p style="font-size:13px;font-weight:800;color:var(--text);margin:0">Rafat Islam</p><p style="font-size:11px;color:var(--muted);margin:0">UI Designer, Acme</p></div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div style="font-size:20px;margin-bottom:10px">★★★★★</div>
+            <p style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:14px;font-weight:600">"The dark mode support and animations are absolutely top-notch. Our users love the soft, premium feel of the interface."</p>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#fa9080,#f5604a);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;box-shadow:var(--clay-sm)">AS</div>
+              <div><p style="font-size:13px;font-weight:800;color:var(--text);margin:0">Amina Shah</p><p style="font-size:11px;color:var(--muted);margin:0">Frontend Dev, TechCo</p></div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div style="font-size:20px;margin-bottom:10px">★★★★★</div>
+            <p style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:14px;font-weight:600">"50+ components, TypeScript support, Storybook integration — everything we needed. Shipping features 3x faster now."</p>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#78dbb8,#3db88a);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;box-shadow:var(--clay-sm)">KR</div>
+              <div><p style="font-size:13px;font-weight:800;color:var(--text);margin:0">Karim Reza</p><p style="font-size:11px;color:var(--muted);margin:0">CTO, StartupBD</p></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:14px">
+          <div class="t-dot active-tdot" onclick="setTestimonial(0)"></div>
+          <div class="t-dot" onclick="setTestimonial(1)"></div>
+          <div class="t-dot" onclick="setTestimonial(2)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. FEATURE GRID -->
+    <div class="card col-12 reveal">
+      <p class="sec" style="text-align:center;margin-bottom:20px">Feature cards</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:linear-gradient(145deg,#c8d0fd,#9aa2fb)">🎨</div>
+          <p style="font-size:14px;font-weight:800;color:var(--text);margin:10px 0 6px">Clay design</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Soft neumorphic aesthetic with consistent shadows and depth.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon" style="background:linear-gradient(145deg,#9ee8c0,#6dd4a0)">🌙</div>
+          <p style="font-size:14px;font-weight:800;color:var(--text);margin:10px 0 6px">Dark mode</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">System-aware dark mode with smooth transitions.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon" style="background:linear-gradient(145deg,#f4aaaa,#e88080)">⚡</div>
+          <p style="font-size:14px;font-weight:800;color:var(--text);margin:10px 0 6px">Animations</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Spring easing, scroll reveals, and microinteractions.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon" style="background:linear-gradient(145deg,#fef3cc,#fad06a)">🧩</div>
+          <p style="font-size:14px;font-weight:800;color:var(--text);margin:10px 0 6px">50+ components</p>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Forms, navigation, data, feedback — everything you need.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. MASONRY GRID -->
+    <div class="card col-6 reveal">
+      <p class="sec">Masonry grid</p>
+      <div style="columns:2;gap:10px">
+        <div class="mas-item" style="height:80px"></div>
+        <div class="mas-item" style="height:120px"></div>
+        <div class="mas-item" style="height:100px"></div>
+        <div class="mas-item" style="height:70px"></div>
+        <div class="mas-item" style="height:110px"></div>
+        <div class="mas-item" style="height:90px"></div>
+      </div>
+    </div>
+
+    <!-- 6. MARQUEE / TICKER -->
+    <div class="card col-6 reveal">
+      <p class="sec">Marquee / ticker</p>
+      <div style="overflow:hidden;border-radius:12px;box-shadow:var(--clay-in-sm);padding:10px 0;margin-bottom:14px">
+        <div style="display:flex;white-space:nowrap;animation:marquee 15s linear infinite" id="marquee1">
+          <span class="mq-item">🚀 Clay UI v2.0</span><span class="mq-item">✨ 50+ Components</span><span class="mq-item">🌙 Dark Mode</span><span class="mq-item">⚡ Animations</span><span class="mq-item">📦 TypeScript</span><span class="mq-item">🎨 Custom Themes</span>
+          <span class="mq-item">🚀 Clay UI v2.0</span><span class="mq-item">✨ 50+ Components</span><span class="mq-item">🌙 Dark Mode</span><span class="mq-item">⚡ Animations</span><span class="mq-item">📦 TypeScript</span><span class="mq-item">🎨 Custom Themes</span>
+        </div>
+      </div>
+      <div style="overflow:hidden;border-radius:12px;box-shadow:var(--clay-in-sm);padding:10px 0">
+        <div style="display:flex;white-space:nowrap;animation:marquee 20s linear infinite reverse" id="marquee2">
+          <span class="mq-item2">★ 4.9 rating</span><span class="mq-item2">10k+ downloads</span><span class="mq-item2">500+ stars</span><span class="mq-item2">MIT license</span><span class="mq-item2">React 18+</span>
+          <span class="mq-item2">★ 4.9 rating</span><span class="mq-item2">10k+ downloads</span><span class="mq-item2">500+ stars</span><span class="mq-item2">MIT license</span><span class="mq-item2">React 18+</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. CAROUSEL -->
+    <div class="card col-6 reveal">
+      <p class="sec">Image carousel</p>
+      <div style="position:relative;overflow:hidden;border-radius:16px">
+        <div id="carousel" style="display:flex;transition:transform .4s cubic-bezier(.22,1,.36,1)">
+          <div class="cr-slide" style="background:linear-gradient(135deg,#c8d0fd,#9aa2fb)"><div style="font-size:48px;margin-bottom:10px">🎨</div><p style="font-size:14px;font-weight:800;color:#3d4fd4">Design System</p><p style="font-size:12px;color:rgba(61,79,212,.7);margin-top:4px">Consistent clay aesthetic</p></div>
+          <div class="cr-slide" style="background:linear-gradient(135deg,#9ee8c0,#6dd4a0)"><div style="font-size:48px;margin-bottom:10px">🌙</div><p style="font-size:14px;font-weight:800;color:#1f8a5e">Dark Mode</p><p style="font-size:12px;color:rgba(31,138,94,.7);margin-top:4px">Smooth theme switching</p></div>
+          <div class="cr-slide" style="background:linear-gradient(135deg,#fde0dc,#f4aaaa)"><div style="font-size:48px;margin-bottom:10px">⚡</div><p style="font-size:14px;font-weight:800;color:#c93a28">Animations</p><p style="font-size:12px;color:rgba(201,58,40,.7);margin-top:4px">Spring & scroll effects</p></div>
+          <div class="cr-slide" style="background:linear-gradient(135deg,#fef3cc,#fad06a)"><div style="font-size:48px;margin-bottom:10px">📦</div><p style="font-size:14px;font-weight:800;color:#9a7010">npm Package</p><p style="font-size:12px;color:rgba(154,112,16,.7);margin-top:4px">Easy install & setup</p></div>
+        </div>
+        <button onclick="crPrev()" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:10px;border:none;background:var(--bg);box-shadow:var(--clay-sm);cursor:pointer;font-size:16px;color:var(--muted);transition:all .2s">‹</button>
+        <button onclick="crNext()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:10px;border:none;background:var(--bg);box-shadow:var(--clay-sm);cursor:pointer;font-size:16px;color:var(--muted);transition:all .2s">›</button>
+      </div>
+      <div style="display:flex;justify-content:center;gap:6px;margin-top:10px" id="cr-dots">
+        <div class="cr-dot active-cdot" onclick="crGo(0)"></div>
+        <div class="cr-dot" onclick="crGo(1)"></div>
+        <div class="cr-dot" onclick="crGo(2)"></div>
+        <div class="cr-dot" onclick="crGo(3)"></div>
+      </div>
+    </div>
+
+    <!-- 8. RESIZABLE PANELS -->
+    <div class="card col-6 reveal">
+      <p class="sec">Resizable panels</p>
+      <div style="display:flex;gap:0;height:180px;border-radius:16px;overflow:hidden;box-shadow:var(--clay-in)" id="panels">
+        <div id="panel-left" style="background:var(--tag-blue-bg);padding:14px;min-width:80px;max-width:70%;overflow:hidden;transition:width .1s">
+          <p style="font-size:12px;font-weight:800;color:var(--tag-blue-text);margin-bottom:8px">Panel A</p>
+          <p style="font-size:11px;color:var(--tag-blue-text);opacity:.7;line-height:1.5">Drag the handle to resize panels.</p>
+        </div>
+        <div id="resize-handle" style="width:8px;background:var(--bg);cursor:col-resize;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:var(--clay-sm)">
+          <div style="width:2px;height:24px;border-radius:1px;background:var(--hint)"></div>
+        </div>
+        <div id="panel-right" style="background:var(--tag-green-bg);padding:14px;flex:1;min-width:80px;overflow:hidden">
+          <p style="font-size:12px;font-weight:800;color:var(--tag-green-text);margin-bottom:8px">Panel B</p>
+          <p style="font-size:11px;color:var(--tag-green-text);opacity:.7;line-height:1.5">Content adapts as you resize.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. CARD GRID VARIANTS -->
+    <div class="card col-12 reveal">
+      <p class="sec">Card variants</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+        <div style="padding:16px;border-radius:18px;box-shadow:var(--clay-lg);transition:all .25s cubic-bezier(.34,1.2,.64,1)" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform=''">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#c8d0fd,#9aa2fb);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;box-shadow:var(--clay-sm)">📊</div>
+          <p style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px">Analytics</p>
+          <p style="font-size:11px;color:var(--muted);line-height:1.5">Track your metrics</p>
+        </div>
+        <div style="padding:16px;border-radius:18px;box-shadow:var(--clay-in);transition:all .25s cubic-bezier(.34,1.2,.64,1)" onmouseover="this.style.boxShadow='var(--clay)'" onmouseout="this.style.boxShadow='var(--clay-in)'">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#9ee8c0,#6dd4a0);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;box-shadow:var(--clay-sm)">🎯</div>
+          <p style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px">Goals</p>
+          <p style="font-size:11px;color:var(--muted);line-height:1.5">Set and track goals</p>
+        </div>
+        <div style="padding:16px;border-radius:18px;border:2px solid rgba(108,126,248,.25);transition:all .25s cubic-bezier(.34,1.2,.64,1)" onmouseover="this.style.borderColor='rgba(108,126,248,.6)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(108,126,248,.25)';this.style.transform=''">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#fde0dc,#f4aaaa);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;box-shadow:var(--clay-sm)">🔔</div>
+          <p style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px">Alerts</p>
+          <p style="font-size:11px;color:var(--muted);line-height:1.5">Manage notifications</p>
+        </div>
+        <div style="padding:16px;border-radius:18px;background:linear-gradient(145deg,#8490fa,#5a6cf5);box-shadow:6px 6px 18px rgba(108,126,248,.45),-4px -4px 12px var(--shadow-l);transition:all .25s cubic-bezier(.34,1.2,.64,1)" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform=''">
+          <div style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px">⭐</div>
+          <p style="font-size:13px;font-weight:800;color:#fff;margin-bottom:4px">Premium</p>
+          <p style="font-size:11px;color:rgba(255,255,255,.7);line-height:1.5">Upgrade your plan</p>
+        </div>
+        <div style="padding:16px;border-radius:18px;box-shadow:var(--clay);transition:all .25s cubic-bezier(.34,1.2,.64,1);cursor:pointer" onclick="this.style.boxShadow='var(--clay-in)';setTimeout(()=>this.style.boxShadow='var(--clay)',300)">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#fef3cc,#fad06a);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;box-shadow:var(--clay-sm)">💡</div>
+          <p style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px">Ideas</p>
+          <p style="font-size:11px;color:var(--muted);line-height:1.5">Click to press effect</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. FOOTER / SOCIAL LINKS -->
+    <div class="card col-12 reveal">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(145deg,#8490fa,#5a6cf5);display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:var(--clay-sm)">◈</div>
+            <span style="font-size:14px;font-weight:900;color:var(--text)">NeumorUI</span>
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px">Beautiful React components with a soft clay aesthetic.</p>
+          <div style="display:flex;gap:8px">
+            <a href="#" class="social-btn">𝕏</a>
+            <a href="#" class="social-btn">⌥ GH</a>
+            <a href="#" class="social-btn">◙ npm</a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Product</p>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <a href="#" class="footer-link">Components</a><a href="#" class="footer-link">Themes</a><a href="#" class="footer-link">Templates</a><a href="#" class="footer-link">Changelog</a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Docs</p>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <a href="#" class="footer-link">Getting started</a><a href="#" class="footer-link">API reference</a><a href="#" class="footer-link">Storybook</a><a href="#" class="footer-link">GitHub</a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Newsletter</p>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.5">Get updates on new components.</p>
+          <div style="display:flex;gap:6px">
+            <input style="flex:1;font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:var(--text);background:var(--bg);border:none;outline:none;border-radius:10px;padding:9px 12px;box-shadow:var(--clay-in-sm)" placeholder="you@example.com"/>
+            <button class="btn btn-blue" style="padding:9px 14px;font-size:13px;border-radius:10px">→</button>
+          </div>
+        </div>
+      </div>
+      <div style="height:1px;background:var(--hint);opacity:.2;margin:20px 0 14px"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <p style="font-size:12px;color:var(--hint);font-weight:600">© 2025 NeumorUI. MIT License.</p>
+        <div style="display:flex;gap:14px">
+          <a href="#" class="footer-link">Privacy</a><a href="#" class="footer-link">Terms</a><a href="#" class="footer-link">Cookies</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.pc-feat{font-size:12px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px}
+.muted-feat{color:var(--hint)!important}
+.feat-card{padding:16px;border-radius:18px;box-shadow:var(--clay);transition:all .25s cubic-bezier(.34,1.2,.64,1)}
+.feat-card:hover{transform:translateY(-5px);box-shadow:var(--clay-lg)}
+.feat-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:var(--clay-sm)}
+.mas-item{break-inside:avoid;border-radius:14px;box-shadow:var(--clay);margin-bottom:10px;background:var(--cover-grad);transition:all .2s;cursor:pointer}
+.mas-item:hover{transform:scale(1.02);box-shadow:var(--clay-lg)}
+.mq-item{display:inline-flex;align-items:center;padding:6px 18px;margin:0 4px;border-radius:999px;font-size:12px;font-weight:800;color:var(--accent);box-shadow:var(--clay-sm)}
+.mq-item2{display:inline-flex;align-items:center;padding:6px 18px;margin:0 4px;border-radius:999px;font-size:12px;font-weight:800;color:var(--accent3)}
+.t-card{min-width:100%;padding:20px;border-radius:18px;box-shadow:var(--clay)}
+.t-dot{width:8px;height:8px;border-radius:50%;background:var(--hint);cursor:pointer;transition:all .2s}
+.t-dot.active-tdot{background:var(--accent);width:20px;border-radius:999px}
+.cr-slide{min-width:100%;height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:16px;text-align:center;padding:20px}
+.cr-dot{width:8px;height:8px;border-radius:50%;background:var(--hint);cursor:pointer;transition:all .2s}
+.cr-dot.active-cdot{background:var(--accent);width:20px;border-radius:999px}
+.social-btn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;box-shadow:var(--clay-sm);font-size:12px;font-weight:800;color:var(--muted);text-decoration:none;transition:all .2s}
+.social-btn:hover{color:var(--accent);transform:translateY(-2px)}
+.footer-link{font-size:12px;font-weight:700;color:var(--muted);text-decoration:none;display:block;transition:color .15s}
+.footer-link:hover{color:var(--accent)}
+</style>
+
+<script>
+function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'light':'dark');document.getElementById('ti').textContent=d?'🌙':'☀️';document.getElementById('tl').textContent=d?'Dark':'Light'}
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+document.addEventListener('click',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),sz=Math.max(r.width,r.height)*1.4,x=e.clientX-r.left-sz/2,y=e.clientY-r.top-sz/2;const rp=document.createElement('span');rp.className='ripple';rp.style.cssText=`width:${sz}px;height:${sz}px;left:${x}px;top:${y}px`;b.appendChild(rp);setTimeout(()=>rp.remove(),600)});
+/* Testimonials */
+let tIdx=0;
+function setTestimonial(i){tIdx=i;document.getElementById('testimonials').style.transform=`translateX(-${i*100}%)`;document.querySelectorAll('.t-dot').forEach((d,j)=>d.classList.toggle('active-tdot',j===i))}
+setInterval(()=>setTestimonial((tIdx+1)%3),4000);
+/* Carousel */
+let crIdx=0;
+function crGo(i){crIdx=i;document.getElementById('carousel').style.transform=`translateX(-${i*100}%)`;document.querySelectorAll('.cr-dot').forEach((d,j)=>d.classList.toggle('active-cdot',j===i))}
+function crNext(){crGo((crIdx+1)%4)}
+function crPrev(){crGo((crIdx+3)%4)}
+/* Resizable panels */
+const handle=document.getElementById('resize-handle');
+let resizing=false;
+handle.addEventListener('mousedown',e=>{resizing=true;e.preventDefault()});
+document.addEventListener('mousemove',e=>{if(!resizing)return;const panels=document.getElementById('panels');const rect=panels.getBoundingClientRect();const pct=((e.clientX-rect.left)/rect.width)*100;if(pct>10&&pct<85){document.getElementById('panel-left').style.width=pct+'%'}});
+document.addEventListener('mouseup',()=>resizing=false);
+</script>
+</body>
+</html>

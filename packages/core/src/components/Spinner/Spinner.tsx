@@ -48,8 +48,8 @@ export const Spinner: React.FC<SpinnerProps> = ({
           height: box,
           borderWidth: border,
           borderStyle: "solid",
-          borderColor: `${color} transparent transparent transparent`,
-          boxShadow: "var(--neu-shadow-inset-sm)",
+          borderColor: "var(--neu-text-muted)",
+          borderTopColor: color,
           ...style,
         }}
       />

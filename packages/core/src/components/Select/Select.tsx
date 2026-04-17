@@ -36,7 +36,7 @@ export const Select: React.FC<SelectProps> = ({
       )}
       <RadixSelect.Root value={value} onValueChange={onValueChange} disabled={disabled}>
         <RadixSelect.Trigger
-          className="w-full flex items-center justify-between px-4 py-3 rounded-neu text-sm outline-none cursor-pointer neu-inset neu-transition border-0"
+          className="w-full flex items-center justify-between px-4 py-[13px] rounded-neu text-sm font-semibold outline-none cursor-pointer neu-inset neu-transition border-0 focus-visible:ring-[3px] focus-visible:ring-[var(--neu-accent)]/20"
           style={{
             background: "var(--neu-bg)",
             color: value ? "var(--neu-text-primary)" : "var(--neu-text-muted)",
@@ -44,12 +44,12 @@ export const Select: React.FC<SelectProps> = ({
           }}
         >
           <RadixSelect.Value placeholder={placeholder} />
-          <RadixSelect.Icon>
+          <RadixSelect.Icon style={{ color: "var(--neu-text-muted)" }}>
             <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
               <path
                 d="M1 1l5 5 5-5"
                 stroke="currentColor"
-                strokeWidth="1.5"
+                strokeWidth="1.8"
                 strokeLinecap="round"
               />
             </svg>

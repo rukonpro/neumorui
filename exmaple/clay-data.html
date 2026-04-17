@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Clay UI — Data</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f0f4ff;--shadow-d:rgba(180,190,220,0.8);--shadow-l:rgba(255,255,255,0.95);--text:#2a2d4a;--muted:#7880a8;--hint:#b0b8d8;--accent:#6c7ef8;--accent2:#f87c6c;--accent3:#5ecba1;--accent4:#f9c74f;--clay:7px 7px 18px var(--shadow-d),-5px -5px 14px var(--shadow-l);--clay-sm:4px 4px 12px var(--shadow-d),-3px -3px 9px var(--shadow-l);--clay-lg:12px 12px 28px var(--shadow-d),-8px -8px 20px var(--shadow-l);--clay-in:inset 5px 5px 12px var(--shadow-d),inset -4px -4px 10px var(--shadow-l);--clay-in-sm:inset 3px 3px 8px var(--shadow-d),inset -2px -2px 6px var(--shadow-l);--tag-green-bg:#d4f3e8;--tag-green-text:#1f8a5e;--tag-coral-bg:#fde0dc;--tag-coral-text:#c93a28;--tag-blue-bg:#dde2fd;--tag-blue-text:#3d4fd4;--tag-yellow-bg:#fef3cc;--tag-yellow-text:#9a7010}
+[data-theme=dark]{--bg:#181c2e;--shadow-d:rgba(8,10,22,0.85);--shadow-l:rgba(50,58,100,0.45);--text:#dde2f8;--muted:#7880a8;--hint:#3e4668;--accent:#7c8ffa;--tag-green-bg:#0e2e22;--tag-green-text:#6ed8b0;--tag-coral-bg:#3a1a16;--tag-coral-text:#f9a090;--tag-blue-bg:#1e2560;--tag-blue-text:#a8b4fb;--tag-yellow-bg:#2e2408;--tag-yellow-text:#fad06a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{transition:background .3s}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1.5rem 4rem}
+.page{max-width:980px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.col-6{grid-column:span 6}.col-4{grid-column:span 4}.col-8{grid-column:span 8}.col-12{grid-column:span 12}.col-7{grid-column:span 7}.col-5{grid-column:span 5}
+@media(max-width:720px){.col-6,.col-4,.col-8,.col-7,.col-5{grid-column:span 12}}
+.card{border-radius:24px;padding:1.75rem;box-shadow:var(--clay-lg);background:var(--bg);transition:background .35s,box-shadow .35s}
+.sec{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--hint);margin-bottom:1.1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;border:none;cursor:pointer;outline:none;position:relative;overflow:hidden;transition:all .2s cubic-bezier(.34,1.4,.64,1)}
+.btn-blue{padding:10px 22px;border-radius:12px;color:#fff;background:linear-gradient(145deg,#8490fa,#5a6cf5);box-shadow:5px 5px 14px rgba(108,126,248,.45),-3px -3px 10px var(--shadow-l)}
+.btn-blue:hover{transform:translateY(-2px)}
+.btn-clay{padding:10px 22px;border-radius:12px;background:var(--bg);color:var(--text);box-shadow:var(--clay-sm)}
+.btn-clay:hover{transform:translateY(-2px)}
+.btn-clay:active{box-shadow:var(--clay-in-sm);transform:scale(.97)}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 13px;border-radius:999px;box-shadow:var(--clay-sm)}
+.tag-green{background:var(--tag-green-bg);color:var(--tag-green-text)}
+.tag-coral{background:var(--tag-coral-bg);color:var(--tag-coral-text)}
+.tag-blue{background:var(--tag-blue-bg);color:var(--tag-blue-text)}
+.tag-yellow{background:var(--tag-yellow-bg);color:var(--tag-yellow-text)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes growH{from{height:0}to{height:var(--h)}}
+@keyframes growW{from{width:0}to{width:var(--w)}}
+.reveal{opacity:0}.reveal.visible{animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);animation:rippleOut .55s ease-out forwards;background:rgba(255,255,255,.3);pointer-events:none}
+@keyframes rippleOut{to{transform:scale(4);opacity:0}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Clay UI · Data</div>
+      <h1 style="font-size:2rem;font-weight:900;letter-spacing:-.03em">Data display</h1>
+    </div>
+    <button onclick="toggleTheme()" style="display:inline-flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;border:none;cursor:pointer;padding:10px 20px;border-radius:999px;background:var(--bg);color:var(--muted);box-shadow:var(--clay-sm)"><span id="ti">🌙</span><span id="tl">Dark</span></button>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. BAR CHART -->
+    <div class="card col-6 reveal">
+      <p class="sec">Bar chart</p>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px">
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Monthly revenue</span>
+        <span class="tag tag-green" style="font-size:10px">↑ 24%</span>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 4px">
+        <div class="bar-item" style="--h:55%"><div class="bar-fill" style="background:linear-gradient(180deg,#9aa2fb,#5a6cf5)"></div><span>Jan</span></div>
+        <div class="bar-item" style="--h:70%"><div class="bar-fill" style="background:linear-gradient(180deg,#9aa2fb,#5a6cf5)"></div><span>Feb</span></div>
+        <div class="bar-item" style="--h:45%"><div class="bar-fill" style="background:linear-gradient(180deg,#9aa2fb,#5a6cf5)"></div><span>Mar</span></div>
+        <div class="bar-item" style="--h:80%"><div class="bar-fill" style="background:linear-gradient(180deg,#9aa2fb,#5a6cf5)"></div><span>Apr</span></div>
+        <div class="bar-item" style="--h:65%"><div class="bar-fill" style="background:linear-gradient(180deg,#9aa2fb,#5a6cf5)"></div><span>May</span></div>
+        <div class="bar-item" style="--h:90%"><div class="bar-fill active-bar" style="background:linear-gradient(180deg,#8490fa,#5a6cf5)"></div><span style="color:var(--accent)">Jun</span></div>
+        <div class="bar-item" style="--h:72%"><div class="bar-fill" style="background:linear-gradient(180deg,#9aa2fb,#5a6cf5)"></div><span>Jul</span></div>
+      </div>
+    </div>
+
+    <!-- 2. DONUT / PIE CHART -->
+    <div class="card col-6 reveal">
+      <p class="sec">Donut chart</p>
+      <div style="display:flex;align-items:center;gap:20px">
+        <div style="position:relative;flex-shrink:0">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="45" fill="none" stroke-width="18" stroke="rgba(176,184,216,.2)"/>
+            <circle id="d1" cx="60" cy="60" r="45" fill="none" stroke-width="18" stroke="#6c7ef8" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 1s ease"/>
+            <circle id="d2" cx="60" cy="60" r="45" fill="none" stroke-width="18" stroke="#5ecba1" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 1s .3s ease"/>
+            <circle id="d3" cx="60" cy="60" r="45" fill="none" stroke-width="18" stroke="#f9c74f" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 1s .6s ease"/>
+            <text x="60" y="56" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="18" fill="currentColor">74%</text>
+            <text x="60" y="70" text-anchor="middle" font-family="Nunito" font-weight="600" font-size="9" fill="#7880a8">complete</text>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;flex:1">
+          <div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:4px;background:#6c7ef8;flex-shrink:0"></div><div style="flex:1"><p style="font-size:12px;font-weight:700;color:var(--text);margin:0">Design</p><div style="height:4px;border-radius:999px;background:linear-gradient(90deg,#6c7ef8,transparent);margin-top:3px;width:74%"></div></div><span style="font-size:12px;font-weight:800;color:var(--text)">42%</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:4px;background:#5ecba1;flex-shrink:0"></div><div style="flex:1"><p style="font-size:12px;font-weight:700;color:var(--text);margin:0">Development</p><div style="height:4px;border-radius:999px;background:linear-gradient(90deg,#5ecba1,transparent);margin-top:3px;width:32%"></div></div><span style="font-size:12px;font-weight:800;color:var(--text)">32%</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:4px;background:#f9c74f;flex-shrink:0"></div><div style="flex:1"><p style="font-size:12px;font-weight:700;color:var(--text);margin:0">Research</p><div style="height:4px;border-radius:999px;background:linear-gradient(90deg,#f9c74f,transparent);margin-top:3px;width:26%"></div></div><span style="font-size:12px;font-weight:800;color:var(--text)">26%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. LINE CHART -->
+    <div class="card col-12 reveal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+        <p class="sec" style="margin:0">Line chart — Weekly users</p>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-clay" onclick="setLineData('week')" id="lc-week" style="font-size:11px;padding:7px 14px;border-radius:10px">Week</button>
+          <button class="btn btn-clay" onclick="setLineData('month')" id="lc-month" style="font-size:11px;padding:7px 14px;border-radius:10px">Month</button>
+          <button class="btn btn-clay" onclick="setLineData('year')" id="lc-year" style="font-size:11px;padding:7px 14px;border-radius:10px">Year</button>
+        </div>
+      </div>
+      <div style="position:relative;height:140px">
+        <canvas id="line-canvas" style="width:100%;height:100%"></canvas>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:8px" id="lc-labels"></div>
+    </div>
+
+    <!-- 4. KANBAN BOARD -->
+    <div class="card col-12 reveal">
+      <p class="sec">Kanban board</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <div class="kanban-col" id="k-todo">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">To Do</span>
+            <span style="font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;background:var(--tag-blue-bg);color:var(--tag-blue-text)" id="k-todo-count">3</span>
+          </div>
+          <div class="k-cards">
+            <div class="k-card" draggable="true"><p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Design system audit</p><div style="display:flex;justify-content:space-between;align-items:center"><span class="tag tag-blue" style="font-size:9px">Design</span><span style="font-size:11px;color:var(--hint)">👤 Rafat</span></div></div>
+            <div class="k-card" draggable="true"><p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Token documentation</p><div style="display:flex;justify-content:space-between;align-items:center"><span class="tag tag-yellow" style="font-size:9px">Docs</span><span style="font-size:11px;color:var(--hint)">👤 Amina</span></div></div>
+            <div class="k-card" draggable="true"><p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Accessibility review</p><div style="display:flex;justify-content:space-between;align-items:center"><span class="tag tag-green" style="font-size:9px">A11y</span><span style="font-size:11px;color:var(--hint)">👤 Karim</span></div></div>
+          </div>
+          <button onclick="addKanban('k-todo')" style="width:100%;padding:8px;border:2px dashed var(--hint);border-radius:12px;background:transparent;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--hint);cursor:pointer;margin-top:8px;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--hint)';this.style.color='var(--hint)'">+ Add card</button>
+        </div>
+        <div class="kanban-col" id="k-progress">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">In Progress</span>
+            <span style="font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;background:var(--tag-yellow-bg);color:var(--tag-yellow-text)" id="k-progress-count">2</span>
+          </div>
+          <div class="k-cards">
+            <div class="k-card" draggable="true"><p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Component library</p><div style="height:4px;border-radius:999px;background:var(--bg);box-shadow:var(--clay-in-sm);margin-bottom:6px"><div style="width:65%;height:100%;border-radius:999px;background:linear-gradient(90deg,#8490fa,#5a6cf5)"></div></div><div style="display:flex;justify-content:space-between"><span class="tag tag-blue" style="font-size:9px">Dev</span><span style="font-size:11px;color:var(--hint)">65%</span></div></div>
+            <div class="k-card" draggable="true"><p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Dark mode support</p><div style="height:4px;border-radius:999px;background:var(--bg);box-shadow:var(--clay-in-sm);margin-bottom:6px"><div style="width:80%;height:100%;border-radius:999px;background:linear-gradient(90deg,#78dbb8,#3db88a)"></div></div><div style="display:flex;justify-content:space-between"><span class="tag tag-green" style="font-size:9px">Design</span><span style="font-size:11px;color:var(--hint)">80%</span></div></div>
+          </div>
+          <button onclick="addKanban('k-progress')" style="width:100%;padding:8px;border:2px dashed var(--hint);border-radius:12px;background:transparent;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--hint);cursor:pointer;margin-top:8px;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--hint)';this.style.color='var(--hint)'">+ Add card</button>
+        </div>
+        <div class="kanban-col" id="k-done">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Done</span>
+            <span style="font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;background:var(--tag-green-bg);color:var(--tag-green-text)" id="k-done-count">2</span>
+          </div>
+          <div class="k-cards">
+            <div class="k-card" draggable="true" style="opacity:.7"><p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;text-decoration:line-through">Initial wireframes</p><span class="tag tag-green" style="font-size:9px">✓ Completed</span></div>
+            <div class="k-card" draggable="true" style="opacity:.7"><p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;text-decoration:line-through">Color token setup</p><span class="tag tag-green" style="font-size:9px">✓ Completed</span></div>
+          </div>
+          <button onclick="addKanban('k-done')" style="width:100%;padding:8px;border:2px dashed var(--hint);border-radius:12px;background:transparent;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--hint);cursor:pointer;margin-top:8px;transition:all .2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--hint)';this.style.color='var(--hint)'">+ Add card</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. MINI CALENDAR -->
+    <div class="card col-6 reveal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <p class="sec" style="margin:0">Calendar</p>
+        <div style="display:flex;gap:6px;align-items:center">
+          <button onclick="prevMonth()" class="btn btn-clay" style="width:28px;height:28px;padding:0;border-radius:8px;font-size:14px">‹</button>
+          <span id="cal-month" style="font-size:13px;font-weight:800;color:var(--text);min-width:100px;text-align:center"></span>
+          <button onclick="nextMonth()" class="btn btn-clay" style="width:28px;height:28px;padding:0;border-radius:8px;font-size:14px">›</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;margin-bottom:6px">
+        <span style="font-size:10px;font-weight:700;color:var(--hint);padding:3px">Su</span><span style="font-size:10px;font-weight:700;color:var(--hint);padding:3px">Mo</span><span style="font-size:10px;font-weight:700;color:var(--hint);padding:3px">Tu</span><span style="font-size:10px;font-weight:700;color:var(--hint);padding:3px">We</span><span style="font-size:10px;font-weight:700;color:var(--hint);padding:3px">Th</span><span style="font-size:10px;font-weight:700;color:var(--hint);padding:3px">Fr</span><span style="font-size:10px;font-weight:700;color:var(--hint);padding:3px">Sa</span>
+      </div>
+      <div id="cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center"></div>
+    </div>
+
+    <!-- 6. HEATMAP / ACTIVITY -->
+    <div class="card col-6 reveal">
+      <p class="sec">Activity heatmap</p>
+      <div style="margin-bottom:8px;display:flex;gap:4px;flex-wrap:wrap" id="heatmap"></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+        <span style="font-size:11px;color:var(--hint);font-weight:600">Less</span>
+        <div style="width:12px;height:12px;border-radius:3px;background:rgba(108,126,248,.1);box-shadow:var(--clay-in-sm)"></div>
+        <div style="width:12px;height:12px;border-radius:3px;background:rgba(108,126,248,.3)"></div>
+        <div style="width:12px;height:12px;border-radius:3px;background:rgba(108,126,248,.6)"></div>
+        <div style="width:12px;height:12px;border-radius:3px;background:rgba(108,126,248,.9)"></div>
+        <span style="font-size:11px;color:var(--hint);font-weight:600">More</span>
+      </div>
+    </div>
+
+    <!-- 7. TREE VIEW -->
+    <div class="card col-6 reveal">
+      <p class="sec">Tree view</p>
+      <div id="tree" style="font-size:13px">
+        <div class="tree-node" onclick="toggleNode(this)">
+          <span class="tree-arrow open">▶</span><span style="font-size:16px">📁</span><span style="font-weight:700;color:var(--text)">src</span>
+          <div class="tree-children">
+            <div class="tree-node" onclick="event.stopPropagation();toggleNode(this)">
+              <span class="tree-arrow open">▶</span><span style="font-size:16px">📁</span><span style="font-weight:700;color:var(--text)">components</span>
+              <div class="tree-children">
+                <div class="tree-leaf"><span style="font-size:14px">📄</span><span style="color:var(--muted)">Button.tsx</span></div>
+                <div class="tree-leaf"><span style="font-size:14px">📄</span><span style="color:var(--muted)">Input.tsx</span></div>
+                <div class="tree-leaf"><span style="font-size:14px">📄</span><span style="color:var(--muted)">Card.tsx</span></div>
+              </div>
+            </div>
+            <div class="tree-node" onclick="event.stopPropagation();toggleNode(this)">
+              <span class="tree-arrow">▶</span><span style="font-size:16px">📁</span><span style="font-weight:700;color:var(--text)">hooks</span>
+              <div class="tree-children" style="display:none">
+                <div class="tree-leaf"><span style="font-size:14px">📄</span><span style="color:var(--muted)">useNeuTheme.ts</span></div>
+                <div class="tree-leaf"><span style="font-size:14px">📄</span><span style="color:var(--muted)">useAnimation.ts</span></div>
+              </div>
+            </div>
+            <div class="tree-leaf"><span style="font-size:14px">📄</span><span style="color:var(--muted)">index.ts</span></div>
+          </div>
+        </div>
+        <div class="tree-leaf" style="margin-top:4px"><span style="font-size:14px">📋</span><span style="color:var(--muted)">package.json</span></div>
+        <div class="tree-leaf"><span style="font-size:14px">📋</span><span style="color:var(--muted)">tsconfig.json</span></div>
+      </div>
+    </div>
+
+    <!-- 8. STATS GRID -->
+    <div class="card col-6 reveal">
+      <p class="sec">Stats grid</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="padding:14px;border-radius:16px;box-shadow:var(--clay)">
+          <p style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Revenue</p>
+          <p class="s-num" style="font-size:1.8rem;font-weight:900;color:var(--accent);letter-spacing:-.03em">$48k</p>
+          <p style="font-size:11px;font-weight:700;margin-top:4px"><span style="color:var(--accent3)">↑ 18%</span> <span style="color:var(--muted)">vs last month</span></p>
+        </div>
+        <div style="padding:14px;border-radius:16px;box-shadow:var(--clay)">
+          <p style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Users</p>
+          <p class="s-num" style="font-size:1.8rem;font-weight:900;color:var(--accent2);letter-spacing:-.03em">9.2k</p>
+          <p style="font-size:11px;font-weight:700;margin-top:4px"><span style="color:var(--accent3)">↑ 12%</span> <span style="color:var(--muted)">vs last month</span></p>
+        </div>
+        <div style="padding:14px;border-radius:16px;box-shadow:var(--clay)">
+          <p style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Conversion</p>
+          <p class="s-num" style="font-size:1.8rem;font-weight:900;color:var(--accent3);letter-spacing:-.03em">8.4%</p>
+          <p style="font-size:11px;font-weight:700;margin-top:4px"><span style="color:var(--accent3)">↑ 3.2%</span> <span style="color:var(--muted)">vs last month</span></p>
+        </div>
+        <div style="padding:14px;border-radius:16px;box-shadow:var(--clay)">
+          <p style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Uptime</p>
+          <p class="s-num" style="font-size:1.8rem;font-weight:900;color:var(--accent4);letter-spacing:-.03em">99.9%</p>
+          <p style="font-size:11px;font-weight:700;margin-top:4px"><span style="color:var(--accent2)">↓ 0.01%</span> <span style="color:var(--muted)">vs last month</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. ACTIVITY FEED -->
+    <div class="card col-6 reveal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <p class="sec" style="margin:0">Activity feed</p>
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--accent3);box-shadow:0 0 0 4px rgba(94,203,161,.2);animation:pulse-dot 2s infinite"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto" id="activity-feed">
+        <div class="af-item"><div class="af-dot" style="background:var(--accent)"></div><div><p style="font-size:13px;font-weight:700;color:var(--text);margin:0"><strong>Rafat</strong> pushed to main</p><p style="font-size:11px;color:var(--muted);margin:2px 0 0">2 min ago · feat/clay-components</p></div></div>
+        <div class="af-item"><div class="af-dot" style="background:var(--accent3)"></div><div><p style="font-size:13px;font-weight:700;color:var(--text);margin:0"><strong>Amina</strong> merged PR #42</p><p style="font-size:11px;color:var(--muted);margin:2px 0 0">15 min ago · Add dark mode</p></div></div>
+        <div class="af-item"><div class="af-dot" style="background:var(--accent2)"></div><div><p style="font-size:13px;font-weight:700;color:var(--text);margin:0"><strong>CI/CD</strong> build failed</p><p style="font-size:11px;color:var(--muted);margin:2px 0 0">32 min ago · lint errors in Input.tsx</p></div></div>
+        <div class="af-item"><div class="af-dot" style="background:var(--accent4)"></div><div><p style="font-size:13px;font-weight:700;color:var(--text);margin:0"><strong>Karim</strong> opened issue #88</p><p style="font-size:11px;color:var(--muted);margin:2px 0 0">1 hr ago · Slider range not working</p></div></div>
+        <div class="af-item"><div class="af-dot" style="background:var(--accent)"></div><div><p style="font-size:13px;font-weight:700;color:var(--text);margin:0"><strong>v1.2.0</strong> released</p><p style="font-size:11px;color:var(--muted);margin:2px 0 0">3 hrs ago · 12 new components</p></div></div>
+      </div>
+      <button class="btn btn-clay" onclick="addActivity()" style="width:100%;justify-content:center;margin-top:12px;font-size:12px;padding:9px">Load more</button>
+    </div>
+
+    <!-- 10. COMPARISON TABLE -->
+    <div class="card col-6 reveal">
+      <p class="sec">Comparison table</p>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:separate;border-spacing:0">
+          <thead>
+            <tr>
+              <th style="text-align:left;font-size:11px;font-weight:700;color:var(--hint);text-transform:uppercase;letter-spacing:.08em;padding:6px 10px">Feature</th>
+              <th style="text-align:center;font-size:12px;font-weight:800;color:var(--muted);padding:6px 10px">Free</th>
+              <th style="text-align:center;font-size:12px;font-weight:800;color:var(--accent);padding:6px 10px">Pro</th>
+              <th style="text-align:center;font-size:12px;font-weight:800;color:var(--muted);padding:6px 10px">Team</th>
+            </tr>
+          </thead>
+          <tbody id="cmp-body">
+            <tr class="cmp-row"><td style="font-size:12px;font-weight:700;color:var(--text);padding:8px 10px;border-radius:8px 0 0 8px">Components</td><td class="cmp-cell">10</td><td class="cmp-cell cmp-accent">30+</td><td class="cmp-cell">30+</td></tr>
+            <tr class="cmp-row"><td style="font-size:12px;font-weight:700;color:var(--text);padding:8px 10px;border-radius:8px 0 0 8px">Dark mode</td><td class="cmp-cell">✕</td><td class="cmp-cell cmp-accent">✓</td><td class="cmp-cell">✓</td></tr>
+            <tr class="cmp-row"><td style="font-size:12px;font-weight:700;color:var(--text);padding:8px 10px;border-radius:8px 0 0 8px">Storybook</td><td class="cmp-cell">✕</td><td class="cmp-cell cmp-accent">✓</td><td class="cmp-cell">✓</td></tr>
+            <tr class="cmp-row"><td style="font-size:12px;font-weight:700;color:var(--text);padding:8px 10px;border-radius:8px 0 0 8px">Custom themes</td><td class="cmp-cell">✕</td><td class="cmp-cell cmp-accent">✓</td><td class="cmp-cell">✓</td></tr>
+            <tr class="cmp-row"><td style="font-size:12px;font-weight:700;color:var(--text);padding:8px 10px;border-radius:8px 0 0 8px">Team seats</td><td class="cmp-cell">1</td><td class="cmp-cell cmp-accent">1</td><td class="cmp-cell">∞</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.bar-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar-fill{width:100%;border-radius:6px 6px 0 0;height:var(--h);box-shadow:var(--clay-sm);transition:all .3s cubic-bezier(.34,1.2,.64,1)}
+.bar-fill:hover{filter:brightness(1.1);transform:scaleY(1.05);transform-origin:bottom}
+.bar-item span{font-size:10px;font-weight:700;color:var(--hint)}
+.active-bar{box-shadow:var(--clay)!important}
+.kanban-col{background:var(--bg);border-radius:18px;padding:14px;box-shadow:var(--clay-in);min-height:200px}
+.k-cards{display:flex;flex-direction:column;gap:8px}
+.k-card{padding:12px;border-radius:14px;box-shadow:var(--clay-sm);cursor:grab;transition:all .2s;background:var(--bg)}
+.k-card:hover{transform:translateY(-2px);box-shadow:var(--clay)}
+.k-card:active{cursor:grabbing}
+.tree-node{padding:4px 0;cursor:pointer;user-select:none}
+.tree-children{padding-left:18px;margin-top:3px}
+.tree-leaf{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:8px;cursor:pointer;transition:all .15s}
+.tree-leaf:hover{box-shadow:var(--clay-sm)}
+.tree-arrow{font-size:9px;color:var(--hint);transition:transform .2s;display:inline-block;margin-right:4px}
+.tree-arrow.open{transform:rotate(90deg)}
+.tree-node>span:not(.tree-arrow){margin-right:5px}
+.af-item{display:flex;align-items:flex-start;gap:12px;padding:8px 10px;border-radius:12px;transition:all .2s}
+.af-item:hover{box-shadow:var(--clay-sm)}
+.af-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.cmp-row:hover td{background:rgba(108,126,248,.04)}
+.cmp-cell{text-align:center;font-size:12px;font-weight:700;color:var(--muted);padding:8px 10px}
+.cmp-accent{color:var(--accent)!important;font-weight:900!important}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 4px rgba(94,203,161,.2)}50%{box-shadow:0 0 0 8px rgba(94,203,161,.05)}}
+</style>
+
+<script>
+function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'light':'dark');document.getElementById('ti').textContent=d?'🌙':'☀️';document.getElementById('tl').textContent=d?'Dark':'Light';drawLine(currentData)}
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+document.addEventListener('click',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),sz=Math.max(r.width,r.height)*1.4,x=e.clientX-r.left-sz/2,y=e.clientY-r.top-sz/2;const rp=document.createElement('span');rp.className='ripple';rp.style.cssText=`width:${sz}px;height:${sz}px;left:${x}px;top:${y}px`;b.appendChild(rp);setTimeout(()=>rp.remove(),600)});
+
+/* Donut chart animate on reveal */
+setTimeout(()=>{
+  const r=2*Math.PI*45;
+  document.getElementById('d1').style.strokeDashoffset=r*(1-.42);
+  document.getElementById('d2').style.strokeDashoffset=r*(1-.32);
+  document.getElementById('d3').style.strokeDashoffset=r*(1-.26);
+},500);
+
+/* Line chart */
+const lineData={week:{d:[320,480,390,620,540,780,650],l:['Mon','Tue','Wed','Thu','Fri','Sat','Sun']},month:{d:[1200,1800,1400,2200,1900,2600,2100,2800,2400,3100,2700,3400,3200,3600,3400,3900,3700,4100,3900,4300,4100,4500,4300,4700,4500,4900,4700,5100,4900,5400],l:Array.from({length:30},(_,i)=>i+1)},year:{d:[28000,32000,29000,38000,34000,42000,39000,45000,43000,48000,46000,52000],l:['J','F','M','A','M','J','J','A','S','O','N','D']}};
+let currentData=lineData.week;
+function drawLine(data){
+  const canvas=document.getElementById('line-canvas');
+  const rect=canvas.getBoundingClientRect();
+  canvas.width=rect.width*2;canvas.height=rect.height*2;
+  const ctx=canvas.getContext('2d');
+  ctx.scale(2,2);
+  const w=rect.width,h=rect.height,pd=20;
+  const mn=Math.min(...data.d),mx=Math.max(...data.d);
+  const pts=data.d.map((v,i)=>({x:pd+(i/(data.d.length-1))*(w-pd*2),y:h-pd-(v-mn)/(mx-mn)*(h-pd*2)}));
+  /* gradient fill */
+  const grad=ctx.createLinearGradient(0,0,0,h);
+  grad.addColorStop(0,'rgba(108,126,248,.25)');grad.addColorStop(1,'rgba(108,126,248,0)');
+  ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
+  pts.forEach((p,i)=>{if(i>0){const pp=pts[i-1];const cx=(p.x+pp.x)/2;ctx.bezierCurveTo(cx,pp.y,cx,p.y,p.x,p.y)}});
+  ctx.lineTo(pts[pts.length-1].x,h);ctx.lineTo(pts[0].x,h);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+  /* line */
+  ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
+  pts.forEach((p,i)=>{if(i>0){const pp=pts[i-1];const cx=(p.x+pp.x)/2;ctx.bezierCurveTo(cx,pp.y,cx,p.y,p.x,p.y)}});
+  ctx.strokeStyle='#6c7ef8';ctx.lineWidth=2;ctx.stroke();
+  /* dots */
+  pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fillStyle='#6c7ef8';ctx.fill()});
+  /* labels */
+  const lbl=document.getElementById('lc-labels');
+  const step=Math.max(1,Math.floor(data.l.length/7));
+  lbl.innerHTML=data.l.filter((_,i)=>i%step===0).map(l=>`<span style="font-size:10px;font-weight:700;color:var(--hint)">${l}</span>`).join('');
+}
+function setLineData(k){currentData=lineData[k];drawLine(currentData);['week','month','year'].forEach(x=>document.getElementById('lc-'+x).style.boxShadow='var(--clay-sm)');document.getElementById('lc-'+k).style.boxShadow='var(--clay-in-sm)'}
+setTimeout(()=>drawLine(currentData),100);
+window.addEventListener('resize',()=>drawLine(currentData));
+
+/* Heatmap */
+const hm=document.getElementById('heatmap');
+for(let i=0;i<91;i++){const v=Math.random();const el=document.createElement('div');el.title=`${Math.round(v*20)} contributions`;el.style.cssText=`width:12px;height:12px;border-radius:3px;cursor:pointer;transition:transform .15s;box-shadow:${v<.1?'var(--clay-in-sm)':'none'};background:rgba(108,126,248,${v<.1?'.05':v<.4?'.2':v<.7?'.5':'.9'})`;el.onmouseover=()=>el.style.transform='scale(1.3)';el.onmouseout=()=>el.style.transform='';hm.appendChild(el)}
+
+/* Calendar */
+let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
+const events={};
+function renderCal(){
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month').textContent=months[calMonth]+' '+calYear;
+  const grid=document.getElementById('cal-grid');grid.innerHTML='';
+  const first=new Date(calYear,calMonth,1).getDay();
+  const days=new Date(calYear,calMonth+1,0).getDate();
+  const today=new Date();
+  for(let i=0;i<first;i++){const d=document.createElement('div');d.style.padding='4px';grid.appendChild(d)}
+  for(let d=1;d<=days;d++){
+    const el=document.createElement('div');
+    const isToday=d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();
+    const key=`${calYear}-${calMonth}-${d}`;const hasEvent=events[key];
+    el.style.cssText=`padding:5px;border-radius:8px;font-size:12px;font-weight:${isToday?'900':'700'};cursor:pointer;transition:all .15s;color:${isToday?'#fff':'var(--text)'};background:${isToday?'linear-gradient(145deg,#8490fa,#5a6cf5)':'transparent'};box-shadow:${isToday?'var(--clay-sm)':'none'};position:relative`;
+    el.textContent=d;
+    if(hasEvent){const dot=document.createElement('div');dot.style.cssText='position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--accent3)';el.appendChild(dot)}
+    el.onclick=()=>{const k=`${calYear}-${calMonth}-${d}`;events[k]=!events[k];renderCal()};
+    el.onmouseover=()=>{if(!isToday)el.style.boxShadow='var(--clay-sm)'};
+    el.onmouseout=()=>{if(!isToday)el.style.boxShadow='none'};
+    grid.appendChild(el);
+  }
+}
+function prevMonth(){calMonth--;if(calMonth<0){calMonth=11;calYear--}renderCal()}
+function nextMonth(){calMonth++;if(calMonth>11){calMonth=0;calYear++}renderCal()}
+renderCal();
+
+/* Tree view */
+function toggleNode(el){const ch=el.querySelector('.tree-children');const ar=el.querySelector('.tree-arrow');if(!ch)return;const open=ch.style.display!=='none';ch.style.display=open?'none':'block';ar.classList.toggle('open',!open)}
+
+/* Kanban drag */
+document.querySelectorAll('.k-card').forEach(card=>{card.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain','');card._drag=card;window._dragCard=card})});
+document.querySelectorAll('.kanban-col').forEach(col=>{col.addEventListener('dragover',e=>{e.preventDefault();col.style.boxShadow='var(--clay-in),0 0 0 2px var(--accent)'});col.addEventListener('dragleave',()=>col.style.boxShadow='var(--clay-in)');col.addEventListener('drop',e=>{e.preventDefault();col.style.boxShadow='var(--clay-in)';if(window._dragCard)col.querySelector('.k-cards').appendChild(window._dragCard)})});
+
+/* Activity */
+const actItems=['deployed v1.3.0','closed issue #92','reviewed PR #44','added 5 new components','updated docs'];
+let actIdx=0;
+function addActivity(){const acts=['Nadia','Zara','Omar','Mia','Leo'];const a=document.createElement('div');a.className='af-item';a.style.animation='fadeUp .3s ease';const colors=['var(--accent)','var(--accent2)','var(--accent3)','var(--accent4)'];a.innerHTML=`<div class="af-dot" style="background:${colors[actIdx%4]};margin-top:4px"></div><div><p style="font-size:13px;font-weight:700;color:var(--text);margin:0"><strong>${acts[actIdx%5]}</strong> ${actItems[actIdx%5]}</p><p style="font-size:11px;color:var(--muted);margin:2px 0 0">Just now</p></div>`;document.getElementById('activity-feed').prepend(a);actIdx++}
+</script>
+</body>
+</html>

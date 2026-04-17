@@ -10,15 +10,20 @@ interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 }
 
-const accentMap: Record<AlertVariant, string> = {
-  info: "var(--neu-info)",
-  success: "var(--neu-success)",
-  warning: "var(--neu-warning)",
-  danger: "var(--neu-danger)",
+interface AlertPalette {
+  bg: string;
+  text: string;
+}
+
+const paletteMap: Record<AlertVariant, AlertPalette> = {
+  info: { bg: "var(--neu-tint-info)", text: "var(--neu-tint-info-text)" },
+  success: { bg: "var(--neu-tint-success)", text: "var(--neu-tint-success-text)" },
+  warning: { bg: "var(--neu-tint-warning)", text: "var(--neu-tint-warning-text)" },
+  danger: { bg: "var(--neu-tint-danger)", text: "var(--neu-tint-danger-text)" },
 };
 
 const defaultIcon: Record<AlertVariant, string> = {
-  info: "i",
+  info: "ℹ",
   success: "✓",
   warning: "!",
   danger: "×",
@@ -34,36 +39,36 @@ export const Alert: React.FC<AlertProps> = ({
   style,
   ...props
 }) => {
-  const accent = accentMap[variant];
+  const { bg, text } = paletteMap[variant];
   return (
     <div
       role="alert"
-      className={cn("flex items-start gap-3 p-4 rounded-neu-lg", className)}
+      className={cn("flex items-start gap-3 px-4 py-3 rounded-neu", className)}
       style={{
-        background: "var(--neu-bg)",
+        background: bg,
         boxShadow: "var(--neu-shadow-raised-sm)",
-        borderLeft: `3px solid ${accent}`,
         ...style,
       }}
       {...props}
     >
       <div
-        className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold text-white"
-        style={{ background: accent }}
+        className="shrink-0 text-lg leading-none flex items-center justify-center"
+        style={{ color: text }}
+        aria-hidden
       >
         {icon ?? defaultIcon[variant]}
       </div>
       <div className="flex-1">
         {title && (
-          <p
-            className="text-sm font-semibold mb-0.5"
-            style={{ color: "var(--neu-text-primary)" }}
-          >
+          <p className="text-sm font-extrabold mb-0.5" style={{ color: text }}>
             {title}
           </p>
         )}
         {children && (
-          <div className="text-sm" style={{ color: "var(--neu-text-secondary)" }}>
+          <div
+            className="text-xs leading-relaxed"
+            style={{ color: text, opacity: 0.8 }}
+          >
             {children}
           </div>
         )}
@@ -73,7 +78,7 @@ export const Alert: React.FC<AlertProps> = ({
           onClick={onClose}
           aria-label="Close alert"
           className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center neu-transition hover:scale-110 outline-none"
-          style={{ color: "var(--neu-text-muted)" }}
+          style={{ color: text, opacity: 0.6 }}
         >
           ×
         </button>

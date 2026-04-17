@@ -25,19 +25,19 @@ export const useToast = () => {
 const variantStyle: Record<ToastVariant, React.CSSProperties> = {
   default: { background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-lg)" },
   success: {
-    background: "var(--neu-bg)",
+    background: "var(--neu-tint-success)",
     boxShadow: "var(--neu-shadow-raised-lg)",
-    borderLeft: "3px solid var(--neu-success)",
+    color: "var(--neu-tint-success-text)",
   },
   danger: {
-    background: "var(--neu-bg)",
+    background: "var(--neu-tint-danger)",
     boxShadow: "var(--neu-shadow-raised-lg)",
-    borderLeft: "3px solid var(--neu-danger)",
+    color: "var(--neu-tint-danger-text)",
   },
   warning: {
-    background: "var(--neu-bg)",
+    background: "var(--neu-tint-warning)",
     boxShadow: "var(--neu-shadow-raised-lg)",
-    borderLeft: "3px solid var(--neu-warning)",
+    color: "var(--neu-tint-warning-text)",
   },
 };
 
@@ -56,25 +56,35 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     <ToastContext.Provider value={{ toast }}>
       {children}
       <div className="fixed top-4 right-4 flex flex-col gap-3 z-50 pointer-events-none">
-        {toasts.map((t) => (
-          <div
-            key={t.id}
-            className="neu-slide-down pointer-events-auto min-w-72 max-w-sm p-4 rounded-neu-lg"
-            style={variantStyle[t.variant ?? "default"]}
-          >
-            <p
-              className="text-sm font-medium"
-              style={{ color: "var(--neu-text-primary)" }}
+        {toasts.map((t) => {
+          const variant = t.variant ?? "default";
+          const isTinted = variant !== "default";
+          return (
+            <div
+              key={t.id}
+              className="neu-slide-down pointer-events-auto min-w-72 max-w-sm p-4 rounded-neu-lg"
+              style={variantStyle[variant]}
             >
-              {t.message}
-            </p>
-            {t.description && (
-              <p className="text-xs mt-1" style={{ color: "var(--neu-text-secondary)" }}>
-                {t.description}
+              <p
+                className="text-sm font-bold"
+                style={{ color: isTinted ? "inherit" : "var(--neu-text-primary)" }}
+              >
+                {t.message}
               </p>
-            )}
-          </div>
-        ))}
+              {t.description && (
+                <p
+                  className="text-xs mt-1"
+                  style={{
+                    color: isTinted ? "inherit" : "var(--neu-text-secondary)",
+                    opacity: isTinted ? 0.85 : 1,
+                  }}
+                >
+                  {t.description}
+                </p>
+              )}
+            </div>
+          );
+        })}
       </div>
     </ToastContext.Provider>
   );

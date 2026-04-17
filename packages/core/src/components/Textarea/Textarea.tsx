@@ -31,10 +31,10 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={inputId}
           rows={rows}
           className={cn(
-            "w-full font-[inherit] text-sm outline-none border-none rounded-neu",
-            "py-3 px-4 neu-inset neu-transition",
-            "placeholder:opacity-60",
-            "focus:ring-2 focus:ring-[var(--neu-accent)]/30",
+            "w-full font-[inherit] text-sm font-semibold outline-none border-none rounded-neu",
+            "py-[13px] px-4 neu-inset neu-transition leading-relaxed",
+            "placeholder:font-medium",
+            "focus:ring-[3px] focus:ring-[var(--neu-accent)]/20",
             error && "ring-2 ring-[var(--neu-danger)]/40",
             className
           )}
