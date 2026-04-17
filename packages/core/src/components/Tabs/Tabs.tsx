@@ -1,6 +1,5 @@
 import React from "react";
 import * as RadixTabs from "@radix-ui/react-tabs";
-import { cn } from "../../utils/cn";
 
 interface Tab {
   value: string;
@@ -19,30 +18,39 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill"
   return (
     <RadixTabs.Root defaultValue={defaultValue ?? tabs[0]?.value}>
       <RadixTabs.List
-        className={cn(
-          "flex p-1 rounded-[18px]",
-          variant === "pill" && "neu-inset"
-        )}
-        style={{ gap: "4px" }}
+        style={{
+          display: "flex",
+          gap: "4px",
+          padding: "4px",
+          borderRadius: "18px",
+          ...(variant === "pill"
+            ? {
+                background: "var(--neu-bg)",
+                boxShadow: "var(--neu-shadow-inset)",
+              }
+            : {}),
+        }}
       >
         {tabs.map((tab) => (
           <RadixTabs.Trigger
             key={tab.value}
             value={tab.value}
             disabled={tab.disabled}
-            className={cn(
-              "flex-1 font-bold neu-transition cursor-pointer",
-              "bg-transparent border-0 outline-none disabled:opacity-50 disabled:cursor-not-allowed",
-              "hover:text-[var(--neu-accent)]",
-              "data-[state=active]:shadow-neu-inset-sm data-[state=active]:!text-[var(--neu-accent)]"
-            )}
+            className="data-[state=active]:neu-tab-active"
             style={{
+              flex: 1,
               padding: "9px 16px",
               borderRadius: "11px",
               fontSize: "13px",
+              fontWeight: 700,
+              fontFamily: "inherit",
               background: "transparent",
+              border: "none",
+              outline: "none",
+              cursor: tab.disabled ? "not-allowed" : "pointer",
+              opacity: tab.disabled ? 0.5 : 1,
               color: "var(--neu-text-secondary)",
-              font: "inherit",
+              transition: "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)",
             }}
           >
             {tab.label}
@@ -50,7 +58,11 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill"
         ))}
       </RadixTabs.List>
       {tabs.map((tab) => (
-        <RadixTabs.Content key={tab.value} value={tab.value} className="mt-4 outline-none">
+        <RadixTabs.Content
+          key={tab.value}
+          value={tab.value}
+          style={{ marginTop: "16px", outline: "none" }}
+        >
           {tab.content}
         </RadixTabs.Content>
       ))}

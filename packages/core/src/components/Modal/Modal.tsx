@@ -1,6 +1,5 @@
 import React from "react";
 import * as RadixDialog from "@radix-ui/react-dialog";
-import { cn } from "../../utils/cn";
 
 interface ModalProps {
   open?: boolean;
@@ -12,11 +11,7 @@ interface ModalProps {
   size?: "sm" | "md" | "lg";
 }
 
-const sizeClasses = {
-  sm: "max-w-sm",
-  md: "max-w-md",
-  lg: "max-w-lg",
-};
+const sizeWidths = { sm: "380px", md: "448px", lg: "512px" };
 
 export const Modal: React.FC<ModalProps> = ({
   open,
@@ -32,41 +27,76 @@ export const Modal: React.FC<ModalProps> = ({
       {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
       <RadixDialog.Portal>
         <RadixDialog.Overlay
-          className="neu-dialog-overlay fixed inset-0 z-40"
-          style={{ background: "rgba(0,0,0,0.25)", backdropFilter: "blur(4px)" }}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 40,
+            background: "rgba(0,0,0,0.25)",
+            backdropFilter: "blur(4px)",
+            animation: "fadeIn 0.2s ease",
+          }}
         />
         <RadixDialog.Content
-          className={cn(
-            "neu-dialog-content fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full p-[1.75rem] outline-none",
-            sizeClasses[size]
-          )}
           style={{
+            position: "fixed",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 50,
+            width: "calc(100% - 32px)",
+            maxWidth: sizeWidths[size],
+            padding: "1.75rem",
+            outline: "none",
             background: "var(--neu-bg)",
-            borderRadius: "var(--neu-radius-xl)",
+            borderRadius: "24px",
             boxShadow: "var(--neu-shadow-raised-lg)",
+            animation: "fadeUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
           }}
         >
           {title && (
             <RadixDialog.Title
-              className="text-lg font-semibold mb-1"
-              style={{ color: "var(--neu-text-primary)" }}
+              style={{
+                fontSize: "18px",
+                fontWeight: 800,
+                color: "var(--neu-text-primary)",
+                margin: "0 0 4px",
+              }}
             >
               {title}
             </RadixDialog.Title>
           )}
           {description && (
             <RadixDialog.Description
-              className="text-sm mb-4"
-              style={{ color: "var(--neu-text-secondary)" }}
+              style={{
+                fontSize: "14px",
+                color: "var(--neu-text-secondary)",
+                margin: "0 0 16px",
+              }}
             >
               {description}
             </RadixDialog.Description>
           )}
           {children}
           <RadixDialog.Close
-            className="absolute top-4 right-4 w-8 h-8 rounded-neu flex items-center justify-center neu-raised-sm neu-transition hover:-translate-y-0.5"
-            style={{ color: "var(--neu-text-secondary)" }}
             aria-label="Close"
+            style={{
+              position: "absolute",
+              top: "16px",
+              right: "16px",
+              width: "32px",
+              height: "32px",
+              borderRadius: "10px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "none",
+              cursor: "pointer",
+              background: "var(--neu-bg)",
+              color: "var(--neu-text-secondary)",
+              boxShadow: "var(--neu-shadow-raised-sm)",
+              transition: "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)",
+              fontSize: "14px",
+            }}
           >
             ✕
           </RadixDialog.Close>

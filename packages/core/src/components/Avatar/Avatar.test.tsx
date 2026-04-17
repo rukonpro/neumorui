@@ -17,7 +17,9 @@ describe("Avatar", () => {
 
   it("renders with a size variant", () => {
     const { container } = render(<Avatar initials="AB" size="lg" />);
-    expect(container.querySelector(".w-14")).not.toBeNull();
+    const divs = container.querySelectorAll("div");
+    const inner = Array.from(divs).find((d) => d.style.width === "56px");
+    expect(inner).not.toBeNull();
   });
 
   it("renders status indicator", () => {

@@ -1,6 +1,5 @@
 import React from "react";
 import * as RadixAccordion from "@radix-ui/react-accordion";
-import { cn } from "../../utils/cn";
 
 interface AccordionItem {
   value: string;
@@ -22,7 +21,8 @@ const Chevron = () => (
     height="14"
     viewBox="0 0 14 14"
     fill="none"
-    className="transition-transform duration-300 group-data-[state=open]:rotate-180"
+    style={{ transition: "transform 0.3s" }}
+    className="group-data-[state=open]:rotate-180"
   >
     <path
       d="M3 5l4 4 4-4"
@@ -53,31 +53,40 @@ export const Accordion: React.FC<AccordionProps> = ({
         } as const);
 
   return (
-    <RadixAccordion.Root {...rootProps} className="flex flex-col gap-2 w-full">
+    <RadixAccordion.Root
+      {...rootProps}
+      style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}
+    >
       {items.map((item) => (
         <RadixAccordion.Item
           key={item.value}
           value={item.value}
           disabled={item.disabled}
-          className="rounded-neu-lg overflow-hidden"
           style={{
+            borderRadius: "18px",
+            overflow: "hidden",
             background: "var(--neu-bg)",
             boxShadow: "var(--neu-shadow-raised-sm)",
           }}
         >
           <RadixAccordion.Header>
             <RadixAccordion.Trigger
-              className={cn(
-                "group flex w-full items-center justify-between text-sm font-bold",
-                "cursor-pointer outline-none neu-transition bg-transparent border-0",
-                "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
-                "disabled:opacity-50 disabled:cursor-not-allowed"
-              )}
+              className="group"
               style={{
+                display: "flex",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "space-between",
                 padding: "18px",
+                fontSize: "14px",
+                fontWeight: 700,
+                fontFamily: "inherit",
                 background: "transparent",
+                border: "none",
+                outline: "none",
+                cursor: "pointer",
                 color: "var(--neu-text-primary)",
-                font: "inherit",
+                transition: "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)",
               }}
             >
               {item.title}
@@ -85,8 +94,12 @@ export const Accordion: React.FC<AccordionProps> = ({
             </RadixAccordion.Trigger>
           </RadixAccordion.Header>
           <RadixAccordion.Content
-            className="overflow-hidden text-sm data-[state=open]:animate-[fadeUp_0.25s_ease] data-[state=closed]:hidden"
-            style={{ color: "var(--neu-text-secondary)" }}
+            className="data-[state=closed]:hidden"
+            style={{
+              overflow: "hidden",
+              fontSize: "14px",
+              color: "var(--neu-text-secondary)",
+            }}
           >
             <div style={{ padding: "0 18px 18px", lineHeight: 1.6 }}>{item.content}</div>
           </RadixAccordion.Content>

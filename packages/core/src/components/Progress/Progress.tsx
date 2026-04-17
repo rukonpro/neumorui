@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 type ProgressVariant = "default" | "success" | "danger" | "warning";
 
@@ -13,14 +12,14 @@ interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   animate?: boolean;
 }
 
-const trackHeight = { sm: "h-1.5", md: "h-[10px]", lg: "h-3" };
-
 const fillColors: Record<ProgressVariant, string> = {
   default: "linear-gradient(90deg, #9aa2fb, #5a6cf5)",
   success: "linear-gradient(90deg, #78dbb8, #3db88a)",
   danger: "linear-gradient(90deg, #fa9080, #f5604a)",
-  warning: "linear-gradient(90deg, var(--neu-warning-light), var(--neu-warning-dark))",
+  warning: "linear-gradient(90deg, #fad06a, #e0b030)",
 };
+
+const trackHeightMap = { sm: "6px", md: "10px", lg: "14px" };
 
 export const Progress: React.FC<ProgressProps> = ({
   value,
@@ -31,23 +30,39 @@ export const Progress: React.FC<ProgressProps> = ({
   size = "md",
   animate = true,
   className,
+  style,
   ...props
 }) => {
   const pct = Math.min(Math.max((value / max) * 100, 0), 100);
 
   return (
-    <div className={cn("w-full", className)} {...props}>
+    <div className={className} style={{ width: "100%", ...style }} {...props}>
       {(label || showLabel) && (
-        <div className="flex justify-between mb-2">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "6px",
+          }}
+        >
           {label && (
-            <span className="text-xs" style={{ color: "var(--neu-text-secondary)" }}>
+            <span
+              style={{
+                fontSize: "13px",
+                fontWeight: 700,
+                color: "var(--neu-text-secondary)",
+              }}
+            >
               {label}
             </span>
           )}
           {showLabel && (
             <span
-              className="text-xs font-semibold"
-              style={{ color: "var(--neu-text-primary)" }}
+              style={{
+                fontSize: "13px",
+                fontWeight: 800,
+                color: "var(--neu-accent)",
+              }}
             >
               {Math.round(pct)}%
             </span>
@@ -55,20 +70,25 @@ export const Progress: React.FC<ProgressProps> = ({
         </div>
       )}
       <div
-        className={cn("w-full rounded-full overflow-hidden", trackHeight[size])}
-        style={{ background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-inset-sm)" }}
         role="progressbar"
         aria-valuenow={value}
         aria-valuemax={max}
+        style={{
+          width: "100%",
+          height: trackHeightMap[size],
+          borderRadius: "999px",
+          overflow: "hidden",
+          background: "var(--neu-bg)",
+          boxShadow: "var(--neu-shadow-inset-sm)",
+        }}
       >
         <div
-          className={cn(
-            "h-full rounded-full transition-all duration-700 ease-out",
-            animate && "neu-grow-bar"
-          )}
           style={{
             width: `${pct}%`,
+            height: "100%",
+            borderRadius: "999px",
             background: fillColors[variant],
+            transition: "width 1s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         />
       </div>

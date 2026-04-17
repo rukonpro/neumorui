@@ -8,9 +8,10 @@ describe("Card", () => {
     expect(screen.getByText("Hello card")).toBeInTheDocument();
   });
 
-  it("applies padding size class (lg)", () => {
+  it("applies padding size (lg)", () => {
     const { container } = render(<Card padding="lg">x</Card>);
-    expect(container.querySelector(".p-6")).not.toBeNull();
+    const el = container.firstElementChild as HTMLElement;
+    expect(el.style.padding).toBe("2rem");
   });
 
   it("renders variant (inset)", () => {

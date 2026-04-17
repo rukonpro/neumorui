@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
   orientation?: "horizontal" | "vertical";
@@ -15,17 +14,17 @@ export const Divider: React.FC<DividerProps> = ({
   style,
   ...props
 }) => {
-  const isVertical = orientation === "vertical";
-
-  if (isVertical) {
+  if (orientation === "vertical") {
     return (
       <div
         role="separator"
         aria-orientation="vertical"
-        className={cn("w-px self-stretch", className)}
+        className={className}
         style={{
+          width: "1px",
+          alignSelf: "stretch",
           background: "var(--neu-text-muted)",
-          opacity: variant === "solid" ? 0.4 : 0.2,
+          opacity: 0.2,
           ...style,
         }}
         {...props}
@@ -37,23 +36,30 @@ export const Divider: React.FC<DividerProps> = ({
     return (
       <div
         role="separator"
-        className={cn("flex items-center gap-3 w-full my-2", className)}
+        className={className}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          width: "100%",
+          margin: "8px 0",
+          ...style,
+        }}
         {...props}
       >
-        <div
-          className="flex-1 h-px"
-          style={{ background: "var(--neu-text-muted)", opacity: 0.25 }}
-        />
+        <div style={{ flex: 1, height: "1px", background: "var(--neu-text-muted)", opacity: 0.2 }} />
         <span
-          className="text-xs uppercase tracking-widest font-bold"
-          style={{ color: "var(--neu-text-muted)" }}
+          style={{
+            fontSize: "10px",
+            fontWeight: 700,
+            textTransform: "uppercase" as const,
+            letterSpacing: "0.12em",
+            color: "var(--neu-text-muted)",
+          }}
         >
           {label}
         </span>
-        <div
-          className="flex-1 h-px"
-          style={{ background: "var(--neu-text-muted)", opacity: 0.25 }}
-        />
+        <div style={{ flex: 1, height: "1px", background: "var(--neu-text-muted)", opacity: 0.2 }} />
       </div>
     );
   }
@@ -62,10 +68,12 @@ export const Divider: React.FC<DividerProps> = ({
     <div
       role="separator"
       aria-orientation="horizontal"
-      className={cn("h-px w-full", className)}
+      className={className}
       style={{
+        height: "1px",
+        width: "100%",
         background: "var(--neu-text-muted)",
-        opacity: variant === "solid" ? 0.4 : 0.2,
+        opacity: 0.2,
         ...style,
       }}
       {...props}

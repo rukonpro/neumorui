@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 type CardVariant = "raised" | "inset" | "flat";
 
@@ -8,27 +7,12 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   padding?: "sm" | "md" | "lg";
 }
 
-const paddingClasses = {
-  sm: "p-4",
-  md: "p-[1.75rem]",
-  lg: "p-6 md:p-7",
-};
+const paddingMap = { sm: "1rem", md: "1.75rem", lg: "2rem" };
 
-const variantStyle: Record<CardVariant, React.CSSProperties> = {
-  raised: {
-    background: "var(--neu-bg)",
-    boxShadow: "var(--neu-shadow-raised-lg)",
-    borderRadius: "var(--neu-radius-xl)",
-  },
-  inset: {
-    background: "var(--neu-bg)",
-    boxShadow: "var(--neu-shadow-inset)",
-    borderRadius: "var(--neu-radius-xl)",
-  },
-  flat: {
-    background: "var(--neu-bg)",
-    borderRadius: "var(--neu-radius-xl)",
-  },
+const variantShadow: Record<CardVariant, string> = {
+  raised: "var(--neu-shadow-raised-lg)",
+  inset: "var(--neu-shadow-inset)",
+  flat: "none",
 };
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -36,8 +20,15 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={cn(paddingClasses[padding], className)}
-        style={{ ...variantStyle[variant], ...style }}
+        className={className}
+        style={{
+          background: "var(--neu-bg)",
+          borderRadius: "24px",
+          padding: paddingMap[padding],
+          boxShadow: variantShadow[variant],
+          transition: "background 0.35s ease, box-shadow 0.35s ease",
+          ...style,
+        }}
         {...props}
       >
         {children}

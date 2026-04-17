@@ -25,21 +25,36 @@ export const Slider: React.FC<SliderProps> = ({
   disabled,
 }) => {
   return (
-    <div className="w-full">
+    <div style={{ width: "100%" }}>
       {(label || showValue) && (
-        <div className="flex justify-between items-center mb-3">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "10px",
+          }}
+        >
           {label && (
             <span
-              className="text-xs font-semibold uppercase tracking-widest"
-              style={{ color: "var(--neu-text-secondary)" }}
+              style={{
+                fontSize: "11px",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase" as const,
+                color: "var(--neu-text-secondary)",
+              }}
             >
               {label}
             </span>
           )}
           {showValue && (
             <span
-              className="text-sm font-semibold"
-              style={{ color: "var(--neu-accent)" }}
+              style={{
+                fontSize: "13px",
+                fontWeight: 800,
+                color: "var(--neu-accent)",
+              }}
             >
               {(value ?? defaultValue)[0]}
             </span>
@@ -54,24 +69,46 @@ export const Slider: React.FC<SliderProps> = ({
         max={max}
         step={step}
         disabled={disabled}
-        className="relative flex items-center w-full h-7 cursor-pointer"
+        style={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          height: "26px",
+          cursor: "pointer",
+        }}
       >
         <RadixSlider.Track
-          className="relative flex-1 h-2 rounded-full"
-          style={{ boxShadow: "var(--neu-shadow-inset-sm)", background: "var(--neu-bg)" }}
+          style={{
+            position: "relative",
+            flex: 1,
+            height: "8px",
+            borderRadius: "999px",
+            background: "var(--neu-bg)",
+            boxShadow: "var(--neu-shadow-inset-sm)",
+          }}
         >
           <RadixSlider.Range
-            className="absolute h-full rounded-full"
             style={{
+              position: "absolute",
+              height: "100%",
+              borderRadius: "999px",
               background: "linear-gradient(90deg, #9aa2fb, #5a6cf5)",
             }}
           />
         </RadixSlider.Track>
         <RadixSlider.Thumb
-          className="block w-[26px] h-[26px] rounded-full outline-none neu-transition hover:scale-[1.2] focus-visible:scale-[1.2]"
           style={{
+            display: "block",
+            width: "26px",
+            height: "26px",
+            borderRadius: "50%",
+            outline: "none",
+            cursor: "pointer",
             background: "linear-gradient(145deg, #9aa2fb, #5a6cf5)",
-            boxShadow: "3px 3px 9px rgba(108,126,248,.45), -2px -2px 6px var(--neu-shadow-light)",
+            boxShadow:
+              "3px 3px 9px rgba(108,126,248,.45), -2px -2px 6px var(--neu-shadow-light)",
+            transition: "transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
           }}
         />
       </RadixSlider.Root>

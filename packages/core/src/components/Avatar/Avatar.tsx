@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 type AvatarSize = "sm" | "md" | "lg" | "xl";
 
@@ -11,11 +10,18 @@ interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   status?: "online" | "offline" | "busy" | "away";
 }
 
-const sizeClasses: Record<AvatarSize, string> = {
-  sm: "w-9 h-9 text-[13px]",
-  md: "w-11 h-11 text-sm",
-  lg: "w-14 h-14 text-base",
-  xl: "w-20 h-20 text-xl",
+const sizeMap: Record<AvatarSize, number> = {
+  sm: 36,
+  md: 44,
+  lg: 56,
+  xl: 80,
+};
+
+const fontSizeMap: Record<AvatarSize, string> = {
+  sm: "13px",
+  md: "16px",
+  lg: "20px",
+  xl: "28px",
 };
 
 const statusColors = {
@@ -35,35 +41,57 @@ export const Avatar: React.FC<AvatarProps> = ({
   style,
   ...props
 }) => {
+  const px = sizeMap[size];
+  const dotSize = size === "sm" ? 8 : size === "xl" ? 14 : 10;
+
   return (
-    <div className={cn("relative inline-flex shrink-0", className)} {...props}>
+    <div
+      className={className}
+      style={{ position: "relative", display: "inline-flex", flexShrink: 0 }}
+      {...props}
+    >
       <div
-        className={cn(
-          "rounded-full flex items-center justify-center overflow-hidden font-extrabold",
-          sizeClasses[size]
-        )}
         style={{
+          width: px,
+          height: px,
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+          fontWeight: 800,
+          fontSize: fontSizeMap[size],
+          color: "#fff",
+          flexShrink: 0,
           background: src
             ? "transparent"
-            : "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
+            : "linear-gradient(145deg, #8490fa, #5a6cf5)",
           boxShadow: "var(--neu-shadow-raised)",
-          color: "#fff",
           ...style,
         }}
       >
         {src ? (
-          <img src={src} alt={alt} className="w-full h-full object-cover" />
+          <img
+            src={src}
+            alt={alt}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
         ) : (
           <span>{initials}</span>
         )}
       </div>
       {status && (
         <span
-          className="absolute bottom-0 right-0 rounded-full border-2"
           style={{
-            width: size === "sm" ? 8 : size === "xl" ? 14 : 10,
-            height: size === "sm" ? 8 : size === "xl" ? 14 : 10,
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            width: dotSize,
+            height: dotSize,
+            borderRadius: "50%",
             background: statusColors[status],
+            borderWidth: "2px",
+            borderStyle: "solid",
             borderColor: "var(--neu-bg)",
           }}
         />

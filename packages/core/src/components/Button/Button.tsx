@@ -22,49 +22,79 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   ripple?: boolean;
 }
 
-const sizeClasses: Record<ButtonSize, string> = {
-  sm: "px-4 py-2 text-xs rounded-[12px]",
-  md: "px-[26px] py-[12px] text-[14px] rounded-[14px]",
-  lg: "px-8 py-[14px] text-base rounded-[14px]",
+const sizeMap: Record<ButtonSize, React.CSSProperties> = {
+  sm: { padding: "8px 16px", fontSize: "12px", borderRadius: "12px" },
+  md: { padding: "12px 26px", fontSize: "14px", borderRadius: "14px" },
+  lg: { padding: "14px 32px", fontSize: "16px", borderRadius: "14px" },
 };
 
-const variantClasses: Record<ButtonVariant, string> = {
-  raised:
-    "neu-raised neu-transition hover:-translate-y-[3px] hover:shadow-neu-raised-lg active:shadow-neu-inset active:translate-y-0 active:scale-[.97]",
-  flat: "neu-flat neu-transition hover:shadow-neu-raised-sm",
-  inset: "neu-inset neu-transition",
-  pill: "neu-raised-sm neu-transition rounded-full hover:-translate-y-0.5 active:shadow-neu-inset-sm active:scale-[.97]",
-  icon: "neu-raised-sm neu-transition hover:-translate-y-0.5 hover:shadow-neu-raised rounded-neu !px-0 active:shadow-neu-inset-sm active:scale-[.97]",
-  primary: "neu-transition hover:-translate-y-[3px] active:scale-[.97] text-white",
-  danger: "neu-transition hover:-translate-y-[3px] active:scale-[.97] text-white",
-  success: "neu-transition hover:-translate-y-[3px] active:scale-[.97] text-white",
+const baseStyle: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "8px",
+  fontFamily: "inherit",
+  fontWeight: 700,
+  border: "none",
+  cursor: "pointer",
+  outline: "none",
+  userSelect: "none",
+  position: "relative",
+  overflow: "hidden",
+  transition: "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)",
 };
 
-const variantStyle: Partial<Record<ButtonVariant, React.CSSProperties>> = {
-  primary: {
-    background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
-    boxShadow: "6px 6px 16px rgba(108,126,248,.45), -4px -4px 12px var(--neu-shadow-light)",
+const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
+  raised: {
+    background: "var(--neu-bg)",
+    color: "var(--neu-text-primary)",
+    boxShadow: "var(--neu-shadow-raised)",
   },
-  danger: {
-    background: "linear-gradient(145deg, #fa9080, #f5604a)",
-    boxShadow: "6px 6px 16px rgba(248,124,108,.45), -4px -4px 12px var(--neu-shadow-light)",
+  flat: {
+    background: "var(--neu-bg)",
+    color: "var(--neu-text-primary)",
+    boxShadow: "none",
   },
-  success: {
-    background: "linear-gradient(145deg, #78dbb8, #3db88a)",
-    boxShadow: "6px 6px 16px rgba(94,203,161,.45), -4px -4px 12px var(--neu-shadow-light)",
+  inset: {
+    background: "var(--neu-bg)",
+    color: "var(--neu-text-primary)",
+    boxShadow: "var(--neu-shadow-inset)",
   },
   pill: {
+    background: "var(--neu-bg)",
+    color: "var(--neu-text-secondary)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
     padding: "9px 22px",
     borderRadius: "999px",
     fontSize: "13px",
-    color: "var(--neu-text-secondary)",
   },
   icon: {
+    background: "var(--neu-bg)",
+    color: "var(--neu-text-secondary)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
     width: "48px",
     height: "48px",
     borderRadius: "14px",
     fontSize: "20px",
-    color: "var(--neu-text-secondary)",
+    padding: "0",
+  },
+  primary: {
+    background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
+    color: "#fff",
+    boxShadow:
+      "6px 6px 16px rgba(108,126,248,.45), -4px -4px 12px var(--neu-shadow-light)",
+  },
+  danger: {
+    background: "linear-gradient(145deg, #fa9080, #f5604a)",
+    color: "#fff",
+    boxShadow:
+      "6px 6px 16px rgba(248,124,108,.45), -4px -4px 12px var(--neu-shadow-light)",
+  },
+  success: {
+    background: "linear-gradient(145deg, #78dbb8, #3db88a)",
+    color: "#fff",
+    boxShadow:
+      "6px 6px 16px rgba(94,203,161,.45), -4px -4px 12px var(--neu-shadow-light)",
   },
 };
 
@@ -82,11 +112,73 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       style,
       ripple = true,
       onClick,
+      onMouseEnter,
+      onMouseLeave,
+      onMouseDown,
+      onMouseUp,
       ...props
     },
     ref
   ) => {
     const { createRipple } = useRipple();
+    const [hovered, setHovered] = React.useState(false);
+    const [pressed, setPressed] = React.useState(false);
+
+    const computedStyle: React.CSSProperties = {
+      ...baseStyle,
+      ...sizeMap[size],
+      ...variantStyles[variant],
+    };
+
+    if (variant === "pill" || variant === "icon") {
+      delete computedStyle.padding;
+      Object.assign(computedStyle, variantStyles[variant]);
+    }
+
+    if (hovered && !disabled && !pressed) {
+      if (variant === "raised") {
+        computedStyle.transform = "translateY(-3px)";
+        computedStyle.boxShadow = "var(--neu-shadow-raised-lg)";
+      } else if (variant === "pill") {
+        computedStyle.color = "var(--neu-accent)";
+        computedStyle.transform = "translateY(-2px)";
+      } else if (variant === "icon") {
+        computedStyle.color = "var(--neu-accent)";
+        computedStyle.transform = "translateY(-2px)";
+        computedStyle.boxShadow = "var(--neu-shadow-raised)";
+      } else if (variant === "flat") {
+        computedStyle.boxShadow = "var(--neu-shadow-raised-sm)";
+      } else if (
+        variant === "primary" ||
+        variant === "danger" ||
+        variant === "success"
+      ) {
+        computedStyle.transform = "translateY(-3px)";
+      }
+    }
+
+    if (pressed && !disabled) {
+      if (variant === "raised") {
+        computedStyle.boxShadow = "var(--neu-shadow-inset)";
+        computedStyle.transform = "translateY(0) scale(0.97)";
+      } else if (variant === "pill" || variant === "icon") {
+        computedStyle.boxShadow = "var(--neu-shadow-inset-sm)";
+        computedStyle.transform = "scale(0.97)";
+      } else if (
+        variant === "primary" ||
+        variant === "danger" ||
+        variant === "success"
+      ) {
+        computedStyle.transform = "scale(0.97)";
+      }
+    }
+
+    if (disabled || loading) {
+      computedStyle.opacity = 0.5;
+      computedStyle.cursor = "not-allowed";
+      computedStyle.transform = "none";
+    }
+
     return (
       <button
         ref={ref}
@@ -95,19 +187,38 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           if (ripple) createRipple(e);
           onClick?.(e);
         }}
-        className={cn(
-          "relative overflow-hidden inline-flex items-center justify-center gap-2 font-bold cursor-pointer select-none",
-          "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
-          sizeClasses[size],
-          variantClasses[variant],
-          className
-        )}
-        style={{ ...variantStyle[variant], ...style }}
+        onMouseEnter={(e) => {
+          setHovered(true);
+          onMouseEnter?.(e);
+        }}
+        onMouseLeave={(e) => {
+          setHovered(false);
+          setPressed(false);
+          onMouseLeave?.(e);
+        }}
+        onMouseDown={(e) => {
+          setPressed(true);
+          onMouseDown?.(e);
+        }}
+        onMouseUp={(e) => {
+          setPressed(false);
+          onMouseUp?.(e);
+        }}
+        className={className}
+        style={{ ...computedStyle, ...style }}
         {...props}
       >
         {loading ? (
-          <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+          <span
+            style={{
+              width: "16px",
+              height: "16px",
+              border: "2px solid currentColor",
+              borderTopColor: "transparent",
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+            }}
+          />
         ) : (
           leftIcon
         )}

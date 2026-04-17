@@ -55,26 +55,49 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   return (
     <ToastContext.Provider value={{ toast }}>
       {children}
-      <div className="fixed top-4 right-4 flex flex-col gap-3 z-50 pointer-events-none">
+      <div
+        style={{
+          position: "fixed",
+          top: "16px",
+          right: "16px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+          zIndex: 50,
+          pointerEvents: "none",
+        }}
+      >
         {toasts.map((t) => {
           const variant = t.variant ?? "default";
           const isTinted = variant !== "default";
           return (
             <div
               key={t.id}
-              className="neu-slide-down pointer-events-auto min-w-72 max-w-sm rounded-[16px]"
-              style={{ padding: "12px 14px", ...variantStyle[variant] }}
+              style={{
+                pointerEvents: "auto",
+                minWidth: "280px",
+                maxWidth: "380px",
+                padding: "12px 14px",
+                borderRadius: "16px",
+                animation: "fadeUp 0.3s ease",
+                ...variantStyle[variant],
+              }}
             >
               <p
-                className="text-sm font-bold"
-                style={{ color: isTinted ? "inherit" : "var(--neu-text-primary)" }}
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 800,
+                  margin: 0,
+                  color: isTinted ? "inherit" : "var(--neu-text-primary)",
+                }}
               >
                 {t.message}
               </p>
               {t.description && (
                 <p
-                  className="text-xs mt-1"
                   style={{
+                    fontSize: "12px",
+                    margin: "3px 0 0",
                     color: isTinted ? "inherit" : "var(--neu-text-secondary)",
                     opacity: isTinted ? 0.85 : 1,
                   }}

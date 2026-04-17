@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 type SkeletonVariant = "text" | "avatar" | "card" | "rect";
 
@@ -10,6 +9,14 @@ interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   lines?: number;
 }
 
+const shimmerStyle: React.CSSProperties = {
+  background:
+    "linear-gradient(90deg, var(--neu-shadow-dark) 25%, var(--neu-shadow-light) 50%, var(--neu-shadow-dark) 75%)",
+  backgroundSize: "200% 100%",
+  animation: "neuShimmer 1.6s linear infinite",
+  boxShadow: "var(--neu-shadow-inset-sm)",
+};
+
 export const Skeleton: React.FC<SkeletonProps> = ({
   variant = "rect",
   width,
@@ -19,16 +26,22 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   style,
   ...props
 }) => {
-  const insetShadow = "var(--neu-shadow-inset-sm)";
-
   if (variant === "text") {
     return (
-      <div className={cn("flex flex-col gap-2", className)} {...props}>
+      <div
+        className={className}
+        style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+        {...props}
+      >
         {Array.from({ length: lines }).map((_, i) => (
           <div
             key={i}
-            className="neu-shimmer h-2.5 rounded-full"
-            style={{ width: i === lines - 1 ? "60%" : "100%", boxShadow: insetShadow }}
+            style={{
+              ...shimmerStyle,
+              height: "10px",
+              borderRadius: "5px",
+              width: i === lines - 1 ? "60%" : i === lines - 2 ? "90%" : "100%",
+            }}
           />
         ))}
       </div>
@@ -38,11 +51,13 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   if (variant === "avatar") {
     return (
       <div
-        className={cn("neu-shimmer rounded-full", className)}
+        className={className}
         style={{
-          width: width ?? 40,
-          height: height ?? 40,
-          boxShadow: insetShadow,
+          ...shimmerStyle,
+          width: width ?? 48,
+          height: height ?? 48,
+          borderRadius: "14px",
+          flexShrink: 0,
           ...style,
         }}
         {...props}
@@ -52,11 +67,12 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 
   return (
     <div
-      className={cn("neu-shimmer rounded-neu", className)}
+      className={className}
       style={{
+        ...shimmerStyle,
         width: width ?? "100%",
-        height: height ?? 80,
-        boxShadow: insetShadow,
+        height: height ?? 60,
+        borderRadius: "14px",
         ...style,
       }}
       {...props}

@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 type AlertVariant = "info" | "success" | "warning" | "danger";
 
@@ -10,12 +9,7 @@ interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
 }
 
-interface AlertPalette {
-  bg: string;
-  text: string;
-}
-
-const paletteMap: Record<AlertVariant, AlertPalette> = {
+const paletteMap: Record<AlertVariant, { bg: string; text: string }> = {
   info: { bg: "var(--neu-tint-info)", text: "var(--neu-tint-info-text)" },
   success: { bg: "var(--neu-tint-success)", text: "var(--neu-tint-success-text)" },
   warning: { bg: "var(--neu-tint-warning)", text: "var(--neu-tint-warning-text)" },
@@ -23,10 +17,10 @@ const paletteMap: Record<AlertVariant, AlertPalette> = {
 };
 
 const defaultIcon: Record<AlertVariant, string> = {
-  info: "ℹ",
-  success: "✓",
-  warning: "!",
-  danger: "×",
+  info: "ℹ️",
+  success: "✅",
+  warning: "⚠️",
+  danger: "🚨",
 };
 
 export const Alert: React.FC<AlertProps> = ({
@@ -43,32 +37,37 @@ export const Alert: React.FC<AlertProps> = ({
   return (
     <div
       role="alert"
-      className={cn("flex items-start gap-3 rounded-[14px]", className)}
+      className={className}
       style={{
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "12px",
         padding: "12px 14px",
-        background: bg,
+        borderRadius: "14px",
         boxShadow: "var(--neu-shadow-raised-sm)",
+        background: bg,
         ...style,
       }}
       {...props}
     >
-      <div
-        className="shrink-0 text-lg leading-none flex items-center justify-center"
-        style={{ color: text }}
-        aria-hidden
-      >
+      <span style={{ fontSize: "18px", flexShrink: 0 }} aria-hidden>
         {icon ?? defaultIcon[variant]}
-      </div>
-      <div className="flex-1">
+      </span>
+      <div style={{ flex: 1 }}>
         {title && (
-          <p className="text-sm font-extrabold mb-0.5" style={{ color: text }}>
+          <p style={{ fontSize: "13px", fontWeight: 800, color: text, margin: 0 }}>
             {title}
           </p>
         )}
         {children && (
           <div
-            className="text-xs leading-relaxed"
-            style={{ color: text, opacity: 0.8 }}
+            style={{
+              fontSize: "12px",
+              color: text,
+              opacity: 0.8,
+              marginTop: title ? "3px" : 0,
+              lineHeight: 1.5,
+            }}
           >
             {children}
           </div>
@@ -78,10 +77,18 @@ export const Alert: React.FC<AlertProps> = ({
         <button
           onClick={onClose}
           aria-label="Close alert"
-          className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center neu-transition hover:scale-110 outline-none"
-          style={{ color: text, opacity: 0.6 }}
+          style={{
+            border: "none",
+            background: "none",
+            cursor: "pointer",
+            fontSize: "16px",
+            color: text,
+            opacity: 0.6,
+            lineHeight: 1,
+            flexShrink: 0,
+          }}
         >
-          ×
+          ✕
         </button>
       )}
     </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 type SpinnerSize = "sm" | "md" | "lg" | "xl";
 type SpinnerVariant = "default" | "primary" | "success" | "danger";
@@ -38,25 +37,35 @@ export const Spinner: React.FC<SpinnerProps> = ({
   return (
     <div
       role="status"
-      className={cn("inline-flex flex-col items-center gap-2", className)}
+      className={className}
+      style={{
+        display: "inline-flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "8px",
+      }}
       {...props}
     >
       <div
-        className="rounded-full animate-spin"
         style={{
           width: box,
           height: box,
+          borderRadius: "50%",
           borderWidth: border,
           borderStyle: "solid",
           borderColor: "var(--neu-text-muted)",
           borderTopColor: color,
+          animation: "spin 1s linear infinite",
           ...style,
         }}
       />
       {label && (
         <span
-          className="text-xs font-medium"
-          style={{ color: "var(--neu-text-secondary)" }}
+          style={{
+            fontSize: "12px",
+            fontWeight: 700,
+            color: "var(--neu-text-secondary)",
+          }}
         >
           {label}
         </span>

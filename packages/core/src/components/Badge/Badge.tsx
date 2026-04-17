@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "../../utils/cn";
 
 type BadgeVariant = "default" | "primary" | "success" | "danger" | "warning" | "info";
 
@@ -51,15 +50,29 @@ export const Badge: React.FC<BadgeProps> = ({
 }) => {
   return (
     <span
-      className={cn(
-        "inline-flex items-center gap-1.5 text-[11px] font-extrabold px-[13px] py-1 rounded-full",
-        className
-      )}
-      style={{ ...variantStyle[variant], ...style }}
+      className={className}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "5px",
+        fontSize: "11px",
+        fontWeight: 800,
+        padding: "4px 13px",
+        borderRadius: "999px",
+        ...variantStyle[variant],
+        ...style,
+      }}
       {...props}
     >
       {dot && (
-        <span className="w-1.5 h-1.5 rounded-full" style={{ background: "currentColor" }} />
+        <span
+          style={{
+            width: "6px",
+            height: "6px",
+            borderRadius: "50%",
+            background: "currentColor",
+          }}
+        />
       )}
       {children}
     </span>
