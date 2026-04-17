@@ -4,6 +4,7 @@ import React from "react";
 
 import { Card, Badge, Button } from "neumorui";
 import { componentDocs } from "@/data/components";
+import { CodeBlock } from "@/components/CodeBlock";
 
 const categories = [
   { name: "Form", color: "#6c7ef8", count: 10 },
@@ -114,52 +115,25 @@ export default function HomePage() {
       </div>
 
       {/* Installation */}
-      <Card variant="raised" padding="lg" style={{ marginBottom: "32px" }}>
+      <div style={{ marginBottom: "32px" }}>
         <h2 style={{ fontSize: "18px", fontWeight: 800, marginBottom: "12px" }}>
           Quick Install
         </h2>
-        <div
-          style={{
-            padding: "14px 18px",
-            borderRadius: "14px",
-            background: "var(--neu-bg)",
-            boxShadow: "var(--neu-shadow-inset)",
-            fontFamily: "'SF Mono', 'Fira Code', monospace",
-            fontSize: "13px",
-            fontWeight: 600,
-            color: "var(--neu-text-primary)",
-          }}
-        >
-          npm install neumorui
-        </div>
-        <div style={{ marginTop: "16px" }}>
-          <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)", lineHeight: 1.7 }}>
-            Then wrap your app with the provider:
-          </p>
-          <div
-            style={{
-              padding: "14px 18px",
-              borderRadius: "14px",
-              background: "var(--neu-bg)",
-              boxShadow: "var(--neu-shadow-inset)",
-              fontFamily: "'SF Mono', 'Fira Code', monospace",
-              fontSize: "13px",
-              fontWeight: 600,
-              color: "var(--neu-text-primary)",
-              marginTop: "8px",
-              whiteSpace: "pre",
-              overflowX: "auto",
-            }}
-          >
-{`import { NeuProvider } from "neumorui";
+        <CodeBlock code="npm install neumorui" language="bash" />
+        <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)", lineHeight: 1.7, margin: "16px 0 8px" }}>
+          Then wrap your app with the provider:
+        </p>
+        <CodeBlock code={`import { NeuProvider } from "neumorui";
 import "neumorui/styles";
 
-<NeuProvider>
-  <App />
-</NeuProvider>`}
-          </div>
-        </div>
-      </Card>
+function App() {
+  return (
+    <NeuProvider defaultTheme="light" defaultAccent="violet">
+      <YourApp />
+    </NeuProvider>
+  );
+}`} language="tsx" />
+      </div>
 
       {/* Categories */}
       <h2 style={{ fontSize: "18px", fontWeight: 800, marginBottom: "16px" }}>
