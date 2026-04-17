@@ -91,6 +91,52 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
               )}
             </button>
 
+            {/* Storybook link */}
+            <a
+              href="https://rukonpro.github.io/neumorui"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "36px",
+                height: "36px",
+                borderRadius: "10px",
+                background: "var(--neu-bg)",
+                boxShadow: "var(--neu-shadow-raised-sm)",
+                color: "var(--neu-text-primary)",
+                transition: "all 0.2s ease",
+                fontSize: "16px",
+              }}
+              aria-label="Storybook"
+            >
+              📖
+            </a>
+
+            {/* npm link */}
+            <a
+              href="https://www.npmjs.com/package/neumorui"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "36px",
+                height: "36px",
+                borderRadius: "10px",
+                background: "var(--neu-bg)",
+                boxShadow: "var(--neu-shadow-raised-sm)",
+                color: "var(--neu-text-primary)",
+                transition: "all 0.2s ease",
+                fontSize: "16px",
+              }}
+              aria-label="npm"
+            >
+              📦
+            </a>
+
             {/* GitHub link */}
             <a
               href="https://github.com/rukonpro/neumorui"
