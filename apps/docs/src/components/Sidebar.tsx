@@ -6,12 +6,14 @@ import { usePathname } from "next/navigation";
 
 interface SidebarCategory {
   name: string;
+  icon: string;
   items: { slug: string; name: string }[];
 }
 
 const categories: SidebarCategory[] = [
   {
     name: "Form",
+    icon: "📝",
     items: [
       { slug: "button", name: "Button" },
       { slug: "input", name: "Input" },
@@ -27,6 +29,7 @@ const categories: SidebarCategory[] = [
   },
   {
     name: "Layout",
+    icon: "🏗️",
     items: [
       { slug: "card", name: "Card" },
       { slug: "grid", name: "Grid" },
@@ -38,6 +41,7 @@ const categories: SidebarCategory[] = [
   },
   {
     name: "Data Display",
+    icon: "📊",
     items: [
       { slug: "badge", name: "Badge" },
       { slug: "avatar", name: "Avatar" },
@@ -58,6 +62,7 @@ const categories: SidebarCategory[] = [
   },
   {
     name: "Navigation",
+    icon: "🧭",
     items: [
       { slug: "tabs", name: "Tabs" },
       { slug: "breadcrumb", name: "Breadcrumb" },
@@ -72,6 +77,7 @@ const categories: SidebarCategory[] = [
   },
   {
     name: "Overlay",
+    icon: "🪟",
     items: [
       { slug: "modal", name: "Modal" },
       { slug: "popover", name: "Popover" },
@@ -84,6 +90,7 @@ const categories: SidebarCategory[] = [
   },
   {
     name: "Feedback",
+    icon: "💬",
     items: [
       { slug: "alert", name: "Alert" },
       { slug: "toast", name: "Toast" },
@@ -95,12 +102,12 @@ const categories: SidebarCategory[] = [
   },
   {
     name: "Disclosure",
-    items: [
-      { slug: "accordion", name: "Accordion" },
-    ],
+    icon: "📂",
+    items: [{ slug: "accordion", name: "Accordion" }],
   },
   {
     name: "Date",
+    icon: "📅",
     items: [
       { slug: "calendar", name: "Calendar" },
       { slug: "date-picker", name: "DatePicker" },
@@ -108,6 +115,7 @@ const categories: SidebarCategory[] = [
   },
   {
     name: "Command",
+    icon: "⌘",
     items: [
       { slug: "command", name: "Command" },
       { slug: "combobox", name: "Combobox" },
@@ -115,6 +123,7 @@ const categories: SidebarCategory[] = [
   },
   {
     name: "Animation",
+    icon: "✨",
     items: [
       { slug: "reveal", name: "Reveal" },
       { slug: "marquee", name: "Marquee" },
@@ -129,16 +138,28 @@ export const DocsSidebar: React.FC<{
 }> = ({ mobileOpen, onClose }) => {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+  const [search, setSearch] = useState("");
 
   const toggleCategory = (name: string) => {
     setCollapsed((prev) => ({ ...prev, [name]: !prev[name] }));
   };
 
+  const filteredCategories = search
+    ? categories
+        .map((cat) => ({
+          ...cat,
+          items: cat.items.filter((item) =>
+            item.name.toLowerCase().includes(search.toLowerCase())
+          ),
+        }))
+        .filter((cat) => cat.items.length > 0)
+    : categories;
+
   const sidebar = (
     <nav
       style={{
-        width: "260px",
-        minWidth: "260px",
+        width: "270px",
+        minWidth: "270px",
         height: "100vh",
         position: "sticky",
         top: 0,
@@ -158,85 +179,132 @@ export const DocsSidebar: React.FC<{
           alignItems: "center",
           gap: "10px",
           padding: "12px",
-          marginBottom: "16px",
+          marginBottom: "12px",
           borderRadius: "16px",
           boxShadow: "var(--neu-shadow-raised-sm)",
           textDecoration: "none",
+          transition: "all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)",
         }}
       >
-        <div
-          style={{
-            width: "34px",
-            height: "34px",
-            borderRadius: "12px",
-            background: "linear-gradient(135deg, #8490fa, #5a6cf5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#fff",
-            fontWeight: 900,
-            fontSize: "16px",
-            boxShadow: "3px 3px 8px rgba(108,126,248,.3)",
-          }}
-        >
-          N
-        </div>
+        <img src="/favicon.svg" alt="NeumorUI" style={{ width: "32px", height: "32px" }} />
         <div>
-          <div style={{ fontWeight: 800, fontSize: "15px", color: "var(--neu-text-primary)" }}>
+          <div style={{ fontWeight: 900, fontSize: "15px", color: "var(--neu-text-primary)", letterSpacing: "-0.02em" }}>
             NeumorUI
           </div>
           <div style={{ fontSize: "10px", color: "var(--neu-text-muted)", fontWeight: 600 }}>
-            Documentation
+            61 Components
           </div>
         </div>
       </Link>
+
+      {/* Search */}
+      <div style={{ position: "relative", marginBottom: "14px" }}>
+        <span
+          style={{
+            position: "absolute",
+            left: "12px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontSize: "13px",
+            color: "var(--neu-text-muted)",
+            pointerEvents: "none",
+          }}
+        >
+          🔍
+        </span>
+        <input
+          type="text"
+          placeholder="Search components..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "10px 12px 10px 36px",
+            borderRadius: "12px",
+            border: "none",
+            outline: "none",
+            fontSize: "12px",
+            fontWeight: 600,
+            fontFamily: "inherit",
+            color: "var(--neu-text-primary)",
+            background: "var(--neu-bg)",
+            boxShadow: "var(--neu-shadow-inset-sm)",
+            transition: "box-shadow 0.2s ease",
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.boxShadow =
+              "var(--neu-shadow-inset-sm), 0 0 0 2px rgba(108,126,248,.2)";
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.boxShadow = "var(--neu-shadow-inset-sm)";
+          }}
+        />
+      </div>
 
       {/* Home link */}
       <Link
         href="/"
         onClick={onClose}
         style={{
-          display: "block",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
           padding: "9px 12px",
-          borderRadius: "10px",
+          borderRadius: "11px",
           fontSize: "13px",
           fontWeight: 700,
-          color: pathname === "/" ? "var(--neu-accent, #6c7ef8)" : "var(--neu-text-secondary)",
+          color: pathname === "/" ? "var(--neu-accent)" : "var(--neu-text-secondary)",
           boxShadow: pathname === "/" ? "var(--neu-shadow-inset-sm)" : "none",
-          marginBottom: "12px",
+          marginBottom: "8px",
           transition: "all 0.2s ease",
+          textDecoration: "none",
         }}
       >
+        <span style={{ fontSize: "14px" }}>🏠</span>
         Overview
       </Link>
 
       {/* Categories */}
-      {categories.map((cat) => {
-        const isCollapsed = collapsed[cat.name];
+      {filteredCategories.map((cat) => {
+        const isCollapsed = collapsed[cat.name] && !search;
+        const hasActive = cat.items.some((item) => pathname === `/docs/${item.slug}`);
         return (
-          <div key={cat.name} style={{ marginBottom: "6px" }}>
+          <div key={cat.name} style={{ marginBottom: "4px" }}>
             <button
               onClick={() => toggleCategory(cat.name)}
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
+                gap: "6px",
                 width: "100%",
-                padding: "7px 12px",
+                padding: "8px 12px",
                 border: "none",
                 background: "transparent",
                 cursor: "pointer",
-                fontSize: "10px",
+                fontSize: "11px",
                 fontWeight: 700,
                 fontFamily: "inherit",
                 textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "var(--neu-text-muted)",
+                letterSpacing: "0.08em",
+                color: hasActive ? "var(--neu-accent)" : "var(--neu-text-muted)",
                 borderRadius: "8px",
-                transition: "color 0.2s ease",
+                transition: "all 0.2s ease",
               }}
             >
-              <span>{cat.name} ({cat.items.length})</span>
+              <span style={{ fontSize: "12px" }}>{cat.icon}</span>
+              <span style={{ flex: 1, textAlign: "left" }}>{cat.name}</span>
+              <span
+                style={{
+                  fontSize: "9px",
+                  fontWeight: 800,
+                  padding: "1px 6px",
+                  borderRadius: "999px",
+                  background: hasActive ? "rgba(108,126,248,0.12)" : "rgba(0,0,0,0.04)",
+                  color: hasActive ? "var(--neu-accent)" : "var(--neu-text-muted)",
+                }}
+              >
+                {cat.items.length}
+              </span>
               <svg
                 width="8"
                 height="8"
@@ -245,13 +313,14 @@ export const DocsSidebar: React.FC<{
                 style={{
                   transform: isCollapsed ? "rotate(-90deg)" : "rotate(0deg)",
                   transition: "transform 0.2s ease",
+                  flexShrink: 0,
                 }}
               >
-                <path d="M1 2l3 3 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M1 2l3 3 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
             {!isCollapsed && (
-              <div style={{ display: "flex", flexDirection: "column", gap: "1px", marginTop: "2px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1px", marginTop: "2px", marginLeft: "4px", paddingLeft: "12px", borderLeft: "2px solid rgba(108,126,248,0.08)" }}>
                 {cat.items.map((item) => {
                   const href = `/docs/${item.slug}`;
                   const isActive = pathname === href;
@@ -262,11 +331,11 @@ export const DocsSidebar: React.FC<{
                       onClick={onClose}
                       style={{
                         display: "block",
-                        padding: "7px 12px 7px 20px",
+                        padding: "7px 12px",
                         borderRadius: "10px",
                         fontSize: "13px",
                         fontWeight: isActive ? 700 : 600,
-                        color: isActive ? "var(--neu-accent, #6c7ef8)" : "var(--neu-text-secondary)",
+                        color: isActive ? "var(--neu-accent)" : "var(--neu-text-secondary)",
                         boxShadow: isActive ? "var(--neu-shadow-inset-sm)" : "none",
                         transition: "all 0.15s ease",
                         textDecoration: "none",
@@ -287,25 +356,13 @@ export const DocsSidebar: React.FC<{
   return (
     <>
       {/* Desktop sidebar */}
-      <div
-        style={{
-          display: "none",
-        }}
-        className="docs-sidebar-desktop"
-      >
+      <div style={{ display: "none" }} className="docs-sidebar-desktop">
         {sidebar}
       </div>
 
       {/* Mobile overlay */}
       {mobileOpen && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 50,
-            display: "flex",
-          }}
-        >
+        <div style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex" }}>
           <div
             onClick={onClose}
             style={{
@@ -315,13 +372,10 @@ export const DocsSidebar: React.FC<{
               backdropFilter: "blur(4px)",
             }}
           />
-          <div style={{ position: "relative", zIndex: 1 }}>
-            {sidebar}
-          </div>
+          <div style={{ position: "relative", zIndex: 1 }}>{sidebar}</div>
         </div>
       )}
 
-      {/* Inline style for responsive sidebar */}
       <style>{`
         @media (min-width: 768px) {
           .docs-sidebar-desktop {
