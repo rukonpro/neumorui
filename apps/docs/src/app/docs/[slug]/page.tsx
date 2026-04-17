@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
-import Link from "next/link";
+
 import { Badge, Button } from "neumorui";
 import { componentDocs } from "@/data/components";
 import { ComponentPreview } from "@/components/ComponentPreview";
@@ -22,9 +22,9 @@ export default function ComponentPage() {
         <p style={{ fontSize: "14px", color: "var(--neu-text-secondary)", marginBottom: "20px" }}>
           No documentation found for &quot;{slug}&quot;.
         </p>
-        <Link href="/">
+        <a href="/">
           <Button variant="primary">Back to home</Button>
-        </Link>
+        </a>
       </div>
     );
   }
@@ -168,7 +168,7 @@ export default function ComponentPage() {
         }}
       >
         {prev ? (
-          <Link href={`/docs/${prev.slug}`} style={{ textDecoration: "none" }}>
+          <a href={`/docs/${prev.slug}`} style={{ textDecoration: "none" }}>
             <div
               style={{
                 padding: "12px 16px",
@@ -194,12 +194,12 @@ export default function ComponentPage() {
                 {prev.name}
               </div>
             </div>
-          </Link>
+          </a>
         ) : (
           <div />
         )}
         {next ? (
-          <Link href={`/docs/${next.slug}`} style={{ textDecoration: "none" }}>
+          <a href={`/docs/${next.slug}`} style={{ textDecoration: "none" }}>
             <div
               style={{
                 padding: "12px 16px",
@@ -226,7 +226,7 @@ export default function ComponentPage() {
                 {next.name}
               </div>
             </div>
-          </Link>
+          </a>
         ) : (
           <div />
         )}

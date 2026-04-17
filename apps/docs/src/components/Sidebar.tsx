@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
+
 import { usePathname } from "next/navigation";
 
 interface SidebarCategory {
@@ -188,7 +188,7 @@ export const DocsSidebar: React.FC<{
           transition: "background 0.35s ease",
         }}
       >
-      <Link
+      <a
         href="/"
         onClick={onClose}
         style={{
@@ -212,7 +212,7 @@ export const DocsSidebar: React.FC<{
             61 Components
           </div>
         </div>
-      </Link>
+      </a>
 
       {/* Search */}
       <div style={{ position: "relative", marginBottom: "14px" }}>
@@ -260,7 +260,7 @@ export const DocsSidebar: React.FC<{
 
       </div>
       {/* Home link */}
-      <Link
+      <a
         href="/"
         onClick={onClose}
         style={{
@@ -280,7 +280,7 @@ export const DocsSidebar: React.FC<{
       >
         <span style={{ fontSize: "14px" }}>🏠</span>
         Overview
-      </Link>
+      </a>
 
       {/* Categories */}
       {filteredCategories.map((cat) => {
@@ -343,7 +343,7 @@ export const DocsSidebar: React.FC<{
                   const href = `/docs/${item.slug}`;
                   const isActive = pathname === href;
                   return (
-                    <Link
+                    <a
                       key={item.slug}
                       href={href}
                       onClick={onClose}
@@ -360,7 +360,7 @@ export const DocsSidebar: React.FC<{
                       }}
                     >
                       {item.name}
-                    </Link>
+                    </a>
                   );
                 })}
               </div>

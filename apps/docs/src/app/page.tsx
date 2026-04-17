@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+
 import { Card, Badge, Button } from "neumorui";
 import { componentDocs } from "@/data/components";
 
@@ -69,9 +69,9 @@ export default function HomePage() {
           with neumorphic shadows, powered by Radix UI primitives.
         </p>
         <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/docs/button">
+          <a href="/docs/button">
             <Button variant="primary">Get started</Button>
-          </Link>
+          </a>
           <a href="https://github.com/rukonpro/neumorui" target="_blank" rel="noopener noreferrer">
             <Button variant="raised">GitHub</Button>
           </a>
@@ -183,7 +183,7 @@ import "neumorui/styles";
               {componentDocs
                 .filter((c) => c.category === cat.name)
                 .map((c) => (
-                  <Link key={c.slug} href={`/docs/${c.slug}`}>
+                  <a key={c.slug} href={`/docs/${c.slug}`}>
                     <span
                       style={{
                         display: "inline-block",
@@ -200,7 +200,7 @@ import "neumorui/styles";
                     >
                       {c.name}
                     </span>
-                  </Link>
+                  </a>
                 ))}
             </div>
           </Card>
@@ -219,7 +219,7 @@ import "neumorui/styles";
         }}
       >
         {componentDocs.map((comp) => (
-          <Link key={comp.slug} href={`/docs/${comp.slug}`} style={{ textDecoration: "none" }}>
+          <a key={comp.slug} href={`/docs/${comp.slug}`} style={{ textDecoration: "none" }}>
             <div
               style={{
                 padding: "14px",
@@ -255,7 +255,7 @@ import "neumorui/styles";
                 {comp.category}
               </span>
             </div>
-          </Link>
+          </a>
         ))}
       </div>
     </div>
