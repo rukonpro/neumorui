@@ -128,4 +128,7 @@ export { BrowserTabs } from "./components/BrowserTabs/BrowserTabs";
 export { Hero } from "./components/Hero/Hero";
 export { PricingCard } from "./components/PricingCard/PricingCard";
 
+// Layout
+export { Grid, Col } from "./components/Grid/Grid";
+
 export { cn } from "./utils/cn";
