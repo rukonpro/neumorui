@@ -20,7 +20,7 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
 }) => {
   const [open, setOpen] = React.useState(true);
   const hasChildren = node.children && node.children.length > 0;
-  const [leafHovered, setLeafHovered] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
 
   if (!hasChildren) {
     return (
@@ -28,18 +28,28 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "6px",
-          padding: "4px 6px",
-          borderRadius: "8px",
+          gap: "10px",
+          padding: "8px 14px",
+          borderRadius: "10px",
           cursor: "pointer",
           transition,
-          boxShadow: leafHovered ? "var(--neu-shadow-raised-sm)" : "none",
+          background: hovered ? "var(--neu-bg)" : "transparent",
+          boxShadow: hovered ? "var(--neu-shadow-raised-sm)" : "none",
+          transform: hovered ? "translateX(4px)" : "none",
+          marginBottom: "2px",
         }}
-        onMouseEnter={() => setLeafHovered(true)}
-        onMouseLeave={() => setLeafHovered(false)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
-        {node.icon && <span style={{ fontSize: "14px" }}>{node.icon}</span>}
-        <span style={{ color: "var(--neu-text-secondary)", fontSize: "13px", fontWeight: 700 }}>
+        {node.icon && <span style={{ fontSize: "15px", flexShrink: 0 }}>{node.icon}</span>}
+        <span
+          style={{
+            color: hovered ? "var(--neu-accent)" : "var(--neu-text-secondary)",
+            fontSize: "13px",
+            fontWeight: 600,
+            transition: "color 0.2s ease",
+          }}
+        >
           {node.label}
         </span>
       </div>
@@ -47,34 +57,81 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
   }
 
   return (
-    <div style={{ padding: "4px 0", cursor: "pointer", userSelect: "none" }}>
+    <div style={{ marginBottom: "4px" }}>
+      {/* Folder header */}
       <div
         onClick={() => setOpen(!open)}
-        style={{ display: "flex", alignItems: "center", gap: "5px" }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          padding: "9px 14px",
+          borderRadius: "12px",
+          cursor: "pointer",
+          userSelect: "none",
+          transition,
+          background: "var(--neu-bg)",
+          boxShadow: hovered
+            ? "var(--neu-shadow-raised)"
+            : "var(--neu-shadow-raised-sm)",
+          transform: hovered ? "translateY(-1px)" : "none",
+        }}
       >
+        {/* Expand/collapse chevron */}
         <span
           style={{
-            fontSize: "9px",
-            color: "var(--neu-text-muted)",
-            transition: "transform 0.2s",
-            display: "inline-block",
-            marginRight: "4px",
-            transform: open ? "rotate(90deg)" : "rotate(0deg)",
+            width: "18px",
+            height: "18px",
+            borderRadius: "6px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+            background: "var(--neu-bg)",
+            boxShadow: open
+              ? "var(--neu-shadow-inset-sm)"
+              : "var(--neu-shadow-raised-sm)",
+            transition,
+            fontSize: "8px",
+            color: open ? "var(--neu-accent)" : "var(--neu-text-muted)",
           }}
         >
-          &#9654;
+          <span
+            style={{
+              display: "inline-block",
+              transition: "transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1)",
+              transform: open ? "rotate(90deg)" : "rotate(0deg)",
+              lineHeight: 1,
+            }}
+          >
+            &#9654;
+          </span>
         </span>
-        {node.icon && <span style={{ fontSize: "16px" }}>{node.icon}</span>}
-        <span style={{ fontWeight: 700, color: "var(--neu-text-primary)", fontSize: "13px" }}>
+        {node.icon && <span style={{ fontSize: "16px", flexShrink: 0 }}>{node.icon}</span>}
+        <span
+          style={{
+            fontWeight: 700,
+            color: open ? "var(--neu-accent)" : "var(--neu-text-primary)",
+            fontSize: "14px",
+            transition: "color 0.2s ease",
+          }}
+        >
           {node.label}
         </span>
       </div>
+
+      {/* Children container */}
       {open && (
         <div
           style={{
-            paddingLeft: "18px",
-            marginTop: "3px",
-            animation: "neu-accordion-expand 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
+            position: "relative",
+            paddingLeft: "22px",
+            marginLeft: "22px",
+            marginTop: "6px",
+            borderLeft: "2px solid var(--neu-border)",
+            animation: "fadeUp 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
           {node.children!.map((child, i) => (
@@ -88,7 +145,19 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
 
 export const TreeView: React.FC<TreeViewProps> = ({ nodes, className, style, ...rest }) => {
   return (
-    <div className={className} style={{ fontSize: "13px", ...style }} data-testid="tree-view" {...rest}>
+    <div
+      className={className}
+      style={{
+        padding: "16px",
+        borderRadius: "18px",
+        background: "var(--neu-bg)",
+        boxShadow: "var(--neu-shadow-inset-sm)",
+        fontSize: "13px",
+        ...style,
+      }}
+      data-testid="tree-view"
+      {...rest}
+    >
       {nodes.map((node, i) => (
         <TreeNodeItem key={i} node={node} />
       ))}

@@ -30,10 +30,81 @@ const buildPages = (current: number, total: number, siblings: number): (number |
   return [1, "ellipsis", ...range(leftSibling, rightSibling), "ellipsis", total];
 };
 
-const sizeClasses = {
-  sm: "w-8 h-8 text-xs",
-  md: "w-10 h-10 text-sm",
-  lg: "w-12 h-12 text-base",
+const sizeMap: Record<string, { box: number; fontSize: string; radius: string }> = {
+  sm: { box: 34, fontSize: "12px", radius: "10px" },
+  md: { box: 42, fontSize: "14px", radius: "12px" },
+  lg: { box: 50, fontSize: "16px", radius: "14px" },
+};
+
+const transition = "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)";
+
+const PaginationButton: React.FC<{
+  children: React.ReactNode;
+  active?: boolean;
+  disabled?: boolean;
+  size: string;
+  onClick?: () => void;
+  ariaLabel?: string;
+  ariaCurrent?: "page" | undefined;
+}> = ({ children, active, disabled, size, onClick, ariaLabel, ariaCurrent }) => {
+  const [hovered, setHovered] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+  const { box, fontSize, radius } = sizeMap[size];
+
+  const style: React.CSSProperties = {
+    width: box,
+    height: box,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "none",
+    outline: "none",
+    cursor: "pointer",
+    fontFamily: "inherit",
+    fontWeight: 700,
+    fontSize,
+    borderRadius: radius,
+    background: "var(--neu-bg)",
+    color: "var(--neu-text-primary)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
+    transition,
+  };
+
+  if (active) {
+    style.boxShadow = "var(--neu-shadow-inset-sm)";
+    style.color = "var(--neu-accent)";
+    style.fontWeight = 800;
+    style.transform = "scale(0.97)";
+  } else if (pressed && !disabled) {
+    style.boxShadow = "var(--neu-shadow-inset-sm)";
+    style.transform = "scale(0.95)";
+  } else if (hovered && !disabled) {
+    style.boxShadow = "var(--neu-shadow-raised)";
+    style.transform = "translateY(-2px)";
+    style.color = "var(--neu-accent)";
+  }
+
+  if (disabled) {
+    style.opacity = 0.4;
+    style.cursor = "not-allowed";
+    style.transform = "none";
+  }
+
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={ariaLabel}
+      aria-current={ariaCurrent}
+      style={style}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => { setHovered(false); setPressed(false); }}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
+    >
+      {children}
+    </button>
+  );
 };
 
 export const Pagination: React.FC<PaginationProps> = ({
@@ -48,81 +119,62 @@ export const Pagination: React.FC<PaginationProps> = ({
   const pages = buildPages(page, total, siblings);
   const canPrev = page > 1;
   const canNext = page < total;
-
-  const btnBase = cn(
-    "flex items-center justify-center font-medium rounded-[10px] neu-transition cursor-pointer outline-none",
-    "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
-    "disabled:opacity-40 disabled:cursor-not-allowed",
-    "hover:-translate-y-0.5 active:scale-95",
-    sizeClasses[size]
-  );
+  const { box, fontSize } = sizeMap[size];
 
   return (
     <nav
       aria-label="Pagination"
-      className={cn("inline-flex items-center gap-1.5", className)}
+      className={cn(className)}
+      style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}
       {...props}
     >
-      <button
-        onClick={() => canPrev && onChange(page - 1)}
+      <PaginationButton
+        size={size}
         disabled={!canPrev}
-        aria-label="Previous page"
-        className={btnBase}
-        style={{
-          background: "var(--neu-bg)",
-          boxShadow: "var(--neu-shadow-raised-sm)",
-          color: "var(--neu-text-secondary)",
-        }}
+        onClick={() => canPrev && onChange(page - 1)}
+        ariaLabel="Previous page"
       >
         ‹
-      </button>
+      </PaginationButton>
+
       {pages.map((p, i) =>
         p === "ellipsis" ? (
           <span
             key={`e-${i}`}
-            className={cn("flex items-center justify-center", sizeClasses[size])}
-            style={{ color: "var(--neu-text-muted)" }}
+            style={{
+              width: box,
+              height: box,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "var(--neu-text-muted)",
+              fontSize,
+              fontWeight: 700,
+            }}
           >
             …
           </span>
         ) : (
-          <button
+          <PaginationButton
             key={p}
+            size={size}
+            active={p === page}
             onClick={() => onChange(p)}
-            aria-current={p === page ? "page" : undefined}
-            className={btnBase}
-            style={
-              p === page
-                ? {
-                    background: "var(--neu-bg)",
-                    color: "var(--neu-accent)",
-                    boxShadow: "var(--neu-shadow-inset-sm)",
-                    fontWeight: 800,
-                  }
-                : {
-                    background: "var(--neu-bg)",
-                    boxShadow: "var(--neu-shadow-raised-sm)",
-                    color: "var(--neu-text-primary)",
-                  }
-            }
+            ariaCurrent={p === page ? "page" : undefined}
           >
             {p}
-          </button>
+          </PaginationButton>
         )
       )}
-      <button
-        onClick={() => canNext && onChange(page + 1)}
+
+      <PaginationButton
+        size={size}
         disabled={!canNext}
-        aria-label="Next page"
-        className={btnBase}
-        style={{
-          background: "var(--neu-bg)",
-          boxShadow: "var(--neu-shadow-raised-sm)",
-          color: "var(--neu-text-secondary)",
-        }}
+        onClick={() => canNext && onChange(page + 1)}
+        ariaLabel="Next page"
       >
         ›
-      </button>
+      </PaginationButton>
     </nav>
   );
 };

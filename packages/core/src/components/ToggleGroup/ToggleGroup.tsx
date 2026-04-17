@@ -30,10 +30,80 @@ type ToggleGroupProps = (ToggleGroupSingleProps | ToggleGroupMultipleProps) & {
   style?: React.CSSProperties;
 };
 
-const sizeClasses = {
-  sm: "px-3 py-1.5 text-xs",
-  md: "px-4 py-2 text-sm",
-  lg: "px-5 py-2.5 text-base",
+const sizeMap: Record<string, React.CSSProperties> = {
+  sm: { padding: "6px 12px", fontSize: "12px", borderRadius: "10px" },
+  md: { padding: "10px 20px", fontSize: "14px", borderRadius: "12px" },
+  lg: { padding: "12px 24px", fontSize: "16px", borderRadius: "14px" },
+};
+
+const ToggleItem: React.FC<{
+  opt: ToggleOption;
+  size: string;
+  groupDisabled?: boolean;
+}> = ({ opt, size, groupDisabled }) => {
+  const [hovered, setHovered] = React.useState(false);
+  const [isOn, setIsOn] = React.useState(false);
+  const ref = React.useRef<HTMLButtonElement>(null);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new MutationObserver(() => {
+      setIsOn(el.getAttribute("data-state") === "on");
+    });
+    setIsOn(el.getAttribute("data-state") === "on");
+    observer.observe(el, { attributes: true, attributeFilter: ["data-state"] });
+    return () => observer.disconnect();
+  }, []);
+
+  const isDisabled = opt.disabled || groupDisabled;
+
+  const computedStyle: React.CSSProperties = {
+    ...sizeMap[size],
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: "inherit",
+    fontWeight: 700,
+    border: "none",
+    cursor: "pointer",
+    outline: "none",
+    userSelect: "none",
+    background: "var(--neu-bg)",
+    color: "var(--neu-text-secondary)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
+    transition: "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)",
+  };
+
+  if (isOn) {
+    computedStyle.boxShadow = "var(--neu-shadow-inset-sm)";
+    computedStyle.color = "var(--neu-accent)";
+    computedStyle.fontWeight = 800;
+    computedStyle.transform = "scale(0.97)";
+  } else if (hovered && !isDisabled) {
+    computedStyle.transform = "translateY(-2px)";
+    computedStyle.boxShadow = "var(--neu-shadow-raised)";
+    computedStyle.color = "var(--neu-accent)";
+  }
+
+  if (isDisabled) {
+    computedStyle.opacity = 0.5;
+    computedStyle.cursor = "not-allowed";
+    computedStyle.transform = "none";
+  }
+
+  return (
+    <RadixToggleGroup.Item
+      ref={ref}
+      value={opt.value}
+      disabled={opt.disabled}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={computedStyle}
+    >
+      {opt.label}
+    </RadixToggleGroup.Item>
+  );
 };
 
 export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
@@ -43,26 +113,19 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
     ...rest
   } = props as ToggleGroupProps & Record<string, unknown>;
 
+  const rootStyle: React.CSSProperties = {
+    background: "var(--neu-bg)",
+    boxShadow: "var(--neu-shadow-inset-sm)",
+    borderRadius: "16px",
+    padding: "6px",
+    display: "inline-flex",
+    gap: "6px",
+    ...style,
+  };
+
   const renderItems = () =>
     options.map((opt) => (
-      <RadixToggleGroup.Item
-        key={opt.value}
-        value={opt.value}
-        disabled={opt.disabled}
-        className={cn(
-          "font-bold rounded-neu neu-transition cursor-pointer outline-none",
-          "data-[state=on]:shadow-neu-inset-sm data-[state=on]:!text-[var(--neu-accent)] data-[state=on]:font-extrabold",
-          "data-[state=off]:hover:-translate-y-0.5 data-[state=off]:hover:text-[var(--neu-accent)]",
-          "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none",
-          "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
-          sizeClasses[size]
-        )}
-        style={{
-          color: "var(--neu-text-secondary)",
-        }}
-      >
-        {opt.label}
-      </RadixToggleGroup.Item>
+      <ToggleItem key={opt.value} opt={opt} size={size} groupDisabled={disabled} />
     ));
 
   if (props.type === "single") {
@@ -73,12 +136,8 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
         defaultValue={props.defaultValue}
         onValueChange={props.onValueChange}
         disabled={disabled}
-        className={cn("inline-flex gap-1 p-1 rounded-neu-lg", className)}
-        style={{
-          background: "var(--neu-bg)",
-          boxShadow: "var(--neu-shadow-raised-sm)",
-          ...style,
-        }}
+        className={cn(className)}
+        style={rootStyle}
         {...rest}
       >
         {renderItems()}
@@ -93,12 +152,8 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
       defaultValue={props.defaultValue}
       onValueChange={props.onValueChange}
       disabled={disabled}
-      className={cn("inline-flex gap-1 p-1 rounded-neu-lg", className)}
-      style={{
-        background: "var(--neu-bg)",
-        boxShadow: "var(--neu-shadow-raised-sm)",
-        ...style,
-      }}
+      className={cn(className)}
+      style={rootStyle}
       {...rest}
     >
       {renderItems()}
