@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import React from "react";
+import Script from "next/script";
 import LayoutInner from "@/components/LayoutInner";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-W7NRRR6KM4";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://neumorui.vercel.app";
 
@@ -128,6 +131,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
         <LayoutInner>{children}</LayoutInner>
       </body>
     </html>
