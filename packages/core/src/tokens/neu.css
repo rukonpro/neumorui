@@ -93,24 +93,24 @@
 }
 
 [data-theme="dark"] {
-  --neu-bg: #181c2e;
-  --neu-bg-dark: #121525;
-  --neu-bg-light: #1e2236;
+  --neu-bg: #1a1e32;
+  --neu-bg-dark: #10132a;
+  --neu-bg-light: #242844;
 
-  --neu-shadow-dark: rgba(8, 10, 22, 0.85);
-  --neu-shadow-light: rgba(50, 58, 100, 0.45);
+  --neu-shadow-dark: rgba(0, 0, 0, 0.6);
+  --neu-shadow-light: rgba(70, 80, 140, 0.35);
 
-  --neu-shadow-raised: 7px 7px 18px var(--neu-shadow-dark),
-    -5px -5px 14px var(--neu-shadow-light);
-  --neu-shadow-raised-sm: 4px 4px 12px var(--neu-shadow-dark),
-    -3px -3px 9px var(--neu-shadow-light);
-  --neu-shadow-raised-lg: 12px 12px 28px var(--neu-shadow-dark),
-    -8px -8px 20px var(--neu-shadow-light);
+  --neu-shadow-raised: 8px 8px 20px var(--neu-shadow-dark),
+    -6px -6px 16px var(--neu-shadow-light);
+  --neu-shadow-raised-sm: 5px 5px 14px var(--neu-shadow-dark),
+    -4px -4px 10px var(--neu-shadow-light);
+  --neu-shadow-raised-lg: 14px 14px 32px var(--neu-shadow-dark),
+    -10px -10px 24px var(--neu-shadow-light);
 
-  --neu-shadow-inset: inset 5px 5px 12px var(--neu-shadow-dark),
-    inset -4px -4px 10px var(--neu-shadow-light);
-  --neu-shadow-inset-sm: inset 3px 3px 8px var(--neu-shadow-dark),
-    inset -2px -2px 6px var(--neu-shadow-light);
+  --neu-shadow-inset: inset 6px 6px 14px var(--neu-shadow-dark),
+    inset -5px -5px 12px var(--neu-shadow-light);
+  --neu-shadow-inset-sm: inset 4px 4px 10px var(--neu-shadow-dark),
+    inset -3px -3px 8px var(--neu-shadow-light);
 
   --neu-accent: #7c8ffa;
   --neu-accent-light: #9aa8fb;
@@ -137,9 +137,9 @@
   --neu-info-dark: #5a6cf5;
   --neu-info-glow: rgba(124, 143, 250, 0.35);
 
-  --neu-text-primary: #dde2f8;
-  --neu-text-secondary: #7880a8;
-  --neu-text-muted: #3e4668;
+  --neu-text-primary: #e0e4fa;
+  --neu-text-secondary: #8890b8;
+  --neu-text-muted: #505878;
 
   --neu-tint-primary: #1e2560;
   --neu-tint-primary-border: rgba(124, 143, 250, 0.35);
