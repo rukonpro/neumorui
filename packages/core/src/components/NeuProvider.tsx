@@ -35,19 +35,31 @@ export const NeuProvider: React.FC<NeuProviderProps> = ({
   followSystemTheme = false,
 }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("neu-theme") as Theme | null;
+      if (saved === "light" || saved === "dark") return saved;
+    }
     if (followSystemTheme && typeof window !== "undefined") {
       return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
     return defaultTheme;
   });
-  const [accent, setAccentState] = useState<AccentColor>(defaultAccent);
+  const [accent, setAccentState] = useState<AccentColor>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("neu-accent") as AccentColor | null;
+      if (saved && saved in accentMap) return saved;
+    }
+    return defaultAccent;
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("neu-theme", theme);
   }, [theme]);
 
   useEffect(() => {
     document.documentElement.style.setProperty("--neu-accent", accentMap[accent]);
+    localStorage.setItem("neu-accent", accent);
   }, [accent]);
 
   useEffect(() => {
