@@ -23,10 +23,11 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         className={className}
         style={{
           background: "var(--neu-bg)",
+          color: "var(--neu-text-primary)",
           borderRadius: "24px",
           padding: paddingMap[padding],
           boxShadow: variantShadow[variant],
-          transition: "background 0.35s ease, box-shadow 0.35s ease",
+          transition: "background 0.35s ease, box-shadow 0.35s ease, color 0.35s ease",
           ...style,
         }}
         {...props}

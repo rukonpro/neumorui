@@ -18,13 +18,14 @@ const ThemeCanvas: React.FC<{ theme: "light" | "dark"; children: React.ReactNode
       style={{
         padding: "56px 32px",
         background: "var(--neu-bg)",
+        color: "var(--neu-text-primary)",
         minHeight: "100vh",
         width: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         boxSizing: "border-box",
-        transition: "background 0.35s ease",
+        transition: "background 0.35s ease, color 0.35s ease",
       }}
     >
       {children}

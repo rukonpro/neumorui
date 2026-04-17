@@ -67,7 +67,14 @@ export const NeuProvider: React.FC<NeuProviderProps> = ({
 
   return (
     <NeuContext.Provider value={{ theme, accent, toggleTheme, setTheme, setAccent }}>
-      {children}
+      <div
+        style={{
+          color: "var(--neu-text-primary)",
+          transition: "color 0.35s ease",
+        }}
+      >
+        {children}
+      </div>
     </NeuContext.Provider>
   );
 };
