@@ -18,6 +18,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
   onDismiss,
   className,
   style,
+  ...rest
 }) => {
   const [dismissed, setDismissed] = React.useState(false);
 
@@ -70,7 +71,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
   };
 
   return (
-    <div className={className} style={containerStyle} role="alert">
+    <div className={className} style={containerStyle} role="alert" {...rest}>
       <div style={{ display: "flex", alignItems: "center", gap: "12px", flex: 1 }}>
         {icon && <span style={{ fontSize: "18px", flexShrink: 0 }}>{icon}</span>}
         <span style={{ fontSize: "13px", fontWeight: 700 }}>{children}</span>

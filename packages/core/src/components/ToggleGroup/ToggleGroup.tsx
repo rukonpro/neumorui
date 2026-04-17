@@ -26,6 +26,8 @@ type ToggleGroupProps = (ToggleGroupSingleProps | ToggleGroupMultipleProps) & {
   options: ToggleOption[];
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
+  className?: string;
+  style?: React.CSSProperties;
 };
 
 const sizeClasses = {
@@ -35,7 +37,11 @@ const sizeClasses = {
 };
 
 export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
-  const { options, disabled, size = "md" } = props;
+  const {
+    options, disabled, size = "md", className, style,
+    type: _type, value: _value, defaultValue: _defaultValue, onValueChange: _onValueChange,
+    ...rest
+  } = props as ToggleGroupProps & Record<string, unknown>;
 
   const renderItems = () =>
     options.map((opt) => (
@@ -67,11 +73,13 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
         defaultValue={props.defaultValue}
         onValueChange={props.onValueChange}
         disabled={disabled}
-        className="inline-flex gap-1 p-1 rounded-neu-lg"
+        className={cn("inline-flex gap-1 p-1 rounded-neu-lg", className)}
         style={{
           background: "var(--neu-bg)",
           boxShadow: "var(--neu-shadow-raised-sm)",
+          ...style,
         }}
+        {...rest}
       >
         {renderItems()}
       </RadixToggleGroup.Root>
@@ -85,11 +93,13 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
       defaultValue={props.defaultValue}
       onValueChange={props.onValueChange}
       disabled={disabled}
-      className="inline-flex gap-1 p-1 rounded-neu-lg"
+      className={cn("inline-flex gap-1 p-1 rounded-neu-lg", className)}
       style={{
         background: "var(--neu-bg)",
         boxShadow: "var(--neu-shadow-raised-sm)",
+        ...style,
       }}
+      {...rest}
     >
       {renderItems()}
     </RadixToggleGroup.Root>

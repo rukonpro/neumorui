@@ -7,6 +7,8 @@ interface CheckboxProps {
   label?: string;
   disabled?: boolean;
   id?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
@@ -15,12 +17,15 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   label,
   disabled,
   id,
+  className,
+  style,
+  ...rest
 }) => {
   const checkId = id || label?.toLowerCase().replace(/\s/g, "-");
   const isChecked = checked === true;
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
+    <div className={className} style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", ...style }} {...rest}>
       <RadixCheckbox.Root
         id={checkId}
         checked={checked}

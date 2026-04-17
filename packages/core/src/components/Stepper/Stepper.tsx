@@ -11,6 +11,8 @@ interface Step {
 interface StepperProps {
   steps: Step[];
   orientation?: "vertical" | "horizontal";
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const circleBase: React.CSSProperties = {
@@ -70,17 +72,23 @@ const badgeLabels: Record<string, string> = {
 export const Stepper: React.FC<StepperProps> = ({
   steps,
   orientation = "vertical",
+  className,
+  style,
+  ...rest
 }) => {
   const isHorizontal = orientation === "horizontal";
 
   return (
     <div
+      className={className}
       style={{
         display: "flex",
         flexDirection: isHorizontal ? "row" : "column",
         gap: isHorizontal ? "8px" : "0",
+        ...style,
       }}
       role="list"
+      {...rest}
     >
       {steps.map((step, index) => (
         <div

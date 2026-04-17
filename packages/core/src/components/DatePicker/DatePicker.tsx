@@ -13,6 +13,8 @@ interface DatePickerProps {
   dateFormat?: string;
   minDate?: Date;
   maxDate?: Date;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const CalendarIcon = () => (
@@ -31,11 +33,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   dateFormat = "PP",
   minDate,
   maxDate,
+  className,
+  style,
+  ...rest
 }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex flex-col gap-1.5 w-full">
+    <div className={cn("flex flex-col gap-1.5 w-full", className)} style={style} {...rest}>
       {label && (
         <label
           className="text-xs font-semibold uppercase tracking-widest"

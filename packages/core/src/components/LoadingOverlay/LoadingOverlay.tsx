@@ -14,12 +14,14 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
   children,
   className,
   style,
+  ...rest
 }) => {
   return (
     <div
       className={className}
       style={{ position: "relative", ...style }}
       data-testid="loading-overlay-container"
+      {...rest}
     >
       {children}
       {loading && (

@@ -11,6 +11,8 @@ interface ContextMenuItem {
 interface ContextMenuProps {
   trigger: React.ReactNode;
   items: ContextMenuItem[];
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const menuStyle: React.CSSProperties = {
@@ -47,7 +49,7 @@ const separatorStyle: React.CSSProperties = {
   margin: "4px 0",
 };
 
-export const ContextMenu: React.FC<ContextMenuProps> = ({ trigger, items }) => {
+export const ContextMenu: React.FC<ContextMenuProps> = ({ trigger, items, className, style, ...rest }) => {
   const [visible, setVisible] = React.useState(false);
   const [pos, setPos] = React.useState({ x: 0, y: 0 });
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
@@ -79,7 +81,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ trigger, items }) => {
 
   return (
     <>
-      <div onContextMenu={handleContextMenu} style={{ display: "inline-block" }}>
+      <div className={className} onContextMenu={handleContextMenu} style={{ display: "inline-block", ...style }} {...rest}>
         {trigger}
       </div>
       {visible && (

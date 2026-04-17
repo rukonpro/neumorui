@@ -25,6 +25,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   animate = true,
   className,
   style,
+  ...rest
 }) => {
   const padding = 20;
   const svgWidth = 500;
@@ -57,7 +58,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   const gradientId = React.useId();
 
   return (
-    <div className={className} style={style}>
+    <div className={className} style={style} {...rest}>
       <svg
         data-testid="line-chart-svg"
         viewBox={`0 0 ${svgWidth} ${svgHeight}`}

@@ -6,6 +6,8 @@ interface DrawerProps {
   side?: "left" | "right" | "bottom";
   title?: string;
   children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const overlayStyle: React.CSSProperties = {
@@ -86,6 +88,9 @@ export const Drawer: React.FC<DrawerProps> = ({
   side = "right",
   title,
   children,
+  className,
+  style,
+  ...rest
 }) => {
   if (!open) return null;
 
@@ -98,8 +103,10 @@ export const Drawer: React.FC<DrawerProps> = ({
       />
       <div
         role="dialog"
-        style={{ ...basePanelStyle, ...sidePanelStyles[side] }}
+        className={className}
+        style={{ ...basePanelStyle, ...sidePanelStyles[side], ...style }}
         data-testid="drawer-panel"
+        {...rest}
       >
         {side === "bottom" && <div style={dragHandleStyle} />}
         <div style={headerStyle}>

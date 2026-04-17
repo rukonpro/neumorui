@@ -20,6 +20,8 @@ interface CommandProps {
   placeholder?: string;
   emptyMessage?: string;
   title?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const groupBy = <T, K extends string>(arr: T[], key: (item: T) => K | undefined) => {
@@ -47,6 +49,9 @@ export const Command: React.FC<CommandProps> = ({
   placeholder = "Type a command or search…",
   emptyMessage = "No results found.",
   title = "Command palette",
+  className,
+  style,
+  ...rest
 }) => {
   const grouped = groupBy(items, (i) => i.group as string | undefined);
 
@@ -58,12 +63,14 @@ export const Command: React.FC<CommandProps> = ({
           style={{ background: "rgba(0,0,0,0.35)" }}
         />
         <RadixDialog.Content
-          className="neu-scale-in fixed left-1/2 top-[20%] -translate-x-1/2 z-50 w-full max-w-lg outline-none"
+          className={cn("neu-scale-in fixed left-1/2 top-[20%] -translate-x-1/2 z-50 w-full max-w-lg outline-none", className)}
           style={{
             background: "var(--neu-bg)",
             borderRadius: "20px",
             boxShadow: "var(--neu-shadow-raised-lg)",
+            ...style,
           }}
+          {...rest}
         >
           <RadixDialog.Title className="sr-only">{title}</RadixDialog.Title>
           <Cmdk label={title} className="flex flex-col overflow-hidden rounded-[inherit]">

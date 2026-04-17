@@ -28,6 +28,8 @@ interface DropdownMenuProps {
   items: DropdownEntry[];
   align?: "start" | "center" | "end";
   side?: "top" | "right" | "bottom" | "left";
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -35,6 +37,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   items,
   align = "end",
   side = "bottom",
+  className,
+  style,
+  ...rest
 }) => {
   return (
     <RadixMenu.Root>
@@ -44,12 +49,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
           align={align}
           side={side}
           sideOffset={8}
-          className="z-50 min-w-[200px] p-1.5 outline-none animate-[neu-slide-down_0.2s_cubic-bezier(0.34,1.2,0.64,1)]"
+          className={cn("z-50 min-w-[200px] p-1.5 outline-none animate-[neu-slide-down_0.2s_cubic-bezier(0.34,1.2,0.64,1)]", className)}
           style={{
             background: "var(--neu-bg)",
             borderRadius: "16px",
             boxShadow: "var(--neu-shadow-raised-lg)",
+            ...style,
           }}
+          {...rest}
         >
           {items.map((entry, i) => {
             if (entry.type === "separator") {

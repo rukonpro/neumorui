@@ -9,6 +9,8 @@ interface ModalProps {
   description?: string;
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const sizeWidths = { sm: "380px", md: "448px", lg: "512px" };
@@ -21,6 +23,8 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   children,
   size = "md",
+  className,
+  style,
 }) => {
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
@@ -37,6 +41,7 @@ export const Modal: React.FC<ModalProps> = ({
           }}
         />
         <RadixDialog.Content
+          className={className}
           style={{
             position: "fixed",
             left: "50%",
@@ -51,6 +56,7 @@ export const Modal: React.FC<ModalProps> = ({
             borderRadius: "24px",
             boxShadow: "var(--neu-shadow-raised-lg)",
             animation: "fadeUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
+            ...style,
           }}
         >
           {title && (

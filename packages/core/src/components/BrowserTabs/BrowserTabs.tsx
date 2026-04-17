@@ -28,6 +28,7 @@ export const BrowserTabs: React.FC<BrowserTabsProps> = ({
   onTabAdd,
   className,
   style,
+  ...rest
 }) => {
   const [hoveredTab, setHoveredTab] = React.useState<string | null>(null);
 
@@ -42,6 +43,7 @@ export const BrowserTabs: React.FC<BrowserTabsProps> = ({
         ...style,
       }}
       data-testid="browser-tabs"
+      {...rest}
     >
       {tabs.map((tab) => {
         const isActive = tab.id === activeTab;

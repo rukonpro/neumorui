@@ -86,9 +86,9 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
   );
 };
 
-export const TreeView: React.FC<TreeViewProps> = ({ nodes, className, style }) => {
+export const TreeView: React.FC<TreeViewProps> = ({ nodes, className, style, ...rest }) => {
   return (
-    <div className={className} style={{ fontSize: "13px", ...style }} data-testid="tree-view">
+    <div className={className} style={{ fontSize: "13px", ...style }} data-testid="tree-view" {...rest}>
       {nodes.map((node, i) => (
         <TreeNodeItem key={i} node={node} />
       ))}

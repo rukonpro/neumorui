@@ -37,6 +37,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   input,
   className,
   style,
+  ...rest
 }) => {
   const [inputValue, setInputValue] = React.useState("");
   const isDanger = variant === "danger";
@@ -69,6 +70,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         ...style,
       }}
       data-testid="confirm-dialog"
+      {...rest}
     >
       <p
         style={{

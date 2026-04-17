@@ -26,6 +26,7 @@ export const CookieConsent: React.FC<CookieConsentProps> = ({
   onCustomize,
   className,
   style,
+  ...rest
 }) => {
   const [toggles, setToggles] = React.useState<Record<string, boolean>>(() => {
     const init: Record<string, boolean> = {};
@@ -60,6 +61,7 @@ export const CookieConsent: React.FC<CookieConsentProps> = ({
         background: "var(--neu-bg)",
         ...style,
       }}
+      {...rest}
     >
       {/* Header */}
       <div

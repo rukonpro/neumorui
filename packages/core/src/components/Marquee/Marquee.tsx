@@ -23,6 +23,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
   pauseOnHover = false,
   className,
   style,
+  ...rest
 }) => {
   const [hovered, setHovered] = React.useState(false);
 
@@ -40,6 +41,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
         }}
         onMouseEnter={() => pauseOnHover && setHovered(true)}
         onMouseLeave={() => pauseOnHover && setHovered(false)}
+        {...rest}
       >
         <div
           data-testid="marquee-track"

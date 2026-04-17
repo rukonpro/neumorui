@@ -18,6 +18,7 @@ export const Heatmap: React.FC<HeatmapProps> = ({
   colors = "108, 126, 248",
   className,
   style,
+  ...rest
 }) => {
   const flat: number[] = Array.isArray(data[0])
     ? (data as number[][]).flat()
@@ -39,7 +40,7 @@ export const Heatmap: React.FC<HeatmapProps> = ({
   };
 
   return (
-    <div className={className} style={style}>
+    <div className={className} style={style} {...rest}>
       <div
         data-testid="heatmap-grid"
         style={{

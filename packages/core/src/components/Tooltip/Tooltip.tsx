@@ -6,6 +6,8 @@ interface TooltipProps {
   children: React.ReactNode;
   side?: "top" | "right" | "bottom" | "left";
   delayDuration?: number;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Tooltip: React.FC<TooltipProps> = ({
@@ -13,6 +15,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
   children,
   side = "top",
   delayDuration = 300,
+  className,
+  style,
 }) => {
   return (
     <RadixTooltip.Provider delayDuration={delayDuration}>
@@ -22,6 +26,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
           <RadixTooltip.Content
             side={side}
             sideOffset={8}
+            className={className}
             style={{
               fontSize: "12px",
               fontWeight: 700,
@@ -32,6 +37,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
               boxShadow: "var(--neu-shadow-raised-sm)",
               color: "var(--neu-text-primary)",
               animation: "neu-slide-down 0.15s cubic-bezier(0.34, 1.2, 0.64, 1)",
+              ...style,
             }}
           >
             {content}

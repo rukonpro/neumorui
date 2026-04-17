@@ -13,6 +13,8 @@ interface AccordionProps {
   type?: "single" | "multiple";
   defaultValue?: string | string[];
   collapsible?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const Chevron = () => (
@@ -39,6 +41,8 @@ export const Accordion: React.FC<AccordionProps> = ({
   type = "single",
   defaultValue,
   collapsible = true,
+  className,
+  style,
 }) => {
   const rootProps =
     type === "single"
@@ -55,7 +59,8 @@ export const Accordion: React.FC<AccordionProps> = ({
   return (
     <RadixAccordion.Root
       {...rootProps}
-      style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}
+      className={className}
+      style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%", ...style }}
     >
       {items.map((item) => (
         <RadixAccordion.Item

@@ -18,6 +18,7 @@ export const Hero: React.FC<HeroProps> = ({
   backgroundGradient = "linear-gradient(135deg, #c8d0fd 0%, #f9c9c4 50%, #c8f3e4 100%)",
   className,
   style,
+  ...rest
 }) => {
   return (
     <div
@@ -29,6 +30,7 @@ export const Hero: React.FC<HeroProps> = ({
         boxShadow: "var(--neu-shadow-raised-lg)",
         ...style,
       }}
+      {...rest}
     >
       <div
         style={{

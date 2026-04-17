@@ -19,6 +19,7 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
   icon = "+",
   className,
   style,
+  ...rest
 }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -31,6 +32,7 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
         alignItems: "flex-end",
         ...style,
       }}
+      {...rest}
     >
       {/* Actions */}
       {open && (

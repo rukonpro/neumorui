@@ -9,6 +9,8 @@ interface StatsCardProps {
   };
   color?: string;
   description?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const containerStyle: React.CSSProperties = {
@@ -39,6 +41,9 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   trend,
   color,
   description,
+  className,
+  style,
+  ...rest
 }) => {
   const [hovered, setHovered] = React.useState(false);
 
@@ -60,14 +65,17 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 
   return (
     <div
+      className={className}
       style={{
         ...containerStyle,
         transform: hovered ? "translateY(-3px)" : undefined,
         boxShadow: hovered ? "var(--neu-shadow-raised-lg)" : containerStyle.boxShadow,
+        ...style,
       }}
       data-testid="stats-card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      {...rest}
     >
       <div style={labelStyle}>{label}</div>
       <div style={valueStyle}>{value}</div>

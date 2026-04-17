@@ -22,6 +22,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
   items,
   className,
   style,
+  ...rest
 }) => {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const closeTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -52,6 +53,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
           ...style,
         }}
         role="menubar"
+        {...rest}
       >
         {items.map((item, i) => (
           <div

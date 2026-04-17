@@ -12,6 +12,8 @@ interface SidebarProps {
   items: SidebarItem[];
   logo?: React.ReactNode;
   brand?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const containerStyle: React.CSSProperties = {
@@ -80,7 +82,7 @@ const defaultLogoStyle: React.CSSProperties = {
   fontWeight: 900,
 };
 
-export const Sidebar: React.FC<SidebarProps> = ({ items, logo, brand }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ items, logo, brand, className, style, ...rest }) => {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
 
   // Group items
@@ -98,7 +100,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ items, logo, brand }) => {
   });
 
   return (
-    <div style={containerStyle} role="navigation" data-testid="sidebar">
+    <div className={className} style={{ ...containerStyle, ...style }} role="navigation" data-testid="sidebar" {...rest}>
       {(logo || brand) && (
         <div style={headerStyle}>
           {logo || <div style={defaultLogoStyle}>N</div>}

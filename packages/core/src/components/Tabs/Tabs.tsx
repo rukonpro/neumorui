@@ -12,11 +12,13 @@ interface TabsProps {
   tabs: Tab[];
   defaultValue?: string;
   variant?: "pill" | "underline";
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill" }) => {
+export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill", className, style }) => {
   return (
-    <RadixTabs.Root defaultValue={defaultValue ?? tabs[0]?.value}>
+    <RadixTabs.Root defaultValue={defaultValue ?? tabs[0]?.value} className={className} style={style}>
       <RadixTabs.List
         style={{
           display: "flex",

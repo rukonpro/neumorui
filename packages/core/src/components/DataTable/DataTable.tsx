@@ -21,6 +21,7 @@ interface DataTableProps<TData> {
   showPagination?: boolean;
   onRowClick?: (row: TData) => void;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const SortIcon = ({ dir }: { dir: false | "asc" | "desc" }) => (
@@ -47,7 +48,9 @@ export function DataTable<TData>({
   showPagination = true,
   onRowClick,
   className,
-}: DataTableProps<TData>) {
+  style,
+  ...rest
+}: DataTableProps<TData> & React.HTMLAttributes<HTMLDivElement>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pageIndex, setPageIndex] = React.useState(0);
 
@@ -76,7 +79,7 @@ export function DataTable<TData>({
   const rows = table.getRowModel().rows;
 
   return (
-    <div className={cn("w-full flex flex-col gap-4", className)}>
+    <div className={cn("w-full flex flex-col gap-4", className)} style={style} {...rest}>
       <div
         className="w-full overflow-hidden"
         style={{

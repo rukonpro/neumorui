@@ -8,6 +8,8 @@ interface SwitchProps {
   description?: string;
   disabled?: boolean;
   id?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Switch: React.FC<SwitchProps> = ({
@@ -17,11 +19,14 @@ export const Switch: React.FC<SwitchProps> = ({
   description,
   disabled,
   id,
+  className,
+  style,
+  ...rest
 }) => {
   const switchId = id || label?.toLowerCase().replace(/\s/g, "-");
 
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px" }}>
+    <div className={className} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", ...style }} {...rest}>
       {(label || description) && (
         <div>
           {label && (

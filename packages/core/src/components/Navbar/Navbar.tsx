@@ -11,6 +11,8 @@ interface NavbarProps {
   brand?: string;
   links: NavLink[];
   actions?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const containerStyle: React.CSSProperties = {
@@ -75,11 +77,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   brand,
   links,
   actions,
+  className,
+  style,
+  ...rest
 }) => {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
 
   return (
-    <nav style={containerStyle} role="navigation">
+    <nav className={className} style={{ ...containerStyle, ...style }} role="navigation" {...rest}>
       <div style={brandStyle}>
         {logo || <div style={defaultLogoStyle}>N</div>}
         {brand && <span style={brandTextStyle}>{brand}</span>}

@@ -18,11 +18,12 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
   plans,
   className,
   style,
+  ...rest
 }) => {
   const [hoveredRow, setHoveredRow] = React.useState<number | null>(null);
 
   return (
-    <div className={className} style={{ overflowX: "auto", ...style }} data-testid="comparison-table">
+    <div className={className} style={{ overflowX: "auto", ...style }} data-testid="comparison-table" {...rest}>
       <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: 0 }}>
         <thead>
           <tr>

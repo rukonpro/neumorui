@@ -8,6 +8,8 @@ interface PopoverProps {
   align?: "start" | "center" | "end";
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Popover: React.FC<PopoverProps> = ({
@@ -17,6 +19,9 @@ export const Popover: React.FC<PopoverProps> = ({
   align = "center",
   open,
   onOpenChange,
+  className,
+  style,
+  ...rest
 }) => {
   return (
     <RadixPopover.Root open={open} onOpenChange={onOpenChange}>
@@ -26,7 +31,7 @@ export const Popover: React.FC<PopoverProps> = ({
           side={side}
           align={align}
           sideOffset={8}
-          className="z-50 outline-none"
+          className={["z-50 outline-none", className].filter(Boolean).join(" ")}
           style={{
             padding: "14px",
             background: "var(--neu-bg)",
@@ -35,7 +40,9 @@ export const Popover: React.FC<PopoverProps> = ({
             color: "var(--neu-text-primary)",
             minWidth: 200,
             animation: "neu-slide-down 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)",
+            ...style,
           }}
+          {...rest}
         >
           {children}
           <RadixPopover.Arrow style={{ fill: "var(--neu-bg)" }} />

@@ -107,7 +107,7 @@ const KanbanCard: React.FC<{ item: KanbanItem }> = ({ item }) => {
   );
 };
 
-export const KanbanBoard: React.FC<KanbanBoardProps> = ({ columns, className, style }) => {
+export const KanbanBoard: React.FC<KanbanBoardProps> = ({ columns, className, style, ...rest }) => {
   return (
     <div
       className={className}
@@ -117,6 +117,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ columns, className, st
         gap: "12px",
         ...style,
       }}
+      {...rest}
     >
       {columns.map((col) => (
         <div

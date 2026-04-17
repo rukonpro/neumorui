@@ -59,9 +59,10 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   onLoadMore,
   className,
   style,
+  ...rest
 }) => {
   return (
-    <div className={className} style={style} data-testid="activity-feed">
+    <div className={className} style={style} data-testid="activity-feed" {...rest}>
       <div
         style={{
           display: "flex",

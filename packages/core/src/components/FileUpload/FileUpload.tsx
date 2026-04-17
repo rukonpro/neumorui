@@ -19,6 +19,8 @@ interface FileUploadProps {
   label?: string;
   hint?: string;
   disabled?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const formatBytes = (bytes: number) => {
@@ -78,6 +80,9 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   label = "Drop files here or click to browse",
   hint,
   disabled,
+  className,
+  style,
+  ...rest
 }) => {
   const [internal, setInternal] = useState<UploadedFile[]>([]);
   const files = value ?? internal;
@@ -124,7 +129,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 w-full">
+    <div className={cn("flex flex-col gap-3 w-full", className)} style={style} {...rest}>
       <button
         type="button"
         onClick={() => !disabled && inputRef.current?.click()}

@@ -17,6 +17,8 @@ interface RadioGroupProps {
   label?: string;
   orientation?: "horizontal" | "vertical";
   disabled?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const RadioGroup: React.FC<RadioGroupProps> = ({
@@ -27,9 +29,12 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   label,
   orientation = "vertical",
   disabled,
+  className,
+  style,
+  ...rest
 }) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className={cn("flex flex-col gap-2", className)} style={style} {...rest}>
       {label && (
         <p
           className="text-xs font-semibold uppercase tracking-widest"

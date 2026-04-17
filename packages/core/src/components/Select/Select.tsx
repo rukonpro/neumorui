@@ -14,6 +14,8 @@ interface SelectProps {
   placeholder?: string;
   label?: string;
   disabled?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -23,9 +25,12 @@ export const Select: React.FC<SelectProps> = ({
   placeholder = "Select...",
   label,
   disabled,
+  className,
+  style,
+  ...rest
 }) => {
   return (
-    <div className="w-full">
+    <div className={["w-full", className].filter(Boolean).join(" ")} style={style} {...rest}>
       {label && (
         <p
           className="text-xs font-semibold uppercase tracking-widest mb-1.5"

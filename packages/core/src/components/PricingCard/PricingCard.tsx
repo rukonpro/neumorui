@@ -171,6 +171,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
   onCtaClick,
   className,
   style,
+  ...rest
 }) => {
   return (
     <div
@@ -182,6 +183,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
         gap: "14px",
         ...style,
       }}
+      {...rest}
     >
       {plans.map((plan, idx) => (
         <PlanCard key={idx} plan={plan} idx={idx} onCtaClick={onCtaClick} />

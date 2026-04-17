@@ -24,6 +24,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   trend,
   className,
   style,
+  ...rest
 }) => {
   const maxValue = Math.max(...data.map((d) => d.value), 1);
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
@@ -31,7 +32,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   React.useEffect(() => { setMounted(true); }, []);
 
   return (
-    <div className={className} style={style}>
+    <div className={className} style={style} {...rest}>
       {(title || trend) && (
         <div
           style={{

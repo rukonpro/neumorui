@@ -19,6 +19,8 @@ interface ComboboxProps {
   searchPlaceholder?: string;
   emptyMessage?: string;
   disabled?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const ChevronIcon = () => (
@@ -48,12 +50,15 @@ export const Combobox: React.FC<ComboboxProps> = ({
   searchPlaceholder = "Search...",
   emptyMessage = "No option found.",
   disabled,
+  className,
+  style,
+  ...rest
 }) => {
   const [open, setOpen] = useState(false);
   const selected = options.find((o) => o.value === value);
 
   return (
-    <div className="w-full">
+    <div className={cn("w-full", className)} style={style} {...rest}>
       {label && (
         <p
           className="text-xs font-semibold uppercase tracking-widest mb-1.5"

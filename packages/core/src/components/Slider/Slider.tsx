@@ -11,6 +11,8 @@ interface SliderProps {
   label?: string;
   showValue?: boolean;
   disabled?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Slider: React.FC<SliderProps> = ({
@@ -23,9 +25,11 @@ export const Slider: React.FC<SliderProps> = ({
   label,
   showValue = true,
   disabled,
+  className,
+  style,
 }) => {
   return (
-    <div style={{ width: "100%" }}>
+    <div className={className} style={{ width: "100%", ...style }}>
       {(label || showValue) && (
         <div
           style={{

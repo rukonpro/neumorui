@@ -12,6 +12,8 @@ interface BottomNavProps {
   items: BottomNavItem[];
   activeIndex?: number;
   onActiveChange?: (index: number) => void;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const containerStyle: React.CSSProperties = {
@@ -74,11 +76,14 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   items,
   activeIndex,
   onActiveChange,
+  className,
+  style,
+  ...rest
 }) => {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
 
   return (
-    <div style={containerStyle} role="navigation" data-testid="bottom-nav">
+    <div className={className} style={{ ...containerStyle, ...style }} role="navigation" data-testid="bottom-nav" {...rest}>
       {items.map((item, i) => {
         if (item.isCreate) {
           return (

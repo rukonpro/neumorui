@@ -19,6 +19,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   interval = 4000,
   className,
   style,
+  ...rest
 }) => {
   const [current, setCurrent] = React.useState(0);
   const timerRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
@@ -61,7 +62,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   };
 
   return (
-    <div className={className} style={style}>
+    <div className={className} style={style} {...rest}>
       <div
         style={{
           position: "relative",

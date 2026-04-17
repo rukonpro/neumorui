@@ -24,6 +24,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
   centerValue,
   className,
   style,
+  ...rest
 }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -42,6 +43,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
         gap: "20px",
         ...style,
       }}
+      {...rest}
     >
       <div style={{ position: "relative", width: size, height: size, flexShrink: 0 }}>
         <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
