@@ -3,15 +3,15 @@ import type { Preview } from "@storybook/react";
 import { NeuProvider } from "neumorui";
 import "neumorui/styles";
 
-const CanvasFiller: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ThemeCanvas: React.FC<{ theme: "light" | "dark"; children: React.ReactNode }> = ({
+  theme,
+  children,
+}) => {
   useEffect(() => {
-    const prev = document.body.style.background;
-    document.body.style.background = "var(--neu-bg)";
+    document.documentElement.setAttribute("data-theme", theme);
     document.documentElement.style.background = "var(--neu-bg)";
-    return () => {
-      document.body.style.background = prev;
-    };
-  }, []);
+    document.body.style.background = "var(--neu-bg)";
+  }, [theme]);
 
   return (
     <div
@@ -24,6 +24,7 @@ const CanvasFiller: React.FC<{ children: React.ReactNode }> = ({ children }) => 
         alignItems: "center",
         justifyContent: "center",
         boxSizing: "border-box",
+        transition: "background 0.35s ease",
       }}
     >
       {children}
@@ -56,9 +57,9 @@ const preview: Preview = {
       const theme = (context.globals.theme as "light" | "dark") ?? "light";
       return (
         <NeuProvider key={theme} defaultTheme={theme}>
-          <CanvasFiller>
+          <ThemeCanvas theme={theme}>
             <Story />
-          </CanvasFiller>
+          </ThemeCanvas>
         </NeuProvider>
       );
     },

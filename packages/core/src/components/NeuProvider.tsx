@@ -14,7 +14,7 @@ interface NeuContextValue {
 export const NeuContext = createContext<NeuContextValue | null>(null);
 
 const accentMap: Record<AccentColor, string> = {
-  violet: "#7c6ff7",
+  violet: "#6c7ef8",
   blue: "#5b9ee0",
   teal: "#4dbfa0",
   rose: "#e07090",
