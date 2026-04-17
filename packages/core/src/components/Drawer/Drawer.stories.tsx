@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Drawer } from "./Drawer";
+import { Button } from "../Button/Button";
 
 const meta: Meta<typeof Drawer> = {
   title: "Components/Drawer",
@@ -22,9 +23,13 @@ export const Default: Story = {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <button onClick={() => setOpen(true)}>Open Drawer</button>
+        <Button variant="primary" onClick={() => setOpen(true)}>
+          Open Drawer
+        </Button>
         <Drawer open={open} onOpenChange={setOpen} title="Settings">
-          <p>Drawer content goes here.</p>
+          <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)", lineHeight: 1.6 }}>
+            This is a right drawer. Commonly used for shopping carts, details panels, or activity feeds.
+          </p>
         </Drawer>
       </>
     );
@@ -36,9 +41,13 @@ export const LeftSide: Story = {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <button onClick={() => setOpen(true)}>Open Left Drawer</button>
+        <Button variant="raised" onClick={() => setOpen(true)}>
+          ← Open Left Drawer
+        </Button>
         <Drawer open={open} onOpenChange={setOpen} side="left" title="Menu">
-          <p>Left drawer content.</p>
+          <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)", lineHeight: 1.6 }}>
+            This is a left drawer. Great for navigation panels, settings, or filters.
+          </p>
         </Drawer>
       </>
     );
@@ -50,9 +59,21 @@ export const BottomSheet: Story = {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <button onClick={() => setOpen(true)}>Open Bottom Sheet</button>
+        <Button variant="raised" onClick={() => setOpen(true)}>
+          ↓ Open Bottom Sheet
+        </Button>
         <Drawer open={open} onOpenChange={setOpen} side="bottom" title="Actions">
-          <p>Bottom sheet content.</p>
+          <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)", lineHeight: 1.6, marginBottom: "16px" }}>
+            A bottom sheet for mobile-first interactions.
+          </p>
+          <div style={{ display: "flex", gap: "8px" }}>
+            <Button variant="primary" style={{ flex: 1 }} onClick={() => setOpen(false)}>
+              Confirm
+            </Button>
+            <Button variant="raised" style={{ flex: 1 }} onClick={() => setOpen(false)}>
+              Cancel
+            </Button>
+          </div>
         </Drawer>
       </>
     );
