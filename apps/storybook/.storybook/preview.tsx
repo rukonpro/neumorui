@@ -16,19 +16,18 @@ const ThemeCanvas: React.FC<{ theme: "light" | "dark"; children: React.ReactNode
   return (
     <div
       style={{
-        padding: "56px 32px",
+        padding: "40px 32px",
         background: "var(--neu-bg)",
         color: "var(--neu-text-primary)",
         minHeight: "100vh",
         width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         boxSizing: "border-box",
         transition: "background 0.35s ease, color 0.35s ease",
       }}
     >
-      {children}
+      <div style={{ maxWidth: "960px", margin: "0 auto", width: "100%" }}>
+        {children}
+      </div>
     </div>
   );
 };
