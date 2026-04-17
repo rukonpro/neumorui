@@ -64,4 +64,47 @@ export { Accordion } from "./components/Accordion/Accordion";
 // Animation
 export { Reveal } from "./components/Reveal/Reveal";
 
+// Drawer / Sheet
+export { Drawer } from "./components/Drawer/Drawer";
+
+// Stepper
+export { Stepper } from "./components/Stepper/Stepper";
+
+// ContextMenu
+export { ContextMenu } from "./components/ContextMenu/ContextMenu";
+
+// Navbar
+export { Navbar } from "./components/Navbar/Navbar";
+
+// Sidebar
+export { Sidebar } from "./components/Sidebar/Sidebar";
+
+// BottomNav
+export { BottomNav } from "./components/BottomNav/BottomNav";
+
+// StatsCard
+export { StatsCard } from "./components/StatsCard/StatsCard";
+
+// Data visualization
+export { BarChart } from "./components/BarChart/BarChart";
+export type { BarChartDataItem } from "./components/BarChart/BarChart";
+export { DonutChart } from "./components/DonutChart/DonutChart";
+export type { DonutSegment } from "./components/DonutChart/DonutChart";
+
+// Layout (batch 2)
+export { Marquee, MarqueeItem } from "./components/Marquee/Marquee";
+export { Carousel } from "./components/Carousel/Carousel";
+export type { CarouselSlide } from "./components/Carousel/Carousel";
+
+// Navigation (batch 2)
+export { SpeedDial } from "./components/SpeedDial/SpeedDial";
+export type { SpeedDialAction } from "./components/SpeedDial/SpeedDial";
+export { MegaMenu } from "./components/MegaMenu/MegaMenu";
+export type { MegaMenuItem } from "./components/MegaMenu/MegaMenu";
+
+// Feedback (batch 2)
+export { AnnouncementBar } from "./components/AnnouncementBar/AnnouncementBar";
+export { CookieConsent } from "./components/CookieConsent/CookieConsent";
+export type { CookieOption } from "./components/CookieConsent/CookieConsent";
+
 export { cn } from "./utils/cn";
