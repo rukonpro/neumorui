@@ -39,7 +39,7 @@ export const Avatar: React.FC<AvatarProps> = ({
     <div className={cn("relative inline-flex shrink-0", className)} {...props}>
       <div
         className={cn(
-          "rounded-full flex items-center justify-center overflow-hidden font-semibold",
+          "rounded-full flex items-center justify-center overflow-hidden font-extrabold",
           sizeClasses[size]
         )}
         style={{

@@ -13,12 +13,12 @@ interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   animate?: boolean;
 }
 
-const trackHeight = { sm: "h-1.5", md: "h-2.5", lg: "h-[10px]" };
+const trackHeight = { sm: "h-1.5", md: "h-[10px]", lg: "h-3" };
 
 const fillColors: Record<ProgressVariant, string> = {
-  default: "linear-gradient(90deg, var(--neu-accent-light), var(--neu-accent-dark))",
-  success: "linear-gradient(90deg, var(--neu-success-light), var(--neu-success-dark))",
-  danger: "linear-gradient(90deg, var(--neu-danger-light), var(--neu-danger-dark))",
+  default: "linear-gradient(90deg, #9aa2fb, #5a6cf5)",
+  success: "linear-gradient(90deg, #78dbb8, #3db88a)",
+  danger: "linear-gradient(90deg, #fa9080, #f5604a)",
   warning: "linear-gradient(90deg, var(--neu-warning-light), var(--neu-warning-dark))",
 };
 

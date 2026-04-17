@@ -32,12 +32,12 @@ export const Modal: React.FC<ModalProps> = ({
       {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
       <RadixDialog.Portal>
         <RadixDialog.Overlay
-          className="neu-dialog-overlay fixed inset-0 z-40 backdrop-blur-sm"
-          style={{ background: "rgba(0,0,0,0.3)" }}
+          className="neu-dialog-overlay fixed inset-0 z-40"
+          style={{ background: "rgba(0,0,0,0.25)", backdropFilter: "blur(4px)" }}
         />
         <RadixDialog.Content
           className={cn(
-            "neu-dialog-content fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full p-6 outline-none",
+            "neu-dialog-content fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full p-[1.75rem] outline-none",
             sizeClasses[size]
           )}
           style={{

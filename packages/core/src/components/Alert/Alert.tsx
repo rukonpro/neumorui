@@ -43,8 +43,9 @@ export const Alert: React.FC<AlertProps> = ({
   return (
     <div
       role="alert"
-      className={cn("flex items-start gap-3 px-4 py-3 rounded-neu", className)}
+      className={cn("flex items-start gap-3 rounded-[14px]", className)}
       style={{
+        padding: "12px 14px",
         background: bg,
         boxShadow: "var(--neu-shadow-raised-sm)",
         ...style,

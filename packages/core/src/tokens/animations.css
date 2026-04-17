@@ -89,21 +89,21 @@
 }
 
 @keyframes neu-scale-in {
-  from { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.94); }
   to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 @keyframes neu-scale-out {
   from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  to { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+  to { opacity: 0; transform: translate(-50%, -48%) scale(0.94); }
 }
 .neu-scale-in {
-  animation: neu-scale-in 180ms var(--ease-out) both;
+  animation: neu-scale-in 200ms ease both;
 }
 [data-state="open"].neu-dialog-content {
-  animation: neu-scale-in 180ms var(--ease-out);
+  animation: neu-scale-in 200ms ease;
 }
 [data-state="closed"].neu-dialog-content {
-  animation: neu-scale-out 140ms var(--ease-out);
+  animation: neu-scale-out 140ms ease;
 }
 [data-state="open"].neu-dialog-overlay {
   animation: fadeIn 160ms ease;

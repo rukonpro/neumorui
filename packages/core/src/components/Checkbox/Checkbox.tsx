@@ -36,7 +36,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         style={{
           background: isChecked ? "var(--neu-gradient-primary)" : "var(--neu-bg)",
           boxShadow: isChecked
-            ? "3px 3px 9px var(--neu-accent-glow), -2px -2px 7px var(--neu-shadow-light)"
+            ? "3px 3px 9px rgba(108,126,248,.4), -2px -2px 7px var(--neu-shadow-light)"
             : "var(--neu-shadow-inset-sm)",
         }}
       >

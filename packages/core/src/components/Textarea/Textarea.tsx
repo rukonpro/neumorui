@@ -32,7 +32,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           rows={rows}
           className={cn(
             "w-full font-[inherit] text-sm font-semibold outline-none border-none rounded-neu",
-            "py-[13px] px-4 neu-inset neu-transition leading-relaxed",
+            "py-[13px] px-4 neu-inset neu-transition",
             "placeholder:font-medium",
             "focus:ring-[3px] focus:ring-[var(--neu-accent)]/20",
             error && "ring-2 ring-[var(--neu-danger)]/40",
@@ -41,6 +41,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           style={{
             background: "var(--neu-bg)",
             color: "var(--neu-text-primary)",
+            minHeight: "90px",
+            lineHeight: 1.6,
             resize,
           }}
           {...props}

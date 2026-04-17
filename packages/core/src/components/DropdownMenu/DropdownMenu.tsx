@@ -47,7 +47,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
           className="z-50 min-w-[200px] p-1.5 outline-none animate-[fadeUp_0.18s_ease]"
           style={{
             background: "var(--neu-bg)",
-            borderRadius: "var(--neu-radius-lg)",
+            borderRadius: "16px",
             boxShadow: "var(--neu-shadow-raised-lg)",
           }}
         >
@@ -56,10 +56,11 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               return (
                 <RadixMenu.Separator
                   key={i}
-                  className="h-px my-1"
+                  className="h-px"
                   style={{
-                    background:
-                      "linear-gradient(90deg, transparent, var(--neu-shadow-dark), transparent)",
+                    background: "var(--neu-text-muted)",
+                    opacity: 0.2,
+                    margin: "4px 0",
                   }}
                 />
               );
@@ -81,11 +82,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 disabled={entry.disabled}
                 onSelect={entry.onSelect}
                 className={cn(
-                  "flex items-center gap-2.5 px-3 py-2 text-sm rounded-neu cursor-pointer outline-none neu-transition",
+                  "flex items-center gap-2.5 rounded-[14px] cursor-pointer outline-none neu-transition",
                   "data-[highlighted]:shadow-neu-inset-sm",
                   "disabled:opacity-50 disabled:cursor-not-allowed"
                 )}
                 style={{
+                  padding: "9px 14px",
+                  fontSize: "13px",
+                  fontWeight: 700,
                   color: entry.danger ? "var(--neu-danger)" : "var(--neu-text-primary)",
                 }}
               >

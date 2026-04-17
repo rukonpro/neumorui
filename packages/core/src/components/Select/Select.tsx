@@ -70,7 +70,7 @@ export const Select: React.FC<SelectProps> = ({
                   key={opt.value}
                   value={opt.value}
                   disabled={opt.disabled}
-                  className="px-4 py-2.5 text-sm rounded-neu cursor-pointer outline-none neu-transition data-[highlighted]:shadow-neu-inset disabled:opacity-50"
+                  className="px-4 py-2.5 text-sm rounded-neu cursor-pointer outline-none neu-transition data-[highlighted]:shadow-neu-inset-sm disabled:opacity-50"
                   style={{ color: "var(--neu-text-primary)" }}
                 >
                   <RadixSelect.ItemText>{opt.label}</RadixSelect.ItemText>

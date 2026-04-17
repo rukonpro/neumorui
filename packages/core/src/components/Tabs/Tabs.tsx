@@ -20,9 +20,10 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill"
     <RadixTabs.Root defaultValue={defaultValue ?? tabs[0]?.value}>
       <RadixTabs.List
         className={cn(
-          "flex gap-1 p-1 rounded-neu-lg",
+          "flex p-1 rounded-[18px]",
           variant === "pill" && "neu-inset"
         )}
+        style={{ gap: "4px" }}
       >
         {tabs.map((tab) => (
           <RadixTabs.Trigger
@@ -30,12 +31,15 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill"
             value={tab.value}
             disabled={tab.disabled}
             className={cn(
-              "flex-1 px-4 py-2 text-sm font-bold rounded-neu neu-transition cursor-pointer",
+              "flex-1 font-bold neu-transition cursor-pointer",
               "bg-transparent border-0 outline-none disabled:opacity-50 disabled:cursor-not-allowed",
               "hover:text-[var(--neu-accent)]",
-              "data-[state=active]:neu-raised-sm data-[state=active]:!text-[var(--neu-accent)]"
+              "data-[state=active]:shadow-neu-inset-sm data-[state=active]:!text-[var(--neu-accent)]"
             )}
             style={{
+              padding: "9px 16px",
+              borderRadius: "11px",
+              fontSize: "13px",
               background: "transparent",
               color: "var(--neu-text-secondary)",
               font: "inherit",

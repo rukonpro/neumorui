@@ -152,8 +152,9 @@ export const FileUpload: React.FC<FileUploadProps> = ({
             ? "var(--neu-shadow-inset)"
             : "var(--neu-shadow-inset-sm)",
           border: `2px dashed ${
-            isDragging ? "var(--neu-accent)" : "var(--neu-border)"
+            isDragging ? "var(--neu-accent)" : "var(--neu-text-muted)"
           }`,
+          borderRadius: "14px",
         }}
       >
         <span style={{ color: "var(--neu-accent)" }}>

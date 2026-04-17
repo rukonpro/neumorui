@@ -50,7 +50,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const canNext = page < total;
 
   const btnBase = cn(
-    "flex items-center justify-center font-medium rounded-neu neu-transition cursor-pointer outline-none",
+    "flex items-center justify-center font-medium rounded-[10px] neu-transition cursor-pointer outline-none",
     "focus-visible:ring-2 focus-visible:ring-[var(--neu-accent)]",
     "disabled:opacity-40 disabled:cursor-not-allowed",
     sizeClasses[size]
@@ -93,10 +93,10 @@ export const Pagination: React.FC<PaginationProps> = ({
             style={
               p === page
                 ? {
-                    background: "var(--neu-gradient-primary)",
-                    color: "#fff",
-                    boxShadow:
-                      "3px 3px 8px var(--neu-accent-glow), -2px -2px 6px var(--neu-shadow-light)",
+                    background: "var(--neu-bg)",
+                    color: "var(--neu-accent)",
+                    boxShadow: "var(--neu-shadow-inset-sm)",
+                    fontWeight: 800,
                   }
                 : {
                     background: "var(--neu-bg)",

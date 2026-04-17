@@ -42,7 +42,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 }) => {
   return (
     <nav aria-label="Breadcrumb" className={cn("flex items-center", className)} {...props}>
-      <ol className="flex items-center gap-1.5 flex-wrap text-sm">
+      <ol className="flex items-center gap-1.5 flex-wrap text-[13px]">
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
           const chipClass =

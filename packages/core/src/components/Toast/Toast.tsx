@@ -23,20 +23,20 @@ export const useToast = () => {
 };
 
 const variantStyle: Record<ToastVariant, React.CSSProperties> = {
-  default: { background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-lg)" },
+  default: { background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-sm)" },
   success: {
     background: "var(--neu-tint-success)",
-    boxShadow: "var(--neu-shadow-raised-lg)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
     color: "var(--neu-tint-success-text)",
   },
   danger: {
     background: "var(--neu-tint-danger)",
-    boxShadow: "var(--neu-shadow-raised-lg)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
     color: "var(--neu-tint-danger-text)",
   },
   warning: {
     background: "var(--neu-tint-warning)",
-    boxShadow: "var(--neu-shadow-raised-lg)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
     color: "var(--neu-tint-warning-text)",
   },
 };
@@ -62,8 +62,8 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           return (
             <div
               key={t.id}
-              className="neu-slide-down pointer-events-auto min-w-72 max-w-sm p-4 rounded-neu-lg"
-              style={variantStyle[variant]}
+              className="neu-slide-down pointer-events-auto min-w-72 max-w-sm rounded-[16px]"
+              style={{ padding: "12px 14px", ...variantStyle[variant] }}
             >
               <p
                 className="text-sm font-bold"

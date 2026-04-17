@@ -63,16 +63,15 @@ export const Slider: React.FC<SliderProps> = ({
           <RadixSlider.Range
             className="absolute h-full rounded-full"
             style={{
-              background:
-                "linear-gradient(90deg, var(--neu-accent-light), var(--neu-accent-dark))",
+              background: "linear-gradient(90deg, #9aa2fb, #5a6cf5)",
             }}
           />
         </RadixSlider.Track>
         <RadixSlider.Thumb
-          className="block w-[26px] h-[26px] rounded-full outline-none neu-transition hover:scale-110 focus-visible:scale-110"
+          className="block w-[26px] h-[26px] rounded-full outline-none neu-transition hover:scale-[1.2] focus-visible:scale-[1.2]"
           style={{
-            background: "var(--neu-gradient-primary)",
-            boxShadow: "3px 3px 9px var(--neu-accent-glow), -2px -2px 6px var(--neu-shadow-light)",
+            background: "linear-gradient(145deg, #9aa2fb, #5a6cf5)",
+            boxShadow: "3px 3px 9px rgba(108,126,248,.45), -2px -2px 6px var(--neu-shadow-light)",
           }}
         />
       </RadixSlider.Root>
