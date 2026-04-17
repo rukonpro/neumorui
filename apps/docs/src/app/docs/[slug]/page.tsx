@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Badge, Button } from "neumorui";
 import { componentDocs } from "@/data/components";
 import { ComponentPreview } from "@/components/ComponentPreview";
+import { CodeBlock } from "@/components/CodeBlock";
 
 export default function ComponentPage() {
   const params = useParams();
@@ -49,21 +50,8 @@ export default function ComponentPage() {
       </div>
 
       {/* Import */}
-      <div
-        style={{
-          padding: "10px 16px",
-          borderRadius: "12px",
-          background: "var(--neu-bg)",
-          boxShadow: "var(--neu-shadow-inset-sm)",
-          fontFamily: "'SF Mono', 'Fira Code', monospace",
-          fontSize: "12px",
-          fontWeight: 600,
-          color: "var(--neu-text-secondary)",
-          marginBottom: "24px",
-          overflowX: "auto",
-        }}
-      >
-        {`import { ${doc.name} } from "neumorui";`}
+      <div style={{ marginBottom: "24px" }}>
+        <CodeBlock code={`import { ${doc.name} } from "neumorui";`} language="tsx" />
       </div>
 
       {/* Preview + Code */}
