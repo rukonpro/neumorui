@@ -1,5 +1,11 @@
 # neumorui
 
+## 0.2.1
+
+### Patch Changes
+
+- ced70c3: Refactor ToggleGroup, RadioGroup, Spinner, Pagination, and TreeView to use inline styles matching the Button component pattern — removes unwanted borders and applies consistent neumorphic raised/inset shadow states with hover and press interactions.
+
 ## 0.2.0
 
 ### Minor Changes
