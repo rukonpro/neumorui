@@ -25,14 +25,16 @@ export const Popover: React.FC<PopoverProps> = ({
         <RadixPopover.Content
           side={side}
           align={align}
-          sideOffset={10}
-          className="z-50 p-4 outline-none animate-[fadeUp_0.2s_ease]"
+          sideOffset={8}
+          className="z-50 outline-none"
           style={{
+            padding: "14px",
             background: "var(--neu-bg)",
-            borderRadius: "var(--neu-radius-lg)",
+            borderRadius: "18px",
             boxShadow: "var(--neu-shadow-raised-lg)",
             color: "var(--neu-text-primary)",
-            minWidth: 220,
+            minWidth: 200,
+            animation: "fadeUp 0.2s ease",
           }}
         >
           {children}

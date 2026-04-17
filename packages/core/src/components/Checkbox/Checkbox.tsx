@@ -40,10 +40,10 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           opacity: disabled ? 0.5 : 1,
           background: isChecked
             ? "linear-gradient(145deg, #8490fa, #5a6cf5)"
-            : "var(--neu-bg-light, var(--neu-bg))",
+            : "var(--neu-bg)",
           boxShadow: isChecked
             ? "3px 3px 9px rgba(108,126,248,.4), -2px -2px 7px var(--neu-shadow-light)"
-            : "var(--neu-shadow-inset)",
+            : "var(--neu-shadow-inset-sm)",
           transition: "all 0.2s",
         }}
       >

@@ -61,14 +61,14 @@ export const Command: React.FC<CommandProps> = ({
           className="neu-scale-in fixed left-1/2 top-[20%] -translate-x-1/2 z-50 w-full max-w-lg outline-none"
           style={{
             background: "var(--neu-bg)",
-            borderRadius: "var(--neu-radius-xl)",
+            borderRadius: "20px",
             boxShadow: "var(--neu-shadow-raised-lg)",
           }}
         >
           <RadixDialog.Title className="sr-only">{title}</RadixDialog.Title>
           <Cmdk label={title} className="flex flex-col overflow-hidden rounded-[inherit]">
             <div
-              className="flex items-center gap-2.5 px-4 py-3"
+              className="flex items-center gap-2.5 px-4 py-[14px]"
               style={{ borderBottom: "1px solid var(--neu-border)" }}
             >
               <span style={{ color: "var(--neu-text-secondary)" }}>
@@ -104,10 +104,10 @@ export const Command: React.FC<CommandProps> = ({
                         onOpenChange?.(false);
                       }}
                       className={cn(
-                        "flex items-center gap-2.5 px-3 py-2 text-sm rounded-neu cursor-pointer neu-transition",
+                        "flex items-center gap-2.5 text-sm rounded-neu cursor-pointer neu-transition",
                         "data-[selected=true]:shadow-neu-inset-sm"
                       )}
-                      style={{ color: "var(--neu-text-primary)" }}
+                      style={{ color: "var(--neu-text-primary)", padding: "9px 14px" }}
                     >
                       {item.icon && <span className="w-4 h-4 shrink-0">{item.icon}</span>}
                       <span className="flex-1">{item.label}</span>

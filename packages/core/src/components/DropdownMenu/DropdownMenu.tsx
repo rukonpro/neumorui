@@ -82,7 +82,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 disabled={entry.disabled}
                 onSelect={entry.onSelect}
                 className={cn(
-                  "flex items-center gap-2.5 rounded-[14px] cursor-pointer outline-none neu-transition",
+                  "flex items-center gap-2.5 cursor-pointer outline-none neu-transition",
                   "data-[highlighted]:shadow-neu-inset-sm",
                   "disabled:opacity-50 disabled:cursor-not-allowed"
                 )}

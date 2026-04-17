@@ -164,11 +164,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       } else if (variant === "pill" || variant === "icon") {
         computedStyle.boxShadow = "var(--neu-shadow-inset-sm)";
         computedStyle.transform = "scale(0.97)";
-      } else if (
-        variant === "primary" ||
-        variant === "danger" ||
-        variant === "success"
-      ) {
+      } else if (variant === "primary") {
+        computedStyle.boxShadow = "inset 4px 4px 10px rgba(60,78,200,.4), inset -3px -3px 8px rgba(255,255,255,.2)";
+        computedStyle.transform = "scale(0.97)";
+      } else if (variant === "danger") {
+        computedStyle.boxShadow = "inset 4px 4px 10px rgba(200,60,40,.4), inset -3px -3px 8px rgba(255,255,255,.2)";
+        computedStyle.transform = "scale(0.97)";
+      } else if (variant === "success") {
+        computedStyle.boxShadow = "inset 4px 4px 10px rgba(30,140,100,.4), inset -3px -3px 8px rgba(255,255,255,.2)";
         computedStyle.transform = "scale(0.97)";
       }
     }

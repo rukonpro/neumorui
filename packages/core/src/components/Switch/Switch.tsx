@@ -63,10 +63,10 @@ export const Switch: React.FC<SwitchProps> = ({
           opacity: disabled ? 0.5 : 1,
           background: checked
             ? "linear-gradient(145deg, #8490fa, #5a6cf5)"
-            : "var(--neu-bg-light, var(--neu-bg))",
+            : "var(--neu-bg)",
           boxShadow: checked
             ? "inset 3px 3px 8px rgba(60,78,200,0.35), inset -2px -2px 6px rgba(255,255,255,0.3)"
-            : "var(--neu-shadow-inset)",
+            : "var(--neu-shadow-inset-sm)",
           transition: "background 0.3s, box-shadow 0.3s",
         }}
       >
