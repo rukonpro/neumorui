@@ -1476,6 +1476,8 @@ function App() {
       { name: "orientation", type: '"horizontal" | "vertical"', default: '"vertical"' },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: RadioGroup as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Choose", options: [{ value: "a", label: "Option A" }, { value: "b", label: "Option B" }] },
   },
   {
     slug: "select",
@@ -1509,6 +1511,8 @@ function App() {
       { name: "label", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: Select as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Framework", placeholder: "Choose one...", options: [{ value: "react", label: "React" }, { value: "vue", label: "Vue" }] },
   },
   {
     slug: "slider",
@@ -1575,6 +1579,8 @@ function App() {
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: ToggleGroup as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { type: "single", options: [{ value: "left", label: "Left" }, { value: "center", label: "Center" }, { value: "right", label: "Right" }] },
   },
   {
     slug: "file-upload",
@@ -1602,6 +1608,8 @@ function App() {
       { name: "hint", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: FileUpload as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Upload files", hint: "PNG, JPG up to 5MB" },
   },
 
   /* ═══ LAYOUT ═══ */
@@ -1644,6 +1652,8 @@ function App() {
       { name: "colGap", type: "number | string", default: "-" },
       { name: "minChildWidth", type: "string", default: "-" },
     ],
+    component: Grid as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { cols: 3, gap: 16 },
   },
   {
     slug: "divider",
@@ -1690,6 +1700,8 @@ function App() {
       { name: "actions", type: "ReactNode", default: "-" },
       { name: "backgroundGradient", type: "string", default: '"linear-gradient(...)"' },
     ],
+    component: Hero as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { title: "Welcome", subtitle: "Build something amazing" },
   },
   {
     slug: "pricing-card",
@@ -1729,6 +1741,8 @@ function App() {
       { name: "plans", type: "PricingPlan[]", default: "[]" },
       { name: "onCtaClick", type: "(planName: string) => void", default: "-" },
     ],
+    component: PricingCard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { plans: [{ name: "Free", price: "$0", period: "/mo", features: [{ label: "5 projects", included: true }], cta: { label: "Start" } }, { name: "Pro", price: "$19", period: "/mo", features: [{ label: "Unlimited", included: true }], cta: { label: "Upgrade" } }] },
   },
   {
     slug: "col",
@@ -1747,6 +1761,8 @@ function App() {
       { name: "start", type: "number", default: "-" },
       { name: "end", type: "number", default: "-" },
     ],
+    component: Col as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { span: 6, children: "Column content" },
   },
 
   /* ═══ DATA DISPLAY ═══ */
@@ -1876,6 +1892,8 @@ const data = [
       { name: "showPagination", type: "boolean", default: "true" },
       { name: "onRowClick", type: "(row: TData) => void", default: "-" },
     ],
+    component: DataTable as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { columns: [{ accessorKey: "name", header: "Name" }, { accessorKey: "role", header: "Role" }], data: [{ name: "Alice", role: "Engineer" }, { name: "Bob", role: "Designer" }] },
   },
   {
     slug: "stats-card",
@@ -1899,6 +1917,8 @@ const data = [
       { name: "animate", type: "boolean", default: "true" },
       { name: "duration", type: "number", default: "1200" },
     ],
+    component: StatsCard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Revenue", value: "$12,340", trend: { value: "+12%", direction: "up" } },
   },
   {
     slug: "bar-chart",
@@ -1922,6 +1942,8 @@ const data = [
       { name: "title", type: "string", default: "-" },
       { name: "trend", type: "ReactNode", default: "-" },
     ],
+    component: BarChart as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { data: [{ label: "A", value: 30 }, { label: "B", value: 60 }, { label: "C", value: 45 }] },
   },
   {
     slug: "donut-chart",
@@ -1947,6 +1969,8 @@ const data = [
       { name: "centerLabel", type: "string", default: "-" },
       { name: "centerValue", type: "string", default: "-" },
     ],
+    component: DonutChart as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { segments: [{ label: "React", value: 45, color: "#6c7ef8" }, { label: "Vue", value: 25, color: "#4dbfa0" }, { label: "Svelte", value: 20, color: "#e8a84b" }] },
   },
   {
     slug: "line-chart",
@@ -1972,6 +1996,8 @@ const data = [
       { name: "showFill", type: "boolean", default: "true" },
       { name: "animate", type: "boolean", default: "true" },
     ],
+    component: LineChart as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { data: [{ label: "Mon", value: 30 }, { label: "Tue", value: 50 }, { label: "Wed", value: 40 }] },
   },
   {
     slug: "heatmap",
@@ -1990,6 +2016,8 @@ const data = Array.from({ length: 91 }, () => Math.random());
       { name: "rows", type: "number", default: "7" },
       { name: "colors", type: "string", default: '"108, 126, 248"' },
     ],
+    component: Heatmap as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { data: Array.from({ length: 91 }, () => Math.random()), cols: 13, rows: 7 },
   },
   {
     slug: "comparison-table",
@@ -2010,6 +2038,8 @@ const data = Array.from({ length: 91 }, () => Math.random());
       { name: "features", type: "string[]", default: "[]" },
       { name: "plans", type: "ComparisonPlan[]", default: "[]" },
     ],
+    component: ComparisonTable as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { features: ["Storage", "Users", "Support"], plans: [{ name: "Free", values: ["1 GB", "1", false] }, { name: "Pro", highlight: true, values: ["50 GB", "10", true] }] },
   },
   {
     slug: "kanban-board",
@@ -2040,6 +2070,8 @@ const data = Array.from({ length: 91 }, () => Math.random());
     props: [
       { name: "columns", type: "KanbanColumn[]", default: "[]" },
     ],
+    component: KanbanBoard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { columns: [{ id: "todo", title: "To Do", items: [{ id: "1", title: "Task 1" }] }, { id: "done", title: "Done", items: [{ id: "2", title: "Task 2" }] }] },
   },
   {
     slug: "tree-view",
@@ -2064,6 +2096,8 @@ const data = Array.from({ length: 91 }, () => Math.random());
     props: [
       { name: "nodes", type: "TreeNode[]", default: "[]" },
     ],
+    component: TreeView as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { nodes: [{ label: "src", children: [{ label: "index.ts" }, { label: "App.tsx" }] }, { label: "package.json" }] },
   },
   {
     slug: "activity-feed",
@@ -2083,6 +2117,8 @@ const data = Array.from({ length: 91 }, () => Math.random());
       { name: "items", type: "ActivityItem[]", default: "[]" },
       { name: "onLoadMore", type: "() => void", default: "-" },
     ],
+    component: ActivityFeed as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { items: [{ user: "Alice", action: "pushed 3 commits", time: "2 min ago", color: "#6c7ef8" }, { user: "Bob", action: "opened PR #42", time: "15 min ago", color: "#4dbfa0" }] },
   },
 
   /* ═══ NAVIGATION ═══ */
@@ -2105,6 +2141,8 @@ const data = Array.from({ length: 91 }, () => Math.random());
       { name: "defaultValue", type: "string", default: "-" },
       { name: "variant", type: '"pill" | "underline"', default: '"pill"' },
     ],
+    component: Tabs as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { tabs: [{ value: "1", label: "Tab 1", content: "Content 1" }, { value: "2", label: "Tab 2", content: "Content 2" }] },
   },
   {
     slug: "breadcrumb",
@@ -2125,6 +2163,8 @@ const data = Array.from({ length: 91 }, () => Math.random());
       { name: "items", type: "BreadcrumbItem[]", default: "[]" },
       { name: "separator", type: "ReactNode", default: '">"' },
     ],
+    component: Breadcrumb as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { items: [{ label: "Home", href: "#" }, { label: "Docs", href: "#" }, { label: "Breadcrumb" }] },
   },
   {
     slug: "pagination",
@@ -2145,6 +2185,8 @@ function App() {
       { name: "siblings", type: "number", default: "1" },
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
     ],
+    component: Pagination as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { page: 1, total: 10 },
   },
   {
     slug: "navbar",
@@ -2297,6 +2339,8 @@ function App() {
       { name: "actions", type: "SpeedDialAction[]", default: "[]" },
       { name: "icon", type: "ReactNode", default: '"+"' },
     ],
+    component: SpeedDial as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { actions: [{ label: "Copy", icon: "C", onClick: () => {} }, { label: "Edit", icon: "E", onClick: () => {} }] },
   },
 
   /* ═══ OVERLAY ═══ */
@@ -2555,6 +2599,8 @@ function App() {
       { name: "dismissible", type: "boolean", default: "false" },
       { name: "onDismiss", type: "() => void", default: "-" },
     ],
+    component: AnnouncementBar as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "NeumorUI v1.0 is here!", dismissible: true },
   },
   {
     slug: "cookie-consent",
@@ -2580,6 +2626,8 @@ function App() {
       { name: "onAccept", type: "(selected: string[]) => void", default: "-" },
       { name: "onCustomize", type: "(selected: string[]) => void", default: "-" },
     ],
+    component: CookieConsent as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { title: "Cookie Preferences", description: "We use cookies to enhance your experience.", options: [{ label: "Essential", required: true, defaultChecked: true }, { label: "Analytics", defaultChecked: false }] },
   },
   {
     slug: "loading-overlay",
@@ -2622,6 +2670,8 @@ function App() {
       { name: "steps", type: "Step[]", default: "[]" },
       { name: "orientation", type: '"vertical" | "horizontal"', default: '"horizontal"' },
     ],
+    component: Stepper as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { steps: [{ label: "Step 1", status: "done" }, { label: "Step 2", status: "active" }, { label: "Step 3", status: "pending" }] },
   },
 
   /* ═══ DISCLOSURE ═══ */
@@ -2645,6 +2695,8 @@ function App() {
       { name: "defaultValue", type: "string | string[]", default: "-" },
       { name: "collapsible", type: "boolean", default: "true" },
     ],
+    component: Accordion as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { items: [{ value: "1", title: "Section 1", content: "Content 1" }, { value: "2", title: "Section 2", content: "Content 2" }] },
   },
 
   /* ═══ DATE ═══ */
@@ -2665,6 +2717,8 @@ function App() {
       { name: "selected", type: "Date | Date[] | DateRange", default: "-" },
       { name: "onSelect", type: "(date: Date) => void", default: "-" },
     ],
+    component: Calendar as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { mode: "single" },
   },
   {
     slug: "date-picker",
@@ -2688,6 +2742,8 @@ function App() {
       { name: "minDate", type: "Date", default: "-" },
       { name: "maxDate", type: "Date", default: "-" },
     ],
+    component: DatePicker as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Date", placeholder: "Pick a date" },
   },
 
   /* ═══ COMMAND ═══ */
@@ -2759,6 +2815,8 @@ function App() {
       { name: "emptyMessage", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: Combobox as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Country", placeholder: "Select...", options: [{ value: "us", label: "United States" }, { value: "uk", label: "United Kingdom" }] },
   },
 
   /* ═══ ANIMATION ═══ */
@@ -2865,6 +2923,8 @@ function App() {
       { name: "label", type: "string", default: "-" },
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
     ],
+    component: OTPInput as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { length: 6, label: "Verification code" },
   },
   {
     slug: "rating",
@@ -2923,6 +2983,8 @@ function App() {
       { name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"' },
       { name: "alternating", type: "boolean", default: "false" },
     ],
+    component: Timeline as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { items: [{ title: "Event 1", description: "First event", date: "Jan 2025" }, { title: "Event 2", description: "Second event", date: "Mar 2025" }] },
   },
   {
     slug: "sheet",
@@ -2990,6 +3052,8 @@ function App() {
       { name: "error", type: "boolean", default: "false" },
       { name: "helperText", type: "string", default: "-" },
     ],
+    component: TagInput as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Tags", placeholder: "Add a tag..." },
   },
   {
     slug: "back-to-top",
@@ -3091,6 +3155,8 @@ function App() {
       { name: "showInput", type: "boolean", default: "true" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: ColorPicker as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Color", defaultValue: "#6c7ef8" },
   },
   {
     slug: "image-gallery",
@@ -3117,6 +3183,8 @@ function App() {
       { name: "rounded", type: "number", default: "16" },
       { name: "lightbox", type: "boolean", default: "true" },
     ],
+    component: ImageGallery as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { columns: 3, images: [{ src: "https://picsum.photos/seed/neu1/300/300", alt: "Sample 1" }, { src: "https://picsum.photos/seed/neu2/300/300", alt: "Sample 2" }, { src: "https://picsum.photos/seed/neu3/300/300", alt: "Sample 3" }] },
   },
   {
     slug: "countdown",
@@ -3145,6 +3213,8 @@ const target = new Date("2025-12-31T00:00:00");
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
       { name: "variant", type: '"raised" | "inset"', default: '"raised"' },
     ],
+    component: Countdown as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { targetDate: new Date(Date.now() + 3600000) },
   },
   {
     slug: "segmented-control",
@@ -3177,6 +3247,8 @@ function App() {
       { name: "fullWidth", type: "boolean", default: "false" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: SegmentedControl as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { options: [{ value: "list", label: "List" }, { value: "grid", label: "Grid" }] },
   },
 
   // ── PasswordInput ──
@@ -3291,6 +3363,8 @@ function App() {
       { name: "error", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: PhoneInput as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Phone Number", defaultCountry: "BD" },
   },
 
   // ── PinInput ──
@@ -3423,6 +3497,8 @@ function App() {
       { name: "horizontal", type: "boolean", default: "false" },
       { name: "children", type: "ReactNode", default: "-" },
     ],
+    component: FormField as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Email", required: true, helperText: "We'll never share your email." },
   },
 
   // ── AreaChart ──
@@ -3472,6 +3548,8 @@ function App() {
       { name: "showValues", type: "boolean", default: "false" },
       { name: "animate", type: "boolean", default: "true" },
     ],
+    component: AreaChart as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { data: [{ label: "Mon", value: 30 }, { label: "Tue", value: 50 }, { label: "Wed", value: 40 }], height: 160 },
   },
 
   // ── RadarChart ──
@@ -3518,6 +3596,8 @@ function App() {
       { name: "rings", type: "number", default: "4" },
       { name: "animate", type: "boolean", default: "true" },
     ],
+    component: RadarChart as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { data: [{ label: "Speed", value: 85 }, { label: "Power", value: 70 }, { label: "Defense", value: 60 }, { label: "Agility", value: 90 }], size: 220 },
   },
 
   // ── GaugeChart ──
@@ -3825,6 +3905,8 @@ export function App() {
       { name: "ratio", type: "number", default: "16/9" },
       { name: "children", type: "ReactNode", default: "-" },
     ],
+    component: AspectRatio as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { ratio: 16 / 9 },
   },
 
   // ── ScrollArea ──
@@ -3872,6 +3954,8 @@ export function App() {
       { name: "maxHeight", type: "number | string", default: "300" },
       { name: "hideScrollbar", type: "boolean", default: "false" },
     ],
+    component: ScrollArea as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { maxHeight: 200, children: "Scrollable content here" },
   },
 
   // ── ResizablePanels ──
@@ -3909,6 +3993,8 @@ export function App() {
       { name: "maxSize", type: "number", default: "80" },
       { name: "children", type: "[ReactNode, ReactNode]", default: "-" },
     ],
+    component: ResizablePanels as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { defaultSize: 50, minSize: 20, maxSize: 80 },
   },
 
   // ── Masonry ──
@@ -3953,6 +4039,8 @@ export function App() {
       { name: "gap", type: "number", default: "12" },
       { name: "children", type: "ReactNode", default: "-" },
     ],
+    component: Masonry as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { columns: 3, gap: 12 },
   },
 
   // ── Container ──
@@ -3986,6 +4074,8 @@ export function App() {
       { name: "padding", type: "boolean", default: "true" },
       { name: "children", type: "ReactNode", default: "-" },
     ],
+    component: Container as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { size: "lg", children: "Container content" },
   },
 
   // ── Dock ──
@@ -4026,6 +4116,8 @@ export function App() {
       { name: "magnification", type: "number", default: "1.6" },
       { name: "baseSize", type: "number", default: "48" },
     ],
+    component: Dock as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { items: [{ icon: "🏠", label: "Home" }, { icon: "📁", label: "Files" }, { icon: "⚙️", label: "Settings" }] },
   },
 
   // ── Steps ──
@@ -4064,6 +4156,8 @@ const [step, setStep] = useState(0);
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
       { name: "onChange", type: "(step: number) => void", default: "-" },
     ],
+    component: Steps as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { steps: [{ title: "Step 1" }, { title: "Step 2" }, { title: "Step 3" }], current: 0 },
   },
 
   // ── LinkPreview ──
@@ -4109,6 +4203,8 @@ const [step, setStep] = useState(0);
       { name: "side", type: '"top" | "bottom"', default: '"top"' },
       { name: "children", type: "ReactNode", default: "-" },
     ],
+    component: LinkPreview as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { href: "https://github.com", title: "GitHub", description: "Where developers build software", children: "GitHub" },
   },
 
   // ── CommandMenu ──
@@ -4334,6 +4430,8 @@ function MyComponent() {
       { name: "artist", type: "string", default: "-" },
       { name: "coverArt", type: "string", default: "-" },
     ],
+    component: AudioPlayer as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", title: "Sample Track", artist: "Artist" },
   },
 
   // ── VideoPlayer ──
@@ -4365,6 +4463,8 @@ function MyComponent() {
       { name: "muted", type: "boolean", default: "false" },
       { name: "loop", type: "boolean", default: "false" },
     ],
+    component: VideoPlayer as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://picsum.photos/seed/vid/400/225" },
   },
 
   // ── CopyButton ──
@@ -4582,6 +4682,8 @@ const [loading, setLoading] = useState(false);
       { name: "onPlay / onPause", type: "() => void", default: "-" },
       { name: "onNext / onPrev", type: "() => void", default: "-" },
     ],
+    component: MusicPlayerCard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { title: "Midnight Dreams", artist: "NeumorUI", album: "Clay Sessions", coverArt: "https://picsum.photos/seed/music1/300/300", progress: 42, currentTime: "1:32", duration: "3:45" },
   },
 
   // ── WeatherCard ──
@@ -4636,6 +4738,8 @@ const [loading, setLoading] = useState(false);
       { name: "feelsLike", type: "number", default: "-" },
       { name: "forecast", type: "ForecastDay[]", default: "[]" },
     ],
+    component: WeatherCard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { location: "New York", temperature: 22, condition: "Sunny", icon: "☀️", humidity: 55, wind: "10 km/h" },
   },
 
   // ── ChatBubble ──
@@ -4891,6 +4995,8 @@ const [active, setActive] = useState(true);
       { name: "onItemClick", type: "(id: string) => void", default: "-" },
       { name: "title", type: "string", default: '"On this page"' },
     ],
+    component: TableOfContents as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { items: [{ id: "intro", text: "Introduction", level: 1 }, { id: "install", text: "Installation", level: 1 }, { id: "usage", text: "Usage", level: 1 }] },
   },
 
   // ── ThemeCustomizer ──
@@ -5000,6 +5106,8 @@ const [active, setActive] = useState(true);
       { name: "size", type: "number", default: "40" },
       { name: "overlap", type: "number", default: "10" },
     ],
+    component: AvatarGroup as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { avatars: [{ name: "Alice" }, { name: "Bob" }, { name: "Carol" }], max: 3 },
   },
 
   // ── RichTextEditor ──
