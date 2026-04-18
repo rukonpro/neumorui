@@ -64,45 +64,44 @@ export const ThemeCustomizer: React.FC<ThemeCustomizerProps> = ({
   };
 
   return (
-    <div className={className} style={{ position: "relative", ...style }}>
+    <div className={className} style={{ ...style }}>
       {/* Toggle button */}
       <button
         type="button"
         onClick={() => setOpen(!isOpen)}
         style={{
-          width: "42px",
-          height: "42px",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "10px 16px",
           borderRadius: "14px",
           border: "none",
           outline: "none",
           cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "18px",
+          fontSize: "13px",
+          fontWeight: 700,
+          fontFamily: "inherit",
+          color: "var(--neu-text-secondary)",
           background: "var(--neu-bg)",
           boxShadow: isOpen ? "var(--neu-shadow-inset-sm)" : "var(--neu-shadow-raised-sm)",
           transition,
         }}
         aria-label="Customize theme"
       >
-        🎨
+        🎨 {isOpen ? "Close Customizer" : "Theme Customizer"}
       </button>
 
-      {/* Panel */}
+      {/* Panel — inline, not absolute */}
       {isOpen && (
         <div
           style={{
-            position: "absolute",
-            top: "calc(100% + 8px)",
-            left: 0,
-            width: "280px",
-            maxWidth: "calc(100vw - 32px)",
+            marginTop: "12px",
+            width: "100%",
+            maxWidth: "320px",
             padding: "18px",
             borderRadius: "20px",
             background: "var(--neu-bg)",
-            boxShadow: "var(--neu-shadow-raised-lg)",
-            zIndex: 50,
+            boxShadow: "var(--neu-shadow-raised)",
             animation: "neuTcIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
           }}
         >
