@@ -141,6 +141,8 @@ export interface ComponentDoc {
   preview: React.ReactNode;
   code: string;
   props: PropDef[];
+  component?: React.ComponentType<Record<string, unknown>>;
+  defaultProps?: Record<string, unknown>;
 }
 
 /* ─── Small demo wrappers (with state) ─── */
@@ -1333,6 +1335,8 @@ function App() {
       { name: "rightIcon", type: "ReactNode", default: "-" },
       { name: "ripple", type: "boolean", default: "false" },
     ],
+    component: Button as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "Click me", variant: "raised", size: "md" },
   },
   {
     slug: "input",
@@ -1360,6 +1364,8 @@ function App() {
       { name: "leftIcon", type: "ReactNode", default: "-" },
       { name: "rightIcon", type: "ReactNode", default: "-" },
     ],
+    component: Input as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Email", placeholder: "you@example.com" },
   },
   {
     slug: "textarea",

@@ -57,7 +57,7 @@ export default function ComponentPageClient({ slug }: { slug: string }) {
           <h2 style={{ fontSize: "16px", fontWeight: 800, marginBottom: "12px" }}>
             Example
           </h2>
-          <PropsPlayground props={doc.props} preview={doc.preview} code={doc.code} />
+          <PropsPlayground props={doc.props} preview={doc.preview} code={doc.code} component={doc.component} defaultProps={doc.defaultProps} />
         </div>
       ) : (
         <div style={{ marginBottom: "32px" }}>

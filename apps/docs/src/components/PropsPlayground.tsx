@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, cloneElement, isValidElement } from "react";
+import React, { useState } from "react";
 import type { PropDef } from "@/data/components";
 import { CodeBlock } from "@/components/CodeBlock";
 
@@ -8,11 +8,13 @@ interface PropsPlaygroundProps {
   props: PropDef[];
   preview: React.ReactNode;
   code: string;
+  component?: React.ComponentType<Record<string, unknown>>;
+  defaultProps?: Record<string, unknown>;
 }
 
 const transition = "all 0.18s cubic-bezier(0.34, 1.2, 0.64, 1)";
 
-export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview, code }) => {
+export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview, code, component: Component, defaultProps = {} }) => {
   const [values, setValues] = useState<Record<string, unknown>>({});
   const [expanded, setExpanded] = useState(true);
   const [showCode, setShowCode] = useState(false);
@@ -42,34 +44,14 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
       .filter(Boolean);
   };
 
-  // Apply playground props to preview component
   const activeProps = Object.fromEntries(
     Object.entries(values).filter(([, v]) => v !== undefined)
   );
 
-  // Try to clone the preview element with playground props
-  let livePreview = preview;
-  if (Object.keys(activeProps).length > 0 && isValidElement(preview)) {
-    try {
-      // If preview is a wrapper div, clone the first child
-      const previewProps = preview.props as Record<string, unknown>;
-      const children = previewProps.children;
-
-      if (isValidElement(children)) {
-        livePreview = cloneElement(
-          preview as React.ReactElement<Record<string, unknown>>,
-          {},
-          cloneElement(children as React.ReactElement<Record<string, unknown>>, activeProps)
-        );
-      } else {
-        livePreview = cloneElement(preview as React.ReactElement<Record<string, unknown>>, activeProps);
-      }
-    } catch {
-      livePreview = preview;
-    }
-  }
-
   const hasChanges = Object.keys(activeProps).length > 0;
+
+  // Merge default props with playground-changed props
+  const mergedProps = { ...defaultProps, ...activeProps };
 
   return (
     <div
@@ -92,7 +74,11 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
         }}
       >
         <div style={{ width: "100%" }}>
-          {livePreview}
+          {Component ? (
+            <Component {...mergedProps} />
+          ) : (
+            preview
+          )}
         </div>
       </div>
 
