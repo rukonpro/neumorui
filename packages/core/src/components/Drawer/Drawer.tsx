@@ -99,6 +99,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       <div
         style={overlayStyle}
         onClick={() => onOpenChange(false)}
+        role="presentation"
         data-testid="drawer-overlay"
       />
       <div

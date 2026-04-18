@@ -174,6 +174,7 @@ export const Carousel: React.FC<CarouselProps> = ({
     else if (dragOffset.current > threshold) prev();
   };
 
+  /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */
   return (
     <div
       className={className}
@@ -185,6 +186,7 @@ export const Carousel: React.FC<CarouselProps> = ({
       aria-roledescription="carousel"
       {...rest}
     >
+    {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
       {/* Main container with neumorphic frame */}
       <div
         onMouseEnter={() => pauseOnHover && setPaused(true)}
@@ -215,7 +217,8 @@ export const Carousel: React.FC<CarouselProps> = ({
           />
         )}
 
-        {/* Slides track */}
+        {/* Slides track — drag/swipe support */}
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
         <div
           ref={trackRef}
           data-testid="carousel-track"

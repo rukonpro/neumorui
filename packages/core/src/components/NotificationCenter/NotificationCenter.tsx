@@ -56,7 +56,13 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   return (
     <div ref={panelRef} className={className} style={{ position: "relative", display: "inline-block", ...style }}>
       {/* Trigger */}
-      <div onClick={() => setOpen(!open)} style={{ cursor: "pointer", position: "relative" }}>
+      <div
+        onClick={() => setOpen(!open)}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setOpen(!open); }}
+        role="button"
+        tabIndex={0}
+        style={{ cursor: "pointer", position: "relative" }}
+      >
         {trigger || (
           <button
             type="button"
@@ -198,6 +204,9 @@ const NotifItem: React.FC<{
   return (
     <div
       onClick={() => onRead?.(item.id)}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onRead?.(item.id); }}
+      role="button"
+      tabIndex={0}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{

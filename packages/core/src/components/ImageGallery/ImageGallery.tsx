@@ -122,6 +122,8 @@ const Lightbox: React.FC<{
       {/* Backdrop */}
       <div
         onClick={onClose}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
+        role="presentation"
         style={{
           position: "absolute",
           inset: 0,

@@ -64,6 +64,9 @@ export const Steps: React.FC<StepsProps> = ({
                 cursor: onChange ? "pointer" : "default",
               }}
               onClick={() => onChange?.(i)}
+              onKeyDown={onChange ? (e) => { if (e.key === 'Enter' || e.key === ' ') onChange(i); } : undefined}
+              role={onChange ? "button" : undefined}
+              tabIndex={onChange ? 0 : undefined}
             >
               {/* Circle */}
               <div

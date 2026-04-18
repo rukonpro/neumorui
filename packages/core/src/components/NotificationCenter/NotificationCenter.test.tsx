@@ -10,7 +10,8 @@ const notifications = [
 describe("NotificationCenter", () => {
   it("renders trigger button", () => {
     render(<NotificationCenter notifications={notifications} />);
-    expect(screen.getByRole("button")).toBeInTheDocument();
+    const buttons = screen.getAllByRole("button");
+    expect(buttons.length).toBeGreaterThanOrEqual(1);
   });
 
   it("shows badge for unread count", () => {
@@ -20,7 +21,7 @@ describe("NotificationCenter", () => {
 
   it("opens panel on click and shows notifications", () => {
     render(<NotificationCenter notifications={notifications} />);
-    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(screen.getAllByRole("button")[0]);
     expect(screen.getByText("New order")).toBeInTheDocument();
     expect(screen.getByText("Comment")).toBeInTheDocument();
   });

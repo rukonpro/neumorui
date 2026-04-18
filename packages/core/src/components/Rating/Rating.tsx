@@ -181,6 +181,7 @@ export const Rating: React.FC<RatingProps> = ({
         }}
         onMouseLeave={() => setHoverValue(-1)}
         role="radiogroup"
+        tabIndex={0}
         aria-label={label || "Rating"}
       >
         {Array.from({ length: max }, (_, i) => {

@@ -42,6 +42,7 @@ export const BrowserTabs: React.FC<BrowserTabsProps> = ({
         paddingBottom: "2px",
         ...style,
       }}
+      role="tablist"
       data-testid="browser-tabs"
       {...rest}
     >
@@ -53,6 +54,10 @@ export const BrowserTabs: React.FC<BrowserTabsProps> = ({
             key={tab.id}
             data-testid={`tab-${tab.id}`}
             onClick={() => onTabChange?.(tab.id)}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onTabChange?.(tab.id); }}
+            role="tab"
+            tabIndex={0}
+            aria-selected={isActive}
             onMouseEnter={() => setHoveredTab(tab.id)}
             onMouseLeave={() => setHoveredTab(null)}
             style={{
@@ -91,21 +96,28 @@ export const BrowserTabs: React.FC<BrowserTabsProps> = ({
               </span>
             )}
             {tab.closable !== false && onTabClose && (
-              <span
+              <button
+                type="button"
                 data-testid={`tab-close-${tab.id}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   onTabClose(tab.id);
                 }}
+                aria-label={`Close ${tab.label}`}
                 style={{
                   marginLeft: "4px",
                   opacity: 0.5,
                   cursor: "pointer",
                   lineHeight: 1,
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  font: "inherit",
+                  color: "inherit",
                 }}
               >
                 &#10005;
-              </span>
+              </button>
             )}
           </div>
         );

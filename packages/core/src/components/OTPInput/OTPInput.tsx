@@ -152,6 +152,7 @@ export const OTPInput: React.FC<OTPInputProps> = ({
           {label}
         </p>
       )}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <div
         style={{
           position: "relative",
@@ -160,6 +161,8 @@ export const OTPInput: React.FC<OTPInputProps> = ({
           cursor: disabled ? "not-allowed" : "pointer",
         }}
         onClick={focusInput}
+        role="group"
+        aria-label={label || "OTP input"}
       >
         {digits.map((d, i) => (
           <OTPCell

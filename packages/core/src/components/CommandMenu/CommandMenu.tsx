@@ -129,6 +129,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
       {/* Backdrop */}
       <div
         onClick={() => setOpen(false)}
+        role="presentation"
         style={{
           position: "absolute",
           inset: 0,

@@ -122,6 +122,7 @@ export const Sheet: React.FC<SheetProps> = ({
       {/* Backdrop */}
       <div
         onClick={() => onOpenChange(false)}
+        role="presentation"
         style={{
           position: "fixed",
           inset: 0,
@@ -134,7 +135,8 @@ export const Sheet: React.FC<SheetProps> = ({
         }}
       />
 
-      {/* Sheet */}
+      {/* Sheet — drag-to-dismiss needs mouse handlers on dialog */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <div
         ref={sheetRef}
         role="dialog"

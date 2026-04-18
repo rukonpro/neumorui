@@ -10,6 +10,7 @@ describe("TestimonialCard", () => {
   });
 
   it("renders role", () => {
+    // eslint-disable-next-line jsx-a11y/aria-role
     render(<TestimonialCard quote="Nice" author="Jane" role="CTO" />);
     expect(screen.getByText("CTO")).toBeInTheDocument();
   });

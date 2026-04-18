@@ -188,6 +188,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
                 placeholder="Search country..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 style={{
                   width: "100%",

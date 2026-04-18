@@ -61,6 +61,9 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
       {/* Folder header */}
       <div
         onClick={() => setOpen(!open)}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setOpen(!open); }}
+        role="button"
+        tabIndex={0}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{

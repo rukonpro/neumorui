@@ -44,6 +44,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
   return (
     <>
       <style>{scaleInKeyframes}</style>
+      {/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */}
       <nav
         className={className}
         style={{
@@ -55,6 +56,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
         role="menubar"
         {...rest}
       >
+      {/* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */}
         {items.map((item, i) => (
           <div
             key={i}

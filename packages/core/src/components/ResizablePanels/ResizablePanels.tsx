@@ -140,14 +140,23 @@ export const ResizablePanels: React.FC<ResizablePanelsProps> = ({
         {children[0]}
       </div>
 
-      {/* Handle */}
+      {/* Handle — separator with aria-valuenow is interactive per WAI-ARIA */}
+      {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
       <div
         onMouseDown={handleMouseDown}
         onTouchStart={() => setDragging(true)}
         onMouseEnter={() => setHandleHovered(true)}
         onMouseLeave={() => setHandleHovered(false)}
+        role="separator"
+        aria-orientation={isHorizontal ? "vertical" : "horizontal"}
+        aria-valuenow={Math.round(size)}
+        aria-valuemin={minSize}
+        aria-valuemax={maxSize}
+        tabIndex={0}
+        aria-label="Resize handle"
         style={handleStyle}
       >
+      {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
         <div style={dotStyle} />
       </div>
 

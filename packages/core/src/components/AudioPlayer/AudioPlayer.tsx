@@ -98,6 +98,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
         ...style,
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio ref={audioRef} src={src} preload="metadata" />
 
       {/* Cover art */}
@@ -167,6 +168,13 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
         {/* Progress bar */}
         <div
           onClick={seek}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') seek(e as unknown as React.MouseEvent<HTMLDivElement>); }}
+          role="slider"
+          tabIndex={0}
+          aria-label="Seek"
+          aria-valuenow={Math.round(pct)}
+          aria-valuemin={0}
+          aria-valuemax={100}
           style={{
             height: "6px",
             borderRadius: "3px",
@@ -218,6 +226,13 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
         </button>
         <div
           onClick={changeVolume}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') changeVolume(e as unknown as React.MouseEvent<HTMLDivElement>); }}
+          role="slider"
+          tabIndex={0}
+          aria-label="Volume"
+          aria-valuenow={Math.round((muted ? 0 : volume) * 100)}
+          aria-valuemin={0}
+          aria-valuemax={100}
           style={{
             width: "50px",
             height: "4px",

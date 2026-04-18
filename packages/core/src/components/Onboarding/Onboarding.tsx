@@ -195,6 +195,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({
       {/* Click blocker */}
       <div
         onClick={onSkip}
+        role="presentation"
         style={{
           position: "fixed",
           inset: 0,

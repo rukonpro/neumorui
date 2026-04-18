@@ -119,6 +119,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         ...style,
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <video
         ref={videoRef}
         src={src}
@@ -134,6 +135,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       {!playing && (
         <div
           onClick={togglePlay}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') togglePlay(); }}
+          role="button"
+          tabIndex={0}
+          aria-label="Play video"
           style={{
             position: "absolute",
             inset: 0,
@@ -183,6 +188,13 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         {/* Progress */}
         <div
           onClick={seek}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') seek(e as unknown as React.MouseEvent<HTMLDivElement>); }}
+          role="slider"
+          tabIndex={0}
+          aria-label="Seek"
+          aria-valuenow={Math.round(pct)}
+          aria-valuemin={0}
+          aria-valuemax={100}
           style={{
             height: "4px",
             borderRadius: "2px",

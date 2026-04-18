@@ -4,6 +4,7 @@ import { UserCard } from "./UserCard";
 
 describe("UserCard", () => {
   it("renders name and role", () => {
+    // eslint-disable-next-line jsx-a11y/aria-role
     render(<UserCard name="Jane Cooper" role="Designer" />);
     expect(screen.getByText("Jane Cooper")).toBeInTheDocument();
     expect(screen.getByText("Designer")).toBeInTheDocument();

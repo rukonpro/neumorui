@@ -147,6 +147,11 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
           <div
             ref={thumbRef}
             onMouseDown={handleMouseDown}
+            role="scrollbar"
+            aria-controls="scroll-area-content"
+            aria-valuenow={Math.round(thumbTop)}
+            tabIndex={0}
+            aria-label="Scroll"
             style={{
               position: "absolute",
               top: `${thumbTop}px`,

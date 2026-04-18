@@ -46,6 +46,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = ({
     <div
       className={className}
       onClick={onClick}
+      onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick(); } : undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       role={onClick ? "button" : undefined}
