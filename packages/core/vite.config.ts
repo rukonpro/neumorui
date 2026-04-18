@@ -19,7 +19,18 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        /^@radix-ui\//,
+        "@tanstack/react-table",
+        "cmdk",
+        "date-fns",
+        "react-day-picker",
+        "clsx",
+        "tailwind-merge",
+      ],
       output: {
         globals: {
           react: "React",
@@ -28,5 +39,7 @@ export default defineConfig({
       },
     },
     cssCodeSplit: false,
+    minify: "esbuild",
+    target: "es2020",
   },
 });
