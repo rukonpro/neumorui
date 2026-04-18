@@ -35,6 +35,51 @@ const categories = Object.entries(
   count,
 }));
 
+function NpmDownloadsStat() {
+  const [total, setTotal] = React.useState<number | null>(null);
+  const [weekly, setWeekly] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    fetch(`https://api.npmjs.org/downloads/point/2025-01-01:${today}/neumorui`)
+      .then((r) => r.json())
+      .then((d) => setTotal(d.downloads ?? null))
+      .catch(() => {});
+    fetch("https://api.npmjs.org/downloads/point/last-week/neumorui")
+      .then((r) => r.json())
+      .then((d) => setWeekly(d.downloads ?? null))
+      .catch(() => {});
+  }, []);
+
+  const fmt = (n: number) => n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
+
+  if (total === null) return null;
+
+  return (
+    <a
+      href="https://www.npmjs.com/package/neumorui"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        padding: "14px 24px",
+        borderRadius: "16px",
+        background: "var(--neu-bg)",
+        boxShadow: "var(--neu-shadow-raised-sm)",
+        textAlign: "center",
+        textDecoration: "none",
+        transition: "all 0.2s ease",
+      }}
+    >
+      <div style={{ fontSize: "22px", fontWeight: 900, color: "var(--neu-accent, #6c7ef8)" }}>
+        {fmt(total)}
+      </div>
+      <div style={{ fontSize: "11px", fontWeight: 700, color: "var(--neu-text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+        Downloads{weekly !== null && ` · ${fmt(weekly)}/wk`}
+      </div>
+    </a>
+  );
+}
+
 function CopyableInstall() {
   const [copied, setCopied] = React.useState(false);
   const cmd = "npm install neumorui";
@@ -185,6 +230,7 @@ export default function HomePage() {
             </div>
           </div>
         ))}
+        <NpmDownloadsStat />
       </div>
 
       {/* Installation */}

@@ -7,70 +7,6 @@ import "../app/globals.css";
 import { DocsSidebar } from "@/components/Sidebar";
 import { SearchDialog } from "@/components/SearchDialog";
 
-function NpmDownloads() {
-  const [total, setTotal] = React.useState<number | null>(null);
-  const [weekly, setWeekly] = React.useState<number | null>(null);
-
-  React.useEffect(() => {
-    // Total downloads (from publish date to today)
-    const start = "2025-01-01";
-    const today = new Date().toISOString().split("T")[0];
-    fetch(`https://api.npmjs.org/downloads/point/${start}:${today}/neumorui`)
-      .then((r) => r.json())
-      .then((d) => setTotal(d.downloads ?? null))
-      .catch(() => {});
-
-    // Weekly downloads
-    fetch("https://api.npmjs.org/downloads/point/last-week/neumorui")
-      .then((r) => r.json())
-      .then((d) => setWeekly(d.downloads ?? null))
-      .catch(() => {});
-  }, []);
-
-  if (total === null && weekly === null) return null;
-
-  const fmt = (n: number) => n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
-
-  return (
-    <a
-      href="https://www.npmjs.com/package/neumorui"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "6px",
-        padding: "6px 12px",
-        borderRadius: "10px",
-        background: "var(--neu-bg)",
-        boxShadow: "var(--neu-shadow-raised-sm)",
-        textDecoration: "none",
-        transition: "all 0.18s ease",
-        fontSize: "11px",
-        fontWeight: 700,
-        color: "var(--neu-text-secondary)",
-      }}
-    >
-      <span style={{ fontSize: "13px" }}>⬇</span>
-      {total !== null && (
-        <>
-          <span style={{ fontVariantNumeric: "tabular-nums", color: "var(--neu-text-primary)", fontWeight: 800 }}>{fmt(total)}</span>
-          <span style={{ color: "var(--neu-text-muted)", fontSize: "10px" }}>total</span>
-        </>
-      )}
-      {total !== null && weekly !== null && (
-        <span style={{ color: "var(--neu-text-muted)", fontSize: "10px" }}>·</span>
-      )}
-      {weekly !== null && (
-        <>
-          <span style={{ fontVariantNumeric: "tabular-nums" }}>{fmt(weekly)}</span>
-          <span style={{ color: "var(--neu-text-muted)", fontSize: "10px" }}>/week</span>
-        </>
-      )}
-    </a>
-  );
-}
-
 function ThemeLayoutInner({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useNeuTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -127,9 +63,6 @@ function ThemeLayoutInner({ children }: { children: React.ReactNode }) {
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            {/* npm downloads badge */}
-            <NpmDownloads />
-
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
