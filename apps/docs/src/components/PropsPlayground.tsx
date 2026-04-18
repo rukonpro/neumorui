@@ -62,7 +62,7 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
         overflow: "hidden",
       }}
     >
-      {/* Live preview area */}
+      {/* Demo preview */}
       <div
         style={{
           padding: "32px 24px",
@@ -70,17 +70,36 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
           alignItems: "center",
           justifyContent: "center",
           minHeight: "140px",
-          borderBottom: "1px solid rgba(0,0,0,0.05)",
+          borderBottom: hasChanges ? "none" : "1px solid rgba(0,0,0,0.05)",
         }}
       >
         <div style={{ width: "100%" }}>
-          {Component ? (
-            <Component {...mergedProps} />
-          ) : (
-            preview
-          )}
+          {preview}
         </div>
       </div>
+
+      {/* Live playground preview — shows only when props changed */}
+      {hasChanges && Component && (
+        <div
+          style={{
+            padding: "24px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "80px",
+            borderTop: "1px dashed rgba(108,126,248,0.2)",
+            borderBottom: "1px solid rgba(0,0,0,0.05)",
+            background: "rgba(108,126,248,0.02)",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", width: "100%" }}>
+            <span style={{ fontSize: "9px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--neu-accent)", opacity: 0.6 }}>
+              Live Preview
+            </span>
+            <Component {...mergedProps} />
+          </div>
+        </div>
+      )}
 
       {/* Playground controls */}
       <div>
