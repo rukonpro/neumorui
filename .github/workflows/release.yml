@@ -2,6 +2,7 @@ name: Release to npm
 
 on:
   push:
+    branches: [master]
     tags:
       - "v*"
 
@@ -14,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -26,12 +30,32 @@ jobs:
       - run: pnpm test
       - run: pnpm --filter neumorui build
 
+      # Check if version changed (compare with npm registry)
+      - name: Check if publish needed
+        id: check
+        run: |
+          LOCAL_VERSION=$(node -p "require('./packages/core/package.json').version")
+          NPM_VERSION=$(npm view neumorui version 2>/dev/null || echo "0.0.0")
+          echo "local=$LOCAL_VERSION" >> $GITHUB_OUTPUT
+          echo "npm=$NPM_VERSION" >> $GITHUB_OUTPUT
+          if [ "$LOCAL_VERSION" != "$NPM_VERSION" ]; then
+            echo "publish=true" >> $GITHUB_OUTPUT
+            echo "Version changed: $NPM_VERSION → $LOCAL_VERSION — will publish"
+          else
+            echo "publish=false" >> $GITHUB_OUTPUT
+            echo "Version unchanged: $LOCAL_VERSION — skipping publish"
+          fi
+
+      # Publish to npm only if version changed
       - name: Publish to npm
+        if: steps.check.outputs.publish == 'true'
         run: pnpm --filter neumorui publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # Create GitHub Release on tag push
       - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
