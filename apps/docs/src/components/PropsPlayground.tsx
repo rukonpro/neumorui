@@ -2,17 +2,20 @@
 
 import React, { useState, cloneElement, isValidElement } from "react";
 import type { PropDef } from "@/data/components";
+import { CodeBlock } from "@/components/CodeBlock";
 
 interface PropsPlaygroundProps {
   props: PropDef[];
   preview: React.ReactNode;
+  code: string;
 }
 
 const transition = "all 0.18s cubic-bezier(0.34, 1.2, 0.64, 1)";
 
-export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview }) => {
+export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview, code }) => {
   const [values, setValues] = useState<Record<string, unknown>>({});
   const [expanded, setExpanded] = useState(true);
+  const [showCode, setShowCode] = useState(false);
 
   const editableProps = props.filter((p) => {
     const t = p.type.toLowerCase();
@@ -239,6 +242,44 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
                 Reset
               </button>
             )}
+          </div>
+        )}
+      </div>
+
+      {/* Code toggle */}
+      <div style={{ borderTop: "1px solid rgba(0,0,0,0.05)" }}>
+        <button
+          type="button"
+          onClick={() => setShowCode(!showCode)}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            width: "100%",
+            padding: "10px 20px",
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+            fontSize: "11px",
+            fontWeight: 700,
+            fontFamily: "inherit",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            color: "var(--neu-text-muted)",
+            transition: "color 0.2s ease",
+          }}
+        >
+          <svg
+            width="10" height="10" viewBox="0 0 10 10" fill="none"
+            style={{ transform: showCode ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.2s ease" }}
+          >
+            <path d="M3 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          {showCode ? "Hide code" : "Show code"}
+        </button>
+        {showCode && (
+          <div style={{ padding: "0 16px 16px" }}>
+            <CodeBlock code={code} />
           </div>
         )}
       </div>
