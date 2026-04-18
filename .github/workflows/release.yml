@@ -1,14 +1,12 @@
-name: Release
+name: Release to npm
 
 on:
   push:
-    branches: [master]
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+    tags:
+      - "v*"
 
 permissions:
   contents: write
-  pull-requests: write
   id-token: write
 
 jobs:
@@ -26,15 +24,16 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm test
-      - run: pnpm build
+      - run: pnpm --filter neumorui build
 
-      - uses: changesets/action@v1
+      - name: Publish to npm
+        run: pnpm --filter neumorui publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          publish: pnpm changeset publish
-          version: pnpm changeset version
-          commit: "chore(release): version packages"
-          title: "chore(release): version packages"
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
