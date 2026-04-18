@@ -5006,17 +5006,20 @@ const [active, setActive] = useState(true);
     category: "Utility",
     description: "Live theme editor with color presets, custom color pickers, and border radius control.",
     preview: (
-      <ThemeCustomizer />
+      <ThemeCustomizer position="inline" />
     ),
     code: `import { ThemeCustomizer } from "neumorui";
 
-<ThemeCustomizer
-  onThemeChange={(vars) => console.log(vars)}
-/>`,
+{/* Fixed position — floating top-right (default) */}
+<ThemeCustomizer />
+
+{/* Inline position — inside a card/section */}
+<ThemeCustomizer position="inline" />`,
     props: [
       { name: "onThemeChange", type: "(vars: Record<string, string>) => void", default: "-" },
       { name: "open", type: "boolean", default: "-" },
       { name: "onOpenChange", type: "(open: boolean) => void", default: "-" },
+      { name: "position", type: '"fixed" | "inline"', default: '"fixed"' },
     ],
   },
 

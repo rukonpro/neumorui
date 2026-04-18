@@ -4,6 +4,7 @@ interface ThemeCustomizerProps {
   onThemeChange?: (vars: Record<string, string>) => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  position?: "fixed" | "inline";
   className?: string;
   style?: React.CSSProperties;
 }
@@ -33,6 +34,7 @@ export const ThemeCustomizer: React.FC<ThemeCustomizerProps> = ({
   onThemeChange,
   open: controlledOpen,
   onOpenChange,
+  position = "fixed",
   className,
   style,
 }) => {
@@ -63,8 +65,16 @@ export const ThemeCustomizer: React.FC<ThemeCustomizerProps> = ({
     applyVar("--neu-radius-md", r);
   };
 
+  const isFixed = position === "fixed";
+
   return (
-    <div className={className} style={{ ...style }}>
+    <div
+      className={className}
+      style={{
+        ...(isFixed ? { position: "fixed", top: "16px", right: "16px", zIndex: 60 } : {}),
+        ...style,
+      }}
+    >
       {/* Toggle button */}
       <button
         type="button"
@@ -73,12 +83,12 @@ export const ThemeCustomizer: React.FC<ThemeCustomizerProps> = ({
           display: "flex",
           alignItems: "center",
           gap: "8px",
-          padding: "10px 16px",
+          padding: isFixed ? "10px" : "10px 16px",
           borderRadius: "14px",
           border: "none",
           outline: "none",
           cursor: "pointer",
-          fontSize: "13px",
+          fontSize: isFixed ? "18px" : "13px",
           fontWeight: 700,
           fontFamily: "inherit",
           color: "var(--neu-text-secondary)",
@@ -88,20 +98,22 @@ export const ThemeCustomizer: React.FC<ThemeCustomizerProps> = ({
         }}
         aria-label="Customize theme"
       >
-        🎨 {isOpen ? "Close Customizer" : "Theme Customizer"}
+        🎨{!isFixed && (isOpen ? " Close Customizer" : " Theme Customizer")}
       </button>
 
-      {/* Panel — inline, not absolute */}
+      {/* Panel */}
       {isOpen && (
         <div
           style={{
-            marginTop: "12px",
-            width: "100%",
-            maxWidth: "320px",
+            ...(isFixed
+              ? { position: "absolute", top: "calc(100% + 8px)", right: 0 }
+              : { marginTop: "12px" }),
+            width: "280px",
+            maxWidth: "calc(100vw - 32px)",
             padding: "18px",
             borderRadius: "20px",
             background: "var(--neu-bg)",
-            boxShadow: "var(--neu-shadow-raised)",
+            boxShadow: "var(--neu-shadow-raised-lg)",
             animation: "neuTcIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
           }}
         >
