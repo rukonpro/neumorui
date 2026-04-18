@@ -46,12 +46,12 @@ function formatNumber(n: number, decimals: number, hasCommas: boolean): string {
   return decPart ? `${withCommas}.${decPart}` : withCommas;
 }
 
-const AnimatedValue: React.FC<{
+function AnimatedValue({ value, color, animate, duration }: {
   value: string | number;
   color?: string;
   animate: boolean;
   duration: number;
-}> = ({ value, color, animate, duration }) => {
+}) {
   const { number: target, prefix, suffix, decimals, hasCommas } = parseValue(value);
   const [display, setDisplay] = useState(animate ? `${prefix}0${suffix}` : String(value));
   const hasAnimated = useRef(false);
@@ -103,9 +103,9 @@ const AnimatedValue: React.FC<{
       {display}
     </div>
   );
-};
+}
 
-export const StatsCard: React.FC<StatsCardProps> = ({
+export function StatsCard({
   label,
   value,
   trend,
@@ -116,7 +116,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   className,
   style,
   ...rest
-}) => {
+}: StatsCardProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -170,6 +170,4 @@ export const StatsCard: React.FC<StatsCardProps> = ({
       )}
     </div>
   );
-};
-
-StatsCard.displayName = "StatsCard";
+}

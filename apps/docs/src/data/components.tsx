@@ -76,6 +76,45 @@ import {
   ColorPicker,
   SegmentedControl,
   Countdown,
+  ImageGallery,
+  PasswordInput,
+  NumberInput,
+  PhoneInput,
+  PinInput,
+  InputGroup,
+  FormField,
+  AreaChart,
+  RadarChart,
+  GaugeChart,
+  Sparkline,
+  UserCard,
+  TestimonialCard,
+  NotificationCard,
+  CodeBlock,
+  AspectRatio,
+  ScrollArea,
+  ResizablePanels,
+  Masonry,
+  Container,
+  Dock,
+  Steps,
+  LinkPreview,
+  CommandMenu,
+  SnackbarProvider,
+  useSnackbar,
+  Banner,
+  InlineMessage,
+  AudioPlayer,
+  VideoPlayer,
+  CopyButton,
+  Kbd,
+  InfiniteScroll,
+  QRCode,
+  MusicPlayerCard,
+  WeatherCard,
+  ChatBubble,
+  NotificationCenter,
+  Onboarding,
 } from "neumorui";
 
 /* ─── Prop type definition ─── */
@@ -1103,6 +1142,23 @@ function OTPInputDemo() {
         {otp.length > 0 ? `Entered: ${otp}` : "Type or paste your code"}
       </p>
     </div>
+  );
+}
+
+function ImageGalleryDemo() {
+  return (
+    <ImageGallery
+      columns={3}
+      gap={12}
+      images={[
+        { src: "https://picsum.photos/seed/neu1/300/300", alt: "Sample 1", caption: "Mountain landscape" },
+        { src: "https://picsum.photos/seed/neu2/300/300", alt: "Sample 2", caption: "Ocean view" },
+        { src: "https://picsum.photos/seed/neu3/300/300", alt: "Sample 3" },
+        { src: "https://picsum.photos/seed/neu4/300/300", alt: "Sample 4", caption: "City lights" },
+        { src: "https://picsum.photos/seed/neu5/300/300", alt: "Sample 5" },
+        { src: "https://picsum.photos/seed/neu6/300/300", alt: "Sample 6" },
+      ]}
+    />
   );
 }
 
@@ -2993,6 +3049,32 @@ function App() {
     ],
   },
   {
+    slug: "image-gallery",
+    name: "ImageGallery",
+    category: "Data Display",
+    description: "Responsive image grid with neumorphic hover effects, lightbox viewer, keyboard navigation, and captions.",
+    preview: <ImageGalleryDemo />,
+    code: `import { ImageGallery } from "neumorui";
+
+<ImageGallery
+  columns={3}
+  gap={12}
+  lightbox
+  images={[
+    { src: "/photo1.jpg", alt: "Photo 1", caption: "My caption" },
+    { src: "/photo2.jpg", alt: "Photo 2" },
+    { src: "/photo3.jpg", alt: "Photo 3" },
+  ]}
+/>`,
+    props: [
+      { name: "images", type: "GalleryImage[]", default: "[]" },
+      { name: "columns", type: "number", default: "3" },
+      { name: "gap", type: "number", default: "12" },
+      { name: "rounded", type: "number", default: "16" },
+      { name: "lightbox", type: "boolean", default: "true" },
+    ],
+  },
+  {
     slug: "countdown",
     name: "Countdown",
     category: "Data Display",
@@ -3050,6 +3132,1587 @@ function App() {
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
       { name: "fullWidth", type: "boolean", default: "false" },
       { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── PasswordInput ──
+  {
+    slug: "password-input",
+    name: "PasswordInput",
+    category: "Form",
+    description: "Password input with eye toggle visibility, strength meter bar, and neumorphic inset styling.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "340px" }}>
+        <PasswordInput label="Password" placeholder="Enter password" showStrength />
+        <PasswordInput label="Confirm Password" placeholder="Re-enter password" />
+      </div>
+    ),
+    code: `import { PasswordInput } from "neumorui";
+
+<PasswordInput
+  label="Password"
+  placeholder="Enter password"
+  showStrength
+/>
+
+<PasswordInput
+  label="Confirm Password"
+  placeholder="Re-enter password"
+  error="Passwords do not match"
+/>`,
+    props: [
+      { name: "label", type: "string", default: "-" },
+      { name: "helperText", type: "string", default: "-" },
+      { name: "error", type: "string", default: "-" },
+      { name: "showStrength", type: "boolean", default: "false" },
+      { name: "placeholder", type: "string", default: "-" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── NumberInput ──
+  {
+    slug: "number-input",
+    name: "NumberInput",
+    category: "Form",
+    description: "Numeric stepper input with neumorphic +/− buttons, min/max/step support, and mobile-friendly inputMode.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "240px" }}>
+        <NumberInput label="Quantity" defaultValue={1} min={0} max={99} />
+        <NumberInput label="Price" defaultValue={10} step={5} min={0} />
+      </div>
+    ),
+    code: `import { NumberInput } from "neumorui";
+
+<NumberInput
+  label="Quantity"
+  defaultValue={1}
+  min={0}
+  max={99}
+/>
+
+<NumberInput
+  label="Price"
+  defaultValue={10}
+  step={5}
+  min={0}
+  onChange={(val) => console.log(val)}
+/>`,
+    props: [
+      { name: "label", type: "string", default: "-" },
+      { name: "value", type: "number", default: "-" },
+      { name: "defaultValue", type: "number", default: "0" },
+      { name: "onChange", type: "(value: number) => void", default: "-" },
+      { name: "min", type: "number", default: "-Infinity" },
+      { name: "max", type: "number", default: "Infinity" },
+      { name: "step", type: "number", default: "1" },
+      { name: "helperText", type: "string", default: "-" },
+      { name: "error", type: "string", default: "-" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── PhoneInput ──
+  {
+    slug: "phone-input",
+    name: "PhoneInput",
+    category: "Form",
+    description: "International phone input with country flag dropdown, dial code, search, and auto-format.",
+    preview: (
+      <div style={{ maxWidth: "360px" }}>
+        <PhoneInput label="Phone Number" defaultCountry="BD" />
+      </div>
+    ),
+    code: `import { PhoneInput } from "neumorui";
+
+<PhoneInput
+  label="Phone Number"
+  defaultCountry="BD"
+  onChange={(full, dial, phone) => {
+    console.log(full, dial, phone);
+  }}
+/>`,
+    props: [
+      { name: "label", type: "string", default: "-" },
+      { name: "value", type: "string", default: "-" },
+      { name: "onChange", type: "(full, dial, phone) => void", default: "-" },
+      { name: "defaultCountry", type: "string", default: '"BD"' },
+      { name: "countries", type: "CountryCode[]", default: "20 preset countries" },
+      { name: "placeholder", type: "string", default: '"1XX XXXX XXXX"' },
+      { name: "helperText", type: "string", default: "-" },
+      { name: "error", type: "string", default: "-" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── PinInput ──
+  {
+    slug: "pin-input",
+    name: "PinInput",
+    category: "Form",
+    description: "Individual digit PIN input with auto-focus advance, paste support, mask mode, and 3 sizes.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        <PinInput label="Enter PIN" length={4} size="md" />
+        <PinInput label="OTP (masked)" length={6} size="sm" mask />
+      </div>
+    ),
+    code: `import { PinInput } from "neumorui";
+
+<PinInput
+  label="Enter PIN"
+  length={4}
+  onComplete={(pin) => console.log("PIN:", pin)}
+/>
+
+<PinInput
+  label="OTP (masked)"
+  length={6}
+  mask
+  size="sm"
+/>`,
+    props: [
+      { name: "length", type: "number", default: "4" },
+      { name: "label", type: "string", default: "-" },
+      { name: "mask", type: "boolean", default: "false" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+      { name: "onChange", type: "(value: string) => void", default: "-" },
+      { name: "onComplete", type: "(value: string) => void", default: "-" },
+      { name: "helperText", type: "string", default: "-" },
+      { name: "error", type: "string", default: "-" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── InputGroup ──
+  {
+    slug: "input-group",
+    name: "InputGroup",
+    category: "Form",
+    description: "Input wrapper with left/right addons and inline elements for prefix, suffix, and icon slots.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "360px" }}>
+        <InputGroup label="Website" leftAddon="https://" placeholder="example.com" />
+        <InputGroup label="Email" rightAddon="@gmail.com" placeholder="username" />
+        <InputGroup label="Price" leftAddon="$" rightAddon=".00" placeholder="0" />
+      </div>
+    ),
+    code: `import { InputGroup } from "neumorui";
+
+<InputGroup
+  label="Website"
+  leftAddon="https://"
+  placeholder="example.com"
+/>
+
+<InputGroup
+  label="Email"
+  rightAddon="@gmail.com"
+  placeholder="username"
+/>
+
+<InputGroup
+  label="Price"
+  leftAddon="$"
+  rightAddon=".00"
+  placeholder="0"
+/>`,
+    props: [
+      { name: "label", type: "string", default: "-" },
+      { name: "leftAddon", type: "ReactNode", default: "-" },
+      { name: "rightAddon", type: "ReactNode", default: "-" },
+      { name: "leftElement", type: "ReactNode", default: "-" },
+      { name: "rightElement", type: "ReactNode", default: "-" },
+      { name: "helperText", type: "string", default: "-" },
+      { name: "error", type: "string", default: "-" },
+      { name: "placeholder", type: "string", default: "-" },
+    ],
+  },
+
+  // ── FormField ──
+  {
+    slug: "form-field",
+    name: "FormField",
+    category: "Form",
+    description: "Consistent form layout wrapper with label, error, helper text, required indicator, and horizontal mode.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "360px" }}>
+        <FormField label="Email" required helperText="We'll never share your email.">
+          <Input placeholder="you@example.com" />
+        </FormField>
+        <FormField label="Name" error="Name is required" required>
+          <Input placeholder="John Doe" />
+        </FormField>
+        <FormField label="Bio" horizontal>
+          <Input placeholder="Tell us about yourself" />
+        </FormField>
+      </div>
+    ),
+    code: `import { FormField, Input } from "neumorui";
+
+<FormField label="Email" required helperText="We'll never share your email.">
+  <Input placeholder="you@example.com" />
+</FormField>
+
+<FormField label="Name" error="Name is required" required>
+  <Input placeholder="John Doe" />
+</FormField>
+
+{/* Horizontal layout */}
+<FormField label="Bio" horizontal>
+  <Input placeholder="Tell us about yourself" />
+</FormField>`,
+    props: [
+      { name: "label", type: "string", default: "-" },
+      { name: "htmlFor", type: "string", default: "auto from label" },
+      { name: "helperText", type: "string", default: "-" },
+      { name: "error", type: "string", default: "-" },
+      { name: "required", type: "boolean", default: "false" },
+      { name: "horizontal", type: "boolean", default: "false" },
+      { name: "children", type: "ReactNode", default: "-" },
+    ],
+  },
+
+  // ── AreaChart ──
+  {
+    slug: "area-chart",
+    name: "AreaChart",
+    category: "Data Display",
+    description: "Gradient-filled area chart with smooth bezier curves, grid lines, dots, and animated draw.",
+    preview: (
+      <AreaChart
+        data={[
+          { label: "Mon", value: 30 },
+          { label: "Tue", value: 58 },
+          { label: "Wed", value: 42 },
+          { label: "Thu", value: 75 },
+          { label: "Fri", value: 62 },
+          { label: "Sat", value: 88 },
+          { label: "Sun", value: 70 },
+        ]}
+        height={160}
+        showValues
+      />
+    ),
+    code: `import { AreaChart } from "neumorui";
+
+<AreaChart
+  data={[
+    { label: "Mon", value: 30 },
+    { label: "Tue", value: 58 },
+    { label: "Wed", value: 42 },
+    { label: "Thu", value: 75 },
+    { label: "Fri", value: 62 },
+    { label: "Sat", value: 88 },
+    { label: "Sun", value: 70 },
+  ]}
+  height={160}
+  showValues
+/>`,
+    props: [
+      { name: "data", type: "AreaChartDataItem[]", default: "[]" },
+      { name: "height", type: "number", default: "160" },
+      { name: "color", type: "string", default: '"#6c7ef8"' },
+      { name: "gradientOpacity", type: "number", default: "0.35" },
+      { name: "showDots", type: "boolean", default: "true" },
+      { name: "showGrid", type: "boolean", default: "true" },
+      { name: "showLabels", type: "boolean", default: "true" },
+      { name: "showValues", type: "boolean", default: "false" },
+      { name: "animate", type: "boolean", default: "true" },
+    ],
+  },
+
+  // ── RadarChart ──
+  {
+    slug: "radar-chart",
+    name: "RadarChart",
+    category: "Data Display",
+    description: "Spider/radar chart for multi-axis comparison with animated fill, labels, and configurable rings.",
+    preview: (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <RadarChart
+          data={[
+            { label: "Speed", value: 85 },
+            { label: "Power", value: 70 },
+            { label: "Defense", value: 60 },
+            { label: "Agility", value: 90 },
+            { label: "Stamina", value: 75 },
+          ]}
+          size={220}
+          showValues
+        />
+      </div>
+    ),
+    code: `import { RadarChart } from "neumorui";
+
+<RadarChart
+  data={[
+    { label: "Speed", value: 85 },
+    { label: "Power", value: 70 },
+    { label: "Defense", value: 60 },
+    { label: "Agility", value: 90 },
+    { label: "Stamina", value: 75 },
+  ]}
+  size={220}
+  showValues
+/>`,
+    props: [
+      { name: "data", type: "RadarChartDataItem[]", default: "[]" },
+      { name: "size", type: "number", default: "240" },
+      { name: "color", type: "string", default: '"#6c7ef8"' },
+      { name: "maxValue", type: "number", default: "100" },
+      { name: "showLabels", type: "boolean", default: "true" },
+      { name: "showValues", type: "boolean", default: "false" },
+      { name: "rings", type: "number", default: "4" },
+      { name: "animate", type: "boolean", default: "true" },
+    ],
+  },
+
+  // ── GaugeChart ──
+  {
+    slug: "gauge-chart",
+    name: "GaugeChart",
+    category: "Data Display",
+    description: "Circular gauge/speedometer with animated arc fill, auto-color based on value, and center label.",
+    preview: (
+      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
+        <GaugeChart value={82} label="Score" size={140} />
+        <GaugeChart value={45} label="CPU" suffix="%" size={140} />
+        <GaugeChart value={28} max={100} label="Low" size={140} />
+      </div>
+    ),
+    code: `import { GaugeChart } from "neumorui";
+
+<GaugeChart value={82} label="Score" />
+<GaugeChart value={45} label="CPU" suffix="%" />
+<GaugeChart value={28} label="Low" />`,
+    props: [
+      { name: "value", type: "number", default: "-" },
+      { name: "max", type: "number", default: "100" },
+      { name: "size", type: "number", default: "160" },
+      { name: "strokeWidth", type: "number", default: "14" },
+      { name: "color", type: "string", default: "auto (green/yellow/red)" },
+      { name: "label", type: "string", default: "-" },
+      { name: "showValue", type: "boolean", default: "true" },
+      { name: "suffix", type: "string", default: '""' },
+      { name: "animate", type: "boolean", default: "true" },
+    ],
+  },
+
+  // ── Sparkline ──
+  {
+    slug: "sparkline",
+    name: "Sparkline",
+    category: "Data Display",
+    description: "Tiny inline SVG chart for embedding in tables, stat cards, or inline text.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--neu-text-primary)", minWidth: "60px" }}>Revenue</span>
+          <Sparkline data={[20, 35, 28, 50, 42, 65, 58, 72]} width={120} height={30} color="var(--neu-success)" />
+          <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--neu-success)" }}>+18%</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--neu-text-primary)", minWidth: "60px" }}>Users</span>
+          <Sparkline data={[60, 55, 48, 52, 45, 38, 42, 35]} width={120} height={30} color="var(--neu-danger)" />
+          <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--neu-danger)" }}>-12%</span>
+        </div>
+      </div>
+    ),
+    code: `import { Sparkline } from "neumorui";
+
+<Sparkline
+  data={[20, 35, 28, 50, 42, 65, 58, 72]}
+  width={120}
+  height={30}
+  color="var(--neu-success)"
+/>`,
+    props: [
+      { name: "data", type: "number[]", default: "[]" },
+      { name: "width", type: "number", default: "120" },
+      { name: "height", type: "number", default: "32" },
+      { name: "color", type: "string", default: '"#6c7ef8"' },
+      { name: "showFill", type: "boolean", default: "true" },
+      { name: "strokeWidth", type: "number", default: "1.5" },
+      { name: "animate", type: "boolean", default: "true" },
+    ],
+  },
+
+  // ── UserCard ──
+  {
+    slug: "user-card",
+    name: "UserCard",
+    category: "Data Display",
+    description: "Profile card with cover, avatar, name, role, bio, and social link buttons.",
+    preview: (
+      <div style={{ maxWidth: "280px" }}>
+        <UserCard
+          name="Jane Cooper"
+          role="Product Designer"
+          bio="Creating beautiful interfaces and delightful user experiences."
+          avatar="https://i.pravatar.cc/150?img=5"
+          socialLinks={[
+            { icon: "🐦", href: "#", label: "Twitter" },
+            { icon: "💼", href: "#", label: "LinkedIn" },
+            { icon: "🐙", href: "#", label: "GitHub" },
+          ]}
+        />
+      </div>
+    ),
+    code: `import { UserCard } from "neumorui";
+
+<UserCard
+  name="Jane Cooper"
+  role="Product Designer"
+  bio="Creating beautiful interfaces."
+  avatar="https://i.pravatar.cc/150?img=5"
+  socialLinks={[
+    { icon: "🐦", href: "#", label: "Twitter" },
+    { icon: "💼", href: "#", label: "LinkedIn" },
+    { icon: "🐙", href: "#", label: "GitHub" },
+  ]}
+/>`,
+    props: [
+      { name: "name", type: "string", default: "-" },
+      { name: "role", type: "string", default: "-" },
+      { name: "avatar", type: "string", default: "-" },
+      { name: "initials", type: "string", default: "auto from name" },
+      { name: "bio", type: "string", default: "-" },
+      { name: "socialLinks", type: "SocialLink[]", default: "[]" },
+      { name: "coverColor", type: "string", default: "var(--neu-accent)" },
+      { name: "onClick", type: "() => void", default: "-" },
+    ],
+  },
+
+  // ── TestimonialCard ──
+  {
+    slug: "testimonial-card",
+    name: "TestimonialCard",
+    category: "Data Display",
+    description: "Customer review card with quote, avatar, author name, role, and star rating.",
+    preview: (
+      <div style={{ maxWidth: "340px" }}>
+        <TestimonialCard
+          quote="NeumorUI made our app look premium without hiring a designer. The neumorphic style is beautiful and consistent."
+          author="Sarah Chen"
+          role="CTO, StartupXYZ"
+          avatar="https://i.pravatar.cc/150?img=32"
+          rating={5}
+        />
+      </div>
+    ),
+    code: `import { TestimonialCard } from "neumorui";
+
+<TestimonialCard
+  quote="NeumorUI made our app look premium without hiring a designer."
+  author="Sarah Chen"
+  role="CTO, StartupXYZ"
+  avatar="https://i.pravatar.cc/150?img=32"
+  rating={5}
+/>`,
+    props: [
+      { name: "quote", type: "string", default: "-" },
+      { name: "author", type: "string", default: "-" },
+      { name: "role", type: "string", default: "-" },
+      { name: "avatar", type: "string", default: "-" },
+      { name: "rating", type: "number", default: "-" },
+      { name: "maxRating", type: "number", default: "5" },
+    ],
+  },
+
+  // ── NotificationCard ──
+  {
+    slug: "notification-card",
+    name: "NotificationCard",
+    category: "Data Display",
+    description: "Notification list item with icon, title, description, timestamp, unread indicator, and dismiss.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "400px" }}>
+        <NotificationCard
+          icon="📦"
+          title="New order received"
+          description="Order #1234 has been placed by John Doe."
+          time="2 min ago"
+          variant="success"
+          unread
+          onDismiss={() => {}}
+        />
+        <NotificationCard
+          icon="⚠️"
+          title="Server warning"
+          description="CPU usage exceeded 90% threshold."
+          time="15 min ago"
+          variant="warning"
+        />
+        <NotificationCard
+          icon="💬"
+          title="New comment"
+          description="Alex replied to your post."
+          time="1 hour ago"
+        />
+      </div>
+    ),
+    code: `import { NotificationCard } from "neumorui";
+
+<NotificationCard
+  icon="📦"
+  title="New order received"
+  description="Order #1234 has been placed."
+  time="2 min ago"
+  variant="success"
+  unread
+  onDismiss={() => {}}
+/>`,
+    props: [
+      { name: "icon", type: "ReactNode", default: "-" },
+      { name: "title", type: "string", default: "-" },
+      { name: "description", type: "string", default: "-" },
+      { name: "time", type: "string", default: "-" },
+      { name: "variant", type: '"default" | "success" | "warning" | "danger" | "info"', default: '"default"' },
+      { name: "unread", type: "boolean", default: "false" },
+      { name: "action", type: "ReactNode", default: "-" },
+      { name: "onDismiss", type: "() => void", default: "-" },
+      { name: "onClick", type: "() => void", default: "-" },
+    ],
+  },
+
+  // ── CodeBlock ──
+  {
+    slug: "code-block",
+    name: "CodeBlock",
+    category: "Data Display",
+    description: "Code display block with line numbers, language badge, copy button, and monospace styling.",
+    preview: (
+      <CodeBlock
+        title="App.tsx"
+        language="tsx"
+        code={`import { Button, Card } from "neumorui";
+
+export function App() {
+  return (
+    <Card variant="raised">
+      <h1>Hello NeumorUI</h1>
+      <Button variant="primary">
+        Get Started
+      </Button>
+    </Card>
+  );
+}`}
+      />
+    ),
+    code: `import { CodeBlock } from "neumorui";
+
+<CodeBlock
+  title="App.tsx"
+  language="tsx"
+  code={\`import { Button } from "neumorui";
+
+<Button variant="primary">
+  Click me
+</Button>\`}
+/>`,
+    props: [
+      { name: "code", type: "string", default: "-" },
+      { name: "language", type: "string", default: '"tsx"' },
+      { name: "title", type: "string", default: "-" },
+      { name: "showLineNumbers", type: "boolean", default: "true" },
+      { name: "showCopyButton", type: "boolean", default: "true" },
+      { name: "maxHeight", type: "number", default: "-" },
+    ],
+  },
+
+  // ── AspectRatio ──
+  {
+    slug: "aspect-ratio",
+    name: "AspectRatio",
+    category: "Layout",
+    description: "Fixed aspect ratio container for images, videos, and embeds. Supports any custom ratio.",
+    preview: (
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+        <div style={{ width: "200px", borderRadius: "16px", overflow: "hidden", boxShadow: "var(--neu-shadow-raised)" }}>
+          <AspectRatio ratio={16 / 9}>
+            <img src="https://picsum.photos/seed/ar1/400/225" alt="16:9" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </AspectRatio>
+        </div>
+        <div style={{ width: "120px", borderRadius: "16px", overflow: "hidden", boxShadow: "var(--neu-shadow-raised)" }}>
+          <AspectRatio ratio={1}>
+            <img src="https://picsum.photos/seed/ar2/200/200" alt="1:1" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </AspectRatio>
+        </div>
+        <div style={{ width: "140px", borderRadius: "16px", overflow: "hidden", boxShadow: "var(--neu-shadow-raised)" }}>
+          <AspectRatio ratio={4 / 3}>
+            <img src="https://picsum.photos/seed/ar3/400/300" alt="4:3" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </AspectRatio>
+        </div>
+      </div>
+    ),
+    code: `import { AspectRatio } from "neumorui";
+
+{/* 16:9 Video container */}
+<AspectRatio ratio={16 / 9}>
+  <img src="/photo.jpg" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+</AspectRatio>
+
+{/* Square */}
+<AspectRatio ratio={1}>
+  <img src="/avatar.jpg" ... />
+</AspectRatio>`,
+    props: [
+      { name: "ratio", type: "number", default: "16/9" },
+      { name: "children", type: "ReactNode", default: "-" },
+    ],
+  },
+
+  // ── ScrollArea ──
+  {
+    slug: "scroll-area",
+    name: "ScrollArea",
+    category: "Layout",
+    description: "Custom neumorphic scrollbar with auto-hide, drag support, and smooth scrolling.",
+    preview: (
+      <div style={{ maxWidth: "320px" }}>
+        <ScrollArea maxHeight={180}>
+          <div style={{ padding: "16px" }}>
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: "10px 14px",
+                  marginBottom: "8px",
+                  borderRadius: "12px",
+                  background: "var(--neu-bg)",
+                  boxShadow: "var(--neu-shadow-raised-sm)",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "var(--neu-text-primary)",
+                }}
+              >
+                List item {i + 1}
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+      </div>
+    ),
+    code: `import { ScrollArea } from "neumorui";
+
+<ScrollArea maxHeight={200}>
+  <div style={{ padding: "16px" }}>
+    {items.map((item) => (
+      <div key={item.id}>{item.name}</div>
+    ))}
+  </div>
+</ScrollArea>`,
+    props: [
+      { name: "children", type: "ReactNode", default: "-" },
+      { name: "maxHeight", type: "number | string", default: "300" },
+      { name: "hideScrollbar", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── ResizablePanels ──
+  {
+    slug: "resizable-panels",
+    name: "ResizablePanels",
+    category: "Layout",
+    description: "Draggable split pane with horizontal/vertical direction, min/max constraints, and touch support.",
+    preview: (
+      <ResizablePanels defaultSize={40} minSize={25} maxSize={75} style={{ height: "180px" }}>
+        <div style={{ padding: "16px", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--neu-text-secondary)" }}>Panel A</span>
+        </div>
+        <div style={{ padding: "16px", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--neu-text-secondary)" }}>Panel B</span>
+        </div>
+      </ResizablePanels>
+    ),
+    code: `import { ResizablePanels } from "neumorui";
+
+<ResizablePanels defaultSize={40} minSize={25} maxSize={75}>
+  <div>Panel A — sidebar</div>
+  <div>Panel B — content</div>
+</ResizablePanels>
+
+{/* Vertical split */}
+<ResizablePanels direction="vertical">
+  <div>Top panel</div>
+  <div>Bottom panel</div>
+</ResizablePanels>`,
+    props: [
+      { name: "direction", type: '"horizontal" | "vertical"', default: '"horizontal"' },
+      { name: "defaultSize", type: "number", default: "50" },
+      { name: "minSize", type: "number", default: "20" },
+      { name: "maxSize", type: "number", default: "80" },
+      { name: "children", type: "[ReactNode, ReactNode]", default: "-" },
+    ],
+  },
+
+  // ── Masonry ──
+  {
+    slug: "masonry",
+    name: "Masonry",
+    category: "Layout",
+    description: "Pinterest-style masonry grid layout with responsive column count and gap control.",
+    preview: (
+      <Masonry columns={3} gap={10}>
+        {[80, 120, 100, 140, 90, 110, 130, 95, 115].map((h, i) => (
+          <div
+            key={i}
+            style={{
+              height: `${h}px`,
+              borderRadius: "14px",
+              background: "var(--neu-bg)",
+              boxShadow: "var(--neu-shadow-raised-sm)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "12px",
+              fontWeight: 700,
+              color: "var(--neu-text-muted)",
+            }}
+          >
+            {h}px
+          </div>
+        ))}
+      </Masonry>
+    ),
+    code: `import { Masonry } from "neumorui";
+
+<Masonry columns={3} gap={12}>
+  <Card>Short</Card>
+  <Card>Taller card with more content</Card>
+  <Card>Medium</Card>
+  {/* Items auto-distribute into columns */}
+</Masonry>`,
+    props: [
+      { name: "columns", type: "number", default: "3" },
+      { name: "gap", type: "number", default: "12" },
+      { name: "children", type: "ReactNode", default: "-" },
+    ],
+  },
+
+  // ── Container ──
+  {
+    slug: "container",
+    name: "Container",
+    category: "Layout",
+    description: "Responsive max-width container with 5 size presets, auto-centering, and optional padding.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        {(["sm", "md", "lg", "xl"] as const).map((sz) => (
+          <Container key={sz} size={sz} style={{ background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-inset-sm)", borderRadius: "12px", padding: "10px 16px" }}>
+            <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--neu-text-secondary)" }}>
+              Container size=&quot;{sz}&quot;
+            </span>
+          </Container>
+        ))}
+      </div>
+    ),
+    code: `import { Container } from "neumorui";
+
+<Container size="lg">
+  <h1>Page content</h1>
+  <p>Centered and responsive.</p>
+</Container>
+
+{/* Sizes: sm(640px), md(768px), lg(1024px), xl(1280px), full(100%) */}`,
+    props: [
+      { name: "size", type: '"sm" | "md" | "lg" | "xl" | "full"', default: '"lg"' },
+      { name: "centered", type: "boolean", default: "true" },
+      { name: "padding", type: "boolean", default: "true" },
+      { name: "children", type: "ReactNode", default: "-" },
+    ],
+  },
+
+  // ── Dock ──
+  {
+    slug: "dock",
+    name: "Dock",
+    category: "Navigation",
+    description: "macOS-style dock bar with icon magnification on hover, tooltips, and badge support.",
+    preview: (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Dock
+          items={[
+            { icon: "🏠", label: "Home" },
+            { icon: "📁", label: "Files", badge: 3 },
+            { icon: "💬", label: "Messages", badge: 12 },
+            { icon: "📷", label: "Photos" },
+            { icon: "🎵", label: "Music" },
+            { icon: "⚙️", label: "Settings" },
+          ]}
+        />
+      </div>
+    ),
+    code: `import { Dock } from "neumorui";
+
+<Dock
+  items={[
+    { icon: "🏠", label: "Home", onClick: () => {} },
+    { icon: "📁", label: "Files", badge: 3 },
+    { icon: "💬", label: "Messages", badge: 12 },
+    { icon: "⚙️", label: "Settings" },
+  ]}
+  magnification={1.6}
+  baseSize={48}
+/>`,
+    props: [
+      { name: "items", type: "DockItem[]", default: "[]" },
+      { name: "position", type: '"bottom" | "top"', default: '"bottom"' },
+      { name: "magnification", type: "number", default: "1.6" },
+      { name: "baseSize", type: "number", default: "48" },
+    ],
+  },
+
+  // ── Steps ──
+  {
+    slug: "steps",
+    name: "Steps",
+    category: "Navigation",
+    description: "Multi-step wizard with done/active/pending states, horizontal and vertical layout, and 3 sizes.",
+    preview: (
+      <Steps
+        current={1}
+        steps={[
+          { title: "Account", description: "Create your account" },
+          { title: "Profile", description: "Set up your profile" },
+          { title: "Review", description: "Review and submit" },
+        ]}
+      />
+    ),
+    code: `import { Steps } from "neumorui";
+
+const [step, setStep] = useState(0);
+
+<Steps
+  current={step}
+  onChange={setStep}
+  steps={[
+    { title: "Account", description: "Create your account" },
+    { title: "Profile", description: "Set up your profile" },
+    { title: "Review", description: "Review and submit" },
+  ]}
+/>`,
+    props: [
+      { name: "steps", type: "StepItem[]", default: "[]" },
+      { name: "current", type: "number", default: "-" },
+      { name: "direction", type: '"horizontal" | "vertical"', default: '"horizontal"' },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+      { name: "onChange", type: "(step: number) => void", default: "-" },
+    ],
+  },
+
+  // ── LinkPreview ──
+  {
+    slug: "link-preview",
+    name: "LinkPreview",
+    category: "Navigation",
+    description: "Hover link preview card with image, title, description, favicon, and domain display.",
+    preview: (
+      <div style={{ fontSize: "14px", fontWeight: 500, color: "var(--neu-text-secondary)", lineHeight: 2 }}>
+        Check out{" "}
+        <LinkPreview
+          href="https://github.com"
+          title="GitHub: Let's build from here"
+          description="GitHub is where over 100 million developers shape the future of software, together."
+          image="https://picsum.photos/seed/github/400/200"
+        >
+          GitHub
+        </LinkPreview>
+        {" "}for open source projects.
+      </div>
+    ),
+    code: `import { LinkPreview } from "neumorui";
+
+<p>
+  Check out{" "}
+  <LinkPreview
+    href="https://github.com"
+    title="GitHub: Let's build from here"
+    description="Where 100M+ developers build software."
+    image="/github-preview.png"
+  >
+    GitHub
+  </LinkPreview>
+  {" "}for projects.
+</p>`,
+    props: [
+      { name: "href", type: "string", default: "-" },
+      { name: "title", type: "string", default: "-" },
+      { name: "description", type: "string", default: "-" },
+      { name: "image", type: "string", default: "-" },
+      { name: "favicon", type: "string", default: "-" },
+      { name: "side", type: '"top" | "bottom"', default: '"top"' },
+      { name: "children", type: "ReactNode", default: "-" },
+    ],
+  },
+
+  // ── CommandMenu ──
+  {
+    slug: "command-menu",
+    name: "CommandMenu",
+    category: "Navigation",
+    description: "Cmd+K command palette with fuzzy search, grouped items, keyboard navigation, and shortcuts.",
+    preview: (() => {
+      function CommandMenuDemo() {
+        const [open, setOpen] = React.useState(false);
+        return (
+          <div>
+            <Button variant="raised" onClick={() => setOpen(true)}>
+              Open Command Menu (⌘K)
+            </Button>
+            <CommandMenu
+              open={open}
+              onOpenChange={setOpen}
+              items={[
+                { id: "home", label: "Go to Home", icon: "🏠", group: "Navigation", shortcut: "⌘H" },
+                { id: "docs", label: "Go to Docs", icon: "📖", group: "Navigation", shortcut: "⌘D" },
+                { id: "search", label: "Search Components", icon: "🔍", group: "Actions", shortcut: "⌘F" },
+                { id: "theme", label: "Toggle Theme", icon: "🌙", group: "Actions", shortcut: "⌘T" },
+                { id: "github", label: "Open GitHub", icon: "🐙", group: "Links" },
+                { id: "npm", label: "Open npm", icon: "📦", group: "Links" },
+              ]}
+            />
+          </div>
+        );
+      }
+      return <CommandMenuDemo />;
+    })(),
+    code: `import { CommandMenu } from "neumorui";
+
+const [open, setOpen] = useState(false);
+
+<CommandMenu
+  open={open}
+  onOpenChange={setOpen}
+  items={[
+    { id: "home", label: "Go to Home", icon: "🏠", group: "Navigation", shortcut: "⌘H" },
+    { id: "theme", label: "Toggle Theme", icon: "🌙", group: "Actions", shortcut: "⌘T" },
+    { id: "github", label: "Open GitHub", icon: "🐙", group: "Links" },
+  ]}
+/>`,
+    props: [
+      { name: "items", type: "CommandMenuItem[]", default: "[]" },
+      { name: "open", type: "boolean", default: "-" },
+      { name: "onOpenChange", type: "(open: boolean) => void", default: "-" },
+      { name: "placeholder", type: "string", default: '"Type a command or search..."' },
+      { name: "emptyMessage", type: "string", default: '"No results found."' },
+      { name: "trigger", type: "string", default: '"k"' },
+    ],
+  },
+
+  // ── Snackbar ──
+  {
+    slug: "snackbar",
+    name: "Snackbar",
+    category: "Feedback",
+    description: "Bottom snackbar notification with action button, auto-dismiss, and 5 variants via useSnackbar hook.",
+    preview: (() => {
+      function SnackbarDemo() {
+        const { snackbar } = useSnackbar();
+        return (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+            <Button variant="raised" onClick={() => snackbar({ message: "File saved successfully!", variant: "success" })}>
+              Success
+            </Button>
+            <Button variant="raised" onClick={() => snackbar({ message: "Something went wrong.", variant: "danger" })}>
+              Error
+            </Button>
+            <Button variant="raised" onClick={() => snackbar({ message: "Item deleted.", action: { label: "Undo", onClick: () => {} } })}>
+              With Action
+            </Button>
+          </div>
+        );
+      }
+      return (
+        <SnackbarProvider>
+          <SnackbarDemo />
+        </SnackbarProvider>
+      );
+    })(),
+    code: `import { SnackbarProvider, useSnackbar } from "neumorui";
+
+// Wrap app with provider
+<SnackbarProvider>
+  <App />
+</SnackbarProvider>
+
+// Use in any component
+function MyComponent() {
+  const { snackbar } = useSnackbar();
+
+  return (
+    <Button onClick={() => snackbar({
+      message: "Item deleted.",
+      variant: "danger",
+      action: { label: "Undo", onClick: () => {} },
+    })}>
+      Delete
+    </Button>
+  );
+}`,
+    props: [
+      { name: "message", type: "string", default: "-" },
+      { name: "variant", type: '"default" | "success" | "danger" | "warning" | "info"', default: '"default"' },
+      { name: "action", type: "{ label: string; onClick: () => void }", default: "-" },
+      { name: "duration", type: "number", default: "4000" },
+    ],
+  },
+
+  // ── Banner ──
+  {
+    slug: "banner",
+    name: "Banner",
+    category: "Feedback",
+    description: "Full-width banner for announcements with icon, action slot, dismiss button, and sticky mode.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <Banner variant="info" icon="ℹ️">
+          System maintenance scheduled for tonight at 11 PM.
+        </Banner>
+        <Banner variant="success" icon="✅">
+          Your profile has been updated successfully!
+        </Banner>
+        <Banner variant="warning" icon="⚠️" action={<Button variant="raised" size="sm">Learn More</Button>}>
+          Your subscription expires in 3 days.
+        </Banner>
+      </div>
+    ),
+    code: `import { Banner, Button } from "neumorui";
+
+<Banner variant="info" icon="ℹ️">
+  System maintenance tonight at 11 PM.
+</Banner>
+
+<Banner
+  variant="warning"
+  icon="⚠️"
+  sticky
+  action={<Button size="sm">Learn More</Button>}
+  onDismiss={() => console.log("dismissed")}
+>
+  Your subscription expires in 3 days.
+</Banner>`,
+    props: [
+      { name: "children", type: "ReactNode", default: "-" },
+      { name: "variant", type: '"default" | "info" | "success" | "warning" | "danger"', default: '"default"' },
+      { name: "position", type: '"top" | "bottom"', default: '"top"' },
+      { name: "icon", type: "ReactNode", default: "-" },
+      { name: "action", type: "ReactNode", default: "-" },
+      { name: "dismissible", type: "boolean", default: "true" },
+      { name: "onDismiss", type: "() => void", default: "-" },
+      { name: "sticky", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── InlineMessage ──
+  {
+    slug: "inline-message",
+    name: "InlineMessage",
+    category: "Feedback",
+    description: "Inline contextual message with 4 variants, left border accent, and icon for form or section feedback.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "380px" }}>
+        <InlineMessage variant="info">This field is optional but recommended.</InlineMessage>
+        <InlineMessage variant="success">Email verified successfully!</InlineMessage>
+        <InlineMessage variant="warning">Password is too short (min 8 chars).</InlineMessage>
+        <InlineMessage variant="danger">This action cannot be undone.</InlineMessage>
+      </div>
+    ),
+    code: `import { InlineMessage } from "neumorui";
+
+<InlineMessage variant="info">
+  This field is optional but recommended.
+</InlineMessage>
+
+<InlineMessage variant="danger">
+  This action cannot be undone.
+</InlineMessage>
+
+<InlineMessage variant="success" icon="🎉">
+  Custom icon support!
+</InlineMessage>`,
+    props: [
+      { name: "variant", type: '"info" | "success" | "warning" | "danger"', default: '"info"' },
+      { name: "icon", type: "ReactNode", default: "auto per variant" },
+      { name: "children", type: "ReactNode", default: "-" },
+    ],
+  },
+
+  // ── AudioPlayer ──
+  {
+    slug: "audio-player",
+    name: "AudioPlayer",
+    category: "Media",
+    description: "Neumorphic audio player with play/pause, seek bar, volume control, cover art, and time display.",
+    preview: (
+      <AudioPlayer
+        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        title="Chill Vibes"
+        artist="SoundHelix"
+      />
+    ),
+    code: `import { AudioPlayer } from "neumorui";
+
+<AudioPlayer
+  src="/audio/song.mp3"
+  title="Chill Vibes"
+  artist="DJ Relax"
+  coverArt="/album-art.jpg"
+/>`,
+    props: [
+      { name: "src", type: "string", default: "-" },
+      { name: "title", type: "string", default: "-" },
+      { name: "artist", type: "string", default: "-" },
+      { name: "coverArt", type: "string", default: "-" },
+    ],
+  },
+
+  // ── VideoPlayer ──
+  {
+    slug: "video-player",
+    name: "VideoPlayer",
+    category: "Media",
+    description: "Custom video player with neumorphic overlay controls, seek, fullscreen, mute, and poster support.",
+    preview: (
+      <div style={{ maxWidth: "400px" }}>
+        <VideoPlayer
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
+          poster="https://picsum.photos/seed/vid/400/225"
+        />
+      </div>
+    ),
+    code: `import { VideoPlayer } from "neumorui";
+
+<VideoPlayer
+  src="/video/demo.mp4"
+  poster="/video-poster.jpg"
+  rounded={18}
+/>`,
+    props: [
+      { name: "src", type: "string", default: "-" },
+      { name: "poster", type: "string", default: "-" },
+      { name: "rounded", type: "number", default: "18" },
+      { name: "autoPlay", type: "boolean", default: "false" },
+      { name: "muted", type: "boolean", default: "false" },
+      { name: "loop", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── CopyButton ──
+  {
+    slug: "copy-button",
+    name: "CopyButton",
+    category: "Utility",
+    description: "Click-to-copy button with Copied! feedback, raised/flat/icon variants, and clipboard API.",
+    preview: (
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
+        <CopyButton text="npm install neumorui" label="Copy" />
+        <CopyButton text="pnpm add neumorui" variant="flat" label="Flat" />
+        <CopyButton text="hello" variant="icon" />
+        <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--neu-text-secondary)", padding: "6px 12px", borderRadius: "10px", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-inset-sm)", fontFamily: "monospace" }}>
+          npm install neumorui
+        </span>
+      </div>
+    ),
+    code: `import { CopyButton } from "neumorui";
+
+<CopyButton text="npm install neumorui" />
+<CopyButton text="some text" variant="icon" />
+<CopyButton text="code" variant="flat" size="sm" />`,
+    props: [
+      { name: "text", type: "string", default: "-" },
+      { name: "label", type: "string", default: '"Copy"' },
+      { name: "copiedLabel", type: "string", default: '"Copied!"' },
+      { name: "variant", type: '"raised" | "flat" | "icon"', default: '"raised"' },
+      { name: "size", type: '"sm" | "md"', default: '"md"' },
+    ],
+  },
+
+  // ── Kbd ──
+  {
+    slug: "kbd",
+    name: "Kbd",
+    category: "Utility",
+    description: "Keyboard shortcut badge with neumorphic raised style and 3 sizes for displaying hotkeys.",
+    preview: (
+      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "center" }}>
+        <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--neu-text-secondary)", display: "flex", alignItems: "center", gap: "4px" }}>
+          <Kbd>⌘</Kbd> + <Kbd>K</Kbd> to open search
+        </span>
+        <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--neu-text-secondary)", display: "flex", alignItems: "center", gap: "4px" }}>
+          <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd> to copy
+        </span>
+        <span style={{ display: "flex", gap: "4px" }}>
+          <Kbd size="sm">Esc</Kbd>
+          <Kbd size="md">Tab</Kbd>
+          <Kbd size="lg">Enter</Kbd>
+        </span>
+      </div>
+    ),
+    code: `import { Kbd } from "neumorui";
+
+<p>Press <Kbd>⌘</Kbd> + <Kbd>K</Kbd> to open search</p>
+<p>Press <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd> to copy</p>
+
+{/* Sizes */}
+<Kbd size="sm">Esc</Kbd>
+<Kbd size="md">Tab</Kbd>
+<Kbd size="lg">Enter</Kbd>`,
+    props: [
+      { name: "children", type: "ReactNode", default: "-" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+    ],
+  },
+
+  // ── InfiniteScroll ──
+  {
+    slug: "infinite-scroll",
+    name: "InfiniteScroll",
+    category: "Utility",
+    description: "Auto-load more on scroll with IntersectionObserver, loading spinner, and end message.",
+    preview: (() => {
+      function InfiniteScrollDemo() {
+        const [items, setItems] = React.useState(Array.from({ length: 8 }, (_, i) => `Item ${i + 1}`));
+        const [loading, setLoading] = React.useState(false);
+        const hasMore = items.length < 20;
+        const loadMore = () => {
+          setLoading(true);
+          setTimeout(() => {
+            setItems((prev) => [
+              ...prev,
+              ...Array.from({ length: 4 }, (_, i) => `Item ${prev.length + i + 1}`),
+            ]);
+            setLoading(false);
+          }, 800);
+        };
+        return (
+          <div style={{ maxHeight: "200px", overflowY: "auto", borderRadius: "14px", boxShadow: "var(--neu-shadow-inset)", padding: "8px" }}>
+            <InfiniteScroll onLoadMore={loadMore} hasMore={hasMore} loading={loading}>
+              {items.map((item, i) => (
+                <div key={i} style={{ padding: "8px 12px", marginBottom: "6px", borderRadius: "10px", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-sm)", fontSize: "12px", fontWeight: 600, color: "var(--neu-text-primary)" }}>
+                  {item}
+                </div>
+              ))}
+            </InfiniteScroll>
+          </div>
+        );
+      }
+      return <InfiniteScrollDemo />;
+    })(),
+    code: `import { InfiniteScroll } from "neumorui";
+
+const [items, setItems] = useState(initialItems);
+const [loading, setLoading] = useState(false);
+
+<InfiniteScroll
+  onLoadMore={loadMore}
+  hasMore={items.length < 100}
+  loading={loading}
+  threshold={100}
+>
+  {items.map((item) => (
+    <div key={item.id}>{item.name}</div>
+  ))}
+</InfiniteScroll>`,
+    props: [
+      { name: "onLoadMore", type: "() => void", default: "-" },
+      { name: "hasMore", type: "boolean", default: "-" },
+      { name: "loading", type: "boolean", default: "false" },
+      { name: "loader", type: "ReactNode", default: "spinner" },
+      { name: "endMessage", type: "ReactNode", default: '"No more items"' },
+      { name: "threshold", type: "number", default: "100" },
+      { name: "children", type: "ReactNode", default: "-" },
+    ],
+  },
+
+  // ── QRCode ──
+  {
+    slug: "qr-code",
+    name: "QRCode",
+    category: "Utility",
+    description: "QR code generator with neumorphic frame, rounded dots, custom colors, and optional label.",
+    preview: (
+      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
+        <QRCode value="https://neumorui.dev" size={140} label="neumorui.dev" />
+        <QRCode value="Hello NeumorUI!" size={140} fgColor="var(--neu-accent)" label="Custom color" />
+      </div>
+    ),
+    code: `import { QRCode } from "neumorui";
+
+<QRCode
+  value="https://neumorui.dev"
+  size={160}
+  label="Scan me"
+/>
+
+<QRCode
+  value="custom data"
+  fgColor="var(--neu-accent)"
+  rounded
+/>`,
+    props: [
+      { name: "value", type: "string", default: "-" },
+      { name: "size", type: "number", default: "160" },
+      { name: "fgColor", type: "string", default: "var(--neu-text-primary)" },
+      { name: "bgColor", type: "string", default: "var(--neu-bg)" },
+      { name: "rounded", type: "boolean", default: "true" },
+      { name: "label", type: "string", default: "-" },
+    ],
+  },
+
+  // ── MusicPlayerCard ──
+  {
+    slug: "music-player-card",
+    name: "MusicPlayerCard",
+    category: "Showpiece",
+    description: "Full music player UI with album art, play controls, progress bar, like button, and shuffle/repeat.",
+    preview: (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <MusicPlayerCard
+          title="Midnight Dreams"
+          artist="NeumorUI"
+          album="Clay Sessions"
+          coverArt="https://picsum.photos/seed/music1/300/300"
+          progress={42}
+          currentTime="1:32"
+          duration="3:45"
+        />
+      </div>
+    ),
+    code: `import { MusicPlayerCard } from "neumorui";
+
+<MusicPlayerCard
+  title="Midnight Dreams"
+  artist="NeumorUI"
+  album="Clay Sessions"
+  coverArt="/album-art.jpg"
+  progress={42}
+  currentTime="1:32"
+  duration="3:45"
+  playing={isPlaying}
+  onPlay={() => play()}
+  onPause={() => pause()}
+  onNext={() => next()}
+  onPrev={() => prev()}
+/>`,
+    props: [
+      { name: "title", type: "string", default: "-" },
+      { name: "artist", type: "string", default: "-" },
+      { name: "album", type: "string", default: "-" },
+      { name: "coverArt", type: "string", default: "-" },
+      { name: "progress", type: "number", default: "0" },
+      { name: "currentTime", type: "string", default: '"0:00"' },
+      { name: "duration", type: "string", default: '"0:00"' },
+      { name: "playing", type: "boolean", default: "false" },
+      { name: "onPlay / onPause", type: "() => void", default: "-" },
+      { name: "onNext / onPrev", type: "() => void", default: "-" },
+    ],
+  },
+
+  // ── WeatherCard ──
+  {
+    slug: "weather-card",
+    name: "WeatherCard",
+    category: "Showpiece",
+    description: "Weather display card with temperature, condition icon, details chips, and multi-day forecast.",
+    preview: (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <WeatherCard
+          location="Dhaka, Bangladesh"
+          temperature={32}
+          condition="Partly Cloudy"
+          icon="⛅"
+          humidity={78}
+          wind="12 km/h"
+          feelsLike={36}
+          forecast={[
+            { day: "Mon", icon: "☀️", high: 34, low: 26 },
+            { day: "Tue", icon: "⛅", high: 32, low: 25 },
+            { day: "Wed", icon: "🌧️", high: 29, low: 24 },
+            { day: "Thu", icon: "⛈️", high: 28, low: 23 },
+            { day: "Fri", icon: "☀️", high: 33, low: 25 },
+          ]}
+        />
+      </div>
+    ),
+    code: `import { WeatherCard } from "neumorui";
+
+<WeatherCard
+  location="Dhaka, Bangladesh"
+  temperature={32}
+  condition="Partly Cloudy"
+  icon="⛅"
+  humidity={78}
+  wind="12 km/h"
+  feelsLike={36}
+  forecast={[
+    { day: "Mon", icon: "☀️", high: 34, low: 26 },
+    { day: "Tue", icon: "⛅", high: 32, low: 25 },
+  ]}
+/>`,
+    props: [
+      { name: "location", type: "string", default: "-" },
+      { name: "temperature", type: "number", default: "-" },
+      { name: "unit", type: '"C" | "F"', default: '"C"' },
+      { name: "condition", type: "string", default: "-" },
+      { name: "icon", type: "string", default: '"☀️"' },
+      { name: "humidity", type: "number", default: "-" },
+      { name: "wind", type: "string", default: "-" },
+      { name: "feelsLike", type: "number", default: "-" },
+      { name: "forecast", type: "ForecastDay[]", default: "[]" },
+    ],
+  },
+
+  // ── ChatBubble ──
+  {
+    slug: "chat-bubble",
+    name: "ChatBubble",
+    category: "Showpiece",
+    description: "Chat message bubble with sent/received variants, avatar, name, timestamp, and read status.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px", maxWidth: "400px" }}>
+        <ChatBubble
+          variant="received"
+          message="Hey! How's the NeumorUI project going?"
+          name="Sarah"
+          avatar="https://i.pravatar.cc/150?img=5"
+          time="10:30 AM"
+        />
+        <ChatBubble
+          variant="sent"
+          message="Going great! Just finished the last batch of components. 98 total now!"
+          time="10:32 AM"
+          status="read"
+        />
+        <ChatBubble
+          variant="received"
+          message="That's amazing! Can't wait to try them out 🎉"
+          name="Sarah"
+          avatar="https://i.pravatar.cc/150?img=5"
+          time="10:33 AM"
+        />
+      </div>
+    ),
+    code: `import { ChatBubble } from "neumorui";
+
+<ChatBubble
+  variant="received"
+  message="Hey! How's it going?"
+  name="Sarah"
+  avatar="/avatar.jpg"
+  time="10:30 AM"
+/>
+
+<ChatBubble
+  variant="sent"
+  message="Going great!"
+  time="10:32 AM"
+  status="read"
+/>`,
+    props: [
+      { name: "message", type: "string", default: "-" },
+      { name: "variant", type: '"sent" | "received"', default: '"received"' },
+      { name: "avatar", type: "string", default: "-" },
+      { name: "name", type: "string", default: "-" },
+      { name: "time", type: "string", default: "-" },
+      { name: "status", type: '"sent" | "delivered" | "read"', default: "-" },
+    ],
+  },
+
+  // ── NotificationCenter ──
+  {
+    slug: "notification-center",
+    name: "NotificationCenter",
+    category: "Showpiece",
+    description: "Dropdown notification panel with bell trigger, badge count, grouped items, read/unread, and clear.",
+    preview: (
+      <div style={{ display: "flex", justifyContent: "center", minHeight: "60px" }}>
+        <NotificationCenter
+          notifications={[
+            { id: "1", icon: "📦", title: "New order received", description: "Order #1234 placed by John", time: "2m ago", group: "Today" },
+            { id: "2", icon: "💬", title: "New comment", description: "Alex replied to your post", time: "15m ago", group: "Today" },
+            { id: "3", icon: "⭐", title: "New review", description: "5-star rating on NeumorUI", time: "1h ago", group: "Today", read: true },
+            { id: "4", icon: "🔔", title: "System update", description: "v2.0 is available", time: "Yesterday", group: "Earlier", read: true },
+          ]}
+          onReadAll={() => {}}
+          onClear={() => {}}
+        />
+      </div>
+    ),
+    code: `import { NotificationCenter } from "neumorui";
+
+<NotificationCenter
+  notifications={[
+    { id: "1", icon: "📦", title: "New order", description: "Order #1234", time: "2m ago", group: "Today" },
+    { id: "2", icon: "💬", title: "New comment", time: "15m ago", group: "Today" },
+    { id: "3", icon: "⭐", title: "New review", time: "1h ago", read: true, group: "Earlier" },
+  ]}
+  onRead={(id) => markRead(id)}
+  onReadAll={() => markAllRead()}
+  onClear={(id) => remove(id)}
+/>`,
+    props: [
+      { name: "notifications", type: "NotificationItem[]", default: "[]" },
+      { name: "onRead", type: "(id: string) => void", default: "-" },
+      { name: "onReadAll", type: "() => void", default: "-" },
+      { name: "onClear", type: "(id: string) => void", default: "-" },
+      { name: "trigger", type: "ReactNode", default: "bell button" },
+    ],
+  },
+
+  // ── Onboarding ──
+  {
+    slug: "onboarding",
+    name: "Onboarding",
+    category: "Showpiece",
+    description: "Step-by-step onboarding flow with spotlight highlight, tooltip, progress bar, and skip/next controls.",
+    preview: (() => {
+      function OnboardingDemo() {
+        const [active, setActive] = React.useState(false);
+        return (
+          <div>
+            <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+              <Button id="onboard-btn" variant="primary" onClick={() => setActive(true)}>
+                Start Onboarding
+              </Button>
+              <span id="onboard-text" style={{ fontSize: "13px", fontWeight: 600, color: "var(--neu-text-secondary)" }}>
+                Click to see the demo
+              </span>
+            </div>
+            <Onboarding
+              active={active}
+              onComplete={() => setActive(false)}
+              onSkip={() => setActive(false)}
+              steps={[
+                { target: "#onboard-btn", title: "Welcome!", description: "This button triggers actions. Click Next to continue.", position: "bottom" },
+                { target: "#onboard-text", title: "Helpful Text", description: "This area shows contextual information about the current state.", position: "bottom" },
+              ]}
+            />
+          </div>
+        );
+      }
+      return <OnboardingDemo />;
+    })(),
+    code: `import { Onboarding } from "neumorui";
+
+const [active, setActive] = useState(true);
+
+<Onboarding
+  active={active}
+  onComplete={() => setActive(false)}
+  onSkip={() => setActive(false)}
+  steps={[
+    { target: "#step1", title: "Welcome!", description: "Let's get started.", position: "bottom" },
+    { target: "#step2", title: "Dashboard", description: "View your stats here.", position: "right" },
+    { target: "#step3", title: "Settings", description: "Configure your preferences.", position: "left" },
+  ]}
+/>`,
+    props: [
+      { name: "steps", type: "OnboardingStep[]", default: "[]" },
+      { name: "active", type: "boolean", default: "true" },
+      { name: "onComplete", type: "() => void", default: "-" },
+      { name: "onSkip", type: "() => void", default: "-" },
     ],
   },
 ];

@@ -30,6 +30,12 @@ const categories: SidebarCategory[] = [
       { slug: "tag-input", name: "TagInput" },
       { slug: "color-picker", name: "ColorPicker" },
       { slug: "segmented-control", name: "SegmentedControl" },
+      { slug: "password-input", name: "PasswordInput" },
+      { slug: "number-input", name: "NumberInput" },
+      { slug: "phone-input", name: "PhoneInput" },
+      { slug: "pin-input", name: "PinInput" },
+      { slug: "input-group", name: "InputGroup" },
+      { slug: "form-field", name: "FormField" },
     ],
   },
   {
@@ -42,6 +48,11 @@ const categories: SidebarCategory[] = [
       { slug: "hero", name: "Hero" },
       { slug: "pricing-card", name: "PricingCard" },
       { slug: "col", name: "Col" },
+      { slug: "aspect-ratio", name: "AspectRatio" },
+      { slug: "scroll-area", name: "ScrollArea" },
+      { slug: "resizable-panels", name: "ResizablePanels" },
+      { slug: "masonry", name: "Masonry" },
+      { slug: "container", name: "Container" },
     ],
   },
   {
@@ -65,7 +76,16 @@ const categories: SidebarCategory[] = [
       { slug: "activity-feed", name: "ActivityFeed" },
       { slug: "timeline", name: "Timeline" },
       { slug: "chip", name: "Chip" },
+      { slug: "image-gallery", name: "ImageGallery" },
       { slug: "countdown", name: "Countdown" },
+      { slug: "area-chart", name: "AreaChart" },
+      { slug: "radar-chart", name: "RadarChart" },
+      { slug: "gauge-chart", name: "GaugeChart" },
+      { slug: "sparkline", name: "Sparkline" },
+      { slug: "user-card", name: "UserCard" },
+      { slug: "testimonial-card", name: "TestimonialCard" },
+      { slug: "notification-card", name: "NotificationCard" },
+      { slug: "code-block", name: "CodeBlock" },
     ],
   },
   {
@@ -82,6 +102,10 @@ const categories: SidebarCategory[] = [
       { slug: "mega-menu", name: "MegaMenu" },
       { slug: "speed-dial", name: "SpeedDial" },
       { slug: "back-to-top", name: "BackToTop" },
+      { slug: "dock", name: "Dock" },
+      { slug: "steps", name: "Steps" },
+      { slug: "link-preview", name: "LinkPreview" },
+      { slug: "command-menu", name: "CommandMenu" },
     ],
   },
   {
@@ -109,6 +133,9 @@ const categories: SidebarCategory[] = [
       { slug: "loading-overlay", name: "LoadingOverlay" },
       { slug: "stepper", name: "Stepper" },
       { slug: "empty-state", name: "EmptyState" },
+      { slug: "snackbar", name: "Snackbar" },
+      { slug: "banner", name: "Banner" },
+      { slug: "inline-message", name: "InlineMessage" },
     ],
   },
   {
@@ -139,6 +166,35 @@ const categories: SidebarCategory[] = [
       { slug: "reveal", name: "Reveal" },
       { slug: "marquee", name: "Marquee" },
       { slug: "carousel", name: "Carousel" },
+    ],
+  },
+  {
+    name: "Showpiece",
+    icon: "💎",
+    items: [
+      { slug: "music-player-card", name: "MusicPlayerCard" },
+      { slug: "weather-card", name: "WeatherCard" },
+      { slug: "chat-bubble", name: "ChatBubble" },
+      { slug: "notification-center", name: "NotificationCenter" },
+      { slug: "onboarding", name: "Onboarding" },
+    ],
+  },
+  {
+    name: "Media",
+    icon: "🎬",
+    items: [
+      { slug: "audio-player", name: "AudioPlayer" },
+      { slug: "video-player", name: "VideoPlayer" },
+    ],
+  },
+  {
+    name: "Utility",
+    icon: "🔧",
+    items: [
+      { slug: "copy-button", name: "CopyButton" },
+      { slug: "kbd", name: "Kbd" },
+      { slug: "infinite-scroll", name: "InfiniteScroll" },
+      { slug: "qr-code", name: "QRCode" },
     ],
   },
 ];
@@ -220,7 +276,7 @@ export const DocsSidebar: React.FC<{
             NeumorUI
           </div>
           <div style={{ fontSize: "10px", color: "var(--neu-text-muted)", fontWeight: 600 }}>
-            61 Components
+            98 Components
           </div>
         </div>
       </Link>

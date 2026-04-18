@@ -6,7 +6,7 @@ import ComponentPageClient from "./ComponentPageClient";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://neumorui.vercel.app";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 /* ── Static params for SSG ── */
@@ -15,8 +15,9 @@ export function generateStaticParams() {
 }
 
 /* ── Dynamic SEO metadata per component ── */
-export function generateMetadata({ params }: PageProps): Metadata {
-  const meta = getComponentMeta(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const meta = getComponentMeta(slug);
 
   if (!meta) {
     return { title: "Component Not Found" };
@@ -56,8 +57,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-export default function ComponentPage({ params }: PageProps) {
-  const meta = getComponentMeta(params.slug);
+export default async function ComponentPage({ params }: PageProps) {
+  const { slug } = await params;
+  const meta = getComponentMeta(slug);
   if (!meta) {
     notFound();
   }
@@ -116,7 +118,7 @@ export default function ComponentPage({ params }: PageProps) {
           }),
         }}
       />
-      <ComponentPageClient slug={params.slug} />
+      <ComponentPageClient slug={slug} />
     </>
   );
 }

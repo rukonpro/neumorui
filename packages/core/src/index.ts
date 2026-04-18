@@ -148,7 +148,69 @@ export { BackToTop } from "./components/BackToTop/BackToTop";
 export { Timeline } from "./components/Timeline/Timeline";
 export { EmptyState } from "./components/EmptyState/EmptyState";
 export { Countdown } from "./components/Countdown/Countdown";
+export { ImageGallery } from "./components/ImageGallery/ImageGallery";
+export type { GalleryImage } from "./components/ImageGallery/ImageGallery";
 export { Chip } from "./components/Chip/Chip";
 export type { TimelineItem } from "./components/Timeline/Timeline";
+
+// Advanced / Showpiece (batch 7 new)
+export { MusicPlayerCard } from "./components/MusicPlayerCard/MusicPlayerCard";
+export { WeatherCard } from "./components/WeatherCard/WeatherCard";
+export type { ForecastDay } from "./components/WeatherCard/WeatherCard";
+export { ChatBubble } from "./components/ChatBubble/ChatBubble";
+export { NotificationCenter } from "./components/NotificationCenter/NotificationCenter";
+export type { NotificationItem } from "./components/NotificationCenter/NotificationCenter";
+export { Onboarding } from "./components/Onboarding/Onboarding";
+export type { OnboardingStep } from "./components/Onboarding/Onboarding";
+
+// Media & Utility (batch 6 new)
+export { AudioPlayer } from "./components/AudioPlayer/AudioPlayer";
+export { VideoPlayer } from "./components/VideoPlayer/VideoPlayer";
+export { CopyButton } from "./components/CopyButton/CopyButton";
+export { Kbd } from "./components/Kbd/Kbd";
+export { InfiniteScroll } from "./components/InfiniteScroll/InfiniteScroll";
+export { QRCode } from "./components/QRCode/QRCode";
+
+// Feedback (batch 5 new)
+export { SnackbarProvider, useSnackbar } from "./components/Snackbar/Snackbar";
+export { Banner } from "./components/Banner/Banner";
+export { InlineMessage } from "./components/InlineMessage/InlineMessage";
+
+// Navigation (batch 4 new)
+export { Dock } from "./components/Dock/Dock";
+export type { DockItem } from "./components/Dock/Dock";
+export { Steps } from "./components/Steps/Steps";
+export type { StepItem } from "./components/Steps/Steps";
+export { LinkPreview } from "./components/LinkPreview/LinkPreview";
+export { CommandMenu } from "./components/CommandMenu/CommandMenu";
+export type { CommandMenuItem } from "./components/CommandMenu/CommandMenu";
+
+// Layout (batch 3 new)
+export { AspectRatio } from "./components/AspectRatio/AspectRatio";
+export { ScrollArea } from "./components/ScrollArea/ScrollArea";
+export { ResizablePanels } from "./components/ResizablePanels/ResizablePanels";
+export { Masonry } from "./components/Masonry/Masonry";
+export { Container } from "./components/Container/Container";
+
+// Data Display (batch 2 new)
+export { AreaChart } from "./components/AreaChart/AreaChart";
+export type { AreaChartDataItem } from "./components/AreaChart/AreaChart";
+export { RadarChart } from "./components/RadarChart/RadarChart";
+export type { RadarChartDataItem } from "./components/RadarChart/RadarChart";
+export { GaugeChart } from "./components/GaugeChart/GaugeChart";
+export { Sparkline } from "./components/Sparkline/Sparkline";
+export { UserCard } from "./components/UserCard/UserCard";
+export { TestimonialCard } from "./components/TestimonialCard/TestimonialCard";
+export { NotificationCard } from "./components/NotificationCard/NotificationCard";
+export { CodeBlock } from "./components/CodeBlock/CodeBlock";
+
+// Form (batch 1 new)
+export { PasswordInput } from "./components/PasswordInput/PasswordInput";
+export { NumberInput } from "./components/NumberInput/NumberInput";
+export { PhoneInput } from "./components/PhoneInput/PhoneInput";
+export type { CountryCode } from "./components/PhoneInput/PhoneInput";
+export { PinInput } from "./components/PinInput/PinInput";
+export { InputGroup } from "./components/InputGroup/InputGroup";
+export { FormField } from "./components/FormField/FormField";
 
 export { cn } from "./utils/cn";
