@@ -7,16 +7,19 @@ import { componentDocs } from "@/data/components";
 import { CodeBlock } from "@/components/CodeBlock";
 
 const categories = [
-  { name: "Form", color: "#6c7ef8", count: 10 },
-  { name: "Layout", color: "#5b9ee0", count: 6 },
-  { name: "Data Display", color: "#4dbfa0", count: 15 },
-  { name: "Navigation", color: "#e8a84b", count: 9 },
-  { name: "Overlay", color: "#e07090", count: 7 },
-  { name: "Feedback", color: "#9c6cf8", count: 6 },
+  { name: "Form", color: "#6c7ef8", count: 21 },
+  { name: "Layout", color: "#5b9ee0", count: 11 },
+  { name: "Data Display", color: "#4dbfa0", count: 27 },
+  { name: "Navigation", color: "#e8a84b", count: 14 },
+  { name: "Overlay", color: "#e07090", count: 8 },
+  { name: "Feedback", color: "#9c6cf8", count: 10 },
   { name: "Disclosure", color: "#6ca8f8", count: 1 },
   { name: "Date", color: "#4db8a0", count: 2 },
   { name: "Command", color: "#e0a84b", count: 2 },
   { name: "Animation", color: "#f86c8e", count: 3 },
+  { name: "Showpiece", color: "#e07060", count: 5 },
+  { name: "Media", color: "#5bbf8a", count: 2 },
+  { name: "Utility", color: "#e8b84b", count: 4 },
 ];
 
 export default function HomePage() {
@@ -44,7 +47,7 @@ export default function HomePage() {
             marginBottom: "20px",
           }}
         >
-          v0.1.0
+          v0.2.1
         </div>
         <h1
           style={{
@@ -66,7 +69,7 @@ export default function HomePage() {
             lineHeight: 1.6,
           }}
         >
-          61 beautiful clay-style React components. Built with TypeScript, styled
+          98 beautiful clay-style React components. Built with TypeScript, styled
           with neumorphic shadows, powered by Radix UI primitives.
         </p>
         <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
@@ -90,8 +93,8 @@ export default function HomePage() {
         }}
       >
         {[
-          { label: "Components", value: "61" },
-          { label: "Categories", value: "10" },
+          { label: "Components", value: "98" },
+          { label: "Categories", value: "13" },
           { label: "TypeScript", value: "100%" },
         ].map((stat) => (
           <div
