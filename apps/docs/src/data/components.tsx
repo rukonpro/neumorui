@@ -115,6 +115,14 @@ import {
   ChatBubble,
   NotificationCenter,
   Onboarding,
+  DateRangePicker,
+  TimePicker,
+  TableOfContents,
+  ThemeCustomizer,
+  MultiSelect,
+  AvatarGroup,
+  RichTextEditor,
+  MarkdownEditor,
 } from "neumorui";
 
 /* ─── Prop type definition ─── */
@@ -4713,6 +4721,262 @@ const [active, setActive] = useState(true);
       { name: "active", type: "boolean", default: "true" },
       { name: "onComplete", type: "() => void", default: "-" },
       { name: "onSkip", type: "() => void", default: "-" },
+    ],
+  },
+
+  // ── DateRangePicker ──
+  {
+    slug: "date-range-picker",
+    name: "DateRangePicker",
+    category: "Date",
+    description: "Date range selector with calendar popover, start/end highlighting, and keyboard navigation.",
+    preview: (
+      <div style={{ maxWidth: "320px" }}>
+        <DateRangePicker label="Stay Period" />
+      </div>
+    ),
+    code: `import { DateRangePicker } from "neumorui";
+
+<DateRangePicker
+  label="Stay Period"
+  onChange={(start, end) => console.log(start, end)}
+/>`,
+    props: [
+      { name: "label", type: "string", default: "-" },
+      { name: "startDate", type: "string", default: "-" },
+      { name: "endDate", type: "string", default: "-" },
+      { name: "onChange", type: "(start, end) => void", default: "-" },
+      { name: "placeholder", type: "string", default: '"Select date range"' },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "error", type: "string", default: "-" },
+    ],
+  },
+
+  // ── TimePicker ──
+  {
+    slug: "time-picker",
+    name: "TimePicker",
+    category: "Date",
+    description: "Time selector with hour/minute spinners, AM/PM toggle, and 24-hour mode support.",
+    preview: (
+      <div style={{ maxWidth: "280px" }}>
+        <TimePicker label="Meeting Time" />
+      </div>
+    ),
+    code: `import { TimePicker } from "neumorui";
+
+<TimePicker
+  label="Meeting Time"
+  onChange={(time) => console.log(time)}
+/>
+
+<TimePicker use24Hour minuteStep={15} />`,
+    props: [
+      { name: "label", type: "string", default: "-" },
+      { name: "value", type: "string", default: "-" },
+      { name: "onChange", type: "(time: string) => void", default: "-" },
+      { name: "use24Hour", type: "boolean", default: "false" },
+      { name: "minuteStep", type: "number", default: "5" },
+      { name: "placeholder", type: "string", default: '"Select time"' },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "error", type: "string", default: "-" },
+    ],
+  },
+
+  // ── TableOfContents ──
+  {
+    slug: "table-of-contents",
+    name: "TableOfContents",
+    category: "Navigation",
+    description: "Auto-tracking table of contents with scroll spy, indented headings, and active indicator.",
+    preview: (
+      <div style={{ maxWidth: "240px" }}>
+        <TableOfContents
+          items={[
+            { id: "intro", text: "Introduction", level: 1 },
+            { id: "install", text: "Installation", level: 1 },
+            { id: "npm", text: "Using npm", level: 2 },
+            { id: "pnpm", text: "Using pnpm", level: 2 },
+            { id: "usage", text: "Usage", level: 1 },
+            { id: "api", text: "API Reference", level: 1 },
+          ]}
+          activeId="install"
+        />
+      </div>
+    ),
+    code: `import { TableOfContents } from "neumorui";
+
+<TableOfContents
+  items={[
+    { id: "intro", text: "Introduction", level: 1 },
+    { id: "install", text: "Installation", level: 1 },
+    { id: "npm", text: "Using npm", level: 2 },
+  ]}
+/>`,
+    props: [
+      { name: "items", type: "TOCItem[]", default: "[]" },
+      { name: "activeId", type: "string", default: "auto (scroll spy)" },
+      { name: "onItemClick", type: "(id: string) => void", default: "-" },
+      { name: "title", type: "string", default: '"On this page"' },
+    ],
+  },
+
+  // ── ThemeCustomizer ──
+  {
+    slug: "theme-customizer",
+    name: "ThemeCustomizer",
+    category: "Utility",
+    description: "Live theme editor with color presets, custom color pickers, and border radius control.",
+    preview: (
+      <ThemeCustomizer />
+    ),
+    code: `import { ThemeCustomizer } from "neumorui";
+
+<ThemeCustomizer
+  onThemeChange={(vars) => console.log(vars)}
+/>`,
+    props: [
+      { name: "onThemeChange", type: "(vars: Record<string, string>) => void", default: "-" },
+      { name: "open", type: "boolean", default: "-" },
+      { name: "onOpenChange", type: "(open: boolean) => void", default: "-" },
+    ],
+  },
+
+  // ── MultiSelect ──
+  {
+    slug: "multi-select",
+    name: "MultiSelect",
+    category: "Form",
+    description: "Multi-option dropdown with tag chips, search filter, checkbox indicators, and max limit.",
+    preview: (
+      <div style={{ maxWidth: "340px" }}>
+        <MultiSelect
+          label="Skills"
+          options={[
+            { value: "react", label: "React" },
+            { value: "typescript", label: "TypeScript" },
+            { value: "node", label: "Node.js" },
+            { value: "python", label: "Python" },
+            { value: "go", label: "Go" },
+            { value: "rust", label: "Rust" },
+          ]}
+          placeholder="Select skills..."
+        />
+      </div>
+    ),
+    code: `import { MultiSelect } from "neumorui";
+
+<MultiSelect
+  label="Skills"
+  options={[
+    { value: "react", label: "React" },
+    { value: "typescript", label: "TypeScript" },
+    { value: "node", label: "Node.js" },
+  ]}
+  onChange={(selected) => console.log(selected)}
+  maxSelected={3}
+/>`,
+    props: [
+      { name: "options", type: "MultiSelectOption[]", default: "[]" },
+      { name: "value", type: "string[]", default: "-" },
+      { name: "onChange", type: "(selected: string[]) => void", default: "-" },
+      { name: "label", type: "string", default: "-" },
+      { name: "placeholder", type: "string", default: '"Select..."' },
+      { name: "maxSelected", type: "number", default: "-" },
+      { name: "searchable", type: "boolean", default: "true" },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "error", type: "string", default: "-" },
+    ],
+  },
+
+  // ── AvatarGroup ──
+  {
+    slug: "avatar-group",
+    name: "AvatarGroup",
+    category: "Data Display",
+    description: "Stacked avatar group with overlap, hover lift, +N overflow indicator, and initials fallback.",
+    preview: (
+      <AvatarGroup
+        avatars={[
+          { src: "https://i.pravatar.cc/150?img=1", name: "Alice" },
+          { src: "https://i.pravatar.cc/150?img=2", name: "Bob" },
+          { src: "https://i.pravatar.cc/150?img=3", name: "Carol" },
+          { name: "Dave" },
+          { name: "Eve" },
+          { name: "Frank" },
+        ]}
+        max={4}
+      />
+    ),
+    code: `import { AvatarGroup } from "neumorui";
+
+<AvatarGroup
+  avatars={[
+    { src: "/avatar1.jpg", name: "Alice" },
+    { src: "/avatar2.jpg", name: "Bob" },
+    { name: "Carol" },
+    { name: "Dave" },
+  ]}
+  max={3}
+  size={44}
+/>`,
+    props: [
+      { name: "avatars", type: "AvatarGroupItem[]", default: "[]" },
+      { name: "max", type: "number", default: "4" },
+      { name: "size", type: "number", default: "40" },
+      { name: "overlap", type: "number", default: "10" },
+    ],
+  },
+
+  // ── RichTextEditor ──
+  {
+    slug: "rich-text-editor",
+    name: "RichTextEditor",
+    category: "Form",
+    description: "WYSIWYG rich text editor with formatting toolbar, headings, lists, links, and code blocks.",
+    preview: (
+      <RichTextEditor label="Content" placeholder="Write something beautiful..." />
+    ),
+    code: `import { RichTextEditor } from "neumorui";
+
+<RichTextEditor
+  label="Content"
+  placeholder="Start writing..."
+  onChange={(html) => console.log(html)}
+/>`,
+    props: [
+      { name: "value", type: "string", default: "-" },
+      { name: "onChange", type: "(html: string) => void", default: "-" },
+      { name: "placeholder", type: "string", default: '"Start writing..."' },
+      { name: "label", type: "string", default: "-" },
+      { name: "minHeight", type: "number", default: "150" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+
+  // ── MarkdownEditor ──
+  {
+    slug: "markdown-editor",
+    name: "MarkdownEditor",
+    category: "Form",
+    description: "Split-pane markdown editor with write/preview tabs, live rendering, and monospace input.",
+    preview: (
+      <MarkdownEditor label="Notes" placeholder="# Hello\n\nWrite **markdown** here..." />
+    ),
+    code: `import { MarkdownEditor } from "neumorui";
+
+<MarkdownEditor
+  label="Notes"
+  placeholder="# Hello\n\nWrite **markdown** here..."
+  onChange={(md) => console.log(md)}
+/>`,
+    props: [
+      { name: "value", type: "string", default: "-" },
+      { name: "onChange", type: "(markdown: string) => void", default: "-" },
+      { name: "placeholder", type: "string", default: '"Write markdown here..."' },
+      { name: "label", type: "string", default: "-" },
+      { name: "minHeight", type: "number", default: "180" },
+      { name: "disabled", type: "boolean", default: "false" },
     ],
   },
 ];

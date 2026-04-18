@@ -142,6 +142,14 @@ export const componentMeta: ComponentMeta[] = [
   { slug: "pin-input", name: "PinInput", category: "Form", description: "Individual digit PIN input with auto-focus advance, paste support, mask mode, and 3 sizes." },
   { slug: "input-group", name: "InputGroup", category: "Form", description: "Input wrapper with left/right addons and inline elements for prefix, suffix, and icon slots." },
   { slug: "form-field", name: "FormField", category: "Form", description: "Consistent form layout wrapper with label, error, helper text, required indicator, and horizontal mode." },
+  { slug: "date-range-picker", name: "DateRangePicker", category: "Date", description: "Date range selector with calendar popover, start/end highlighting, and keyboard navigation." },
+  { slug: "time-picker", name: "TimePicker", category: "Date", description: "Time selector with hour/minute spinners, AM/PM toggle, and 24-hour mode support." },
+  { slug: "table-of-contents", name: "TableOfContents", category: "Navigation", description: "Auto-tracking table of contents with scroll spy, indented headings, and active indicator." },
+  { slug: "theme-customizer", name: "ThemeCustomizer", category: "Utility", description: "Live theme editor with color presets, custom color pickers, and border radius control." },
+  { slug: "multi-select", name: "MultiSelect", category: "Form", description: "Multi-option dropdown with tag chips, search filter, checkbox indicators, and max limit." },
+  { slug: "avatar-group", name: "AvatarGroup", category: "Data Display", description: "Stacked avatar group with overlap, hover lift, +N overflow indicator, and initials fallback." },
+  { slug: "rich-text-editor", name: "RichTextEditor", category: "Form", description: "WYSIWYG rich text editor with formatting toolbar, headings, lists, links, and code blocks." },
+  { slug: "markdown-editor", name: "MarkdownEditor", category: "Form", description: "Split-pane markdown editor with write/preview tabs, live rendering, and monospace input." },
 ];
 
 export function getComponentMeta(slug: string): ComponentMeta | undefined {

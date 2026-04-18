@@ -37,6 +37,9 @@ const categories: SidebarCategory[] = [
       { slug: "pin-input", name: "PinInput" },
       { slug: "input-group", name: "InputGroup" },
       { slug: "form-field", name: "FormField" },
+      { slug: "multi-select", name: "MultiSelect" },
+      { slug: "rich-text-editor", name: "RichTextEditor" },
+      { slug: "markdown-editor", name: "MarkdownEditor" },
     ],
   },
   {
@@ -87,6 +90,7 @@ const categories: SidebarCategory[] = [
       { slug: "testimonial-card", name: "TestimonialCard" },
       { slug: "notification-card", name: "NotificationCard" },
       { slug: "code-block", name: "CodeBlock" },
+      { slug: "avatar-group", name: "AvatarGroup" },
     ],
   },
   {
@@ -107,6 +111,7 @@ const categories: SidebarCategory[] = [
       { slug: "steps", name: "Steps" },
       { slug: "link-preview", name: "LinkPreview" },
       { slug: "command-menu", name: "CommandMenu" },
+      { slug: "table-of-contents", name: "TableOfContents" },
     ],
   },
   {
@@ -150,6 +155,8 @@ const categories: SidebarCategory[] = [
     items: [
       { slug: "calendar", name: "Calendar" },
       { slug: "date-picker", name: "DatePicker" },
+      { slug: "date-range-picker", name: "DateRangePicker" },
+      { slug: "time-picker", name: "TimePicker" },
     ],
   },
   {
@@ -196,6 +203,7 @@ const categories: SidebarCategory[] = [
       { slug: "kbd", name: "Kbd" },
       { slug: "infinite-scroll", name: "InfiniteScroll" },
       { slug: "qr-code", name: "QRCode" },
+      { slug: "theme-customizer", name: "ThemeCustomizer" },
     ],
   },
 ];

@@ -153,6 +153,19 @@ export type { GalleryImage } from "./components/ImageGallery/ImageGallery";
 export { Chip } from "./components/Chip/Chip";
 export type { TimelineItem } from "./components/Timeline/Timeline";
 
+// New components (batch 8)
+export { DateRangePicker } from "./components/DateRangePicker/DateRangePicker";
+export { TimePicker } from "./components/TimePicker/TimePicker";
+export { TableOfContents } from "./components/TableOfContents/TableOfContents";
+export type { TOCItem } from "./components/TableOfContents/TableOfContents";
+export { ThemeCustomizer } from "./components/ThemeCustomizer/ThemeCustomizer";
+export { MultiSelect } from "./components/MultiSelect/MultiSelect";
+export type { MultiSelectOption } from "./components/MultiSelect/MultiSelect";
+export { AvatarGroup } from "./components/AvatarGroup/AvatarGroup";
+export type { AvatarGroupItem } from "./components/AvatarGroup/AvatarGroup";
+export { RichTextEditor } from "./components/RichTextEditor/RichTextEditor";
+export { MarkdownEditor } from "./components/MarkdownEditor/MarkdownEditor";
+
 // Advanced / Showpiece (batch 7 new)
 export { MusicPlayerCard } from "./components/MusicPlayerCard/MusicPlayerCard";
 export { WeatherCard } from "./components/WeatherCard/WeatherCard";
