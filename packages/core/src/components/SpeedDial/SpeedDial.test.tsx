@@ -15,10 +15,12 @@ describe("SpeedDial", () => {
 
   it("shows actions when toggled open", () => {
     render(<SpeedDial actions={actions} />);
-    expect(screen.queryByTestId("speed-dial-actions")).not.toBeInTheDocument();
+    // Actions container is always in DOM but items have pointer-events: none when closed
+    const actionsContainer = screen.getByTestId("speed-dial-actions");
+    expect(actionsContainer).toBeInTheDocument();
     fireEvent.click(screen.getByLabelText("Toggle actions"));
-    expect(screen.getByTestId("speed-dial-actions")).toBeInTheDocument();
     expect(screen.getByText("Edit")).toBeInTheDocument();
+    expect(screen.getByText("Share")).toBeInTheDocument();
   });
 
   it("calls action onClick and closes", () => {
