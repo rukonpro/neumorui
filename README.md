@@ -6,12 +6,13 @@
 
 <p align="center">
   <strong>Beautiful clay-style React component library</strong><br/>
-  61 components · Dark mode · Animations · TypeScript · Radix UI
+  98 components · Dark mode · Animations · TypeScript · Radix UI
 </p>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/neumorui"><img src="https://img.shields.io/npm/v/neumorui?style=flat-square&color=6c7ef8" alt="npm" /></a>
   <a href="https://github.com/rukonpro/neumorui/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="license" /></a>
+  <a href="https://neumorui.vercel.app"><img src="https://img.shields.io/badge/docs-live-6c7ef8?style=flat-square" alt="docs" /></a>
   <a href="https://rukonpro.github.io/neumorui"><img src="https://img.shields.io/badge/storybook-live-ff4785?style=flat-square" alt="storybook" /></a>
 </p>
 
@@ -65,20 +66,23 @@ function LoginPage() {
 }
 ```
 
-## 61 Components
+## 98 Components
 
 | Category | Components |
 |---|---|
-| **Form** (10) | Button, Input, Textarea, Switch, Checkbox, RadioGroup, Select, Slider, ToggleGroup, FileUpload |
-| **Layout** (6) | Card, Grid, Col, Divider, Hero, PricingCard |
-| **Data Display** (15) | Badge, Avatar, Progress, Skeleton, Spinner, DataTable, StatsCard, BarChart, DonutChart, LineChart, Heatmap, ComparisonTable, KanbanBoard, TreeView, ActivityFeed |
-| **Navigation** (9) | Tabs, Breadcrumb, Pagination, Navbar, Sidebar, BottomNav, BrowserTabs, MegaMenu, SpeedDial |
-| **Overlay** (7) | Modal, Popover, Tooltip, DropdownMenu, ContextMenu, Drawer, ConfirmDialog |
-| **Feedback** (6) | Alert, Toast, AnnouncementBar, CookieConsent, LoadingOverlay, Stepper |
+| **Form** (21) | Button, Input, Textarea, Switch, Checkbox, RadioGroup, Select, Slider, ToggleGroup, FileUpload, OTPInput, Rating, TagInput, ColorPicker, SegmentedControl, PasswordInput, NumberInput, PhoneInput, PinInput, InputGroup, FormField |
+| **Layout** (11) | Card, Grid, Col, Divider, Hero, PricingCard, AspectRatio, ScrollArea, ResizablePanels, Masonry, Container |
+| **Data Display** (27) | Badge, Avatar, Progress, Skeleton, Spinner, DataTable, StatsCard, BarChart, DonutChart, LineChart, Heatmap, ComparisonTable, KanbanBoard, TreeView, ActivityFeed, Timeline, Chip, ImageGallery, Countdown, AreaChart, RadarChart, GaugeChart, Sparkline, UserCard, TestimonialCard, NotificationCard, CodeBlock |
+| **Navigation** (14) | Tabs, Breadcrumb, Pagination, Navbar, Sidebar, BottomNav, BrowserTabs, MegaMenu, SpeedDial, BackToTop, Dock, Steps, LinkPreview, CommandMenu |
+| **Overlay** (8) | Modal, Popover, Tooltip, DropdownMenu, ContextMenu, Drawer, ConfirmDialog, Sheet |
+| **Feedback** (10) | Alert, Toast, AnnouncementBar, CookieConsent, LoadingOverlay, Stepper, EmptyState, Snackbar, Banner, InlineMessage |
 | **Disclosure** (1) | Accordion |
 | **Date** (2) | Calendar, DatePicker |
 | **Command** (2) | Command, Combobox |
 | **Animation** (3) | Reveal, Marquee, Carousel |
+| **Showpiece** (5) | MusicPlayerCard, WeatherCard, ChatBubble, NotificationCenter, Onboarding |
+| **Media** (2) | AudioPlayer, VideoPlayer |
+| **Utility** (4) | CopyButton, Kbd, InfiniteScroll, QRCode |
 
 ## Features
 
@@ -90,6 +94,7 @@ function LoginPage() {
 - **TypeScript** — Full type definitions, no `any`
 - **Radix UI** — Accessible primitives for overlays, forms, and navigation
 - **Pure inline styles** — No Tailwind required, zero CSS conflicts
+- **Versioned docs** — Version selector dropdown, each release preserved on its own branch
 - **206 tests** — Smoke tests for every component
 
 ## Dark Mode
@@ -125,22 +130,23 @@ Override CSS variables:
 ## Hooks
 
 ```tsx
-import { useNeuTheme, useReveal, useCountUp, useRipple } from "neumorui";
+import { useNeuTheme, useReveal, useCountUp, useRipple, useSnackbar } from "neumorui";
 
 const { theme, toggleTheme, isDark } = useNeuTheme();
 const { ref, visible } = useReveal();
 const count = useCountUp(9240);
 const { createRipple } = useRipple();
+const { snackbar } = useSnackbar();
 ```
 
 ## Links
 
 | | Link |
 |---|---|
+| **Docs** | [neumorui.vercel.app](https://neumorui.vercel.app) |
 | **npm** | [npmjs.com/package/neumorui](https://www.npmjs.com/package/neumorui) |
 | **Storybook** | [rukonpro.github.io/neumorui](https://rukonpro.github.io/neumorui) |
 | **GitHub** | [github.com/rukonpro/neumorui](https://github.com/rukonpro/neumorui) |
-| **Full API Docs** | [packages/core/README.md](packages/core/README.md) |
 
 ## Development
 
@@ -151,6 +157,17 @@ pnpm --filter docs dev                # Docs at localhost:3001
 pnpm --filter @neumorui/storybook dev # Storybook at localhost:6006
 pnpm --filter neumorui test           # 206 tests
 pnpm build                            # Build all
+```
+
+## Releasing a New Version
+
+```bash
+# 1. Snapshot current docs to a version branch
+./scripts/release-version.sh
+
+# 2. Bump version in packages/core/package.json
+# 3. Update apps/docs/src/data/versions.ts
+# 4. Commit, push, and deploy
 ```
 
 ## Contributing
