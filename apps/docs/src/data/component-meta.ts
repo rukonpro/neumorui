@@ -91,6 +91,19 @@ export const componentMeta: ComponentMeta[] = [
   { slug: "reveal", name: "Reveal", category: "Animation", description: "Scroll-triggered reveal animation using IntersectionObserver." },
   { slug: "marquee", name: "Marquee", category: "Animation", description: "Infinite horizontal scrolling marquee with configurable speed and direction." },
   { slug: "carousel", name: "Carousel", category: "Animation", description: "Slide carousel with prev/next buttons, dot indicators, and autoplay." },
+
+  // ── New components ──
+  { slug: "otp-input", name: "OTPInput", category: "Form", description: "One-time password input with auto-focus, masking, and paste support." },
+  { slug: "rating", name: "Rating", category: "Form", description: "Star or heart rating selector with hover preview, half-star support, and read-only mode." },
+  { slug: "timeline", name: "Timeline", category: "Data Display", description: "Vertical or horizontal event timeline with neumorphic nodes, connector lines, and hover animations." },
+  { slug: "sheet", name: "Sheet", category: "Overlay", description: "Mobile-friendly bottom/side sheet with drag-to-dismiss, backdrop blur, and neumorphic handle." },
+  { slug: "tag-input", name: "TagInput", category: "Form", description: "Multi-tag input with Enter/comma to add, Backspace to remove, paste support, and max limit." },
+  { slug: "back-to-top", name: "BackToTop", category: "Navigation", description: "Floating scroll-to-top button with scroll threshold, smooth scroll, and neumorphic hover/press states." },
+  { slug: "empty-state", name: "EmptyState", category: "Feedback", description: "Placeholder for empty pages with icon, title, description, and call-to-action button." },
+  { slug: "chip", name: "Chip", category: "Data Display", description: "Removable and selectable chip/tag with raised, outlined, and filled variants." },
+  { slug: "color-picker", name: "ColorPicker", category: "Form", description: "Neumorphic color picker with preset swatches, hex input, native picker fallback, and live preview." },
+  { slug: "countdown", name: "Countdown", category: "Data Display", description: "Live countdown timer with flip animation, blinking separators, and customizable units." },
+  { slug: "segmented-control", name: "SegmentedControl", category: "Form", description: "iOS-style segmented toggle with sliding neumorphic indicator, icon support, and fullWidth mode." },
 ];
 
 export function getComponentMeta(slug: string): ComponentMeta | undefined {

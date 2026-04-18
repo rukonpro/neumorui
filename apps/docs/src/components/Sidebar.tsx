@@ -25,6 +25,11 @@ const categories: SidebarCategory[] = [
       { slug: "slider", name: "Slider" },
       { slug: "toggle-group", name: "ToggleGroup" },
       { slug: "file-upload", name: "FileUpload" },
+      { slug: "otp-input", name: "OTPInput" },
+      { slug: "rating", name: "Rating" },
+      { slug: "tag-input", name: "TagInput" },
+      { slug: "color-picker", name: "ColorPicker" },
+      { slug: "segmented-control", name: "SegmentedControl" },
     ],
   },
   {
@@ -58,6 +63,9 @@ const categories: SidebarCategory[] = [
       { slug: "kanban-board", name: "KanbanBoard" },
       { slug: "tree-view", name: "TreeView" },
       { slug: "activity-feed", name: "ActivityFeed" },
+      { slug: "timeline", name: "Timeline" },
+      { slug: "chip", name: "Chip" },
+      { slug: "countdown", name: "Countdown" },
     ],
   },
   {
@@ -73,6 +81,7 @@ const categories: SidebarCategory[] = [
       { slug: "browser-tabs", name: "BrowserTabs" },
       { slug: "mega-menu", name: "MegaMenu" },
       { slug: "speed-dial", name: "SpeedDial" },
+      { slug: "back-to-top", name: "BackToTop" },
     ],
   },
   {
@@ -86,6 +95,7 @@ const categories: SidebarCategory[] = [
       { slug: "context-menu", name: "ContextMenu" },
       { slug: "drawer", name: "Drawer" },
       { slug: "confirm-dialog", name: "ConfirmDialog" },
+      { slug: "sheet", name: "Sheet" },
     ],
   },
   {
@@ -98,6 +108,7 @@ const categories: SidebarCategory[] = [
       { slug: "cookie-consent", name: "CookieConsent" },
       { slug: "loading-overlay", name: "LoadingOverlay" },
       { slug: "stepper", name: "Stepper" },
+      { slug: "empty-state", name: "EmptyState" },
     ],
   },
   {

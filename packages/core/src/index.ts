@@ -131,4 +131,24 @@ export { PricingCard } from "./components/PricingCard/PricingCard";
 // Layout
 export { Grid, Col } from "./components/Grid/Grid";
 
+// Form (new)
+export { OTPInput } from "./components/OTPInput/OTPInput";
+export { Rating } from "./components/Rating/Rating";
+export { TagInput } from "./components/TagInput/TagInput";
+export { ColorPicker } from "./components/ColorPicker/ColorPicker";
+export { SegmentedControl } from "./components/SegmentedControl/SegmentedControl";
+
+// Overlay (new)
+export { Sheet } from "./components/Sheet/Sheet";
+
+// Navigation (new)
+export { BackToTop } from "./components/BackToTop/BackToTop";
+
+// Data Display (new)
+export { Timeline } from "./components/Timeline/Timeline";
+export { EmptyState } from "./components/EmptyState/EmptyState";
+export { Countdown } from "./components/Countdown/Countdown";
+export { Chip } from "./components/Chip/Chip";
+export type { TimelineItem } from "./components/Timeline/Timeline";
+
 export { cn } from "./utils/cn";

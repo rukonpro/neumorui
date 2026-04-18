@@ -65,6 +65,17 @@ import {
   Marquee,
   MarqueeItem,
   Carousel,
+  OTPInput,
+  Rating,
+  Timeline,
+  Sheet,
+  TagInput,
+  BackToTop,
+  EmptyState,
+  Chip,
+  ColorPicker,
+  SegmentedControl,
+  Countdown,
 } from "neumorui";
 
 /* ─── Prop type definition ─── */
@@ -1074,8 +1085,159 @@ function CarouselDemo() {
   );
 }
 
+/* ─── New component demos ─── */
+
+function OTPInputDemo() {
+  const [otp, setOtp] = useState("");
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" }}>
+      <OTPInput
+        length={6}
+        value={otp}
+        onChange={setOtp}
+        onComplete={(code) => alert(`OTP: ${code}`)}
+        label="Enter verification code"
+        autoFocus
+      />
+      <p style={{ fontSize: "12px", color: "var(--neu-text-muted)" }}>
+        {otp.length > 0 ? `Entered: ${otp}` : "Type or paste your code"}
+      </p>
+    </div>
+  );
+}
+
+function CountdownDemo() {
+  const target = new Date();
+  target.setHours(target.getHours() + 2);
+  target.setMinutes(target.getMinutes() + 30);
+  return <Countdown targetDate={target} />;
+}
+
+function SegmentedControlDemo() {
+  const [view, setView] = useState("list");
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start" }}>
+      <SegmentedControl
+        value={view}
+        onChange={setView}
+        options={[
+          { value: "list", label: "List" },
+          { value: "grid", label: "Grid" },
+          { value: "board", label: "Board" },
+        ]}
+      />
+      <SegmentedControl
+        defaultValue="monthly"
+        size="lg"
+        options={[
+          { value: "monthly", label: "Monthly" },
+          { value: "yearly", label: "Yearly" },
+        ]}
+      />
+    </div>
+  );
+}
+
+function ColorPickerDemo() {
+  const [color, setColor] = useState("#6c7ef8");
+  return <ColorPicker value={color} onChange={setColor} label="Pick a color" />;
+}
+
+function ChipDemo() {
+  const [items, setItems] = useState(["React", "Vue", "Angular", "Svelte"]);
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
+      <Chip>Default</Chip>
+      <Chip color="primary" variant="filled">Filled</Chip>
+      <Chip color="success" variant="outlined">Outlined</Chip>
+      <Chip color="danger" icon={<span>🔥</span>}>With icon</Chip>
+      <Chip selected>Selected</Chip>
+      {items.map((item) => (
+        <Chip key={item} removable onRemove={() => setItems((p) => p.filter((i) => i !== item))}>
+          {item}
+        </Chip>
+      ))}
+    </div>
+  );
+}
+
+function EmptyStateDemo() {
+  return (
+    <EmptyState
+      title="No projects yet"
+      description="Create your first project to get started with NeumorUI."
+      action={<Button variant="primary">Create project</Button>}
+    />
+  );
+}
+
+function BackToTopDemo() {
+  return (
+    <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+      <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)" }}>
+        Scroll down to see the button appear in the bottom-right corner.
+      </p>
+      <BackToTop threshold={100} />
+    </div>
+  );
+}
+
+function TagInputDemo() {
+  const [tags, setTags] = useState(["React", "TypeScript"]);
+  return (
+    <TagInput
+      value={tags}
+      onChange={setTags}
+      label="Technologies"
+      placeholder="Add a tag..."
+      maxTags={8}
+      helperText="Press Enter or comma to add. Backspace to remove."
+    />
+  );
+}
+
+function SheetDemo() {
+  const [open, setOpen] = useState(false);
+  const [side, setSide] = useState<"bottom" | "right">("bottom");
+  return (
+    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+      <Button variant="raised" onClick={() => { setSide("bottom"); setOpen(true); }}>Bottom Sheet</Button>
+      <Button variant="pill" onClick={() => { setSide("right"); setOpen(true); }}>Right Sheet</Button>
+      <Sheet open={open} onOpenChange={setOpen} side={side} title="Sheet Title" description="Swipe down to dismiss">
+        <p style={{ fontSize: "14px", color: "var(--neu-text-secondary)", lineHeight: 1.6 }}>
+          This is a mobile-friendly sheet component. Drag the handle to dismiss, or tap the backdrop.
+        </p>
+      </Sheet>
+    </div>
+  );
+}
+
+function TimelineDemo() {
+  return (
+    <Timeline
+      items={[
+        { title: "Project started", description: "Initial commit and setup", date: "Jan 2025", color: "var(--neu-accent)" },
+        { title: "Beta release", description: "First public beta with 30 components", date: "Mar 2025", color: "var(--neu-success)" },
+        { title: "v1.0 launch", description: "Stable release with 61+ components", date: "Apr 2025", color: "var(--neu-danger)" },
+      ]}
+    />
+  );
+}
+
+function RatingDemo() {
+  const [star, setStar] = useState(3);
+  const [heart, setHeart] = useState(2);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start" }}>
+      <Rating value={star} onChange={setStar} label="Stars" />
+      <Rating value={heart} onChange={setHeart} icon="heart" label="Hearts" />
+      <Rating value={4} readOnly label="Read only" size="sm" />
+    </div>
+  );
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
-   COMPONENT DOCS REGISTRY — 61 components
+   COMPONENT DOCS REGISTRY
    ───────────────────────────────────────────────────────────────────────────── */
 
 export const componentDocs: ComponentDoc[] = [
@@ -2574,6 +2736,320 @@ function App() {
       { name: "showDots", type: "boolean", default: "true" },
       { name: "showProgress", type: "boolean", default: "false" },
       { name: "slideHeight", type: "number | string", default: "200" },
+    ],
+  },
+  // ─── New components ───
+  {
+    slug: "otp-input",
+    name: "OTPInput",
+    category: "Form",
+    description: "One-time password input with auto-focus, masking, and paste support.",
+    preview: <OTPInputDemo />,
+    code: `import { OTPInput } from "neumorui";
+
+function App() {
+  const [otp, setOtp] = useState("");
+  return (
+    <OTPInput
+      length={6}
+      value={otp}
+      onChange={setOtp}
+      onComplete={(code) => console.log("OTP:", code)}
+      label="Verification code"
+    />
+  );
+}`,
+    props: [
+      { name: "length", type: "number", default: "6" },
+      { name: "value", type: "string", default: '""' },
+      { name: "onChange", type: "(value: string) => void", default: "-" },
+      { name: "onComplete", type: "(value: string) => void", default: "-" },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "error", type: "boolean", default: "false" },
+      { name: "masked", type: "boolean", default: "false" },
+      { name: "autoFocus", type: "boolean", default: "false" },
+      { name: "label", type: "string", default: "-" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+    ],
+  },
+  {
+    slug: "rating",
+    name: "Rating",
+    category: "Form",
+    description: "Star or heart rating selector with hover preview, half-star support, and read-only mode.",
+    preview: <RatingDemo />,
+    code: `import { Rating } from "neumorui";
+
+function App() {
+  const [value, setValue] = useState(3);
+  return (
+    <Rating
+      value={value}
+      onChange={setValue}
+      max={5}
+      icon="star"
+      label="Your rating"
+    />
+  );
+}`,
+    props: [
+      { name: "value", type: "number", default: "-" },
+      { name: "defaultValue", type: "number", default: "0" },
+      { name: "onChange", type: "(value: number) => void", default: "-" },
+      { name: "max", type: "number", default: "5" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+      { name: "icon", type: '"star" | "heart"', default: '"star"' },
+      { name: "readOnly", type: "boolean", default: "false" },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "allowHalf", type: "boolean", default: "false" },
+      { name: "label", type: "string", default: "-" },
+    ],
+  },
+  {
+    slug: "timeline",
+    name: "Timeline",
+    category: "Data Display",
+    description: "Vertical or horizontal event timeline with neumorphic nodes, connector lines, and hover animations.",
+    preview: <TimelineDemo />,
+    code: `import { Timeline } from "neumorui";
+
+<Timeline
+  items={[
+    { title: "Step 1", description: "Details", date: "Jan 2025" },
+    { title: "Step 2", description: "Details", date: "Mar 2025" },
+    { title: "Step 3", description: "Details", date: "Apr 2025" },
+  ]}
+  orientation="vertical"
+  alternating={false}
+/>`,
+    props: [
+      { name: "items", type: "TimelineItem[]", default: "[]" },
+      { name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"' },
+      { name: "alternating", type: "boolean", default: "false" },
+    ],
+  },
+  {
+    slug: "sheet",
+    name: "Sheet",
+    category: "Overlay",
+    description: "Mobile-friendly bottom/side sheet with drag-to-dismiss, backdrop blur, and neumorphic handle.",
+    preview: <SheetDemo />,
+    code: `import { Sheet, Button } from "neumorui";
+
+function App() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Sheet</Button>
+      <Sheet
+        open={open}
+        onOpenChange={setOpen}
+        side="bottom"
+        title="Sheet Title"
+        description="Drag down to dismiss"
+      >
+        <p>Sheet content here</p>
+      </Sheet>
+    </>
+  );
+}`,
+    props: [
+      { name: "open", type: "boolean", default: "-" },
+      { name: "onOpenChange", type: "(open: boolean) => void", default: "-" },
+      { name: "children", type: "ReactNode", default: "-" },
+      { name: "side", type: '"bottom" | "top" | "left" | "right"', default: '"bottom"' },
+      { name: "title", type: "string", default: "-" },
+      { name: "description", type: "string", default: "-" },
+      { name: "showHandle", type: "boolean", default: "true" },
+    ],
+  },
+  {
+    slug: "tag-input",
+    name: "TagInput",
+    category: "Form",
+    description: "Multi-tag input with Enter/comma to add, Backspace to remove, paste support, and max limit.",
+    preview: <TagInputDemo />,
+    code: `import { TagInput } from "neumorui";
+
+function App() {
+  const [tags, setTags] = useState(["React", "TypeScript"]);
+  return (
+    <TagInput
+      value={tags}
+      onChange={setTags}
+      label="Skills"
+      placeholder="Add a tag..."
+      maxTags={10}
+    />
+  );
+}`,
+    props: [
+      { name: "value", type: "string[]", default: "-" },
+      { name: "defaultValue", type: "string[]", default: "[]" },
+      { name: "onChange", type: "(tags: string[]) => void", default: "-" },
+      { name: "label", type: "string", default: "-" },
+      { name: "placeholder", type: "string", default: '"Type and press Enter..."' },
+      { name: "maxTags", type: "number", default: "-" },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "error", type: "boolean", default: "false" },
+      { name: "helperText", type: "string", default: "-" },
+    ],
+  },
+  {
+    slug: "back-to-top",
+    name: "BackToTop",
+    category: "Navigation",
+    description: "Floating scroll-to-top button with scroll threshold, smooth scroll, and neumorphic hover/press states.",
+    preview: <BackToTopDemo />,
+    code: `import { BackToTop } from "neumorui";
+
+<BackToTop
+  threshold={300}
+  smooth
+  position="bottom-right"
+  size="md"
+/>`,
+    props: [
+      { name: "threshold", type: "number", default: "300" },
+      { name: "smooth", type: "boolean", default: "true" },
+      { name: "icon", type: "ReactNode", default: "arrow up" },
+      { name: "position", type: '"bottom-right" | "bottom-left" | "bottom-center"', default: '"bottom-right"' },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+    ],
+  },
+  {
+    slug: "empty-state",
+    name: "EmptyState",
+    category: "Feedback",
+    description: "Placeholder for empty pages with icon, title, description, and call-to-action button.",
+    preview: <EmptyStateDemo />,
+    code: `import { EmptyState, Button } from "neumorui";
+
+<EmptyState
+  title="No projects yet"
+  description="Create your first project to get started."
+  action={<Button variant="primary">Create project</Button>}
+/>`,
+    props: [
+      { name: "icon", type: "ReactNode", default: "folder icon" },
+      { name: "title", type: "string", default: "-" },
+      { name: "description", type: "string", default: "-" },
+      { name: "action", type: "ReactNode", default: "-" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+    ],
+  },
+  {
+    slug: "chip",
+    name: "Chip",
+    category: "Data Display",
+    description: "Removable and selectable chip/tag with raised, outlined, and filled variants.",
+    preview: <ChipDemo />,
+    code: `import { Chip } from "neumorui";
+
+<Chip variant="raised" removable onRemove={() => {}}>React</Chip>
+<Chip variant="filled" color="primary">Primary</Chip>
+<Chip variant="outlined" color="success">Success</Chip>
+<Chip selected onClick={() => {}}>Selectable</Chip>`,
+    props: [
+      { name: "children", type: "ReactNode", default: "-" },
+      { name: "variant", type: '"raised" | "outlined" | "filled"', default: '"raised"' },
+      { name: "color", type: '"default" | "primary" | "success" | "danger" | "warning"', default: '"default"' },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+      { name: "icon", type: "ReactNode", default: "-" },
+      { name: "removable", type: "boolean", default: "false" },
+      { name: "onRemove", type: "() => void", default: "-" },
+      { name: "selected", type: "boolean", default: "false" },
+      { name: "onClick", type: "() => void", default: "-" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+  {
+    slug: "color-picker",
+    name: "ColorPicker",
+    category: "Form",
+    description: "Neumorphic color picker with preset swatches, hex input, native picker fallback, and live preview.",
+    preview: <ColorPickerDemo />,
+    code: `import { ColorPicker } from "neumorui";
+
+function App() {
+  const [color, setColor] = useState("#6c7ef8");
+  return (
+    <ColorPicker
+      value={color}
+      onChange={setColor}
+      label="Brand color"
+      showInput
+    />
+  );
+}`,
+    props: [
+      { name: "value", type: "string", default: "-" },
+      { name: "defaultValue", type: "string", default: '"#6c7ef8"' },
+      { name: "onChange", type: "(color: string) => void", default: "-" },
+      { name: "presets", type: "string[]", default: "20 default colors" },
+      { name: "label", type: "string", default: "-" },
+      { name: "showInput", type: "boolean", default: "true" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+  },
+  {
+    slug: "countdown",
+    name: "Countdown",
+    category: "Data Display",
+    description: "Live countdown timer with flip animation, blinking separators, and customizable units.",
+    preview: <CountdownDemo />,
+    code: `import { Countdown } from "neumorui";
+
+const target = new Date("2025-12-31T00:00:00");
+
+<Countdown
+  targetDate={target}
+  onComplete={() => alert("Done!")}
+  size="md"
+  variant="raised"
+/>`,
+    props: [
+      { name: "targetDate", type: "Date | string | number", default: "-" },
+      { name: "onComplete", type: "() => void", default: "-" },
+      { name: "showDays", type: "boolean", default: "true" },
+      { name: "showHours", type: "boolean", default: "true" },
+      { name: "showMinutes", type: "boolean", default: "true" },
+      { name: "showSeconds", type: "boolean", default: "true" },
+      { name: "labels", type: "{ days?: string; hours?: string; minutes?: string; seconds?: string }", default: "Days/Hours/Min/Sec" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+      { name: "variant", type: '"raised" | "inset"', default: '"raised"' },
+    ],
+  },
+  {
+    slug: "segmented-control",
+    name: "SegmentedControl",
+    category: "Form",
+    description: "iOS-style segmented toggle with sliding neumorphic indicator, icon support, and fullWidth mode.",
+    preview: <SegmentedControlDemo />,
+    code: `import { SegmentedControl } from "neumorui";
+
+function App() {
+  const [view, setView] = useState("list");
+  return (
+    <SegmentedControl
+      value={view}
+      onChange={setView}
+      options={[
+        { value: "list", label: "List" },
+        { value: "grid", label: "Grid" },
+        { value: "board", label: "Board" },
+      ]}
+    />
+  );
+}`,
+    props: [
+      { name: "options", type: "SegmentOption[]", default: "[]" },
+      { name: "value", type: "string", default: "-" },
+      { name: "defaultValue", type: "string", default: "first option" },
+      { name: "onChange", type: "(value: string) => void", default: "-" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+      { name: "fullWidth", type: "boolean", default: "false" },
+      { name: "disabled", type: "boolean", default: "false" },
     ],
   },
 ];
