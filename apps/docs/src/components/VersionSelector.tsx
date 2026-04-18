@@ -79,11 +79,15 @@ export const VersionSelector: React.FC = () => {
         >
           {versions.map((v) => {
             const isActive = v.version === current;
+            const isDisabled = v.deployed === false;
             return (
               <a
                 key={v.version}
-                href={v.url}
-                onClick={() => setOpen(false)}
+                href={isDisabled ? undefined : v.url}
+                onClick={(e) => {
+                  if (isDisabled) e.preventDefault();
+                  setOpen(false);
+                }}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -94,15 +98,32 @@ export const VersionSelector: React.FC = () => {
                   fontSize: "12px",
                   fontWeight: 700,
                   fontFamily: "inherit",
-                  color: isActive ? "var(--neu-accent)" : "var(--neu-text-secondary)",
+                  color: isDisabled ? "var(--neu-text-muted)" : isActive ? "var(--neu-accent)" : "var(--neu-text-secondary)",
                   background: isActive ? "rgba(108,126,248,0.08)" : "transparent",
                   textDecoration: "none",
-                  cursor: "pointer",
+                  cursor: isDisabled ? "not-allowed" : "pointer",
+                  opacity: isDisabled ? 0.6 : 1,
                   transition,
                 }}
               >
                 <span>{v.label}</span>
                 <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                  {isDisabled && (
+                    <span
+                      style={{
+                        fontSize: "8px",
+                        fontWeight: 800,
+                        padding: "1px 5px",
+                        borderRadius: "4px",
+                        background: "rgba(0,0,0,0.06)",
+                        color: "var(--neu-text-muted)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                      }}
+                    >
+                      Coming soon
+                    </span>
+                  )}
                   {v.latest && (
                     <span
                       style={{

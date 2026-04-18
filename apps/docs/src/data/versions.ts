@@ -4,6 +4,7 @@ export interface VersionEntry {
   branch: string;
   url: string;
   latest?: boolean;
+  deployed?: boolean;
 }
 
 // Each release adds an entry here. Latest must be first.
@@ -14,12 +15,14 @@ export const versions: VersionEntry[] = [
     branch: "master",
     url: "https://neumorui.vercel.app",
     latest: true,
+    deployed: true,
   },
   {
     version: "0.2.1",
     label: "v0.2.1",
     branch: "docs/v0.2.1",
-    url: "https://github.com/rukonpro/neumorui/tree/docs/v0.2.1",
+    url: "",
+    deployed: false,
   },
 ];
 
