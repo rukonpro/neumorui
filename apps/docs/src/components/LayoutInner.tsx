@@ -8,18 +8,28 @@ import { DocsSidebar } from "@/components/Sidebar";
 import { SearchDialog } from "@/components/SearchDialog";
 
 function NpmDownloads() {
-  const [downloads, setDownloads] = React.useState<number | null>(null);
+  const [total, setTotal] = React.useState<number | null>(null);
+  const [weekly, setWeekly] = React.useState<number | null>(null);
 
   React.useEffect(() => {
+    // Total downloads (from publish date to today)
+    const start = "2025-01-01";
+    const today = new Date().toISOString().split("T")[0];
+    fetch(`https://api.npmjs.org/downloads/point/${start}:${today}/neumorui`)
+      .then((r) => r.json())
+      .then((d) => setTotal(d.downloads ?? null))
+      .catch(() => {});
+
+    // Weekly downloads
     fetch("https://api.npmjs.org/downloads/point/last-week/neumorui")
       .then((r) => r.json())
-      .then((d) => setDownloads(d.downloads ?? null))
+      .then((d) => setWeekly(d.downloads ?? null))
       .catch(() => {});
   }, []);
 
-  if (downloads === null) return null;
+  if (total === null && weekly === null) return null;
 
-  const formatted = downloads >= 1000 ? `${(downloads / 1000).toFixed(1)}k` : String(downloads);
+  const fmt = (n: number) => n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
 
   return (
     <a
@@ -42,8 +52,21 @@ function NpmDownloads() {
       }}
     >
       <span style={{ fontSize: "13px" }}>⬇</span>
-      <span style={{ fontVariantNumeric: "tabular-nums" }}>{formatted}</span>
-      <span style={{ color: "var(--neu-text-muted)", fontSize: "10px" }}>/week</span>
+      {total !== null && (
+        <>
+          <span style={{ fontVariantNumeric: "tabular-nums", color: "var(--neu-text-primary)", fontWeight: 800 }}>{fmt(total)}</span>
+          <span style={{ color: "var(--neu-text-muted)", fontSize: "10px" }}>total</span>
+        </>
+      )}
+      {total !== null && weekly !== null && (
+        <span style={{ color: "var(--neu-text-muted)", fontSize: "10px" }}>·</span>
+      )}
+      {weekly !== null && (
+        <>
+          <span style={{ fontVariantNumeric: "tabular-nums" }}>{fmt(weekly)}</span>
+          <span style={{ color: "var(--neu-text-muted)", fontSize: "10px" }}>/week</span>
+        </>
+      )}
     </a>
   );
 }
