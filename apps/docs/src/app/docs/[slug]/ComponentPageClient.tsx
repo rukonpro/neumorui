@@ -51,26 +51,23 @@ export default function ComponentPageClient({ slug }: { slug: string }) {
         <CodeBlock code={`import { ${doc.name} } from "neumorui";`} language="tsx" />
       </div>
 
-      {/* Preview + Code */}
+      {/* Interactive Playground — live preview + prop editor */}
+      {doc.props.length > 0 && (
+        <div style={{ marginBottom: "32px" }}>
+          <h2 style={{ fontSize: "16px", fontWeight: 800, marginBottom: "12px" }}>
+            Playground
+          </h2>
+          <PropsPlayground props={doc.props} preview={doc.preview} />
+        </div>
+      )}
+
+      {/* Code example */}
       <div style={{ marginBottom: "32px" }}>
         <h2 style={{ fontSize: "16px", fontWeight: 800, marginBottom: "12px" }}>
-          Example
+          Code
         </h2>
         <ComponentPreview preview={doc.preview} code={doc.code} />
       </div>
-
-      {/* Interactive Playground */}
-      {doc.props.length > 0 && (
-        <div style={{ marginBottom: "24px" }}>
-          <PropsPlayground
-            props={doc.props}
-            onPropsChange={(values) => {
-              // Props playground is visual-only for now — values shown in UI
-              console.log("Playground props:", values);
-            }}
-          />
-        </div>
-      )}
 
       {/* Props table */}
       {doc.props.length > 0 && (
