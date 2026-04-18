@@ -19,7 +19,7 @@ export const versions: VersionEntry[] = [
     version: "0.2.1",
     label: "v0.2.1",
     branch: "docs/v0.2.1",
-    url: "https://docs-v0-2-1.neumorui.vercel.app",
+    url: "https://github.com/rukonpro/neumorui/tree/docs/v0.2.1",
   },
 ];
 
