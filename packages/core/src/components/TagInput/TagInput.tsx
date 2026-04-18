@@ -128,7 +128,7 @@ export const TagInput: React.FC<TagInputProps> = ({
     e.preventDefault();
     const text = e.clipboardData.getData("text");
     const newTags = text.split(/[,\n]/).map((t) => t.trim()).filter(Boolean);
-    let current = [...tags];
+    const current = [...tags];
     for (const t of newTags) {
       if (current.includes(t)) continue;
       if (maxTags && current.length >= maxTags) break;

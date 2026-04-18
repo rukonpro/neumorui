@@ -12,8 +12,6 @@ interface LinkPreviewProps {
   style?: React.CSSProperties;
 }
 
-const transition = "all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)";
-
 export const LinkPreview: React.FC<LinkPreviewProps> = ({
   href,
   title,

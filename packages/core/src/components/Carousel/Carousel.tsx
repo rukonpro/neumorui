@@ -188,7 +188,7 @@ export const Carousel: React.FC<CarouselProps> = ({
       {/* Main container with neumorphic frame */}
       <div
         onMouseEnter={() => pauseOnHover && setPaused(true)}
-        onMouseLeave={() => { pauseOnHover && setPaused(false); handleDragEnd(); }}
+        onMouseLeave={() => { if (pauseOnHover) setPaused(false); handleDragEnd(); }}
         style={{
           position: "relative",
           overflow: "hidden",
