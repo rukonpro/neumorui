@@ -95,8 +95,9 @@ export const ThemeCustomizer: React.FC<ThemeCustomizerProps> = ({
           style={{
             position: "absolute",
             top: "calc(100% + 8px)",
-            right: 0,
+            left: 0,
             width: "280px",
+            maxWidth: "calc(100vw - 32px)",
             padding: "18px",
             borderRadius: "20px",
             background: "var(--neu-bg)",
