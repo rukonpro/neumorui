@@ -17,13 +17,8 @@ export const versions: VersionEntry[] = [
     latest: true,
     deployed: true,
   },
-  {
-    version: "0.2.1",
-    label: "v0.2.1",
-    branch: "docs/v0.2.1",
-    url: "https://neumorui-store-git-docs-v021-rukon-uddin-projects.vercel.app",
-    deployed: true,
-  },
+  // Old versions will be added here when a custom domain is available
+  // { version: "0.2.1", label: "v0.2.1", branch: "docs/v0.2.1", url: "https://v021.neumorui.dev", deployed: true },
 ];
 
 export function getCurrentVersion(): string {
