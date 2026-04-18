@@ -7,6 +7,47 @@ import "../app/globals.css";
 import { DocsSidebar } from "@/components/Sidebar";
 import { SearchDialog } from "@/components/SearchDialog";
 
+function NpmDownloads() {
+  const [downloads, setDownloads] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    fetch("https://api.npmjs.org/downloads/point/last-week/neumorui")
+      .then((r) => r.json())
+      .then((d) => setDownloads(d.downloads ?? null))
+      .catch(() => {});
+  }, []);
+
+  if (downloads === null) return null;
+
+  const formatted = downloads >= 1000 ? `${(downloads / 1000).toFixed(1)}k` : String(downloads);
+
+  return (
+    <a
+      href="https://www.npmjs.com/package/neumorui"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "6px",
+        padding: "6px 12px",
+        borderRadius: "10px",
+        background: "var(--neu-bg)",
+        boxShadow: "var(--neu-shadow-raised-sm)",
+        textDecoration: "none",
+        transition: "all 0.18s ease",
+        fontSize: "11px",
+        fontWeight: 700,
+        color: "var(--neu-text-secondary)",
+      }}
+    >
+      <span style={{ fontSize: "13px" }}>⬇</span>
+      <span style={{ fontVariantNumeric: "tabular-nums" }}>{formatted}</span>
+      <span style={{ color: "var(--neu-text-muted)", fontSize: "10px" }}>/week</span>
+    </a>
+  );
+}
+
 function ThemeLayoutInner({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useNeuTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -63,6 +104,9 @@ function ThemeLayoutInner({ children }: { children: React.ReactNode }) {
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            {/* npm downloads badge */}
+            <NpmDownloads />
+
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
