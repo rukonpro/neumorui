@@ -1335,7 +1335,7 @@ function App() {
       { name: "rightIcon", type: "ReactNode", default: "-" },
       { name: "ripple", type: "boolean", default: "false" },
     ],
-    component: Button as React.ComponentType<Record<string, unknown>>,
+    component: Button as unknown as React.ComponentType<Record<string, unknown>>,
     defaultProps: { children: "Click me", variant: "raised", size: "md" },
   },
   {
@@ -1364,7 +1364,7 @@ function App() {
       { name: "leftIcon", type: "ReactNode", default: "-" },
       { name: "rightIcon", type: "ReactNode", default: "-" },
     ],
-    component: Input as React.ComponentType<Record<string, unknown>>,
+    component: Input as unknown as React.ComponentType<Record<string, unknown>>,
     defaultProps: { label: "Email", placeholder: "you@example.com" },
   },
   {
@@ -1387,6 +1387,8 @@ function App() {
       { name: "resize", type: '"none" | "both" | "horizontal" | "vertical"', default: '"vertical"' },
       { name: "rows", type: "number", default: "4" },
     ],
+    component: Textarea as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Message", placeholder: "Type here..." },
   },
   {
     slug: "switch",
@@ -1414,6 +1416,8 @@ function App() {
       { name: "description", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: Switch as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Toggle me" },
   },
   {
     slug: "checkbox",
@@ -1439,6 +1443,8 @@ function App() {
       { name: "label", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: Checkbox as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Check me" },
   },
   {
     slug: "radio-group",
@@ -1535,6 +1541,8 @@ function App() {
       { name: "showValue", type: "boolean", default: "true" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: Slider as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Volume", defaultValue: [50] },
   },
   {
     slug: "toggle-group",
@@ -1613,6 +1621,8 @@ function App() {
       { name: "variant", type: '"raised" | "inset" | "flat"', default: '"raised"' },
       { name: "padding", type: '"sm" | "md" | "lg"', default: '"md"' },
     ],
+    component: Card as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "Card content", variant: "raised", padding: "md" },
   },
   {
     slug: "grid",
@@ -1651,6 +1661,8 @@ function App() {
       { name: "label", type: "string", default: "-" },
       { name: "variant", type: '"solid" | "inset"', default: '"inset"' },
     ],
+    component: Divider as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: {},
   },
   {
     slug: "hero",
@@ -1752,6 +1764,8 @@ function App() {
       { name: "variant", type: '"default" | "primary" | "success" | "danger" | "warning" | "info"', default: '"default"' },
       { name: "dot", type: "boolean", default: "false" },
     ],
+    component: Badge as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "Badge", variant: "primary" },
   },
   {
     slug: "avatar",
@@ -1770,6 +1784,8 @@ function App() {
       { name: "size", type: '"sm" | "md" | "lg" | "xl"', default: '"md"' },
       { name: "status", type: '"online" | "offline" | "busy" | "away"', default: "-" },
     ],
+    component: Avatar as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { initials: "JD", size: "md" },
   },
   {
     slug: "progress",
@@ -1790,6 +1806,8 @@ function App() {
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
       { name: "animate", type: "boolean", default: "true" },
     ],
+    component: Progress as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { value: 65, showLabel: true },
   },
   {
     slug: "skeleton",
@@ -1808,6 +1826,8 @@ function App() {
       { name: "height", type: "string | number", default: "-" },
       { name: "lines", type: "number", default: "3" },
     ],
+    component: Skeleton as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { variant: "text" },
   },
   {
     slug: "spinner",
@@ -1824,6 +1844,8 @@ function App() {
       { name: "variant", type: '"default" | "primary" | "success" | "danger"', default: '"default"' },
       { name: "label", type: "string", default: "-" },
     ],
+    component: Spinner as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { size: "md" },
   },
   {
     slug: "data-table",
@@ -2478,6 +2500,8 @@ function App() {
       { name: "icon", type: "ReactNode", default: "-" },
       { name: "onClose", type: "() => void", default: "-" },
     ],
+    component: Alert as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "This is an alert", variant: "info" },
   },
   {
     slug: "toast",
@@ -2874,6 +2898,8 @@ function App() {
       { name: "allowHalf", type: "boolean", default: "false" },
       { name: "label", type: "string", default: "-" },
     ],
+    component: Rating as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { defaultValue: 3 },
   },
   {
     slug: "timeline",
@@ -3007,6 +3033,8 @@ function App() {
       { name: "action", type: "ReactNode", default: "-" },
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
     ],
+    component: EmptyState as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { title: "No data", description: "Nothing to show here" },
   },
   {
     slug: "chip",
@@ -3032,6 +3060,8 @@ function App() {
       { name: "onClick", type: "() => void", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: Chip as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "Chip", variant: "raised" },
   },
   {
     slug: "color-picker",
@@ -3182,6 +3212,8 @@ function App() {
       { name: "placeholder", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: PasswordInput as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Password", placeholder: "Enter password" },
   },
 
   // ── NumberInput ──
@@ -3224,6 +3256,8 @@ function App() {
       { name: "error", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: NumberInput as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Quantity", defaultValue: 5 },
   },
 
   // ── PhoneInput ──
@@ -3296,6 +3330,8 @@ function App() {
       { name: "error", type: "string", default: "-" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: PinInput as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "PIN", length: 4 },
   },
 
   // ── InputGroup ──
@@ -3341,6 +3377,8 @@ function App() {
       { name: "error", type: "string", default: "-" },
       { name: "placeholder", type: "string", default: "-" },
     ],
+    component: InputGroup as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Website", leftAddon: "https://", placeholder: "example.com" },
   },
 
   // ── FormField ──
@@ -3511,6 +3549,8 @@ function App() {
       { name: "suffix", type: "string", default: '""' },
       { name: "animate", type: "boolean", default: "true" },
     ],
+    component: GaugeChart as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { value: 72, label: "Score" },
   },
 
   // ── Sparkline ──
@@ -3550,6 +3590,8 @@ function App() {
       { name: "strokeWidth", type: "number", default: "1.5" },
       { name: "animate", type: "boolean", default: "true" },
     ],
+    component: Sparkline as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { data: [20, 35, 28, 50, 42, 65, 58, 72] },
   },
 
   // ── UserCard ──
@@ -3596,6 +3638,8 @@ function App() {
       { name: "coverColor", type: "string", default: "var(--neu-accent)" },
       { name: "onClick", type: "() => void", default: "-" },
     ],
+    component: UserCard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { name: "Jane Cooper", role: "Designer" },
   },
 
   // ── TestimonialCard ──
@@ -3632,6 +3676,8 @@ function App() {
       { name: "rating", type: "number", default: "-" },
       { name: "maxRating", type: "number", default: "5" },
     ],
+    component: TestimonialCard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { quote: "Great library!", author: "Sarah", rating: 5 },
   },
 
   // ── NotificationCard ──
@@ -3688,6 +3734,8 @@ function App() {
       { name: "onDismiss", type: "() => void", default: "-" },
       { name: "onClick", type: "() => void", default: "-" },
     ],
+    component: NotificationCard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { title: "New message", description: "You have a new notification", time: "2m ago", icon: "📬" },
   },
 
   // ── CodeBlock ──
@@ -3733,6 +3781,8 @@ export function App() {
       { name: "showCopyButton", type: "boolean", default: "true" },
       { name: "maxHeight", type: "number", default: "-" },
     ],
+    component: CodeBlock as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { code: "const x = 1;", title: "Example", language: "tsx" },
   },
 
   // ── AspectRatio ──
@@ -4217,6 +4267,8 @@ function MyComponent() {
       { name: "onDismiss", type: "() => void", default: "-" },
       { name: "sticky", type: "boolean", default: "false" },
     ],
+    component: Banner as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "Important announcement!", variant: "info", icon: "ℹ️" },
   },
 
   // ── InlineMessage ──
@@ -4251,6 +4303,8 @@ function MyComponent() {
       { name: "icon", type: "ReactNode", default: "auto per variant" },
       { name: "children", type: "ReactNode", default: "-" },
     ],
+    component: InlineMessage as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "This field is required.", variant: "warning" },
   },
 
   // ── AudioPlayer ──
@@ -4341,6 +4395,8 @@ function MyComponent() {
       { name: "variant", type: '"raised" | "flat" | "icon"', default: '"raised"' },
       { name: "size", type: '"sm" | "md"', default: '"md"' },
     ],
+    component: CopyButton as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { text: "npm install neumorui" },
   },
 
   // ── Kbd ──
@@ -4377,6 +4433,8 @@ function MyComponent() {
       { name: "children", type: "ReactNode", default: "-" },
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
     ],
+    component: Kbd as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { children: "⌘K" },
   },
 
   // ── InfiniteScroll ──
@@ -4473,6 +4531,8 @@ const [loading, setLoading] = useState(false);
       { name: "rounded", type: "boolean", default: "true" },
       { name: "label", type: "string", default: "-" },
     ],
+    component: QRCode as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { value: "https://neumorui.vercel.app", label: "Scan me" },
   },
 
   // ── MusicPlayerCard ──
@@ -4632,6 +4692,8 @@ const [loading, setLoading] = useState(false);
       { name: "time", type: "string", default: "-" },
       { name: "status", type: '"sent" | "delivered" | "read"', default: "-" },
     ],
+    component: ChatBubble as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { message: "Hello there!", variant: "received", name: "Sarah", time: "10:30 AM" },
   },
 
   // ── NotificationCenter ──
@@ -4756,6 +4818,8 @@ const [active, setActive] = useState(true);
       { name: "disabled", type: "boolean", default: "false" },
       { name: "error", type: "string", default: "-" },
     ],
+    component: DateRangePicker as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Date Range" },
   },
 
   // ── TimePicker ──
@@ -4787,6 +4851,8 @@ const [active, setActive] = useState(true);
       { name: "disabled", type: "boolean", default: "false" },
       { name: "error", type: "string", default: "-" },
     ],
+    component: TimePicker as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Time" },
   },
 
   // ── TableOfContents ──
@@ -4893,6 +4959,8 @@ const [active, setActive] = useState(true);
       { name: "disabled", type: "boolean", default: "false" },
       { name: "error", type: "string", default: "-" },
     ],
+    component: MultiSelect as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Skills", options: [{ value: "react", label: "React" }, { value: "ts", label: "TypeScript" }], placeholder: "Select..." },
   },
 
   // ── AvatarGroup ──
@@ -4958,6 +5026,8 @@ const [active, setActive] = useState(true);
       { name: "minHeight", type: "number", default: "150" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: RichTextEditor as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Content", placeholder: "Start writing..." },
   },
 
   // ── MarkdownEditor ──
@@ -4984,5 +5054,7 @@ const [active, setActive] = useState(true);
       { name: "minHeight", type: "number", default: "180" },
       { name: "disabled", type: "boolean", default: "false" },
     ],
+    component: MarkdownEditor as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Notes", placeholder: "Write markdown..." },
   },
 ];
