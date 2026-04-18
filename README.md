@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Beautiful clay-style React component library</strong><br/>
-  98 components · Dark mode · Animations · TypeScript · Radix UI
+  106 components · Dark mode · Animations · TypeScript · Radix UI
 </p>
 
 <p align="center">
@@ -66,23 +66,23 @@ function LoginPage() {
 }
 ```
 
-## 98 Components
+## 106 Components
 
 | Category | Components |
 |---|---|
-| **Form** (21) | Button, Input, Textarea, Switch, Checkbox, RadioGroup, Select, Slider, ToggleGroup, FileUpload, OTPInput, Rating, TagInput, ColorPicker, SegmentedControl, PasswordInput, NumberInput, PhoneInput, PinInput, InputGroup, FormField |
+| **Form** (24) | Button, Input, Textarea, Switch, Checkbox, RadioGroup, Select, Slider, ToggleGroup, FileUpload, OTPInput, Rating, TagInput, ColorPicker, SegmentedControl, PasswordInput, NumberInput, PhoneInput, PinInput, InputGroup, FormField, MultiSelect, RichTextEditor, MarkdownEditor |
 | **Layout** (11) | Card, Grid, Col, Divider, Hero, PricingCard, AspectRatio, ScrollArea, ResizablePanels, Masonry, Container |
-| **Data Display** (27) | Badge, Avatar, Progress, Skeleton, Spinner, DataTable, StatsCard, BarChart, DonutChart, LineChart, Heatmap, ComparisonTable, KanbanBoard, TreeView, ActivityFeed, Timeline, Chip, ImageGallery, Countdown, AreaChart, RadarChart, GaugeChart, Sparkline, UserCard, TestimonialCard, NotificationCard, CodeBlock |
-| **Navigation** (14) | Tabs, Breadcrumb, Pagination, Navbar, Sidebar, BottomNav, BrowserTabs, MegaMenu, SpeedDial, BackToTop, Dock, Steps, LinkPreview, CommandMenu |
+| **Data Display** (28) | Badge, Avatar, Progress, Skeleton, Spinner, DataTable, StatsCard, BarChart, DonutChart, LineChart, Heatmap, ComparisonTable, KanbanBoard, TreeView, ActivityFeed, Timeline, Chip, ImageGallery, Countdown, AreaChart, RadarChart, GaugeChart, Sparkline, UserCard, TestimonialCard, NotificationCard, CodeBlock, AvatarGroup |
+| **Navigation** (15) | Tabs, Breadcrumb, Pagination, Navbar, Sidebar, BottomNav, BrowserTabs, MegaMenu, SpeedDial, BackToTop, Dock, Steps, LinkPreview, CommandMenu, TableOfContents |
 | **Overlay** (8) | Modal, Popover, Tooltip, DropdownMenu, ContextMenu, Drawer, ConfirmDialog, Sheet |
 | **Feedback** (10) | Alert, Toast, AnnouncementBar, CookieConsent, LoadingOverlay, Stepper, EmptyState, Snackbar, Banner, InlineMessage |
 | **Disclosure** (1) | Accordion |
-| **Date** (2) | Calendar, DatePicker |
+| **Date** (4) | Calendar, DatePicker, DateRangePicker, TimePicker |
 | **Command** (2) | Command, Combobox |
 | **Animation** (3) | Reveal, Marquee, Carousel |
 | **Showpiece** (5) | MusicPlayerCard, WeatherCard, ChatBubble, NotificationCenter, Onboarding |
 | **Media** (2) | AudioPlayer, VideoPlayer |
-| **Utility** (4) | CopyButton, Kbd, InfiniteScroll, QRCode |
+| **Utility** (5) | CopyButton, Kbd, InfiniteScroll, QRCode, ThemeCustomizer |
 
 ## Features
 
@@ -95,7 +95,10 @@ function LoginPage() {
 - **Radix UI** — Accessible primitives for overlays, forms, and navigation
 - **Pure inline styles** — No Tailwind required, zero CSS conflicts
 - **Versioned docs** — Version selector dropdown, each release preserved on its own branch
-- **206 tests** — Smoke tests for every component
+- **352 tests** — Smoke tests for every component
+- **Accessibility** — eslint-plugin-jsx-a11y, ARIA attributes, keyboard navigation
+- **Live playground** — Interactive prop editor on docs pages
+- **Global search** — Cmd+K component search across docs
 
 ## Dark Mode
 
@@ -155,7 +158,7 @@ pnpm install
 pnpm --filter neumorui build          # Build library
 pnpm --filter docs dev                # Docs at localhost:3001
 pnpm --filter @neumorui/storybook dev # Storybook at localhost:6006
-pnpm --filter neumorui test           # 206 tests
+pnpm --filter neumorui test           # 352 tests
 pnpm build                            # Build all
 ```
 
