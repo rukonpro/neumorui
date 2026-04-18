@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { VersionSelector } from "@/components/VersionSelector";
 
 interface SidebarCategory {
   name: string;
@@ -271,15 +272,20 @@ export const DocsSidebar: React.FC<{
         }}
       >
         <img src="/favicon.svg" alt="NeumorUI" style={{ width: "32px", height: "32px" }} />
-        <div>
+        <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 900, fontSize: "15px", color: "var(--neu-text-primary)", letterSpacing: "-0.02em" }}>
             NeumorUI
           </div>
           <div style={{ fontSize: "10px", color: "var(--neu-text-muted)", fontWeight: 600 }}>
-            98 Components
+            {categories.reduce((sum, cat) => sum + cat.items.length, 0)} Components
           </div>
         </div>
       </Link>
+
+      {/* Version Selector */}
+      <div style={{ marginBottom: "10px" }}>
+        <VersionSelector />
+      </div>
 
       {/* Search */}
       <div style={{ position: "relative", marginBottom: "14px" }}>

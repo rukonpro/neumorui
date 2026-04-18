@@ -5,24 +5,40 @@ import React from "react";
 import { Card, Badge, Button } from "neumorui";
 import { componentDocs } from "@/data/components";
 import { CodeBlock } from "@/components/CodeBlock";
+import { getCurrentVersion } from "@/data/versions";
 
-const categories = [
-  { name: "Form", color: "#6c7ef8", count: 21 },
-  { name: "Layout", color: "#5b9ee0", count: 11 },
-  { name: "Data Display", color: "#4dbfa0", count: 27 },
-  { name: "Navigation", color: "#e8a84b", count: 14 },
-  { name: "Overlay", color: "#e07090", count: 8 },
-  { name: "Feedback", color: "#9c6cf8", count: 10 },
-  { name: "Disclosure", color: "#6ca8f8", count: 1 },
-  { name: "Date", color: "#4db8a0", count: 2 },
-  { name: "Command", color: "#e0a84b", count: 2 },
-  { name: "Animation", color: "#f86c8e", count: 3 },
-  { name: "Showpiece", color: "#e07060", count: 5 },
-  { name: "Media", color: "#5bbf8a", count: 2 },
-  { name: "Utility", color: "#e8b84b", count: 4 },
-];
+const categoryColors: Record<string, string> = {
+  Form: "#6c7ef8",
+  Layout: "#5b9ee0",
+  "Data Display": "#4dbfa0",
+  Navigation: "#e8a84b",
+  Overlay: "#e07090",
+  Feedback: "#9c6cf8",
+  Disclosure: "#6ca8f8",
+  Date: "#4db8a0",
+  Command: "#e0a84b",
+  Animation: "#f86c8e",
+  Showpiece: "#e07060",
+  Media: "#5bbf8a",
+  Utility: "#e8b84b",
+};
+
+// Auto-generate categories from componentDocs
+const categories = Object.entries(
+  componentDocs.reduce<Record<string, number>>((acc, c) => {
+    acc[c.category] = (acc[c.category] || 0) + 1;
+    return acc;
+  }, {})
+).map(([name, count]) => ({
+  name,
+  color: categoryColors[name] || "#6c7ef8",
+  count,
+}));
 
 export default function HomePage() {
+  const version = getCurrentVersion();
+  const totalComponents = componentDocs.length;
+
   return (
     <div>
       {/* Hero section */}
@@ -47,7 +63,7 @@ export default function HomePage() {
             marginBottom: "20px",
           }}
         >
-          v0.2.1
+          v{version}
         </div>
         <h1
           style={{
@@ -69,7 +85,7 @@ export default function HomePage() {
             lineHeight: 1.6,
           }}
         >
-          98 beautiful clay-style React components. Built with TypeScript, styled
+          {totalComponents} beautiful clay-style React components. Built with TypeScript, styled
           with neumorphic shadows, powered by Radix UI primitives.
         </p>
         <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
@@ -93,8 +109,8 @@ export default function HomePage() {
         }}
       >
         {[
-          { label: "Components", value: "98" },
-          { label: "Categories", value: "13" },
+          { label: "Components", value: String(totalComponents) },
+          { label: "Categories", value: String(categories.length) },
           { label: "TypeScript", value: "100%" },
         ].map((stat) => (
           <div
