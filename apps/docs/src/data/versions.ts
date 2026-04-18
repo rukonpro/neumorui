@@ -21,8 +21,8 @@ export const versions: VersionEntry[] = [
     version: "0.2.1",
     label: "v0.2.1",
     branch: "docs/v0.2.1",
-    url: "",
-    deployed: false,
+    url: "https://neumorui-store-git-docs-v021-rukon-uddin-projects.vercel.app",
+    deployed: true,
   },
 ];
 
