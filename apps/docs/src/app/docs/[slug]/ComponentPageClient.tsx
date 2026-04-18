@@ -5,6 +5,7 @@ import { Badge, Button } from "neumorui";
 import { componentDocs } from "@/data/components";
 import { ComponentPreview } from "@/components/ComponentPreview";
 import { CodeBlock } from "@/components/CodeBlock";
+import { PropsPlayground } from "@/components/PropsPlayground";
 
 export default function ComponentPageClient({ slug }: { slug: string }) {
   const doc = componentDocs.find((c) => c.slug === slug);
@@ -57,6 +58,19 @@ export default function ComponentPageClient({ slug }: { slug: string }) {
         </h2>
         <ComponentPreview preview={doc.preview} code={doc.code} />
       </div>
+
+      {/* Interactive Playground */}
+      {doc.props.length > 0 && (
+        <div style={{ marginBottom: "24px" }}>
+          <PropsPlayground
+            props={doc.props}
+            onPropsChange={(values) => {
+              // Props playground is visual-only for now — values shown in UI
+              console.log("Playground props:", values);
+            }}
+          />
+        </div>
+      )}
 
       {/* Props table */}
       {doc.props.length > 0 && (

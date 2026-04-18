@@ -35,6 +35,60 @@ const categories = Object.entries(
   count,
 }));
 
+function CopyableInstall() {
+  const [copied, setCopied] = React.useState(false);
+  const cmd = "npm install neumorui";
+  const handleCopy = async () => {
+    try { await navigator.clipboard.writeText(cmd); } catch {
+      const ta = document.createElement("textarea"); ta.value = cmd; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "14px 18px",
+        borderRadius: "16px",
+        background: "var(--neu-bg)",
+        boxShadow: "var(--neu-shadow-inset)",
+        fontFamily: "'SF Mono', 'Fira Code', 'Cascadia Code', monospace",
+      }}
+    >
+      <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--neu-text-primary)" }}>
+        <span style={{ color: "var(--neu-text-muted)", marginRight: "8px" }}>$</span>
+        {cmd}
+      </span>
+      <button
+        type="button"
+        onClick={handleCopy}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "5px",
+          padding: "5px 12px",
+          borderRadius: "8px",
+          border: "none",
+          outline: "none",
+          cursor: "pointer",
+          fontSize: "11px",
+          fontWeight: 700,
+          fontFamily: "inherit",
+          color: copied ? "var(--neu-success)" : "var(--neu-text-muted)",
+          background: "var(--neu-bg)",
+          boxShadow: copied ? "var(--neu-shadow-inset-sm)" : "var(--neu-shadow-raised-sm)",
+          transition: "all 0.18s ease",
+        }}
+      >
+        {copied ? "Copied!" : "Copy"}
+      </button>
+    </div>
+  );
+}
+
 export default function HomePage() {
   const version = getCurrentVersion();
   const totalComponents = componentDocs.length;
@@ -138,7 +192,7 @@ export default function HomePage() {
         <h2 style={{ fontSize: "18px", fontWeight: 800, marginBottom: "12px" }}>
           Quick Install
         </h2>
-        <CodeBlock code="npm install neumorui" language="bash" />
+        <CopyableInstall />
         <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)", lineHeight: 1.7, margin: "16px 0 8px" }}>
           Then wrap your app with the provider:
         </p>

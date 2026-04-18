@@ -5,6 +5,7 @@ import { NeuProvider, useNeuTheme } from "neumorui";
 import "neumorui/styles";
 import "../app/globals.css";
 import { DocsSidebar } from "@/components/Sidebar";
+import { SearchDialog } from "@/components/SearchDialog";
 
 function ThemeLayoutInner({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useNeuTheme();
@@ -195,6 +196,7 @@ export default function LayoutInner({ children }: { children: React.ReactNode })
   return (
     <NeuProvider defaultTheme="light" defaultAccent="violet">
       <ThemeLayoutInner>{children}</ThemeLayoutInner>
+      <SearchDialog />
     </NeuProvider>
   );
 }
