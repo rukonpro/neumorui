@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="apps/docs/public/favicon.svg" width="80" alt="NeumorUI" />
+  <img src="https://raw.githubusercontent.com/rukonpro/neumorui/master/apps/docs/public/favicon.svg" width="80" alt="NeumorUI" />
 </p>
 
 <h1 align="center">NeumorUI</h1>
@@ -150,35 +150,6 @@ const { snackbar } = useSnackbar();
 | **npm** | [npmjs.com/package/neumorui](https://www.npmjs.com/package/neumorui) |
 | **Storybook** | [rukonpro.github.io/neumorui](https://rukonpro.github.io/neumorui) |
 | **GitHub** | [github.com/rukonpro/neumorui](https://github.com/rukonpro/neumorui) |
-
-## Development
-
-```bash
-pnpm install
-pnpm --filter neumorui build          # Build library
-pnpm --filter docs dev                # Docs at localhost:3001
-pnpm --filter @neumorui/storybook dev # Storybook at localhost:6006
-pnpm --filter neumorui test           # 335 tests
-pnpm build                            # Build all
-```
-
-## Releasing a New Version
-
-```bash
-# 1. Snapshot current docs to a version branch
-./scripts/release-version.sh
-
-# 2. Bump version in packages/core/package.json
-# 3. Update apps/docs/src/data/versions.ts
-# 4. Commit, push, and deploy
-```
-
-## Contributing
-
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feat/my-component`)
-3. Commit changes (`git commit -m "feat: add MyComponent"`)
-4. Push and open a PR
 
 ## License
 
