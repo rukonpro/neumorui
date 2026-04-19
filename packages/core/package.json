@@ -1,6 +1,6 @@
 {
   "name": "neumorui",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Neumorphic UI component library for React — TypeScript, Tailwind, Radix primitives",
   "keywords": [
     "react",
@@ -24,7 +24,7 @@
     "neumorui"
   ],
   "license": "MIT",
-  "author": "rukon",
+  "author": "Rukon Uddin",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rukonpro/neumorui.git"
