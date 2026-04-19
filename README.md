@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Beautiful clay-style React component library</strong><br/>
-  106 components · Dark mode · Animations · TypeScript · Radix UI
+  118 components · Dark mode · Animations · TypeScript · Radix UI
 </p>
 
 <p align="center">
@@ -66,7 +66,7 @@ function LoginPage() {
 }
 ```
 
-## 106 Components
+## 118 Components
 
 | Category | Components |
 |---|---|
