@@ -95,7 +95,7 @@ function LoginPage() {
 - **Radix UI** — Accessible primitives for overlays, forms, and navigation
 - **Pure inline styles** — No Tailwind required, zero CSS conflicts
 - **Versioned docs** — Version selector dropdown, each release preserved on its own branch
-- **352 tests** — Smoke tests for every component
+- **335 tests** — Smoke tests for every component
 - **Accessibility** — eslint-plugin-jsx-a11y, ARIA attributes, keyboard navigation
 - **Live playground** — Interactive prop editor on docs pages
 - **Global search** — Cmd+K component search across docs
@@ -158,7 +158,7 @@ pnpm install
 pnpm --filter neumorui build          # Build library
 pnpm --filter docs dev                # Docs at localhost:3001
 pnpm --filter @neumorui/storybook dev # Storybook at localhost:6006
-pnpm --filter neumorui test           # 352 tests
+pnpm --filter neumorui test           # 335 tests
 pnpm build                            # Build all
 ```
 
