@@ -17,10 +17,13 @@ sed -i "s/## [0-9]\+ Components/## $COUNT Components/" README.md
 sed -i "s/[0-9]\+ beautiful clay-style/$COUNT beautiful clay-style/" README.md
 sed -i "s/[0-9]\+ tests\b/$((TESTS * 3 + 20)) tests/" README.md
 
+# Copy root README to core package (npm uses this one!)
+cp README.md packages/core/README.md
+
 # Stage if changed
-if git diff --quiet README.md; then
+if git diff --quiet README.md packages/core/README.md; then
   : # no changes
 else
-  git add README.md
+  git add README.md packages/core/README.md
   echo "README.md auto-updated: $COUNT components, v$VERSION"
 fi
