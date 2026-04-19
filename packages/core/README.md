@@ -153,4 +153,4 @@ const { snackbar } = useSnackbar();
 
 ## License
 
-MIT — [Rukon Islam](https://github.com/rukonpro)
+MIT — [Rukon Uddin](https://github.com/rukonpro)
