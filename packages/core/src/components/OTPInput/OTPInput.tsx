@@ -1,15 +1,25 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 
 interface OTPInputProps {
+  /** Number of OTP digits */
   length?: number;
+  /** Current OTP string value */
   value?: string;
+  /** Called on each digit change */
   onChange?: (value: string) => void;
+  /** Called when all digits are filled */
   onComplete?: (value: string) => void;
+  /** Disable the input */
   disabled?: boolean;
+  /** Show error state styling */
   error?: boolean;
+  /** Hide digits with mask character */
   masked?: boolean;
+  /** Focus the input on mount */
   autoFocus?: boolean;
+  /** Label text above the input */
   label?: string;
+  /** Size of each digit cell */
   size?: "sm" | "md" | "lg";
   className?: string;
   style?: React.CSSProperties;

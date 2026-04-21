@@ -3,11 +3,17 @@ import React from "react";
 type ChatBubbleVariant = "sent" | "received";
 
 interface ChatBubbleProps {
+  /** Message text content */
   message: string;
+  /** Sent or received bubble style */
   variant?: ChatBubbleVariant;
+  /** Sender avatar image URL */
   avatar?: string;
+  /** Sender display name */
   name?: string;
+  /** Timestamp display string */
   time?: string;
+  /** Message delivery status indicator */
   status?: "sent" | "delivered" | "read";
   className?: string;
   style?: React.CSSProperties;

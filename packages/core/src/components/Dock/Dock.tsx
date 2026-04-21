@@ -8,9 +8,13 @@ export interface DockItem {
 }
 
 interface DockProps {
+  /** Dock items with icons and actions */
   items: DockItem[];
+  /** Dock placement on screen */
   position?: "bottom" | "top";
+  /** Max scale factor on hover */
   magnification?: number;
+  /** Base icon size in pixels */
   baseSize?: number;
   className?: string;
   style?: React.CSSProperties;

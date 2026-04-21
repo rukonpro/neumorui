@@ -9,7 +9,9 @@ interface ContextMenuItem {
 }
 
 interface ContextMenuProps {
+  /** Element that activates the context menu */
   trigger: React.ReactNode;
+  /** Menu items to display on right-click */
   items: ContextMenuItem[];
   className?: string;
   style?: React.CSSProperties;

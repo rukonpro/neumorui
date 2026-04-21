@@ -9,7 +9,9 @@ interface Step {
 }
 
 interface StepperProps {
+  /** Array of step definitions to render */
   steps: Step[];
+  /** Layout direction of the stepper */
   orientation?: "vertical" | "horizontal";
   className?: string;
   style?: React.CSSProperties;

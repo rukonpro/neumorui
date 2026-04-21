@@ -1,15 +1,25 @@
 import React, { useState, useRef, useCallback } from "react";
 
 interface PinInputProps {
+  /** Number of pin digits */
   length?: number;
+  /** Label text above the input */
   label?: string;
+  /** Helper text below the input */
   helperText?: string;
+  /** Error message below the input */
   error?: string;
+  /** Mask digits like a password */
   mask?: boolean;
+  /** Called on each digit change */
   onChange?: (value: string) => void;
+  /** Called when all digits are filled */
   onComplete?: (value: string) => void;
+  /** Disable the input */
   disabled?: boolean;
+  /** Size of each pin cell */
   size?: "sm" | "md" | "lg";
+  /** HTML id attribute */
   id?: string;
   className?: string;
 }

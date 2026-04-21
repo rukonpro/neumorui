@@ -6,13 +6,21 @@ export interface RadarChartDataItem {
 }
 
 interface RadarChartProps {
+  /** Data points for each axis */
   data: RadarChartDataItem[];
+  /** Width and height in pixels */
   size?: number;
+  /** Fill and stroke color */
   color?: string;
+  /** Maximum scale value for axes */
   maxValue?: number;
+  /** Show axis labels */
   showLabels?: boolean;
+  /** Show values near data points */
   showValues?: boolean;
+  /** Number of concentric guide rings */
   rings?: number;
+  /** Enable entrance animation */
   animate?: boolean;
   className?: string;
   style?: React.CSSProperties;

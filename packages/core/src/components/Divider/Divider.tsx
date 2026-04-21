@@ -1,8 +1,11 @@
 import React from "react";
 
 interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Layout direction of the divider */
   orientation?: "horizontal" | "vertical";
+  /** Text label displayed in the center */
   label?: string;
+  /** Visual style variant */
   variant?: "solid" | "inset";
 }
 

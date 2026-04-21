@@ -3,9 +3,13 @@ import React from "react";
 type AlertVariant = "info" | "success" | "warning" | "danger";
 
 interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Semantic color variant of the alert */
   variant?: AlertVariant;
+  /** Bold title text at the top */
   title?: string;
+  /** Custom icon overriding the default emoji */
   icon?: React.ReactNode;
+  /** Callback to show close button and handle dismiss */
   onClose?: () => void;
 }
 

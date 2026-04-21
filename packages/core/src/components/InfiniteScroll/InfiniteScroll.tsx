@@ -2,11 +2,17 @@ import React, { useRef, useEffect, useCallback } from "react";
 
 interface InfiniteScrollProps {
   children: React.ReactNode;
+  /** Called when scroll reaches threshold */
   onLoadMore: () => void;
+  /** Whether more items are available */
   hasMore: boolean;
+  /** Currently loading more items */
   loading?: boolean;
+  /** Custom loading indicator element */
   loader?: React.ReactNode;
+  /** Shown when no more items remain */
   endMessage?: React.ReactNode;
+  /** Trigger distance from bottom in pixels */
   threshold?: number;
   className?: string;
   style?: React.CSSProperties;

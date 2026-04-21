@@ -5,12 +5,19 @@ type BannerPosition = "top" | "bottom";
 
 interface BannerProps {
   children: React.ReactNode;
+  /** Color variant of the banner */
   variant?: BannerVariant;
+  /** Display at top or bottom */
   position?: BannerPosition;
+  /** Icon shown before content */
   icon?: React.ReactNode;
+  /** Action element on the right */
   action?: React.ReactNode;
+  /** Allow user to dismiss the banner */
   dismissible?: boolean;
+  /** Called when banner is dismissed */
   onDismiss?: () => void;
+  /** Stick to top or bottom edge */
   sticky?: boolean;
   className?: string;
   style?: React.CSSProperties;

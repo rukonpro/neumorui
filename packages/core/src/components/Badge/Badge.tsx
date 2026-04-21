@@ -3,7 +3,9 @@ import React from "react";
 type BadgeVariant = "default" | "primary" | "success" | "danger" | "warning" | "info";
 
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Color variant of the badge */
   variant?: BadgeVariant;
+  /** Show a small dot indicator before text */
   dot?: boolean;
 }
 

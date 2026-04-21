@@ -1,14 +1,23 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 
 interface CountdownProps {
+  /** Target date to count down to */
   targetDate: Date | string | number;
+  /** Called when countdown reaches zero */
   onComplete?: () => void;
+  /** Show the days unit */
   showDays?: boolean;
+  /** Show the hours unit */
   showHours?: boolean;
+  /** Show the minutes unit */
   showMinutes?: boolean;
+  /** Show the seconds unit */
   showSeconds?: boolean;
+  /** Custom labels for each time unit */
   labels?: { days?: string; hours?: string; minutes?: string; seconds?: string };
+  /** Size of the countdown boxes */
   size?: "sm" | "md" | "lg";
+  /** Visual style variant */
   variant?: "raised" | "inset";
   className?: string;
   style?: React.CSSProperties;

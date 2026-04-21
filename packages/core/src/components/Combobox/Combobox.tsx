@@ -11,13 +11,21 @@ export interface ComboboxOption {
 }
 
 interface ComboboxProps {
+  /** Available options to select from */
   options: ComboboxOption[];
+  /** Currently selected option value */
   value?: string;
+  /** Callback when selected value changes */
   onValueChange?: (value: string) => void;
+  /** Label text above the combobox */
   label?: string;
+  /** Placeholder when no option is selected */
   placeholder?: string;
+  /** Placeholder for the search input */
   searchPlaceholder?: string;
+  /** Message shown when no options match */
   emptyMessage?: string;
+  /** Whether the combobox is disabled */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

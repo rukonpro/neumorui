@@ -8,11 +8,17 @@ interface SelectOption {
 }
 
 interface SelectProps {
+  /** Array of selectable options */
   options: SelectOption[];
+  /** Controlled selected value */
   value?: string;
+  /** Callback fired when selection changes */
   onValueChange?: (value: string) => void;
+  /** Text shown when no option is selected */
   placeholder?: string;
+  /** Label text displayed above the select */
   label?: string;
+  /** Disable the select dropdown */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

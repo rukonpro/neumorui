@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 interface BackToTopProps {
+  /** Scroll distance to show the button */
   threshold?: number;
+  /** Use smooth scroll animation */
   smooth?: boolean;
+  /** Custom icon element */
   icon?: React.ReactNode;
+  /** Button position on screen */
   position?: "bottom-right" | "bottom-left" | "bottom-center";
+  /** Button size */
   size?: "sm" | "md" | "lg";
   className?: string;
   style?: React.CSSProperties;

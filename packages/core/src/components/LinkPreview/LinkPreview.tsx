@@ -1,12 +1,18 @@
 import React, { useState, useRef } from "react";
 
 interface LinkPreviewProps {
+  /** URL the link points to */
   href: string;
+  /** Preview card title text */
   title: string;
+  /** Short description for the preview */
   description?: string;
+  /** Preview image URL */
   image?: string;
+  /** Site favicon URL */
   favicon?: string;
   children: React.ReactNode;
+  /** Tooltip position relative to link */
   side?: "top" | "bottom";
   className?: string;
   style?: React.CSSProperties;

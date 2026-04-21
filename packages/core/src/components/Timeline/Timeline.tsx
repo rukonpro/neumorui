@@ -9,8 +9,11 @@ export interface TimelineItem {
 }
 
 interface TimelineProps {
+  /** Timeline entries to render */
   items: TimelineItem[];
+  /** Layout direction of the timeline */
   orientation?: "vertical" | "horizontal";
+  /** Alternate items left and right */
   alternating?: boolean;
   className?: string;
   style?: React.CSSProperties;

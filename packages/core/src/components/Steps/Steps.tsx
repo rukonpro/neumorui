@@ -7,10 +7,15 @@ export interface StepItem {
 }
 
 interface StepsProps {
+  /** Array of step items to render */
   steps: StepItem[];
+  /** Zero-based index of the active step */
   current: number;
+  /** Layout direction of the steps */
   direction?: "horizontal" | "vertical";
+  /** Size preset of step circles and text */
   size?: "sm" | "md" | "lg";
+  /** Callback fired when a step is clicked */
   onChange?: (step: number) => void;
   className?: string;
   style?: React.CSSProperties;

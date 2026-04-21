@@ -1,11 +1,17 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 interface VideoPlayerProps {
+  /** Video file source URL */
   src: string;
+  /** Poster image shown before playback */
   poster?: string;
+  /** Border radius in pixels */
   rounded?: number;
+  /** Start playing automatically */
   autoPlay?: boolean;
+  /** Mute audio by default */
   muted?: boolean;
+  /** Loop playback continuously */
   loop?: boolean;
   className?: string;
   style?: React.CSSProperties;

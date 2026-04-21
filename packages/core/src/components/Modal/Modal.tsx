@@ -2,12 +2,18 @@ import React from "react";
 import * as RadixDialog from "@radix-ui/react-dialog";
 
 interface ModalProps {
+  /** Controlled open state of the modal */
   open?: boolean;
+  /** Callback fired when open state changes */
   onOpenChange?: (open: boolean) => void;
+  /** Element that opens the modal on click */
   trigger?: React.ReactNode;
+  /** Heading text in the modal header */
   title?: string;
+  /** Subtext below the title */
   description?: string;
   children: React.ReactNode;
+  /** Width preset of the modal dialog */
   size?: "sm" | "md" | "lg";
   className?: string;
   style?: React.CSSProperties;

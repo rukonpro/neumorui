@@ -1,9 +1,13 @@
 import React from "react";
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  /** Label text displayed above the textarea */
   label?: string;
+  /** Hint text shown below the textarea */
   helperText?: string;
+  /** Error message replaces helper text */
   error?: string;
+  /** CSS resize behavior for the textarea */
   resize?: "none" | "both" | "horizontal" | "vertical";
 }
 

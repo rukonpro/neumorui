@@ -14,11 +14,17 @@ export interface CommandItem {
 }
 
 interface CommandProps {
+  /** Controlled open state of the palette */
   open?: boolean;
+  /** Callback when open state changes */
   onOpenChange?: (open: boolean) => void;
+  /** Command items to display */
   items: CommandItem[];
+  /** Placeholder text for the search input */
   placeholder?: string;
+  /** Message shown when no results match */
   emptyMessage?: string;
+  /** Accessible title for the dialog */
   title?: string;
   className?: string;
   style?: React.CSSProperties;

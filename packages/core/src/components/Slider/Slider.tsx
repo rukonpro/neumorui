@@ -2,14 +2,23 @@ import React from "react";
 import * as RadixSlider from "@radix-ui/react-slider";
 
 interface SliderProps {
+  /** Controlled slider value as array */
   value?: number[];
+  /** Initial value when uncontrolled */
   defaultValue?: number[];
+  /** Callback fired when value changes */
   onValueChange?: (value: number[]) => void;
+  /** Minimum allowed value */
   min?: number;
+  /** Maximum allowed value */
   max?: number;
+  /** Step increment between values */
   step?: number;
+  /** Label text displayed above the slider */
   label?: string;
+  /** Display the current numeric value */
   showValue?: boolean;
+  /** Disable interaction with the slider */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

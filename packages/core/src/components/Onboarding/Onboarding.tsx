@@ -8,9 +8,13 @@ export interface OnboardingStep {
 }
 
 interface OnboardingProps {
+  /** Guided tour steps with targets */
   steps: OnboardingStep[];
+  /** Whether the onboarding is active */
   active?: boolean;
+  /** Called when all steps are completed */
   onComplete?: () => void;
+  /** Called when user skips the tour */
   onSkip?: () => void;
   className?: string;
 }

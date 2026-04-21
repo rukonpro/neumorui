@@ -9,8 +9,11 @@ interface SidebarItem {
 }
 
 interface SidebarProps {
+  /** Navigation items to display */
   items: SidebarItem[];
+  /** Custom logo element */
   logo?: React.ReactNode;
+  /** Brand name text */
   brand?: string;
   className?: string;
   style?: React.CSSProperties;

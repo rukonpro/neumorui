@@ -1,35 +1,62 @@
 import React from "react";
 
 interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Number of grid columns */
   cols?: number;
+  /** Number of grid rows */
   rows?: number;
+  /** Spacing between grid items */
   gap?: number | string;
+  /** Vertical spacing between rows */
   rowGap?: number | string;
+  /** Horizontal spacing between columns */
   colGap?: number | string;
+  /** Minimum child width for auto-fit */
   minChildWidth?: string;
+  /** Vertical alignment of grid items */
   alignItems?: React.CSSProperties["alignItems"];
+  /** Horizontal alignment of grid items */
   justifyItems?: React.CSSProperties["justifyItems"];
+  /** Alignment of the grid content vertically */
   alignContent?: React.CSSProperties["alignContent"];
+  /** Alignment of the grid content horizontally */
   justifyContent?: React.CSSProperties["justifyContent"];
+  /** Grid auto-flow direction */
   flow?: "row" | "column" | "dense" | "row dense" | "column dense";
+  /** Custom grid-template-columns value */
   templateColumns?: string;
+  /** Custom grid-template-rows value */
   templateRows?: string;
+  /** Named grid template areas */
   areas?: string;
+  /** Use inline-grid display */
   inline?: boolean;
+  /** Size of implicitly created rows */
   autoRows?: string;
+  /** Size of implicitly created columns */
   autoCols?: string;
 }
 
 interface ColProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Number of columns to span */
   span?: number;
+  /** Column start position */
   start?: number;
+  /** Column end position */
   end?: number;
+  /** Number of rows to span */
   rowSpan?: number;
+  /** Row start position */
   rowStart?: number;
+  /** Row end position */
   rowEnd?: number;
+  /** Visual order of the item */
   order?: number;
+  /** Named grid area to place item */
   area?: string;
+  /** Vertical self-alignment */
   alignSelf?: React.CSSProperties["alignSelf"];
+  /** Horizontal self-alignment */
   justifySelf?: React.CSSProperties["justifySelf"];
 }
 

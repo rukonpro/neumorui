@@ -1,10 +1,15 @@
 import React, { useState, useCallback } from "react";
 
 interface CopyButtonProps {
+  /** Text to copy to clipboard */
   text: string;
+  /** Button label before copying */
   label?: string;
+  /** Label shown after copying */
   copiedLabel?: string;
+  /** Visual style variant */
   variant?: "raised" | "flat" | "icon";
+  /** Button size */
   size?: "sm" | "md";
   className?: string;
   style?: React.CSSProperties;

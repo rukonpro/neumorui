@@ -31,15 +31,25 @@ const defaultCountries: CountryCode[] = [
 ];
 
 interface PhoneInputProps {
+  /** Label text above the input */
   label?: string;
+  /** Helper text below the input */
   helperText?: string;
+  /** Error message below the input */
   error?: string;
+  /** Phone number value */
   value?: string;
+  /** Called with full number, dial code, phone */
   onChange?: (fullNumber: string, dialCode: string, phone: string) => void;
+  /** Default country ISO code */
   defaultCountry?: string;
+  /** Available countries for selection */
   countries?: CountryCode[];
+  /** Input placeholder text */
   placeholder?: string;
+  /** Disable the input */
   disabled?: boolean;
+  /** HTML id attribute */
   id?: string;
   className?: string;
 }

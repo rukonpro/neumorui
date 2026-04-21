@@ -1,14 +1,23 @@
 import React, { useState, useRef, useCallback } from "react";
 
 interface TagInputProps {
+  /** Controlled array of tag strings */
   value?: string[];
+  /** Initial tags when uncontrolled */
   defaultValue?: string[];
+  /** Called when tags change */
   onChange?: (tags: string[]) => void;
+  /** Label text above the input */
   label?: string;
+  /** Input placeholder text */
   placeholder?: string;
+  /** Maximum number of allowed tags */
   maxTags?: number;
+  /** Disable the input */
   disabled?: boolean;
+  /** Show error state styling */
   error?: boolean;
+  /** Helper text below the input */
   helperText?: string;
   className?: string;
   style?: React.CSSProperties;

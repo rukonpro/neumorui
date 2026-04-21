@@ -22,6 +22,7 @@ interface KanbanColumn {
 }
 
 interface KanbanBoardProps {
+  /** Array of kanban columns with items */
   columns: KanbanColumn[];
   className?: string;
   style?: React.CSSProperties;

@@ -1,9 +1,13 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 interface AudioPlayerProps {
+  /** Audio file source URL */
   src: string;
+  /** Track title display text */
   title?: string;
+  /** Artist name display text */
   artist?: string;
+  /** Cover art image URL */
   coverArt?: string;
   className?: string;
   style?: React.CSSProperties;

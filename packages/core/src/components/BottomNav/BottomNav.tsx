@@ -9,8 +9,11 @@ interface BottomNavItem {
 }
 
 interface BottomNavProps {
+  /** Navigation items to display */
   items: BottomNavItem[];
+  /** Index of the currently active item */
   activeIndex?: number;
+  /** Callback when active item changes */
   onActiveChange?: (index: number) => void;
   className?: string;
   style?: React.CSSProperties;

@@ -1,12 +1,19 @@
 import React from "react";
 
 interface SparklineProps {
+  /** Numeric data points to plot */
   data: number[];
+  /** SVG width in pixels */
   width?: number;
+  /** SVG height in pixels */
   height?: number;
+  /** Line and fill color */
   color?: string;
+  /** Show gradient fill below line */
   showFill?: boolean;
+  /** Thickness of the line stroke */
   strokeWidth?: number;
+  /** Enable draw animation */
   animate?: boolean;
   className?: string;
   style?: React.CSSProperties;

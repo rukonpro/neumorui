@@ -14,11 +14,17 @@ type ButtonVariant =
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Visual style variant of the button */
   variant?: ButtonVariant;
+  /** Size preset — affects padding, font-size, radius */
   size?: ButtonSize;
+  /** Show loading spinner and disable the button */
   loading?: boolean;
+  /** Icon element displayed before the label */
   leftIcon?: React.ReactNode;
+  /** Icon element displayed after the label */
   rightIcon?: React.ReactNode;
+  /** Enable ripple effect on click */
   ripple?: boolean;
 }
 

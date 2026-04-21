@@ -2,9 +2,13 @@ import React, { useState, useCallback, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 interface ThemeCustomizerProps {
+  /** Called with updated CSS variable map */
   onThemeChange?: (vars: Record<string, string>) => void;
+  /** Controlled open state */
   open?: boolean;
+  /** Called when panel open state changes */
   onOpenChange?: (open: boolean) => void;
+  /** Fixed overlay or inline panel */
   position?: "fixed" | "inline";
   className?: string;
   style?: React.CSSProperties;

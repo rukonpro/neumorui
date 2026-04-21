@@ -1,11 +1,17 @@
 import React, { useState, useCallback } from "react";
 
 interface MarkdownEditorProps {
+  /** Markdown content value */
   value?: string;
+  /** Called with updated markdown text */
   onChange?: (markdown: string) => void;
+  /** Placeholder text when empty */
   placeholder?: string;
+  /** Label text above the editor */
   label?: string;
+  /** Minimum editor height in pixels */
   minHeight?: number;
+  /** Disable editing */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

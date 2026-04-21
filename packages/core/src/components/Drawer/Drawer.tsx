@@ -1,9 +1,13 @@
 import React from "react";
 
 interface DrawerProps {
+  /** Whether the drawer is visible */
   open: boolean;
+  /** Callback fired when open state changes */
   onOpenChange: (open: boolean) => void;
+  /** Edge of the screen the drawer slides from */
   side?: "left" | "right" | "bottom";
+  /** Heading text in the drawer header */
   title?: string;
   children: React.ReactNode;
   className?: string;

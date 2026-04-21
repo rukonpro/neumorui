@@ -24,9 +24,13 @@ export interface DropdownLabel {
 export type DropdownEntry = DropdownItem | DropdownSeparator | DropdownLabel;
 
 interface DropdownMenuProps {
+  /** Element that opens the dropdown */
   trigger: React.ReactNode;
+  /** Menu entries to render */
   items: DropdownEntry[];
+  /** Horizontal alignment of the menu */
   align?: "start" | "center" | "end";
+  /** Preferred side to display the menu */
   side?: "top" | "right" | "bottom" | "left";
   className?: string;
   style?: React.CSSProperties;

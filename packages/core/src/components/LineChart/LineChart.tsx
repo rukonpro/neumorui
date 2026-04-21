@@ -6,11 +6,17 @@ export interface LineChartDataItem {
 }
 
 interface LineChartProps {
+  /** Array of data points for the line */
   data: LineChartDataItem[];
+  /** Chart height in pixels */
   height?: number;
+  /** Line and fill color */
   color?: string;
+  /** Show dots at each data point */
   showDots?: boolean;
+  /** Show gradient fill under the line */
   showFill?: boolean;
+  /** Enable draw-in animation */
   animate?: boolean;
   className?: string;
   style?: React.CSSProperties;

@@ -2,11 +2,16 @@ import React from "react";
 import * as RadixPopover from "@radix-ui/react-popover";
 
 interface PopoverProps {
+  /** Element that triggers the popover */
   trigger: React.ReactNode;
   children: React.ReactNode;
+  /** Preferred side to display the popover */
   side?: "top" | "right" | "bottom" | "left";
+  /** Alignment relative to the trigger */
   align?: "start" | "center" | "end";
+  /** Controlled open state */
   open?: boolean;
+  /** Callback when open state changes */
   onOpenChange?: (open: boolean) => void;
   className?: string;
   style?: React.CSSProperties;

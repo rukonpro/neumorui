@@ -2,10 +2,15 @@ import React from "react";
 import * as RadixSwitch from "@radix-ui/react-switch";
 
 interface SwitchProps {
+  /** Controlled toggle state */
   checked?: boolean;
+  /** Callback fired when toggle state changes */
   onCheckedChange?: (checked: boolean) => void;
+  /** Label text beside the switch */
   label?: string;
+  /** Secondary text shown below the label */
   description?: string;
+  /** Disable interaction and dim the switch */
   disabled?: boolean;
   id?: string;
   className?: string;

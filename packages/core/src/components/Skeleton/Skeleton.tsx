@@ -3,9 +3,13 @@ import React from "react";
 type SkeletonVariant = "text" | "avatar" | "card" | "rect";
 
 interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Shape variant of the skeleton placeholder */
   variant?: SkeletonVariant;
+  /** Custom width of the skeleton element */
   width?: string | number;
+  /** Custom height of the skeleton element */
   height?: string | number;
+  /** Number of lines for text variant */
   lines?: number;
 }
 

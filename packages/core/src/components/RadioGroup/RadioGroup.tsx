@@ -10,12 +10,19 @@ interface RadioOption {
 }
 
 interface RadioGroupProps {
+  /** Array of radio options to render */
   options: RadioOption[];
+  /** Controlled selected value */
   value?: string;
+  /** Initial selected value when uncontrolled */
   defaultValue?: string;
+  /** Callback fired when selection changes */
   onValueChange?: (value: string) => void;
+  /** Group label displayed above the options */
   label?: string;
+  /** Layout direction of radio items */
   orientation?: "horizontal" | "vertical";
+  /** Disable all radio items in the group */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

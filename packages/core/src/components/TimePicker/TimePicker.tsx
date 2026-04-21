@@ -1,13 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 
 interface TimePickerProps {
+  /** Label text above the input */
   label?: string;
+  /** Current time value (HH:MM) */
   value?: string;
+  /** Called when time changes */
   onChange?: (time: string) => void;
+  /** Use 24-hour format */
   use24Hour?: boolean;
+  /** Minute increment step */
   minuteStep?: number;
+  /** Placeholder text when empty */
   placeholder?: string;
+  /** Disable the picker */
   disabled?: boolean;
+  /** Error message below the input */
   error?: string;
   className?: string;
   style?: React.CSSProperties;

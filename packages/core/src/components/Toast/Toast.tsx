@@ -3,10 +3,15 @@ import React, { createContext, useCallback, useContext, useState } from "react";
 type ToastVariant = "default" | "success" | "danger" | "warning";
 
 interface ToastItem {
+  /** Unique identifier for the toast */
   id: string;
+  /** Primary toast message text */
   message: string;
+  /** Secondary description text */
   description?: string;
+  /** Color variant for the toast */
   variant?: ToastVariant;
+  /** Auto-dismiss duration in milliseconds */
   duration?: number;
 }
 

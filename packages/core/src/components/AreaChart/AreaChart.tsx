@@ -6,14 +6,23 @@ export interface AreaChartDataItem {
 }
 
 interface AreaChartProps {
+  /** Data points for the chart */
   data: AreaChartDataItem[];
+  /** Chart height in pixels */
   height?: number;
+  /** Line and fill color */
   color?: string;
+  /** Opacity of the gradient fill */
   gradientOpacity?: number;
+  /** Show data point dots */
   showDots?: boolean;
+  /** Show horizontal grid lines */
   showGrid?: boolean;
+  /** Show x-axis labels */
   showLabels?: boolean;
+  /** Show values above data points */
   showValues?: boolean;
+  /** Enable entrance animation */
   animate?: boolean;
   className?: string;
   style?: React.CSSProperties;

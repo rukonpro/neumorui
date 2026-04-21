@@ -3,10 +3,15 @@ import React from "react";
 type AvatarSize = "sm" | "md" | "lg" | "xl";
 
 interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Image URL for the avatar */
   src?: string;
+  /** Alt text for the avatar image */
   alt?: string;
+  /** Fallback initials when no image provided */
   initials?: string;
+  /** Size preset of the avatar */
   size?: AvatarSize;
+  /** Presence status indicator dot */
   status?: "online" | "offline" | "busy" | "away";
 }
 

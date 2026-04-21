@@ -1,10 +1,15 @@
 import React from "react";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** Label text displayed above the input */
   label?: string;
+  /** Hint text shown below the input */
   helperText?: string;
+  /** Error message replaces helper text */
   error?: string;
+  /** Icon element displayed before the input */
   leftIcon?: React.ReactNode;
+  /** Icon element displayed after the input */
   rightIcon?: React.ReactNode;
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 
 interface AspectRatioProps {
+  /** Width-to-height ratio (e.g. 16/9) */
   ratio?: number;
   children: React.ReactNode;
   className?: string;

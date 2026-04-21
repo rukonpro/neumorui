@@ -8,12 +8,19 @@ interface SegmentOption {
 }
 
 interface SegmentedControlProps {
+  /** Segment options to render */
   options: SegmentOption[];
+  /** Controlled selected value */
   value?: string;
+  /** Initial value when uncontrolled */
   defaultValue?: string;
+  /** Called when selection changes */
   onChange?: (value: string) => void;
+  /** Size of the control */
   size?: "sm" | "md" | "lg";
+  /** Stretch to fill container width */
   fullWidth?: boolean;
+  /** Disable all segments */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

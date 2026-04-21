@@ -1,10 +1,15 @@
 import React from "react";
 
 interface EmptyStateProps {
+  /** Custom icon element */
   icon?: React.ReactNode;
+  /** Heading text for the empty state */
   title: string;
+  /** Supporting description text */
   description?: string;
+  /** Action button or element */
   action?: React.ReactNode;
+  /** Size of the empty state layout */
   size?: "sm" | "md" | "lg";
   className?: string;
   style?: React.CSSProperties;

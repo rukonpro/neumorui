@@ -7,13 +7,21 @@ interface SocialLink {
 }
 
 interface UserCardProps {
+  /** User display name */
   name: string;
+  /** Job title or role text */
   role?: string;
+  /** Avatar image URL */
   avatar?: string;
+  /** Fallback initials when no avatar */
   initials?: string;
+  /** Short biography text */
   bio?: string;
+  /** Social media link buttons */
   socialLinks?: SocialLink[];
+  /** Background color of the cover area */
   coverColor?: string;
+  /** Card click handler */
   onClick?: () => void;
   className?: string;
   style?: React.CSSProperties;

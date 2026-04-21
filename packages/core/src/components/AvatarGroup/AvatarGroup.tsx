@@ -6,9 +6,13 @@ export interface AvatarGroupItem {
 }
 
 interface AvatarGroupProps {
+  /** Array of avatar items to display */
   avatars: AvatarGroupItem[];
+  /** Max visible avatars before +N */
   max?: number;
+  /** Avatar diameter in pixels */
   size?: number;
+  /** Overlap offset in pixels */
   overlap?: number;
   className?: string;
   style?: React.CSSProperties;

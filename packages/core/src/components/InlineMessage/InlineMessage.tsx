@@ -3,7 +3,9 @@ import React from "react";
 type InlineMessageVariant = "info" | "success" | "warning" | "danger";
 
 interface InlineMessageProps {
+  /** Message type and color */
   variant?: InlineMessageVariant;
+  /** Custom icon overriding default */
   icon?: React.ReactNode;
   children: React.ReactNode;
   className?: string;

@@ -7,9 +7,13 @@ interface NavLink {
 }
 
 interface NavbarProps {
+  /** Custom logo element */
   logo?: React.ReactNode;
+  /** Brand name text */
   brand?: string;
+  /** Navigation link items */
   links: NavLink[];
+  /** Action buttons on the right */
   actions?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;

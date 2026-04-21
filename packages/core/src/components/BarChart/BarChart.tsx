@@ -7,9 +7,13 @@ export interface BarChartDataItem {
 }
 
 interface BarChartProps {
+  /** Array of data items for each bar */
   data: BarChartDataItem[];
+  /** Chart height in pixels */
   height?: number;
+  /** Title displayed above the chart */
   title?: string;
+  /** Trend indicator element */
   trend?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;

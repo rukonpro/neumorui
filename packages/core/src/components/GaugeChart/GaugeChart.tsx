@@ -1,14 +1,23 @@
 import React from "react";
 
 interface GaugeChartProps {
+  /** Current gauge value */
   value: number;
+  /** Maximum value for the gauge */
   max?: number;
+  /** Pixel width and height of the SVG */
   size?: number;
+  /** Thickness of the gauge arc stroke */
   strokeWidth?: number;
+  /** Custom color for the gauge fill arc */
   color?: string;
+  /** Text label below the center value */
   label?: string;
+  /** Display the numeric value in center */
   showValue?: boolean;
+  /** Unit suffix appended to the value */
   suffix?: string;
+  /** Enable arc fill animation on mount */
   animate?: boolean;
   className?: string;
   style?: React.CSSProperties;

@@ -2,7 +2,9 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 
 interface ScrollAreaProps {
   children: React.ReactNode;
+  /** Maximum height before scrolling */
   maxHeight?: number | string;
+  /** Hide the custom scrollbar */
   hideScrollbar?: boolean;
   className?: string;
   style?: React.CSSProperties;

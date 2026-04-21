@@ -4,8 +4,11 @@ type SpinnerSize = "sm" | "md" | "lg" | "xl";
 type SpinnerVariant = "default" | "primary" | "success" | "danger";
 
 interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Size preset of the spinner */
   size?: SpinnerSize;
+  /** Color variant of the spinner arc */
   variant?: SpinnerVariant;
+  /** Text displayed below the spinner */
   label?: string;
 }
 

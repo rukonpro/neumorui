@@ -6,16 +6,27 @@ interface ConfirmDialogInput {
 }
 
 interface ConfirmDialogProps {
+  /** Whether the dialog is visible */
   open: boolean;
+  /** Callback when visibility changes */
   onOpenChange: (open: boolean) => void;
+  /** Dialog heading text */
   title: string;
+  /** Explanatory text below the title */
   description?: string;
+  /** Icon displayed before the title */
   icon?: string;
+  /** Visual style: default or danger */
   variant?: "default" | "danger";
+  /** Text for the confirm button */
   confirmLabel?: string;
+  /** Text for the cancel button */
   cancelLabel?: string;
+  /** Callback when user confirms */
   onConfirm: () => void;
+  /** Callback when user cancels */
   onCancel?: () => void;
+  /** Optional confirmation text input config */
   input?: ConfirmDialogInput;
   className?: string;
   style?: React.CSSProperties;

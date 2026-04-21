@@ -9,10 +9,15 @@ interface BrowserTab {
 }
 
 interface BrowserTabsProps {
+  /** Array of tab definitions */
   tabs: BrowserTab[];
+  /** ID of the currently active tab */
   activeTab?: string;
+  /** Callback when a tab is selected */
   onTabChange?: (id: string) => void;
+  /** Callback when a tab is closed */
   onTabClose?: (id: string) => void;
+  /** Callback when the add button is clicked */
   onTabAdd?: () => void;
   className?: string;
   style?: React.CSSProperties;

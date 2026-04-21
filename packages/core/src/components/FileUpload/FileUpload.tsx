@@ -10,14 +10,23 @@ export interface UploadedFile {
 }
 
 interface FileUploadProps {
+  /** Controlled uploaded files array */
   value?: UploadedFile[];
+  /** Called when files change */
   onChange?: (files: UploadedFile[]) => void;
+  /** Allow selecting multiple files */
   multiple?: boolean;
+  /** Accepted file types (e.g. "image/*") */
   accept?: string;
+  /** Maximum file size in bytes */
   maxSize?: number;
+  /** Maximum number of files allowed */
   maxFiles?: number;
+  /** Drop zone label text */
   label?: string;
+  /** Hint text below the label */
   hint?: string;
+  /** Disable the upload area */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

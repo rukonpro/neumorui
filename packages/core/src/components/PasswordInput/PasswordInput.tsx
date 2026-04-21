@@ -1,9 +1,13 @@
 import React, { useState, useMemo } from "react";
 
 interface PasswordInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+  /** Label text displayed above the input */
   label?: string;
+  /** Hint text shown below the input */
   helperText?: string;
+  /** Error message replaces helper text */
   error?: string;
+  /** Show a password strength meter below input */
   showStrength?: boolean;
 }
 

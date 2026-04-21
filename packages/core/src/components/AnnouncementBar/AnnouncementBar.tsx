@@ -2,9 +2,13 @@ import React from "react";
 
 interface AnnouncementBarProps {
   children: React.ReactNode;
+  /** Visual style: gradient or clay */
   variant?: "gradient" | "clay";
+  /** Icon displayed before the content */
   icon?: React.ReactNode;
+  /** Whether the bar can be dismissed */
   dismissible?: boolean;
+  /** Callback when bar is dismissed */
   onDismiss?: () => void;
   className?: string;
   style?: React.CSSProperties;

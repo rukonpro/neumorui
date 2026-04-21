@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 
 interface TestimonialCardProps {
+  /** Testimonial quote text */
   quote: string;
+  /** Name of the person quoted */
   author: string;
+  /** Author's role or title */
   role?: string;
+  /** Author avatar image URL */
   avatar?: string;
+  /** Star rating value */
   rating?: number;
+  /** Maximum possible star rating */
   maxRating?: number;
   className?: string;
   style?: React.CSSProperties;

@@ -3,14 +3,23 @@ import React, { useState } from "react";
 export type NotificationVariant = "default" | "success" | "warning" | "danger" | "info";
 
 export interface NotificationCardProps {
+  /** Icon displayed beside the title */
   icon?: React.ReactNode;
+  /** Notification heading text */
   title: string;
+  /** Supporting detail text */
   description?: string;
+  /** Timestamp display string */
   time?: string;
+  /** Color variant for the notification */
   variant?: NotificationVariant;
+  /** Show unread indicator */
   unread?: boolean;
+  /** Action element below description */
   action?: React.ReactNode;
+  /** Called when dismiss button is clicked */
   onDismiss?: () => void;
+  /** Card click handler */
   onClick?: () => void;
   className?: string;
   style?: React.CSSProperties;

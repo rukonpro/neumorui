@@ -8,7 +8,9 @@ interface ActivityItem {
 }
 
 interface ActivityFeedProps {
+  /** Activity entries to display */
   items: ActivityItem[];
+  /** Callback to load more items */
   onLoadMore?: () => void;
   className?: string;
   style?: React.CSSProperties;

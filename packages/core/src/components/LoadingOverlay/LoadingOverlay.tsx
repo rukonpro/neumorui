@@ -1,7 +1,9 @@
 import React from "react";
 
 interface LoadingOverlayProps {
+  /** Whether the loading overlay is visible */
   loading: boolean;
+  /** Text displayed below the spinner */
   message?: string;
   children: React.ReactNode;
   className?: string;

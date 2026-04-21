@@ -1,12 +1,18 @@
 import React from "react";
 
 interface FormFieldProps {
+  /** Field label text */
   label?: string;
+  /** Linked input id for the label */
   htmlFor?: string;
+  /** Helper text below the field */
   helperText?: string;
+  /** Error message below the field */
   error?: string;
+  /** Show required asterisk on label */
   required?: boolean;
   children: React.ReactNode;
+  /** Use horizontal label-input layout */
   horizontal?: boolean;
   className?: string;
 }

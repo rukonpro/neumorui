@@ -1,11 +1,17 @@
 import React, { useMemo } from "react";
 
 interface QRCodeProps {
+  /** Data string encoded in the QR code */
   value: string;
+  /** Width and height in pixels */
   size?: number;
+  /** Foreground module color */
   fgColor?: string;
+  /** Background color */
   bgColor?: string;
+  /** Use rounded QR modules */
   rounded?: boolean;
+  /** Caption text below the code */
   label?: string;
   className?: string;
   style?: React.CSSProperties;

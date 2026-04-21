@@ -1,14 +1,23 @@
 import React, { useState, useCallback } from "react";
 
 interface NumberInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange" | "value"> {
+  /** Label text displayed above the input */
   label?: string;
+  /** Hint text shown below the input */
   helperText?: string;
+  /** Error message replaces helper text */
   error?: string;
+  /** Controlled numeric value */
   value?: number;
+  /** Initial value when uncontrolled */
   defaultValue?: number;
+  /** Callback fired when value changes */
   onChange?: (value: number) => void;
+  /** Minimum allowed value */
   min?: number;
+  /** Maximum allowed value */
   max?: number;
+  /** Step increment for stepper buttons */
   step?: number;
 }
 

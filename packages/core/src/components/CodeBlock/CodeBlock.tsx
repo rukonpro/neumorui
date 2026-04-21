@@ -1,11 +1,17 @@
 import React, { useState, useCallback } from "react";
 
 interface CodeBlockProps {
+  /** Source code string to display */
   code: string;
+  /** Programming language label */
   language?: string;
+  /** Title shown in the header */
   title?: string;
+  /** Display line numbers */
   showLineNumbers?: boolean;
+  /** Show copy-to-clipboard button */
   showCopyButton?: boolean;
+  /** Max scrollable height in pixels */
   maxHeight?: number;
   className?: string;
   style?: React.CSSProperties;

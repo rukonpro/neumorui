@@ -1,19 +1,33 @@
 import React, { useState } from "react";
 
 interface MusicPlayerCardProps {
+  /** Song title */
   title: string;
+  /** Artist name */
   artist: string;
+  /** Album name */
   album?: string;
+  /** Cover art image URL */
   coverArt?: string;
+  /** Total track duration string */
   duration?: string;
+  /** Current playback time string */
   currentTime?: string;
+  /** Playback progress percentage (0-100) */
   progress?: number;
+  /** Whether the track is playing */
   playing?: boolean;
+  /** Called when play is pressed */
   onPlay?: () => void;
+  /** Called when pause is pressed */
   onPause?: () => void;
+  /** Called when next track is pressed */
   onNext?: () => void;
+  /** Called when previous track is pressed */
   onPrev?: () => void;
+  /** Called when shuffle is toggled */
   onShuffle?: () => void;
+  /** Called when repeat is toggled */
   onRepeat?: () => void;
   className?: string;
   style?: React.CSSProperties;

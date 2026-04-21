@@ -7,6 +7,7 @@ export interface TreeNode {
 }
 
 interface TreeViewProps {
+  /** Hierarchical tree nodes to display */
   nodes: TreeNode[];
   className?: string;
   style?: React.CSSProperties;

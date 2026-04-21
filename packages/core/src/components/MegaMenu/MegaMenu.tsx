@@ -6,6 +6,7 @@ export interface MegaMenuItem {
 }
 
 interface MegaMenuProps {
+  /** Menu items with expandable panels */
   items: MegaMenuItem[];
   className?: string;
   style?: React.CSSProperties;

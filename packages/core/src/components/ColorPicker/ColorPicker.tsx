@@ -1,12 +1,19 @@
 import React, { useState, useCallback } from "react";
 
 interface ColorPickerProps {
+  /** Controlled hex color value */
   value?: string;
+  /** Initial color when uncontrolled */
   defaultValue?: string;
+  /** Called when color changes */
   onChange?: (color: string) => void;
+  /** Array of preset hex color swatches */
   presets?: string[];
+  /** Label text above the picker */
   label?: string;
+  /** Show hex input and preview */
   showInput?: boolean;
+  /** Disable the picker */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

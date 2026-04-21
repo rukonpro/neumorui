@@ -1,15 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 
 interface StatsCardProps {
+  /** Metric label displayed above the value */
   label: string;
+  /** Numeric or formatted stat value */
   value: string | number;
+  /** Trend indicator with direction */
   trend?: {
     value: string;
     direction: "up" | "down";
   };
+  /** Accent color for the value text */
   color?: string;
+  /** Additional description below the value */
   description?: string;
+  /** Enable count-up animation on reveal */
   animate?: boolean;
+  /** Animation duration in milliseconds */
   duration?: number;
   className?: string;
   style?: React.CSSProperties;

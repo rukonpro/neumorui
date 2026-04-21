@@ -1,13 +1,20 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 
 interface SheetProps {
+  /** Whether the sheet is visible */
   open: boolean;
+  /** Called when open state changes */
   onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
+  /** Edge the sheet slides from */
   side?: "bottom" | "top" | "left" | "right";
+  /** Sheet header title */
   title?: string;
+  /** Sheet header description */
   description?: string;
+  /** Show drag handle indicator */
   showHandle?: boolean;
+  /** Snap point heights for dragging */
   snapPoints?: number[];
   className?: string;
   style?: React.CSSProperties;

@@ -1,10 +1,15 @@
 import React from "react";
 
 interface HeroProps {
+  /** Small text displayed above the title */
   eyebrow?: string;
+  /** Main heading content */
   title: React.ReactNode;
+  /** Supporting text below the title */
   subtitle?: string;
+  /** CTA buttons or action elements */
   actions?: React.ReactNode;
+  /** CSS gradient for the background */
   backgroundGradient?: string;
   className?: string;
   style?: React.CSSProperties;

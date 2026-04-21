@@ -23,8 +23,11 @@ interface ToggleGroupMultipleProps {
 }
 
 type ToggleGroupProps = (ToggleGroupSingleProps | ToggleGroupMultipleProps) & {
+  /** Toggle button options */
   options: ToggleOption[];
+  /** Disable all toggle buttons */
   disabled?: boolean;
+  /** Size of the toggle buttons */
   size?: "sm" | "md" | "lg";
   className?: string;
   style?: React.CSSProperties;

@@ -13,12 +13,19 @@ import { Pagination } from "../Pagination/Pagination";
 import { Spinner } from "../Spinner/Spinner";
 
 interface DataTableProps<TData> {
+  /** Column definitions for the table */
   columns: ColumnDef<TData, any>[];
+  /** Array of row data to display */
   data: TData[];
+  /** Show loading spinner overlay */
   loading?: boolean;
+  /** Content shown when data is empty */
   empty?: React.ReactNode;
+  /** Number of rows per page */
   pageSize?: number;
+  /** Show pagination controls below table */
   showPagination?: boolean;
+  /** Callback when a row is clicked */
   onRowClick?: (row: TData) => void;
   className?: string;
   style?: React.CSSProperties;

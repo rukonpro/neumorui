@@ -1,12 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 
 interface DateRangePickerProps {
+  /** Label text above the input */
   label?: string;
+  /** Initial start date (YYYY-MM-DD) */
   startDate?: string;
+  /** Initial end date (YYYY-MM-DD) */
   endDate?: string;
+  /** Called with selected start and end dates */
   onChange?: (start: string, end: string) => void;
+  /** Placeholder text when empty */
   placeholder?: string;
+  /** Disable the picker */
   disabled?: boolean;
+  /** Error message below the input */
   error?: string;
   className?: string;
   style?: React.CSSProperties;

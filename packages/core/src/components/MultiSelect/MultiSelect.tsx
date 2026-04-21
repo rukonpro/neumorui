@@ -7,14 +7,23 @@ export interface MultiSelectOption {
 }
 
 interface MultiSelectProps {
+  /** Array of selectable options */
   options: MultiSelectOption[];
+  /** Controlled array of selected values */
   value?: string[];
+  /** Callback fired when selection changes */
   onChange?: (selected: string[]) => void;
+  /** Label text displayed above the select */
   label?: string;
+  /** Text shown when nothing is selected */
   placeholder?: string;
+  /** Maximum number of selectable items */
   maxSelected?: number;
+  /** Enable search filtering in the dropdown */
   searchable?: boolean;
+  /** Disable the multi-select */
   disabled?: boolean;
+  /** Error message shown below the trigger */
   error?: string;
   className?: string;
   style?: React.CSSProperties;

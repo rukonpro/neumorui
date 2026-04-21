@@ -2,14 +2,23 @@ import React, { useState } from "react";
 
 interface ChipProps {
   children: React.ReactNode;
+  /** Visual style variant */
   variant?: "raised" | "outlined" | "filled";
+  /** Color theme of the chip */
   color?: "default" | "primary" | "success" | "danger" | "warning";
+  /** Size of the chip */
   size?: "sm" | "md" | "lg";
+  /** Icon displayed before the label */
   icon?: React.ReactNode;
+  /** Show a remove button */
   removable?: boolean;
+  /** Called when remove button is clicked */
   onRemove?: () => void;
+  /** Whether the chip is selected */
   selected?: boolean;
+  /** Click handler for interactive chips */
   onClick?: () => void;
+  /** Disable interaction */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

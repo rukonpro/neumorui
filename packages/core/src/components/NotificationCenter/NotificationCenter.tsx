@@ -11,10 +11,15 @@ export interface NotificationItem {
 }
 
 interface NotificationCenterProps {
+  /** List of notification items */
   notifications: NotificationItem[];
+  /** Called when a notification is read */
   onRead?: (id: string) => void;
+  /** Mark all notifications as read */
   onReadAll?: () => void;
+  /** Remove a notification by id */
   onClear?: (id: string) => void;
+  /** Custom trigger button element */
   trigger?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;

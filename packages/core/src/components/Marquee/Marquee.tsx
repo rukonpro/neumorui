@@ -2,8 +2,11 @@ import React from "react";
 
 interface MarqueeProps {
   children: React.ReactNode;
+  /** Animation duration in seconds */
   speed?: number;
+  /** Scroll direction of the marquee */
   direction?: "left" | "right";
+  /** Pause scrolling when hovered */
   pauseOnHover?: boolean;
   className?: string;
   style?: React.CSSProperties;

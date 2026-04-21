@@ -11,11 +11,17 @@ export interface CommandMenuItem {
 }
 
 interface CommandMenuProps {
+  /** Available command items */
   items: CommandMenuItem[];
+  /** Controlled open state */
   open?: boolean;
+  /** Called when open state changes */
   onOpenChange?: (open: boolean) => void;
+  /** Search input placeholder text */
   placeholder?: string;
+  /** Message when no results match */
   emptyMessage?: string;
+  /** Keyboard shortcut key (with Cmd/Ctrl) */
   trigger?: string;
   className?: string;
   style?: React.CSSProperties;

@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 
 interface InputGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** Label text above the input */
   label?: string;
+  /** Helper text below the input */
   helperText?: string;
+  /** Error message below the input */
   error?: string;
+  /** Addon element on the left side */
   leftAddon?: React.ReactNode;
+  /** Addon element on the right side */
   rightAddon?: React.ReactNode;
+  /** Inline icon on the left */
   leftElement?: React.ReactNode;
+  /** Inline icon on the right */
   rightElement?: React.ReactNode;
 }
 

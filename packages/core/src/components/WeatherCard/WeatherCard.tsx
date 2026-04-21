@@ -8,14 +8,23 @@ export interface ForecastDay {
 }
 
 interface WeatherCardProps {
+  /** City or location name */
   location: string;
+  /** Current temperature value */
   temperature: number;
+  /** Temperature unit */
   unit?: "C" | "F";
+  /** Weather condition text */
   condition: string;
+  /** Weather icon emoji or string */
   icon?: string;
+  /** Humidity percentage */
   humidity?: number;
+  /** Wind speed description */
   wind?: string;
+  /** Feels-like temperature value */
   feelsLike?: number;
+  /** Multi-day forecast data */
   forecast?: ForecastDay[];
   className?: string;
   style?: React.CSSProperties;

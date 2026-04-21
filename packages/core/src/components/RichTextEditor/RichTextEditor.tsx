@@ -1,11 +1,17 @@
 import React, { useRef, useCallback, useState } from "react";
 
 interface RichTextEditorProps {
+  /** HTML content value */
   value?: string;
+  /** Called with updated HTML content */
   onChange?: (html: string) => void;
+  /** Placeholder text when empty */
   placeholder?: string;
+  /** Label text above the editor */
   label?: string;
+  /** Minimum editor height in pixels */
   minHeight?: number;
+  /** Disable editing */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

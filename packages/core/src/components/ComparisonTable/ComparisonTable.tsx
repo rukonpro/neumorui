@@ -7,7 +7,9 @@ interface ComparisonPlan {
 }
 
 interface ComparisonTableProps {
+  /** List of feature names for rows */
   features: string[];
+  /** Plans to compare across columns */
   plans: ComparisonPlan[];
   className?: string;
   style?: React.CSSProperties;

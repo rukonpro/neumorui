@@ -1,15 +1,25 @@
 import React, { useState, useCallback } from "react";
 
 interface RatingProps {
+  /** Controlled rating value */
   value?: number;
+  /** Initial value when uncontrolled */
   defaultValue?: number;
+  /** Callback fired when rating changes */
   onChange?: (value: number) => void;
+  /** Total number of rating icons */
   max?: number;
+  /** Size preset of the rating icons */
   size?: "sm" | "md" | "lg";
+  /** Shape of the rating icon */
   icon?: "star" | "heart";
+  /** Prevent user interaction, display only */
   readOnly?: boolean;
+  /** Disable and dim the rating */
   disabled?: boolean;
+  /** Allow half-step rating values */
   allowHalf?: boolean;
+  /** Label text displayed above the rating */
   label?: string;
   className?: string;
   style?: React.CSSProperties;

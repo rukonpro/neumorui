@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 interface MasonryProps {
+  /** Number of masonry columns */
   columns?: number;
+  /** Gap between items in pixels */
   gap?: number;
   children: React.ReactNode;
   className?: string;

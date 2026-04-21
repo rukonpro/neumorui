@@ -3,7 +3,9 @@ import React from "react";
 type CardVariant = "raised" | "inset" | "flat";
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Visual style variant of the card */
   variant?: CardVariant;
+  /** Inner padding preset */
   padding?: "sm" | "md" | "lg";
 }
 

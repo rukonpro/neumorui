@@ -2,9 +2,13 @@ import React from "react";
 import * as RadixCheckbox from "@radix-ui/react-checkbox";
 
 interface CheckboxProps {
+  /** Controlled checked state or indeterminate */
   checked?: boolean | "indeterminate";
+  /** Callback fired when checked state changes */
   onCheckedChange?: (checked: boolean | "indeterminate") => void;
+  /** Label text beside the checkbox */
   label?: string;
+  /** Disable interaction and dim the checkbox */
   disabled?: boolean;
   id?: string;
   className?: string;

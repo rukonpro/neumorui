@@ -1,9 +1,13 @@
 import React from "react";
 
 interface HeatmapProps {
+  /** Grid values as flat or 2D array */
   data: number[][] | number[];
+  /** Number of columns in the grid */
   cols?: number;
+  /** Number of rows in the grid */
   rows?: number;
+  /** RGB color string for cell fills */
   colors?: string;
   className?: string;
   style?: React.CSSProperties;

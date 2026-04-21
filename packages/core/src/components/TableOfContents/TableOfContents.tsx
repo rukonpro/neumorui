@@ -7,9 +7,13 @@ export interface TOCItem {
 }
 
 interface TableOfContentsProps {
+  /** Heading items to list */
   items: TOCItem[];
+  /** Controlled active section id */
   activeId?: string;
+  /** Called when an item is clicked */
   onItemClick?: (id: string) => void;
+  /** Navigation heading text */
   title?: string;
   className?: string;
   style?: React.CSSProperties;

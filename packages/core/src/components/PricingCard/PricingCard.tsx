@@ -16,7 +16,9 @@ interface PricingPlan {
 }
 
 interface PricingCardProps {
+  /** Array of pricing plans to display */
   plans: PricingPlan[];
+  /** Callback when a plan CTA is clicked */
   onCtaClick?: (planName: string) => void;
   className?: string;
   style?: React.CSSProperties;

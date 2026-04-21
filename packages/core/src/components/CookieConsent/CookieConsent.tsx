@@ -7,11 +7,17 @@ export interface CookieOption {
 }
 
 interface CookieConsentProps {
+  /** Heading text for the banner */
   title?: string;
+  /** Explanatory text about cookies */
   description?: string;
+  /** URL to the privacy policy page */
   privacyLink?: string;
+  /** Cookie category toggle options */
   options?: CookieOption[];
+  /** Callback when user accepts all cookies */
   onAccept?: (selected: string[]) => void;
+  /** Callback when user customizes preferences */
   onCustomize?: (selected: string[]) => void;
   className?: string;
   style?: React.CSSProperties;

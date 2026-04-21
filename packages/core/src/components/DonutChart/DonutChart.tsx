@@ -7,10 +7,15 @@ export interface DonutSegment {
 }
 
 interface DonutChartProps {
+  /** Data segments for the donut chart */
   segments: DonutSegment[];
+  /** Diameter of the donut in pixels */
   size?: number;
+  /** Thickness of the donut ring */
   strokeWidth?: number;
+  /** Small label in the donut center */
   centerLabel?: string;
+  /** Large value in the donut center */
   centerValue?: string;
   className?: string;
   style?: React.CSSProperties;

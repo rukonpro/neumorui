@@ -3,12 +3,19 @@ import React from "react";
 type ProgressVariant = "default" | "success" | "danger" | "warning";
 
 interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Current progress value */
   value: number;
+  /** Maximum value for the progress bar */
   max?: number;
+  /** Color variant of the progress fill */
   variant?: ProgressVariant;
+  /** Display the percentage text */
   showLabel?: boolean;
+  /** Label text displayed above the bar */
   label?: string;
+  /** Height preset of the progress track */
   size?: "sm" | "md" | "lg";
+  /** Enable fill animation on mount */
   animate?: boolean;
 }
 

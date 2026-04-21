@@ -2,6 +2,7 @@ import React from "react";
 
 interface KbdProps {
   children: React.ReactNode;
+  /** Size of the keyboard key badge */
   size?: "sm" | "md" | "lg";
   className?: string;
   style?: React.CSSProperties;

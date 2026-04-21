@@ -6,14 +6,23 @@ export interface CarouselSlide {
 }
 
 interface CarouselProps {
+  /** Array of slides to display */
   slides: CarouselSlide[];
+  /** Enable automatic slide advancement */
   autoPlay?: boolean;
+  /** Auto-play interval in milliseconds */
   interval?: number;
+  /** Pause auto-play on hover */
   pauseOnHover?: boolean;
+  /** Enable infinite looping */
   loop?: boolean;
+  /** Show previous/next navigation arrows */
   showArrows?: boolean;
+  /** Show dot indicators below slides */
   showDots?: boolean;
+  /** Show auto-play progress bar */
   showProgress?: boolean;
+  /** Height of each slide */
   slideHeight?: number | string;
   className?: string;
   style?: React.CSSProperties;

@@ -9,9 +9,13 @@ interface AccordionItem {
 }
 
 interface AccordionProps {
+  /** Array of accordion items to render */
   items: AccordionItem[];
+  /** Allow single or multiple open panels */
   type?: "single" | "multiple";
+  /** Initially open panel value(s) */
   defaultValue?: string | string[];
+  /** Allow collapsing all panels in single mode */
   collapsible?: boolean;
   className?: string;
   style?: React.CSSProperties;

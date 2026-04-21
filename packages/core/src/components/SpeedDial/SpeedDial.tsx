@@ -8,7 +8,9 @@ export interface SpeedDialAction {
 }
 
 interface SpeedDialProps {
+  /** Action items revealed on toggle */
   actions: SpeedDialAction[];
+  /** Custom icon for the main FAB */
   icon?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;

@@ -9,8 +9,11 @@ interface Tab {
 }
 
 interface TabsProps {
+  /** Array of tab items to render */
   tabs: Tab[];
+  /** Initially active tab value */
   defaultValue?: string;
+  /** Visual style of the tab indicators */
   variant?: "pill" | "underline";
   className?: string;
   style?: React.CSSProperties;

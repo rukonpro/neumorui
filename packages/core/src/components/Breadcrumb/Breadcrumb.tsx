@@ -8,7 +8,9 @@ interface BreadcrumbItem {
 }
 
 interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
+  /** Array of breadcrumb navigation items */
   items: BreadcrumbItem[];
+  /** Custom separator element between items */
   separator?: React.ReactNode;
 }
 

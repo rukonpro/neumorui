@@ -4,6 +4,7 @@ import { cn } from "../../utils/cn";
 
 interface RevealProps {
   children: React.ReactNode;
+  /** Animation delay in milliseconds */
   delay?: number;
   className?: string;
   style?: React.CSSProperties;

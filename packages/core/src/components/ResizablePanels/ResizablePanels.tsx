@@ -1,9 +1,13 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 
 interface ResizablePanelsProps {
+  /** Split direction of the panels */
   direction?: "horizontal" | "vertical";
+  /** Initial size of the first panel (%) */
   defaultSize?: number;
+  /** Minimum panel size percentage */
   minSize?: number;
+  /** Maximum panel size percentage */
   maxSize?: number;
   children: [React.ReactNode, React.ReactNode];
   className?: string;

@@ -2,10 +2,15 @@ import React from "react";
 import { cn } from "../../utils/cn";
 
 interface PaginationProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+  /** Current active page number */
   page: number;
+  /** Total number of pages */
   total: number;
+  /** Callback fired when page changes */
   onChange: (page: number) => void;
+  /** Number of sibling pages around current */
   siblings?: number;
+  /** Size preset of pagination buttons */
   size?: "sm" | "md" | "lg";
 }
 

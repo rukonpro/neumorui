@@ -3,8 +3,11 @@ import React from "react";
 type ContainerSize = "sm" | "md" | "lg" | "xl" | "full";
 
 interface ContainerProps {
+  /** Max-width breakpoint preset */
   size?: ContainerSize;
+  /** Center horizontally with auto margins */
   centered?: boolean;
+  /** Apply horizontal padding */
   padding?: boolean;
   children: React.ReactNode;
   className?: string;

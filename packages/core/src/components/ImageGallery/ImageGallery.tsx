@@ -7,10 +7,15 @@ export interface GalleryImage {
 }
 
 interface ImageGalleryProps {
+  /** Array of images to display */
   images: GalleryImage[];
+  /** Number of grid columns */
   columns?: number;
+  /** Gap between images in pixels */
   gap?: number;
+  /** Border radius for thumbnails */
   rounded?: number;
+  /** Enable lightbox on click */
   lightbox?: boolean;
   className?: string;
   style?: React.CSSProperties;

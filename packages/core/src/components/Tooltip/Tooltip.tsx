@@ -2,9 +2,12 @@ import React from "react";
 import * as RadixTooltip from "@radix-ui/react-tooltip";
 
 interface TooltipProps {
+  /** Content displayed inside the tooltip */
   content: React.ReactNode;
   children: React.ReactNode;
+  /** Preferred side relative to the trigger */
   side?: "top" | "right" | "bottom" | "left";
+  /** Delay in ms before tooltip appears */
   delayDuration?: number;
   className?: string;
   style?: React.CSSProperties;

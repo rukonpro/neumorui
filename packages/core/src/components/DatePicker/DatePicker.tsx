@@ -5,13 +5,21 @@ import { Calendar } from "../Calendar/Calendar";
 import { cn } from "../../utils/cn";
 
 interface DatePickerProps {
+  /** Currently selected date */
   value?: Date;
+  /** Callback fired when date selection changes */
   onChange?: (date: Date | undefined) => void;
+  /** Label text displayed above the picker */
   label?: string;
+  /** Text shown when no date is selected */
   placeholder?: string;
+  /** Disable the date picker */
   disabled?: boolean;
+  /** Date-fns format string for display */
   dateFormat?: string;
+  /** Earliest selectable date */
   minDate?: Date;
+  /** Latest selectable date */
   maxDate?: Date;
   className?: string;
   style?: React.CSSProperties;
