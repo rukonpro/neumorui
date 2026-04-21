@@ -772,16 +772,14 @@ function MegaMenuDemo() {
 
 function SpeedDialDemo() {
   return (
-    <div style={{ height: "280px", position: "relative" }}>
-      <div style={{ position: "absolute", bottom: "16px", right: "16px" }}>
-        <SpeedDial
-          actions={[
-            { label: "Copy", icon: <span>📋</span>, onClick: () => {} },
-            { label: "Edit", icon: <span>✏️</span>, onClick: () => {} },
-            { label: "Share", icon: <span>🔗</span>, onClick: () => {} },
-          ]}
-        />
-      </div>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", minHeight: "300px", paddingBottom: "16px" }}>
+      <SpeedDial
+        actions={[
+          { label: "Copy", icon: <span>📋</span>, onClick: () => {} },
+          { label: "Edit", icon: <span>✏️</span>, onClick: () => {} },
+          { label: "Share", icon: <span>🔗</span>, onClick: () => {} },
+        ]}
+      />
     </div>
   );
 }
