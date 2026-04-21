@@ -64,6 +64,15 @@ export const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open]);
+
   const formatDisplay = (): string => {
     if (use24Hour) {
       return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;

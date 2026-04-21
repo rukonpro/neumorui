@@ -61,6 +61,15 @@ export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open]);
+
   const filtered = useMemo(() => {
     if (!search) return options;
     return options.filter((o) => o.label.toLowerCase().includes(search.toLowerCase()));

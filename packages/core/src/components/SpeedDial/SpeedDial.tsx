@@ -125,6 +125,15 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
     return () => document.removeEventListener("mousedown", handler);
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open]);
+
   const fabStyle: React.CSSProperties = {
     width: "56px",
     height: "56px",

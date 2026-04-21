@@ -91,6 +91,15 @@ export const PhoneInput = React.forwardRef<HTMLDivElement, PhoneInputProps>(
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDropdownOpen(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [dropdownOpen]);
+
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value.replace(/[^0-9\s\-()]/g, "");
     setPhone(val);

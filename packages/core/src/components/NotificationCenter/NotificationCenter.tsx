@@ -50,6 +50,15 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open]);
+
   // Group notifications
   const grouped: Record<string, NotificationItem[]> = {};
   notifications.forEach((n) => {
