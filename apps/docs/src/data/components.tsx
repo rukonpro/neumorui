@@ -123,6 +123,9 @@ import {
   AvatarGroup,
   RichTextEditor,
   MarkdownEditor,
+  AlertDialog,
+  AlertDialogProvider,
+  useAlertDialog,
   ChatInput,
   MessageList,
   StreamingText,
@@ -5361,5 +5364,70 @@ ref.current?.restart();`,
     ],
     component: PromptCard as unknown as React.ComponentType<Record<string, unknown>>,
     defaultProps: { icon: "💡", title: "Explain code", prompt: "Explain this code" },
+  },
+
+  // ── AlertDialog ──
+  {
+    slug: "alert-dialog",
+    name: "AlertDialog",
+    category: "Overlay",
+    description: "Popup alert/confirm dialog with OK/Cancel buttons, 5 variants, icon, and useAlertDialog hook.",
+    preview: (() => {
+      function AlertDialogDemo() {
+        const { alert, confirm } = useAlertDialog();
+        return (
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Button variant="raised" onClick={() => alert({ title: "Saved!", message: "Your changes have been saved.", variant: "success" })}>
+              Success Alert
+            </Button>
+            <Button variant="raised" onClick={() => alert({ title: "Error", message: "Something went wrong.", variant: "danger" })}>
+              Error Alert
+            </Button>
+            <Button variant="raised" onClick={() => confirm({ title: "Delete?", message: "This cannot be undone.", variant: "warning", cancelText: "Cancel", okText: "Delete" })}>
+              Confirm Dialog
+            </Button>
+          </div>
+        );
+      }
+      return <AlertDialogProvider><AlertDialogDemo /></AlertDialogProvider>;
+    })(),
+    code: `import { AlertDialogProvider, useAlertDialog } from "neumorui";
+
+// Wrap app with provider
+<AlertDialogProvider>
+  <App />
+</AlertDialogProvider>
+
+// Use anywhere
+const { alert, confirm } = useAlertDialog();
+
+// Simple alert
+alert({
+  title: "Saved!",
+  message: "Your changes have been saved.",
+  variant: "success",
+});
+
+// Confirm dialog
+confirm({
+  title: "Delete?",
+  message: "This cannot be undone.",
+  variant: "danger",
+  okText: "Delete",
+  cancelText: "Cancel",
+  onOk: () => deleteItem(),
+});`,
+    props: [
+      { name: "open", type: "boolean", default: "false" },
+      { name: "onClose", type: "() => void", default: "-" },
+      { name: "title", type: "string", default: "-" },
+      { name: "message", type: "ReactNode", default: "-" },
+      { name: "variant", type: '"default" | "success" | "danger" | "warning" | "info"', default: '"default"' },
+      { name: "icon", type: "ReactNode", default: "auto per variant" },
+      { name: "okText", type: "string", default: '"OK"' },
+      { name: "cancelText", type: "string", default: "-" },
+      { name: "onOk", type: "() => void", default: "-" },
+      { name: "onCancel", type: "() => void", default: "-" },
+    ],
   },
 ];

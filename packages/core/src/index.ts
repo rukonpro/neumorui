@@ -5,6 +5,9 @@ export { NeuProvider } from "./components/NeuProvider";
 export { useNeuTheme } from "./hooks/useNeuTheme";
 export { useReveal, useCountUp, useRipple } from "./hooks/useAnimation";
 
+// AlertDialog
+export { AlertDialog, AlertDialogProvider, useAlertDialog } from "./components/AlertDialog/AlertDialog";
+
 // AI Chat
 export { ChatInput } from "./components/ChatInput/ChatInput";
 export { MessageList } from "./components/MessageList/MessageList";

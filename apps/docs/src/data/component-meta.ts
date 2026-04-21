@@ -150,6 +150,7 @@ export const componentMeta: ComponentMeta[] = [
   { slug: "avatar-group", name: "AvatarGroup", category: "Data Display", description: "Stacked avatar group with overlap, hover lift, +N overflow indicator, and initials fallback." },
   { slug: "rich-text-editor", name: "RichTextEditor", category: "Form", description: "WYSIWYG rich text editor with formatting toolbar, headings, lists, links, and code blocks." },
   { slug: "markdown-editor", name: "MarkdownEditor", category: "Form", description: "Split-pane markdown editor with write/preview tabs, live rendering, and monospace input." },
+  { slug: "alert-dialog", name: "AlertDialog", category: "Overlay", description: "Popup alert/confirm dialog with OK/Cancel buttons, 5 variants, icon, and useAlertDialog hook." },
   { slug: "chat-input", name: "ChatInput", category: "AI Chat", description: "Auto-expanding chat input with send button, attachment support, Enter to send, and character count." },
   { slug: "message-list", name: "MessageList", category: "AI Chat", description: "Scrollable chat message container with auto-scroll, day separators, and user/assistant/system roles." },
   { slug: "streaming-text", name: "StreamingText", category: "AI Chat", description: "Typewriter streaming text effect with blinking cursor, skip-on-click, and imperative ref handle." },

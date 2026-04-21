@@ -126,6 +126,7 @@ const categories: SidebarCategory[] = [
       { slug: "drawer", name: "Drawer" },
       { slug: "confirm-dialog", name: "ConfirmDialog" },
       { slug: "sheet", name: "Sheet" },
+      { slug: "alert-dialog", name: "AlertDialog" },
     ],
   },
   {
