@@ -39,7 +39,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
   style,
 }, ref) => {
   return (
-    <div ref={ref} className={className} style={{ width: "100%", ...style }}>
+    <div ref={ref} className={className} style={{ width: "100%", ...style, ...(disabled ? { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" as const } : {}) }}>
       {(label || showValue) && (
         <div
           style={{

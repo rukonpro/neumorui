@@ -37,7 +37,7 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
   ...rest
 }, ref) => {
   return (
-    <div ref={ref} className={["w-full", className].filter(Boolean).join(" ")} style={style} {...rest}>
+    <div ref={ref} className={["w-full", className].filter(Boolean).join(" ")} style={{ ...style, ...(disabled ? { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" as const } : {}) }} {...rest}>
       {label && (
         <p
           className="text-xs font-semibold uppercase tracking-widest mb-1.5"

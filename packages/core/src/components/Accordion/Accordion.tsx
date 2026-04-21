@@ -52,6 +52,7 @@ const AccordionItemRow: React.FC<{
         : "var(--neu-shadow-raised-sm)",
     transform: hovered && !isOpen ? "translateY(-2px)" : "none",
     transition: "all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1)",
+    ...(item.disabled ? { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" as const } : {}),
   };
 
   return (
