@@ -70,7 +70,8 @@ const CloseIcon = () => (
   </svg>
 );
 
-export const FileUpload: React.FC<FileUploadProps> = ({
+export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
+  ({
   value,
   onChange,
   multiple = false,
@@ -83,7 +84,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   className,
   style,
   ...rest
-}) => {
+}, ref) => {
   const [internal, setInternal] = useState<UploadedFile[]>([]);
   const files = value ?? internal;
   const setFiles = (next: UploadedFile[]) => {
@@ -129,7 +130,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   };
 
   return (
-    <div className={cn("flex flex-col gap-3 w-full", className)} style={style} {...rest}>
+    <div ref={ref} className={cn("flex flex-col gap-3 w-full", className)} style={style} {...rest}>
       <button
         type="button"
         onClick={() => !disabled && inputRef.current?.click()}
@@ -270,5 +271,5 @@ export const FileUpload: React.FC<FileUploadProps> = ({
       )}
     </div>
   );
-};
+});
 FileUpload.displayName = "FileUpload";

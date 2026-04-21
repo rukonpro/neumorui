@@ -95,7 +95,8 @@ function isLight(hex: string): boolean {
   return (r * 299 + g * 587 + b * 114) / 1000 > 150;
 }
 
-export const ColorPicker: React.FC<ColorPickerProps> = ({
+export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
+  ({
   value: controlledValue,
   defaultValue = "#6c7ef8",
   onChange,
@@ -105,7 +106,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   disabled = false,
   className,
   style,
-}) => {
+}, ref) => {
   const [internalValue, setInternalValue] = useState(defaultValue);
   const value = controlledValue ?? internalValue;
 
@@ -115,7 +116,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   }, [onChange]);
 
   return (
-    <div className={className} style={style}>
+    <div ref={ref} className={className} style={style}>
       {label && (
         <p
           style={{
@@ -238,6 +239,6 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
       </div>
     </div>
   );
-};
+});
 
 ColorPicker.displayName = "ColorPicker";

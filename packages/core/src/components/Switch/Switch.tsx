@@ -12,7 +12,8 @@ interface SwitchProps {
   style?: React.CSSProperties;
 }
 
-export const Switch: React.FC<SwitchProps> = ({
+export const Switch = React.forwardRef<HTMLDivElement, SwitchProps>(
+  ({
   checked,
   onCheckedChange,
   label,
@@ -22,11 +23,11 @@ export const Switch: React.FC<SwitchProps> = ({
   className,
   style,
   ...rest
-}) => {
+}, ref) => {
   const switchId = id || label?.toLowerCase().replace(/\s/g, "-");
 
   return (
-    <div className={className} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", ...style }} {...rest}>
+    <div ref={ref} className={className} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", ...style }} {...rest}>
       {(label || description) && (
         <div>
           {label && (
@@ -90,5 +91,5 @@ export const Switch: React.FC<SwitchProps> = ({
       </RadixSwitch.Root>
     </div>
   );
-};
+});
 Switch.displayName = "Switch";

@@ -126,7 +126,8 @@ const RatingItem: React.FC<{
   );
 };
 
-export const Rating: React.FC<RatingProps> = ({
+export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
+  ({
   value: controlledValue,
   defaultValue = 0,
   onChange,
@@ -139,7 +140,7 @@ export const Rating: React.FC<RatingProps> = ({
   label,
   className,
   style,
-}) => {
+}, ref) => {
   const [internalValue, setInternalValue] = useState(defaultValue);
   const [hoverValue, setHoverValue] = useState(-1);
   const value = controlledValue ?? internalValue;
@@ -154,7 +155,7 @@ export const Rating: React.FC<RatingProps> = ({
   const displayValue = hoverValue >= 0 ? hoverValue + 1 : value;
 
   return (
-    <div className={className} style={style}>
+    <div ref={ref} className={className} style={style}>
       {label && (
         <p
           style={{
@@ -207,6 +208,6 @@ export const Rating: React.FC<RatingProps> = ({
       </div>
     </div>
   );
-};
+});
 
 Rating.displayName = "Rating";

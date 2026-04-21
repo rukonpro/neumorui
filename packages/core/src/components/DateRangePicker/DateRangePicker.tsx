@@ -25,7 +25,8 @@ function daysInMonth(year: number, month: number): number {
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-export const DateRangePicker: React.FC<DateRangePickerProps> = ({
+export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
+  ({
   label,
   startDate,
   endDate,
@@ -35,18 +36,18 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
   error,
   className,
   style,
-}) => {
+}, ref) => {
   const [open, setOpen] = useState(false);
   const [focused, setFocused] = useState(false);
   const [start, setStart] = useState(startDate || "");
   const [end, setEnd] = useState(endDate || "");
   const [selecting, setSelecting] = useState<"start" | "end">("start");
   const [viewDate, setViewDate] = useState(new Date());
-  const ref = useRef<HTMLDivElement>(null);
+  const internalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (internalRef.current && !internalRef.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -88,7 +89,11 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
   const displayValue = start && end ? `${start} → ${end}` : start || "";
 
   return (
-    <div ref={ref} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", position: "relative", ...style }}>
+    <div ref={(node) => {
+        internalRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", position: "relative", ...style }}>
       {label && (
         <label style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--neu-text-secondary)" }}>
           {label}
@@ -210,6 +215,6 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
       <style>{`@keyframes neuDrpIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }`}</style>
     </div>
   );
-};
+});
 
 DateRangePicker.displayName = "DateRangePicker";

@@ -106,7 +106,7 @@ const ToggleItem: React.FC<{
   );
 };
 
-export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
+export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>((props, ref) => {
   const {
     options, disabled, size = "md", className, style,
     type: _type, value: _value, defaultValue: _defaultValue, onValueChange: _onValueChange,
@@ -130,6 +130,7 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
 
   if (props.type === "single") {
     return (
+      <div ref={ref}>
       <RadixToggleGroup.Root
         type="single"
         value={props.value}
@@ -142,10 +143,12 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
       >
         {renderItems()}
       </RadixToggleGroup.Root>
+      </div>
     );
   }
 
   return (
+    <div ref={ref}>
     <RadixToggleGroup.Root
       type="multiple"
       value={props.value}
@@ -158,6 +161,7 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
     >
       {renderItems()}
     </RadixToggleGroup.Root>
+    </div>
   );
-};
+});
 ToggleGroup.displayName = "ToggleGroup";

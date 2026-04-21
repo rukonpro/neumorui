@@ -11,7 +11,8 @@ interface FormFieldProps {
   className?: string;
 }
 
-export const FormField: React.FC<FormFieldProps> = ({
+export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
+  ({
   label,
   htmlFor,
   helperText,
@@ -20,12 +21,13 @@ export const FormField: React.FC<FormFieldProps> = ({
   children,
   horizontal = false,
   className,
-}) => {
+}, ref) => {
   const labelId = htmlFor || label?.toLowerCase().replace(/\s/g, "-");
 
   if (horizontal) {
     return (
       <div
+        ref={ref}
         className={className}
         style={{
           display: "flex",
@@ -70,7 +72,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   }
 
   return (
-    <div className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%" }}>
+    <div ref={ref} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%" }}>
       {label && (
         <label
           htmlFor={labelId}
@@ -97,6 +99,6 @@ export const FormField: React.FC<FormFieldProps> = ({
       )}
     </div>
   );
-};
+});
 
 FormField.displayName = "FormField";

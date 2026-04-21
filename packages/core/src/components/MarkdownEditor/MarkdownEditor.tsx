@@ -37,7 +37,8 @@ function markdownToHtml(md: string): string {
   return html;
 }
 
-export const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
+export const MarkdownEditor = React.forwardRef<HTMLDivElement, MarkdownEditorProps>(
+  ({
   value: controlledValue,
   onChange,
   placeholder = "Write markdown here...",
@@ -46,7 +47,7 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
   disabled,
   className,
   style,
-}) => {
+}, ref) => {
   const [internal, setInternal] = useState("");
   const [tab, setTab] = useState<"write" | "preview">("write");
   const [focused, setFocused] = useState(false);
@@ -62,7 +63,7 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
   const preview = markdownToHtml(text);
 
   return (
-    <div className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", ...style }}>
+    <div ref={ref} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", ...style }}>
       {label && (
         <label style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--neu-text-secondary)" }}>
           {label}
@@ -150,6 +151,6 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
       </div>
     </div>
   );
-};
+});
 
 MarkdownEditor.displayName = "MarkdownEditor";

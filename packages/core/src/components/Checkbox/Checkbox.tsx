@@ -11,7 +11,8 @@ interface CheckboxProps {
   style?: React.CSSProperties;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>(
+  ({
   checked,
   onCheckedChange,
   label,
@@ -20,12 +21,12 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   className,
   style,
   ...rest
-}) => {
+}, ref) => {
   const checkId = id || label?.toLowerCase().replace(/\s/g, "-");
   const isChecked = checked === true;
 
   return (
-    <div className={className} style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", ...style }} {...rest}>
+    <div ref={ref} className={className} style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", ...style }} {...rest}>
       <RadixCheckbox.Root
         id={checkId}
         checked={checked}
@@ -85,5 +86,5 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       )}
     </div>
   );
-};
+});
 Checkbox.displayName = "Checkbox";

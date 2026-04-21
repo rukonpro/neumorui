@@ -22,7 +22,8 @@ const sizeMap = {
   lg: { box: 56, font: 24, radius: 14, gap: 10 },
 };
 
-export const PinInput: React.FC<PinInputProps> = ({
+export const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
+  ({
   length = 4,
   label,
   helperText,
@@ -34,7 +35,7 @@ export const PinInput: React.FC<PinInputProps> = ({
   size = "md",
   id,
   className,
-}) => {
+}, ref) => {
   const inputId = id || label?.toLowerCase().replace(/\s/g, "-") || "pin-input";
   const [values, setValues] = useState<string[]>(Array(length).fill(""));
   const [focusedIdx, setFocusedIdx] = useState<number | null>(null);
@@ -101,7 +102,7 @@ export const PinInput: React.FC<PinInputProps> = ({
   );
 
   return (
-    <div className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "fit-content" }}>
+    <div ref={ref} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "fit-content" }}>
       {label && (
         <label
           htmlFor={`${inputId}-0`}
@@ -175,6 +176,6 @@ export const PinInput: React.FC<PinInputProps> = ({
       )}
     </div>
   );
-};
+});
 
 PinInput.displayName = "PinInput";

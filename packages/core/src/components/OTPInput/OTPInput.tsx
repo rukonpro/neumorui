@@ -82,7 +82,8 @@ const OTPCell: React.FC<{
   );
 };
 
-export const OTPInput: React.FC<OTPInputProps> = ({
+export const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>(
+  ({
   length = 6,
   value = "",
   onChange,
@@ -95,7 +96,7 @@ export const OTPInput: React.FC<OTPInputProps> = ({
   size = "md",
   className,
   style,
-}) => {
+}, ref) => {
   const [focusIndex, setFocusIndex] = useState(autoFocus ? 0 : -1);
   const inputRef = useRef<HTMLInputElement>(null);
   const digits = value.split("").slice(0, length);
@@ -136,7 +137,7 @@ export const OTPInput: React.FC<OTPInputProps> = ({
   };
 
   return (
-    <div className={className} style={style}>
+    <div ref={ref} className={className} style={style}>
       {label && (
         <p
           style={{
@@ -210,6 +211,6 @@ export const OTPInput: React.FC<OTPInputProps> = ({
       `}</style>
     </div>
   );
-};
+});
 
 OTPInput.displayName = "OTPInput";

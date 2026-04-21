@@ -29,7 +29,8 @@ const tools: ToolbarAction[] = [
   { label: "Link", icon: "🔗", command: "createLink" },
 ];
 
-export const RichTextEditor: React.FC<RichTextEditorProps> = ({
+export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorProps>(
+  ({
   value,
   onChange,
   placeholder = "Start writing...",
@@ -38,7 +39,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   disabled,
   className,
   style,
-}) => {
+}, ref) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState(false);
 
@@ -64,7 +65,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   };
 
   return (
-    <div className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", ...style }}>
+    <div ref={ref} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", ...style }}>
       {label && (
         <label style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--neu-text-secondary)" }}>
           {label}
@@ -134,7 +135,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
       `}</style>
     </div>
   );
-};
+});
 
 const ToolbarButton: React.FC<{ tool: ToolbarAction; onClick: () => void }> = ({ tool, onClick }) => {
   const [hovered, setHovered] = useState(false);

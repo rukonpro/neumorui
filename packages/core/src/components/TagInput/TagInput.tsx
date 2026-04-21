@@ -80,7 +80,8 @@ const Tag: React.FC<{
   );
 };
 
-export const TagInput: React.FC<TagInputProps> = ({
+export const TagInput = React.forwardRef<HTMLDivElement, TagInputProps>(
+  ({
   value: controlledValue,
   defaultValue = [],
   onChange,
@@ -92,7 +93,7 @@ export const TagInput: React.FC<TagInputProps> = ({
   helperText,
   className,
   style,
-}) => {
+}, ref) => {
   const [internalTags, setInternalTags] = useState<string[]>(defaultValue);
   const [inputValue, setInputValue] = useState("");
   const [focused, setFocused] = useState(false);
@@ -142,7 +143,7 @@ export const TagInput: React.FC<TagInputProps> = ({
   const atLimit = maxTags !== undefined && tags.length >= maxTags;
 
   return (
-    <div className={className} style={style}>
+    <div ref={ref} className={className} style={style}>
       {label && (
         <p
           style={{
@@ -230,6 +231,6 @@ export const TagInput: React.FC<TagInputProps> = ({
       )}
     </div>
   );
-};
+});
 
 TagInput.displayName = "TagInput";

@@ -22,7 +22,8 @@ interface MultiSelectProps {
 
 const transition = "all 0.18s cubic-bezier(0.34, 1.2, 0.64, 1)";
 
-export const MultiSelect: React.FC<MultiSelectProps> = ({
+export const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
+  ({
   options,
   value: controlledValue,
   onChange,
@@ -34,18 +35,18 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   error,
   className,
   style,
-}) => {
+}, ref) => {
   const [open, setOpen] = useState(false);
   const [focused, setFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [internal, setInternal] = useState<string[]>([]);
-  const ref = useRef<HTMLDivElement>(null);
+  const internalRef = useRef<HTMLDivElement>(null);
 
   const selected = controlledValue ?? internal;
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) { setOpen(false); setSearch(""); }
+      if (internalRef.current && !internalRef.current.contains(e.target as Node)) { setOpen(false); setSearch(""); }
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -77,7 +78,11 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   const selectedLabels = selected.map((v) => options.find((o) => o.value === v)?.label || v);
 
   return (
-    <div ref={ref} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", position: "relative", ...style }}>
+    <div ref={(node) => {
+        internalRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%", position: "relative", ...style }}>
       {label && (
         <label style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--neu-text-secondary)" }}>
           {label}
@@ -252,6 +257,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       <style>{`@keyframes neuMsIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }`}</style>
     </div>
   );
-};
+});
 
 MultiSelect.displayName = "MultiSelect";

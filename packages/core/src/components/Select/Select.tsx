@@ -18,7 +18,8 @@ interface SelectProps {
   style?: React.CSSProperties;
 }
 
-export const Select: React.FC<SelectProps> = ({
+export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
+  ({
   options,
   value,
   onValueChange,
@@ -28,9 +29,9 @@ export const Select: React.FC<SelectProps> = ({
   className,
   style,
   ...rest
-}) => {
+}, ref) => {
   return (
-    <div className={["w-full", className].filter(Boolean).join(" ")} style={style} {...rest}>
+    <div ref={ref} className={["w-full", className].filter(Boolean).join(" ")} style={style} {...rest}>
       {label && (
         <p
           className="text-xs font-semibold uppercase tracking-widest mb-1.5"
@@ -88,5 +89,5 @@ export const Select: React.FC<SelectProps> = ({
       </RadixSelect.Root>
     </div>
   );
-};
+});
 Select.displayName = "Select";

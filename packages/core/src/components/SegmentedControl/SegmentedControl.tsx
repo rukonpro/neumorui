@@ -27,7 +27,8 @@ const sizeMap: Record<string, { padding: string; fontSize: string; height: numbe
   lg: { padding: "6px", fontSize: "15px", height: 48, radius: "16px", innerRadius: "12px" },
 };
 
-export const SegmentedControl: React.FC<SegmentedControlProps> = ({
+export const SegmentedControl = React.forwardRef<HTMLDivElement, SegmentedControlProps>(
+  ({
   options,
   value: controlledValue,
   defaultValue,
@@ -37,7 +38,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
   disabled = false,
   className,
   style,
-}) => {
+}, ref) => {
   const [internalValue, setInternalValue] = useState(defaultValue ?? options[0]?.value ?? "");
   const value = controlledValue ?? internalValue;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -70,7 +71,11 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
 
   return (
     <div
-      ref={containerRef}
+      ref={(node) => {
+        containerRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }}
       className={className}
       role="radiogroup"
       style={{
@@ -143,6 +148,6 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
       })}
     </div>
   );
-};
+});
 
 SegmentedControl.displayName = "SegmentedControl";

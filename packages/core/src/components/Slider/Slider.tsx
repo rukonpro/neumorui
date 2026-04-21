@@ -15,7 +15,8 @@ interface SliderProps {
   style?: React.CSSProperties;
 }
 
-export const Slider: React.FC<SliderProps> = ({
+export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
+  ({
   value,
   defaultValue = [50],
   onValueChange,
@@ -27,9 +28,9 @@ export const Slider: React.FC<SliderProps> = ({
   disabled,
   className,
   style,
-}) => {
+}, ref) => {
   return (
-    <div className={className} style={{ width: "100%", ...style }}>
+    <div ref={ref} className={className} style={{ width: "100%", ...style }}>
       {(label || showValue) && (
         <div
           style={{
@@ -118,5 +119,5 @@ export const Slider: React.FC<SliderProps> = ({
       </RadixSlider.Root>
     </div>
   );
-};
+});
 Slider.displayName = "Slider";

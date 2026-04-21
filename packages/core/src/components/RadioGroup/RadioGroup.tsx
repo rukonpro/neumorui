@@ -127,7 +127,8 @@ const RadioItem: React.FC<{
   );
 };
 
-export const RadioGroup: React.FC<RadioGroupProps> = ({
+export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
+  ({
   options,
   value,
   defaultValue,
@@ -138,9 +139,10 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   className,
   style,
   ...rest
-}) => {
+}, ref) => {
   return (
     <div
+      ref={ref}
       className={cn(className)}
       style={{
         display: "flex",
@@ -181,5 +183,5 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       </RadixRadio.Root>
     </div>
   );
-};
+});
 RadioGroup.displayName = "RadioGroup";

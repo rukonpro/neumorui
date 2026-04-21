@@ -46,7 +46,8 @@ interface PhoneInputProps {
 
 const transition = "all 0.18s cubic-bezier(0.34, 1.2, 0.64, 1)";
 
-export const PhoneInput: React.FC<PhoneInputProps> = ({
+export const PhoneInput = React.forwardRef<HTMLDivElement, PhoneInputProps>(
+  ({
   label,
   helperText,
   error,
@@ -58,7 +59,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
   disabled,
   id,
   className,
-}) => {
+}, ref) => {
   const inputId = id || label?.toLowerCase().replace(/\s/g, "-") || "phone-input";
   const [focused, setFocused] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -103,7 +104,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
     : countries;
 
   return (
-    <div className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%" }}>
+    <div ref={ref} className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%" }}>
       {label && (
         <label
           htmlFor={inputId}
@@ -275,6 +276,6 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
       )}
     </div>
   );
-};
+});
 
 PhoneInput.displayName = "PhoneInput";
