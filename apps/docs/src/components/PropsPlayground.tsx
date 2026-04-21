@@ -29,7 +29,7 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
     );
   });
 
-  if (editableProps.length === 0) return null;
+  // Don't return null — still need to show preview + code even without editable props
 
   const handleChange = (name: string, value: unknown) => {
     setValues((prev) => ({ ...prev, [name]: value }));
@@ -100,8 +100,8 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
         </div>
       )}
 
-      {/* Playground controls */}
-      <div>
+      {/* Playground controls — only show if there are editable props */}
+      {editableProps.length > 0 && <div>
         <button
           type="button"
           onClick={() => setExpanded(!expanded)}
@@ -248,7 +248,7 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
             )}
           </div>
         )}
-      </div>
+      </div>}
 
       {/* Code toggle */}
       <div style={{ borderTop: "1px solid rgba(0,0,0,0.05)" }}>

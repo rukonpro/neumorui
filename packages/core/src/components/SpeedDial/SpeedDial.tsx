@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export interface SpeedDialAction {
   label: string;
@@ -114,6 +114,16 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
   const [open, setOpen] = useState(false);
   const [fabHovered, setFabHovered] = useState(false);
   const [fabPressed, setFabPressed] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
 
   const fabStyle: React.CSSProperties = {
     width: "56px",
@@ -145,25 +155,29 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
 
   return (
     <div
+      ref={ref}
       className={className}
       style={{
         display: "inline-flex",
         flexDirection: "column",
         alignItems: "flex-end",
+        position: "relative",
         ...style,
       }}
       {...rest}
     >
-      {/* Actions */}
+      {/* Actions — floating above the FAB */}
       <div
         data-testid="speed-dial-actions"
         style={{
+          position: "absolute",
+          bottom: "68px",
+          right: 0,
           display: "flex",
           flexDirection: "column-reverse",
           gap: "10px",
-          marginBottom: open ? "12px" : "0",
           alignItems: "flex-end",
-          transition: "margin 0.3s ease",
+          pointerEvents: open ? "auto" : "none",
         }}
       >
         {actions.map((action, i) => (
