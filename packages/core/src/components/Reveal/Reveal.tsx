@@ -23,3 +23,4 @@ export const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className, 
     </div>
   );
 };
+Reveal.displayName = "Reveal";

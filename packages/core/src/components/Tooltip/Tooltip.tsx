@@ -48,3 +48,4 @@ export const Tooltip: React.FC<TooltipProps> = ({
     </RadixTooltip.Provider>
   );
 };
+Tooltip.displayName = "Tooltip";

@@ -71,3 +71,4 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultValue, variant = "pill"
     </RadixTabs.Root>
   );
 };
+Tabs.displayName = "Tabs";

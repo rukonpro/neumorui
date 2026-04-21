@@ -80,3 +80,4 @@ export const Divider: React.FC<DividerProps> = ({
     />
   );
 };
+Divider.displayName = "Divider";

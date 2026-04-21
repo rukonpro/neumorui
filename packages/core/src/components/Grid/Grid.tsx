@@ -138,3 +138,4 @@ export const Col: React.FC<ColProps> = ({
     </div>
   );
 };
+Grid.displayName = "Grid";

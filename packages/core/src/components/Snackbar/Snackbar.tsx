@@ -30,7 +30,7 @@ const variantColors: Record<SnackbarVariant, string> = {
   info: "var(--neu-info)",
 };
 
-export const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const SnackbarProvider: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
   const [items, setItems] = useState<SnackbarItem[]>([]);
 
   const snackbar = useCallback((opts: Omit<SnackbarItem, "id">) => {
@@ -49,6 +49,7 @@ export const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     <SnackbarContext.Provider value={{ snackbar }}>
       {children}
       <div
+        className={className}
         style={{
           position: "fixed",
           bottom: "20px",

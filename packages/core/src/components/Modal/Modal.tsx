@@ -111,3 +111,4 @@ export const Modal: React.FC<ModalProps> = ({
     </RadixDialog.Root>
   );
 };
+Modal.displayName = "Modal";

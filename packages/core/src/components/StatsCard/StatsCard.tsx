@@ -171,3 +171,4 @@ export function StatsCard({
     </div>
   );
 }
+StatsCard.displayName = "StatsCard";

@@ -118,3 +118,4 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     </RadixMenu.Root>
   );
 };
+DropdownMenu.displayName = "DropdownMenu";

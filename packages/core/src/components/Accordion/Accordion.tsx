@@ -171,3 +171,4 @@ export const Accordion: React.FC<AccordionProps> = ({
     </RadixAccordion.Root>
   );
 };
+Accordion.displayName = "Accordion";

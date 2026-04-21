@@ -267,3 +267,4 @@ export const Calendar: React.FC<CalendarProps> = ({ className, classNames, ...pr
     />
   );
 };
+Calendar.displayName = "Calendar";

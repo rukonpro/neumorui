@@ -41,7 +41,7 @@ const variantStyle: Record<ToastVariant, React.CSSProperties> = {
   },
 };
 
-export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ToastProvider: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   const toast = useCallback((opts: Omit<ToastItem, "id">) => {
@@ -56,6 +56,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     <ToastContext.Provider value={{ toast }}>
       {children}
       <div
+        className={className}
         style={{
           position: "fixed",
           top: "16px",
@@ -112,3 +113,4 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     </ToastContext.Provider>
   );
 };
+ToastProvider.displayName = "ToastProvider";

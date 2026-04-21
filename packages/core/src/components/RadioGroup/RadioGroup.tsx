@@ -182,3 +182,4 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     </div>
   );
 };
+RadioGroup.displayName = "RadioGroup";

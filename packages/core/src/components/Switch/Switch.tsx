@@ -91,3 +91,4 @@ export const Switch: React.FC<SwitchProps> = ({
     </div>
   );
 };
+Switch.displayName = "Switch";

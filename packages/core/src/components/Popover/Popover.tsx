@@ -51,3 +51,4 @@ export const Popover: React.FC<PopoverProps> = ({
     </RadixPopover.Root>
   );
 };
+Popover.displayName = "Popover";

@@ -11,6 +11,7 @@ interface PinInputProps {
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
   id?: string;
+  className?: string;
 }
 
 const transition = "all 0.18s cubic-bezier(0.34, 1.2, 0.64, 1)";
@@ -32,6 +33,7 @@ export const PinInput: React.FC<PinInputProps> = ({
   disabled,
   size = "md",
   id,
+  className,
 }) => {
   const inputId = id || label?.toLowerCase().replace(/\s/g, "-") || "pin-input";
   const [values, setValues] = useState<string[]>(Array(length).fill(""));
@@ -99,7 +101,7 @@ export const PinInput: React.FC<PinInputProps> = ({
   );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "7px", width: "fit-content" }}>
+    <div className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "fit-content" }}>
       {label && (
         <label
           htmlFor={`${inputId}-0`}

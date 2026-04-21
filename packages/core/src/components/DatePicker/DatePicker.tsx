@@ -156,3 +156,4 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     </div>
   );
 };
+DatePicker.displayName = "DatePicker";

@@ -100,3 +100,4 @@ export const Alert: React.FC<AlertProps> = ({
     </div>
   );
 };
+Alert.displayName = "Alert";

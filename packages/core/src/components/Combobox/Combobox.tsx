@@ -312,3 +312,4 @@ export const Combobox: React.FC<ComboboxProps> = ({
     </div>
   );
 };
+Combobox.displayName = "Combobox";

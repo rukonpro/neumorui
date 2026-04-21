@@ -272,3 +272,4 @@ export const Command: React.FC<CommandProps> = ({
     </RadixDialog.Root>
   );
 };
+Command.displayName = "Command";

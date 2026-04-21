@@ -41,6 +41,7 @@ interface PhoneInputProps {
   placeholder?: string;
   disabled?: boolean;
   id?: string;
+  className?: string;
 }
 
 const transition = "all 0.18s cubic-bezier(0.34, 1.2, 0.64, 1)";
@@ -56,6 +57,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
   placeholder = "1XX XXXX XXXX",
   disabled,
   id,
+  className,
 }) => {
   const inputId = id || label?.toLowerCase().replace(/\s/g, "-") || "phone-input";
   const [focused, setFocused] = useState(false);
@@ -101,7 +103,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
     : countries;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%" }}>
+    <div className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%" }}>
       {label && (
         <label
           htmlFor={inputId}

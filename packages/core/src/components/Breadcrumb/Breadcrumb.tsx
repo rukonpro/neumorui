@@ -133,3 +133,4 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
     </nav>
   );
 };
+Breadcrumb.displayName = "Breadcrumb";

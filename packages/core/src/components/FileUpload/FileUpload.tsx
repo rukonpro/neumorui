@@ -271,3 +271,4 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     </div>
   );
 };
+FileUpload.displayName = "FileUpload";

@@ -187,3 +187,21 @@
   from { opacity: 1; transform: translateY(0); }
   to { opacity: 0; transform: translateY(-16px); }
 }
+
+/* ── Reduced Motion — respects user OS preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .neu-reveal { opacity: 1; }
+  .neu-float-a,
+  .neu-float-b { animation: none; }
+  .neu-shimmer { animation: none; }
+  .neu-icon-bounce:hover { animation: none; }
+}

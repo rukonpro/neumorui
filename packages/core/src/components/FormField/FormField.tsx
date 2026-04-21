@@ -8,6 +8,7 @@ interface FormFieldProps {
   required?: boolean;
   children: React.ReactNode;
   horizontal?: boolean;
+  className?: string;
 }
 
 export const FormField: React.FC<FormFieldProps> = ({
@@ -18,12 +19,14 @@ export const FormField: React.FC<FormFieldProps> = ({
   required,
   children,
   horizontal = false,
+  className,
 }) => {
   const labelId = htmlFor || label?.toLowerCase().replace(/\s/g, "-");
 
   if (horizontal) {
     return (
       <div
+        className={className}
         style={{
           display: "flex",
           alignItems: "flex-start",
@@ -67,7 +70,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%" }}>
+    <div className={className} style={{ display: "flex", flexDirection: "column", gap: "7px", width: "100%" }}>
       {label && (
         <label
           htmlFor={labelId}

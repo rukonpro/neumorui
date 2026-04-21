@@ -160,3 +160,4 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = (props) => {
     </RadixToggleGroup.Root>
   );
 };
+ToggleGroup.displayName = "ToggleGroup";
