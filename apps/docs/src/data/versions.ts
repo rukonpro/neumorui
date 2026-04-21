@@ -10,8 +10,8 @@ export interface VersionEntry {
 // Each release adds an entry here. Latest must be first.
 export const versions: VersionEntry[] = [
   {
-    version: "0.3.5",
-    label: "v0.3.5",
+    version: "0.3.6",
+    label: "v0.3.6",
     branch: "master",
     url: "https://neumorui.vercel.app",
     latest: true,
