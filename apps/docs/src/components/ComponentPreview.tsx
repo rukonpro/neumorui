@@ -17,7 +17,6 @@ export const ComponentPreview: React.FC<ComponentPreviewProps> = ({ preview, cod
         borderRadius: "24px",
         background: "var(--neu-bg)",
         boxShadow: "var(--neu-shadow-raised-lg)",
-        overflow: "hidden",
         transition: "all 0.35s ease",
       }}
     >

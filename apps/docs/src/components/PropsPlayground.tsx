@@ -59,7 +59,6 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
         borderRadius: "22px",
         background: "var(--neu-bg)",
         boxShadow: "var(--neu-shadow-raised-lg)",
-        overflow: "hidden",
       }}
     >
       {/* Demo preview */}
