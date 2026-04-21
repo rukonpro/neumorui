@@ -1,6 +1,6 @@
 {
   "name": "neumorui",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Neumorphic UI component library for React — TypeScript, Tailwind, Radix primitives",
   "keywords": [
     "react",
