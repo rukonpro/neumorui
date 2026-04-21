@@ -5,6 +5,15 @@ export { NeuProvider } from "./components/NeuProvider";
 export { useNeuTheme } from "./hooks/useNeuTheme";
 export { useReveal, useCountUp, useRipple } from "./hooks/useAnimation";
 
+// AI Chat
+export { ChatInput } from "./components/ChatInput/ChatInput";
+export { MessageList } from "./components/MessageList/MessageList";
+export type { ChatMessage } from "./components/MessageList/MessageList";
+export { StreamingText } from "./components/StreamingText/StreamingText";
+export type { StreamingTextHandle } from "./components/StreamingText/StreamingText";
+export { ThinkingIndicator } from "./components/ThinkingIndicator/ThinkingIndicator";
+export { PromptCard, PromptGrid } from "./components/PromptCard/PromptCard";
+
 // Date
 export { Calendar } from "./components/Calendar/Calendar";
 export { DatePicker } from "./components/DatePicker/DatePicker";

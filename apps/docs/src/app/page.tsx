@@ -21,6 +21,7 @@ const categoryColors: Record<string, string> = {
   Showpiece: "#e07060",
   Media: "#5bbf8a",
   Utility: "#e8b84b",
+  "AI Chat": "#6c7ef8",
 };
 
 // Auto-generate categories from componentDocs

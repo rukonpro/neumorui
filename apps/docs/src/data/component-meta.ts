@@ -150,6 +150,11 @@ export const componentMeta: ComponentMeta[] = [
   { slug: "avatar-group", name: "AvatarGroup", category: "Data Display", description: "Stacked avatar group with overlap, hover lift, +N overflow indicator, and initials fallback." },
   { slug: "rich-text-editor", name: "RichTextEditor", category: "Form", description: "WYSIWYG rich text editor with formatting toolbar, headings, lists, links, and code blocks." },
   { slug: "markdown-editor", name: "MarkdownEditor", category: "Form", description: "Split-pane markdown editor with write/preview tabs, live rendering, and monospace input." },
+  { slug: "chat-input", name: "ChatInput", category: "AI Chat", description: "Auto-expanding chat input with send button, attachment support, Enter to send, and character count." },
+  { slug: "message-list", name: "MessageList", category: "AI Chat", description: "Scrollable chat message container with auto-scroll, day separators, and user/assistant/system roles." },
+  { slug: "streaming-text", name: "StreamingText", category: "AI Chat", description: "Typewriter streaming text effect with blinking cursor, skip-on-click, and imperative ref handle." },
+  { slug: "thinking-indicator", name: "ThinkingIndicator", category: "AI Chat", description: "Animated AI thinking indicator with dots, wave, pulse, and typing variants in 3 sizes." },
+  { slug: "prompt-card", name: "PromptCard", category: "AI Chat", description: "Clickable AI prompt suggestion card with icon, title, description, and category badge." },
 ];
 
 export function getComponentMeta(slug: string): ComponentMeta | undefined {

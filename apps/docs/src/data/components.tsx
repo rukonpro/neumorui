@@ -123,6 +123,12 @@ import {
   AvatarGroup,
   RichTextEditor,
   MarkdownEditor,
+  ChatInput,
+  MessageList,
+  StreamingText,
+  ThinkingIndicator,
+  PromptCard,
+  PromptGrid,
 } from "neumorui";
 
 /* ─── Prop type definition ─── */
@@ -5167,5 +5173,193 @@ const [active, setActive] = useState(true);
     ],
     component: MarkdownEditor as unknown as React.ComponentType<Record<string, unknown>>,
     defaultProps: { label: "Notes", placeholder: "Write markdown..." },
+  },
+
+  // ── ChatInput ──
+  {
+    slug: "chat-input",
+    name: "ChatInput",
+    category: "AI Chat",
+    description: "Auto-expanding chat input with send button, attachment support, Enter to send, and character count.",
+    preview: <ChatInput placeholder="Type a message..." />,
+    code: `import { ChatInput } from "neumorui";
+
+<ChatInput
+  onSend={(msg) => console.log(msg)}
+  placeholder="Ask me anything..."
+  showAttachment
+  maxLength={500}
+/>`,
+    props: [
+      { name: "value", type: "string", default: "-" },
+      { name: "onChange", type: "(value: string) => void", default: "-" },
+      { name: "onSend", type: "(message: string) => void", default: "-" },
+      { name: "onAttach", type: "(files: FileList) => void", default: "-" },
+      { name: "placeholder", type: "string", default: '"Type a message..."' },
+      { name: "disabled", type: "boolean", default: "false" },
+      { name: "loading", type: "boolean", default: "false" },
+      { name: "maxLength", type: "number", default: "-" },
+      { name: "showAttachment", type: "boolean", default: "false" },
+      { name: "maxRows", type: "number", default: "6" },
+      { name: "autoFocus", type: "boolean", default: "false" },
+    ],
+    component: ChatInput as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { placeholder: "Ask me anything..." },
+  },
+
+  // ── MessageList ──
+  {
+    slug: "message-list",
+    name: "MessageList",
+    category: "AI Chat",
+    description: "Scrollable chat message container with auto-scroll, day separators, and user/assistant/system roles.",
+    preview: (
+      <MessageList
+        maxHeight="300px"
+        messages={[
+          { id: "1", role: "user", content: "Hey! Can you help me?" },
+          { id: "2", role: "assistant", content: "Of course! What do you need?", name: "AI" },
+          { id: "3", role: "user", content: "Build a chat UI with NeumorUI" },
+          { id: "4", role: "assistant", content: "Great choice! NeumorUI has ChatInput, MessageList, and StreamingText components for that.", name: "AI" },
+        ]}
+      />
+    ),
+    code: `import { MessageList } from "neumorui";
+
+<MessageList
+  messages={messages}
+  showDaySeparators
+  maxHeight="500px"
+  onScrollTop={() => loadMore()}
+/>`,
+    props: [
+      { name: "messages", type: "ChatMessage[]", default: "[]" },
+      { name: "renderMessage", type: "(msg) => ReactNode", default: "-" },
+      { name: "loading", type: "boolean", default: "false" },
+      { name: "emptyState", type: "ReactNode", default: '"No messages yet"' },
+      { name: "showDaySeparators", type: "boolean", default: "false" },
+      { name: "onScrollTop", type: "() => void", default: "-" },
+      { name: "autoScroll", type: "boolean", default: "true" },
+      { name: "maxHeight", type: "string | number", default: '"500px"' },
+    ],
+  },
+
+  // ── StreamingText ──
+  {
+    slug: "streaming-text",
+    name: "StreamingText",
+    category: "AI Chat",
+    description: "Typewriter streaming text effect with blinking cursor, skip-on-click, and imperative ref handle.",
+    preview: (
+      <StreamingText
+        text="Hello! I'm an AI assistant built with NeumorUI. I can help you build beautiful neumorphic interfaces."
+        speed={30}
+        skipOnClick
+      />
+    ),
+    code: `import { StreamingText } from "neumorui";
+
+<StreamingText
+  text="Hello! I'm an AI assistant..."
+  speed={40}
+  skipOnClick
+  onComplete={() => console.log("Done!")}
+/>
+
+// With ref for imperative control
+const ref = useRef<StreamingTextHandle>(null);
+ref.current?.skip();
+ref.current?.restart();`,
+    props: [
+      { name: "text", type: "string", default: "-" },
+      { name: "speed", type: "number", default: "40" },
+      { name: "startDelay", type: "number", default: "0" },
+      { name: "showCursor", type: "boolean", default: "true" },
+      { name: "cursorChar", type: "string", default: '"▊"' },
+      { name: "onComplete", type: "() => void", default: "-" },
+      { name: "skipOnClick", type: "boolean", default: "false" },
+      { name: "paused", type: "boolean", default: "false" },
+    ],
+    component: StreamingText as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { text: "Hello! I'm streaming text...", speed: 30 },
+  },
+
+  // ── ThinkingIndicator ──
+  {
+    slug: "thinking-indicator",
+    name: "ThinkingIndicator",
+    category: "AI Chat",
+    description: "Animated AI thinking indicator with dots, wave, pulse, and typing variants in 3 sizes.",
+    preview: (
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <ThinkingIndicator variant="dots" label="Thinking..." />
+        <ThinkingIndicator variant="wave" label="Generating..." />
+        <ThinkingIndicator variant="pulse" label="Processing..." />
+        <ThinkingIndicator variant="typing" label="Typing..." />
+      </div>
+    ),
+    code: `import { ThinkingIndicator } from "neumorui";
+
+<ThinkingIndicator variant="dots" label="Thinking..." />
+<ThinkingIndicator variant="wave" label="Generating..." size="lg" />
+<ThinkingIndicator variant="pulse" avatar="/ai-avatar.png" />`,
+    props: [
+      { name: "label", type: "string", default: "-" },
+      { name: "avatar", type: "string", default: "-" },
+      { name: "variant", type: '"dots" | "wave" | "pulse" | "typing"', default: '"dots"' },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
+      { name: "accentColor", type: "string", default: "var(--neu-accent)" },
+    ],
+    component: ThinkingIndicator as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { label: "Thinking...", variant: "dots" },
+  },
+
+  // ── PromptCard ──
+  {
+    slug: "prompt-card",
+    name: "PromptCard",
+    category: "AI Chat",
+    description: "Clickable AI prompt suggestion card with icon, title, description, and category badge.",
+    preview: (
+      <PromptGrid
+        columns={2}
+        onSelect={(p) => alert(p)}
+        prompts={[
+          { icon: "💡", title: "Explain code", description: "Break down complex code", category: "Coding", prompt: "Explain this code" },
+          { icon: "✍️", title: "Write a blog", description: "Create engaging content", category: "Writing", prompt: "Write a blog post" },
+          { icon: "🐛", title: "Debug error", description: "Find and fix bugs", category: "Coding", prompt: "Debug this error" },
+          { icon: "🎨", title: "Design UI", description: "Create beautiful interfaces", category: "Design", prompt: "Design a UI" },
+        ]}
+      />
+    ),
+    code: `import { PromptCard, PromptGrid } from "neumorui";
+
+{/* Single card */}
+<PromptCard
+  icon="💡"
+  title="Explain code"
+  description="Break down complex code"
+  category="Coding"
+  prompt="Explain this code step by step"
+  onClick={(prompt) => sendMessage(prompt)}
+/>
+
+{/* Grid of cards */}
+<PromptGrid
+  columns={2}
+  onSelect={(prompt) => sendMessage(prompt)}
+  prompts={[...]}
+/>`,
+    props: [
+      { name: "icon", type: "ReactNode", default: "-" },
+      { name: "title", type: "string", default: "-" },
+      { name: "description", type: "string", default: "-" },
+      { name: "category", type: "string", default: "-" },
+      { name: "prompt", type: "string", default: "-" },
+      { name: "onClick", type: "(prompt: string) => void", default: "-" },
+      { name: "disabled", type: "boolean", default: "false" },
+    ],
+    component: PromptCard as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { icon: "💡", title: "Explain code", prompt: "Explain this code" },
   },
 ];

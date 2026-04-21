@@ -206,6 +206,17 @@ const categories: SidebarCategory[] = [
       { slug: "theme-customizer", name: "ThemeCustomizer" },
     ],
   },
+  {
+    name: "AI Chat",
+    icon: "🤖",
+    items: [
+      { slug: "chat-input", name: "ChatInput" },
+      { slug: "message-list", name: "MessageList" },
+      { slug: "streaming-text", name: "StreamingText" },
+      { slug: "thinking-indicator", name: "ThinkingIndicator" },
+      { slug: "prompt-card", name: "PromptCard" },
+    ],
+  },
 ];
 
 export const DocsSidebar: React.FC<{
