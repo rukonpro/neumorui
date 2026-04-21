@@ -1150,7 +1150,7 @@ function OTPInputDemo() {
         length={6}
         value={otp}
         onChange={setOtp}
-        onComplete={(code) => alert(`OTP: ${code}`)}
+        onComplete={() => {}}
         label="Enter verification code"
         autoFocus
       />
@@ -5323,7 +5323,7 @@ ref.current?.restart();`,
     preview: (
       <PromptGrid
         columns={2}
-        onSelect={(p) => alert(p)}
+        onSelect={() => {}}
         prompts={[
           { icon: "💡", title: "Explain code", description: "Break down complex code", category: "Coding", prompt: "Explain this code" },
           { icon: "✍️", title: "Write a blog", description: "Create engaging content", category: "Writing", prompt: "Write a blog post" },
