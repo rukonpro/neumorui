@@ -94,6 +94,7 @@ export const MusicPlayerCard: React.FC<MusicPlayerCardProps> = ({
         {/* Like button */}
         <button
           type="button"
+          aria-label={liked ? "Unlike" : "Like"}
           onClick={() => setLiked(!liked)}
           style={{
             position: "absolute",
@@ -158,10 +159,11 @@ export const MusicPlayerCard: React.FC<MusicPlayerCardProps> = ({
 
       {/* Controls */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", padding: "8px 24px 22px" }}>
-        <ControlBtn icon="🔀" onClick={onShuffle} small />
-        <ControlBtn icon="⏮" onClick={onPrev} />
+        <ControlBtn icon="🔀" onClick={onShuffle} small ariaLabel="Shuffle" />
+        <ControlBtn icon="⏮" onClick={onPrev} ariaLabel="Previous track" />
         <button
           type="button"
+          aria-label={playing ? "Pause" : "Play"}
           onClick={playing ? onPause : onPlay}
           onMouseEnter={() => setPlayHovered(true)}
           onMouseLeave={() => setPlayHovered(false)}
@@ -196,18 +198,19 @@ export const MusicPlayerCard: React.FC<MusicPlayerCardProps> = ({
             </svg>
           )}
         </button>
-        <ControlBtn icon="⏭" onClick={onNext} />
-        <ControlBtn icon="🔁" onClick={onRepeat} small />
+        <ControlBtn icon="⏭" onClick={onNext} ariaLabel="Next track" />
+        <ControlBtn icon="🔁" onClick={onRepeat} small ariaLabel="Repeat" />
       </div>
     </div>
   );
 };
 
-const ControlBtn: React.FC<{ icon: string; onClick?: () => void; small?: boolean }> = ({ icon, onClick, small }) => {
+const ControlBtn: React.FC<{ icon: string; onClick?: () => void; small?: boolean; ariaLabel?: string }> = ({ icon, onClick, small, ariaLabel }) => {
   const [hovered, setHovered] = useState(false);
   return (
     <button
       type="button"
+      aria-label={ariaLabel}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

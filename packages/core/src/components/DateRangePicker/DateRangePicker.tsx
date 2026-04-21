@@ -164,13 +164,13 @@ export const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerP
         }}>
           {/* Header */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
-            <button type="button" onClick={() => setViewDate(new Date(year, month - 1))} style={{ width: 28, height: 28, borderRadius: 8, border: "none", cursor: "pointer", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-sm)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "var(--neu-text-secondary)", transition }}>
+            <button type="button" aria-label="Previous month" onClick={() => setViewDate(new Date(year, month - 1))} style={{ width: 28, height: 28, borderRadius: 8, border: "none", cursor: "pointer", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-sm)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "var(--neu-text-secondary)", transition }}>
               ‹
             </button>
             <span style={{ fontSize: "13px", fontWeight: 800, color: "var(--neu-text-primary)" }}>
               {MONTHS[month]} {year}
             </span>
-            <button type="button" onClick={() => setViewDate(new Date(year, month + 1))} style={{ width: 28, height: 28, borderRadius: 8, border: "none", cursor: "pointer", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-sm)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "var(--neu-text-secondary)", transition }}>
+            <button type="button" aria-label="Next month" onClick={() => setViewDate(new Date(year, month + 1))} style={{ width: 28, height: 28, borderRadius: 8, border: "none", cursor: "pointer", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-raised-sm)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "var(--neu-text-secondary)", transition }}>
               ›
             </button>
           </div>

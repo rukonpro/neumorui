@@ -80,6 +80,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         {trigger || (
           <button
             type="button"
+            aria-label="Notifications"
             style={{
               width: "42px",
               height: "42px",
@@ -156,6 +157,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
             {onReadAll && unreadCount > 0 && (
               <button
                 type="button"
+                aria-label="Mark all notifications as read"
                 onClick={() => { onReadAll(); }}
                 style={{
                   border: "none",
@@ -255,6 +257,7 @@ const NotifItem: React.FC<{
       {onClear && hovered && (
         <button
           type="button"
+          aria-label="Dismiss notification"
           onClick={(e) => { e.stopPropagation(); onClear(item.id); }}
           style={{
             width: "22px",

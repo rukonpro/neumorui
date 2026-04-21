@@ -198,28 +198,29 @@ export const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
         }}>
           {/* Hour */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-            <button type="button" onClick={incHour} style={spinnerBtnStyle}>▲</button>
+            <button type="button" aria-label="Increase hour" onClick={incHour} style={spinnerBtnStyle}>▲</button>
             <div style={{ width: "48px", height: "48px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", fontWeight: 900, color: "var(--neu-text-primary)", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-inset)" }}>
               {String(hour).padStart(2, "0")}
             </div>
-            <button type="button" onClick={decHour} style={spinnerBtnStyle}>▼</button>
+            <button type="button" aria-label="Decrease hour" onClick={decHour} style={spinnerBtnStyle}>▼</button>
           </div>
 
           <span style={{ fontSize: "22px", fontWeight: 900, color: "var(--neu-text-muted)" }}>:</span>
 
           {/* Minute */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-            <button type="button" onClick={incMinute} style={spinnerBtnStyle}>▲</button>
+            <button type="button" aria-label="Increase minute" onClick={incMinute} style={spinnerBtnStyle}>▲</button>
             <div style={{ width: "48px", height: "48px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", fontWeight: 900, color: "var(--neu-text-primary)", background: "var(--neu-bg)", boxShadow: "var(--neu-shadow-inset)" }}>
               {String(minute).padStart(2, "0")}
             </div>
-            <button type="button" onClick={decMinute} style={spinnerBtnStyle}>▼</button>
+            <button type="button" aria-label="Decrease minute" onClick={decMinute} style={spinnerBtnStyle}>▼</button>
           </div>
 
           {/* AM/PM */}
           {!use24Hour && (
             <button
               type="button"
+              aria-label="Toggle AM/PM"
               onClick={togglePeriod}
               style={{
                 padding: "10px 14px",
