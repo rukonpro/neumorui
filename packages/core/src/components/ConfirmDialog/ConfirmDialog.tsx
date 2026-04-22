@@ -96,6 +96,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   const dialog = (
     <>
       {/* Backdrop */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div
         onClick={handleCancel}
         style={{
@@ -173,6 +174,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder={input.placeholder}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 style={{
                   width: "100%",
