@@ -88,7 +88,7 @@ export const Steps: React.FC<StepsProps> = ({
                   transition,
                   ...(isDone
                     ? {
-                        background: "linear-gradient(145deg, var(--neu-success), #3a9a6a)",
+                        background: "linear-gradient(145deg, var(--neu-success), var(--neu-success-dark))",
                         color: "#fff",
                         boxShadow: "3px 3px 8px rgba(60,150,100,0.3), -2px -2px 5px var(--neu-shadow-light)",
                       }

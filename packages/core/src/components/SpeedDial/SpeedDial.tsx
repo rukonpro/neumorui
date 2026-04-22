@@ -139,7 +139,7 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
     height: "56px",
     borderRadius: "18px",
     border: "none",
-    background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
+    background: "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
     color: "#fff",
     cursor: "pointer",
     fontSize: "26px",

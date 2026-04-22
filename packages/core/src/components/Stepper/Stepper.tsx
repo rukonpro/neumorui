@@ -32,12 +32,12 @@ const circleBase: React.CSSProperties = {
 
 const circleStyles: Record<StepStatus, React.CSSProperties> = {
   done: {
-    background: "linear-gradient(145deg, #78dbb8, #3db88a)",
+    background: "linear-gradient(145deg, var(--neu-success-light), var(--neu-success-dark))",
     color: "#fff",
     boxShadow: "3px 3px 8px rgba(60,150,100,.35)",
   },
   active: {
-    background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
+    background: "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
     color: "#fff",
     boxShadow: "3px 3px 8px rgba(108,126,248,.4)",
   },

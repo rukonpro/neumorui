@@ -20,10 +20,10 @@ interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const fillColors: Record<ProgressVariant, string> = {
-  default: "linear-gradient(90deg, #9aa2fb, #5a6cf5)",
-  success: "linear-gradient(90deg, #78dbb8, #3db88a)",
-  danger: "linear-gradient(90deg, #fa9080, #f5604a)",
-  warning: "linear-gradient(90deg, #fad06a, #e0b030)",
+  default: "linear-gradient(90deg, var(--neu-accent-light), var(--neu-accent-dark))",
+  success: "linear-gradient(90deg, var(--neu-success-light), var(--neu-success-dark))",
+  danger: "linear-gradient(90deg, var(--neu-danger-light), var(--neu-danger-dark))",
+  warning: "linear-gradient(90deg, var(--neu-warning-light), var(--neu-warning-dark))",
 };
 
 const trackHeightMap = { sm: "6px", md: "10px", lg: "14px" };

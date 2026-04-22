@@ -85,19 +85,19 @@ const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
     padding: "0",
   },
   primary: {
-    background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
+    background: "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
     color: "#fff",
     boxShadow:
       "6px 6px 16px rgba(108,126,248,.45), -4px -4px 12px var(--neu-shadow-light)",
   },
   danger: {
-    background: "linear-gradient(145deg, #fa9080, #f5604a)",
+    background: "linear-gradient(145deg, var(--neu-danger-light), var(--neu-danger-dark))",
     color: "#fff",
     boxShadow:
       "6px 6px 16px rgba(248,124,108,.45), -4px -4px 12px var(--neu-shadow-light)",
   },
   success: {
-    background: "linear-gradient(145deg, #78dbb8, #3db88a)",
+    background: "linear-gradient(145deg, var(--neu-success-light), var(--neu-success-dark))",
     color: "#fff",
     boxShadow:
       "6px 6px 16px rgba(94,203,161,.45), -4px -4px 12px var(--neu-shadow-light)",
