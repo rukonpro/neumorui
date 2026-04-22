@@ -127,6 +127,7 @@ export const StreamingText = React.forwardRef<StreamingTextHandle, StreamingText
 
     const animId = React.useId().replace(/:/g, "");
 
+    /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */
     return (
       <div
         className={className}

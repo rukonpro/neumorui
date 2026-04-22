@@ -168,6 +168,7 @@ export const ChatInput = React.forwardRef<HTMLTextAreaElement, ChatInputProps>(
           onBlur={() => setFocused(false)}
           placeholder={placeholder}
           disabled={disabled || loading}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
           rows={1}
           aria-label="Chat message"
