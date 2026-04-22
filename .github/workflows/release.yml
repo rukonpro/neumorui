@@ -2,7 +2,6 @@ name: Release to npm
 
 on:
   push:
-    branches: [master]
     tags:
       - "v*"
 
@@ -15,10 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -31,58 +26,12 @@ jobs:
       - run: pnpm test
       - run: pnpm --filter neumorui build
 
-      # Auto patch bump if components changed but version didn't
-      - name: Auto version bump if needed
-        id: bump
-        run: |
-          LOCAL_VERSION=$(node -p "require('./packages/core/package.json').version")
-          NPM_VERSION=$(npm view neumorui version 2>/dev/null || echo "0.0.0")
-
-          if [ "$LOCAL_VERSION" = "$NPM_VERSION" ]; then
-            # Check if any component files changed
-            CHANGED=$(git diff HEAD~1 --name-only -- packages/core/src/ README.md packages/core/README.md 2>/dev/null | wc -l)
-            if [ "$CHANGED" -gt "0" ]; then
-              # Auto patch bump
-              cd packages/core
-              npm version patch --no-git-tag-version
-              cd ../..
-              NEW_VERSION=$(node -p "require('./packages/core/package.json').version")
-
-              # Update versions.ts
-              sed -i "s/version: \"$LOCAL_VERSION\"/version: \"$NEW_VERSION\"/" apps/docs/src/data/versions.ts
-              sed -i "s/label: \"v$LOCAL_VERSION\"/label: \"v$NEW_VERSION\"/" apps/docs/src/data/versions.ts
-
-              echo "publish=true" >> $GITHUB_OUTPUT
-              echo "Auto bumped: $LOCAL_VERSION → $NEW_VERSION"
-            else
-              echo "publish=false" >> $GITHUB_OUTPUT
-              echo "No component changes — skip publish"
-            fi
-          else
-            echo "publish=true" >> $GITHUB_OUTPUT
-            echo "Version already changed: $NPM_VERSION → $LOCAL_VERSION"
-          fi
-
-      # Publish to npm
       - name: Publish to npm
-        if: steps.bump.outputs.publish == 'true'
         run: pnpm --filter neumorui publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # Push auto-bumped version back to repo
-      - name: Push version bump
-        if: steps.bump.outputs.publish == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git diff --staged --quiet || git commit -m "chore(release): auto bump version [skip ci]"
-          git push origin master || true
-
-      # Create GitHub Release on tag push
       - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
