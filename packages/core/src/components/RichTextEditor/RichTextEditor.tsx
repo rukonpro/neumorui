@@ -148,6 +148,7 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
 
       {/* Link URL Modal */}
       {linkModalOpen && (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div
           style={{
             position: "fixed",
@@ -185,6 +186,7 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
               onChange={(e) => setLinkUrl(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") handleLinkSubmit(); if (e.key === "Escape") setLinkModalOpen(false); }}
               placeholder="https://example.com"
+              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
               style={{
                 width: "100%",
