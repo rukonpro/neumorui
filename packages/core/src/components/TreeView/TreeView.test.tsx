@@ -35,7 +35,10 @@ describe("TreeView", () => {
 
   it("renders children by default (open)", () => {
     render(<TreeView nodes={nodes} />);
+    // Root level (depth 0) is open by default, so "components" is visible
     expect(screen.getByText("components")).toBeInTheDocument();
+    // Nested folder (depth 1) is closed by default — click to open
+    fireEvent.click(screen.getByText("components"));
     expect(screen.getByText("Button.tsx")).toBeInTheDocument();
   });
 
