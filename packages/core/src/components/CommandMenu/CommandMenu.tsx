@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
 
 export interface CommandMenuItem {
   id: string;
@@ -120,16 +121,12 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
 
   let flatIdx = -1;
 
-  return (
+  const content = (
     <div
       style={{
         position: "fixed",
         inset: 0,
-        zIndex: 100,
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        paddingTop: "min(20vh, 140px)",
+        zIndex: 9999,
       }}
     >
       {/* Backdrop */}
@@ -137,11 +134,10 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
         onClick={() => setOpen(false)}
         role="presentation"
         style={{
-          position: "absolute",
+          position: "fixed",
           inset: 0,
           background: "rgba(0,0,0,0.35)",
           backdropFilter: "blur(6px)",
-          animation: "neuCmdFadeIn 0.15s ease",
         }}
       />
 
@@ -149,15 +145,19 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
       <div
         className={className}
         style={{
-          position: "relative",
-          width: "100%",
+          position: "fixed",
+          top: "min(20vh, 140px)",
+          left: 0,
+          right: 0,
+          marginLeft: "auto",
+          marginRight: "auto",
+          width: "calc(100% - 32px)",
           maxWidth: "520px",
-          margin: "0 16px",
           borderRadius: "20px",
           overflow: "hidden",
           background: "var(--neu-bg)",
           boxShadow: "var(--neu-shadow-raised-lg)",
-          animation: "neuCmdScaleIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
+          zIndex: 10000,
           ...style,
         }}
       >
@@ -291,12 +291,13 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
         </div>
       </div>
 
-      <style>{`
-        @keyframes neuCmdFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes neuCmdScaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-      `}</style>
     </div>
   );
+
+  if (typeof document !== "undefined") {
+    return createPortal(content, document.body);
+  }
+  return content;
 };
 
 CommandMenu.displayName = "CommandMenu";

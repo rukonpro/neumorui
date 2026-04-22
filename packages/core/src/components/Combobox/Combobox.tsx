@@ -221,7 +221,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
               width: "var(--radix-popover-trigger-width)",
               minWidth: 220,
               overflow: "hidden",
-              animation: "fadeUp 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
+              animation: "neu-slide-down 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
             <Cmdk

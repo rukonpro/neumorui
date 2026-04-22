@@ -85,7 +85,7 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "80px",
+            minHeight: "120px",
             borderTop: "1px dashed rgba(108,126,248,0.2)",
             borderBottom: "1px solid rgba(0,0,0,0.05)",
             background: "rgba(108,126,248,0.02)",
@@ -251,7 +251,7 @@ export const PropsPlayground: React.FC<PropsPlaygroundProps> = ({ props, preview
       </div>}
 
       {/* Code toggle */}
-      <div style={{ borderTop: "1px solid rgba(0,0,0,0.05)" }}>
+      <div style={{ borderTop: "1px solid rgba(0,0,0,0.05)", borderRadius: "0 0 22px 22px", overflow: "hidden" }}>
         <button
           type="button"
           onClick={() => setShowCode(!showCode)}

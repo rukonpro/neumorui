@@ -25,7 +25,7 @@ const menuStyle: React.CSSProperties = {
   background: "var(--neu-bg)",
   minWidth: "180px",
   overflow: "hidden",
-  animation: "fadeUp 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
+  animation: "neu-slide-down 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
 };
 
 const itemBase: React.CSSProperties = {

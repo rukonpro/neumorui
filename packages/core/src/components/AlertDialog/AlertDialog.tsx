@@ -1,4 +1,5 @@
 import React, { useState, useCallback, createContext, useContext } from "react";
+import { createPortal } from "react-dom";
 
 const transition = "all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)";
 
@@ -77,7 +78,7 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
 
   if (!open) return null;
 
-  return (
+  const content = (
     <div
       style={{
         position: "fixed",
@@ -209,10 +210,10 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
               fontWeight: 700,
               fontFamily: "inherit",
               color: "#fff",
-              background: `linear-gradient(145deg, ${color}, ${color}cc)`,
+              background: color,
               boxShadow: okHovered
-                ? `4px 4px 12px ${color}50`
-                : `3px 3px 8px ${color}30`,
+                ? "var(--neu-shadow-raised)"
+                : "var(--neu-shadow-raised-sm)",
               transform: okHovered ? "translateY(-2px)" : "none",
               transition,
             }}
@@ -228,6 +229,11 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
       `}</style>
     </div>
   );
+
+  if (typeof document !== "undefined") {
+    return createPortal(content, document.body);
+  }
+  return content;
 };
 
 AlertDialog.displayName = "AlertDialog";

@@ -139,7 +139,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               background: "var(--neu-bg)",
               borderRadius: "20px",
               boxShadow: "var(--neu-shadow-raised-lg)",
-              animation: "fadeUp 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
+              animation: "neu-slide-down 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
             <Calendar

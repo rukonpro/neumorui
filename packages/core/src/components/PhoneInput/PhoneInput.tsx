@@ -202,7 +202,7 @@ export const PhoneInput = React.forwardRef<HTMLDivElement, PhoneInputProps>(
                 background: "var(--neu-bg)",
                 boxShadow: "var(--neu-shadow-raised-lg)",
                 padding: "6px",
-                animation: "fadeUp 0.2s ease",
+                animation: "neu-slide-down 0.2s ease",
               }}
             >
               <input

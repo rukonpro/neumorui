@@ -135,25 +135,27 @@ export const Command: React.FC<CommandProps> = ({
             zIndex: 40,
             background: "rgba(0,0,0,0.35)",
             backdropFilter: "blur(6px)",
-            animation: "fadeIn 0.2s ease",
+            animation: "none",
           }}
         />
         <RadixDialog.Content
           className={cn(className)}
           style={{
             position: "fixed",
-            left: "50%",
             top: "20%",
-            transform: "translateX(-50%)",
+            left: 0,
+            right: 0,
+            marginLeft: "auto",
+            marginRight: "auto",
             zIndex: 50,
-            width: "100%",
+            width: "calc(100% - 32px)",
             maxWidth: "520px",
             outline: "none",
             background: "var(--neu-bg)",
             borderRadius: "22px",
             boxShadow: "var(--neu-shadow-raised-lg)",
             overflow: "hidden",
-            animation: "fadeUp 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
+            animation: "none",
             ...style,
           }}
           {...rest}

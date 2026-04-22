@@ -134,7 +134,7 @@ const AccordionItemRow: React.FC<{
           style={{
             padding: "0 18px 18px",
             lineHeight: 1.7,
-            animation: "fadeUp 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
+            animation: "neu-accordion-expand 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
           {item.content}

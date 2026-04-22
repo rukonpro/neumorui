@@ -107,6 +107,13 @@ const NeuDropdown: React.FC<any> = (props) => {
       </button>
 
       {open && (
+        <>
+        <style>{`
+          @keyframes neuDropIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+          }
+        `}</style>
         <div
           ref={listRef}
           style={{
@@ -122,7 +129,7 @@ const NeuDropdown: React.FC<any> = (props) => {
             borderRadius: "14px",
             background: "var(--neu-bg)",
             boxShadow: "var(--neu-shadow-raised-lg)",
-            animation: "fadeUp 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
+            animation: "neuDropIn 0.15s ease-out",
           }}
         >
           {options.map((opt) => {
@@ -142,6 +149,7 @@ const NeuDropdown: React.FC<any> = (props) => {
             );
           })}
         </div>
+        </>
       )}
     </div>
   );

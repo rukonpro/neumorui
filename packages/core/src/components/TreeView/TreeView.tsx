@@ -19,7 +19,7 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
   node,
   depth = 0,
 }) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(depth === 0);
   const hasChildren = node.children && node.children.length > 0;
   const [hovered, setHovered] = React.useState(false);
 
@@ -29,9 +29,9 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "10px",
-          padding: "8px 14px",
-          borderRadius: "10px",
+          gap: "8px",
+          padding: "6px 10px",
+          borderRadius: "8px",
           cursor: "pointer",
           transition,
           background: hovered ? "var(--neu-bg)" : "transparent",
@@ -70,17 +70,15 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "10px",
-          padding: "9px 14px",
-          borderRadius: "12px",
+          gap: "8px",
+          padding: "8px 10px",
+          borderRadius: "10px",
           cursor: "pointer",
           userSelect: "none",
           transition,
-          background: "var(--neu-bg)",
-          boxShadow: hovered
-            ? "var(--neu-shadow-raised)"
-            : "var(--neu-shadow-raised-sm)",
-          transform: hovered ? "translateY(-1px)" : "none",
+          background: hovered ? "var(--neu-bg)" : "transparent",
+          boxShadow: hovered ? "var(--neu-shadow-raised-sm)" : "none",
+          transform: hovered ? "translateX(2px)" : "none",
         }}
       >
         {/* Expand/collapse chevron */}
@@ -131,11 +129,11 @@ const TreeNodeItem: React.FC<{ node: TreeNode; depth?: number }> = ({
         <div
           style={{
             position: "relative",
-            paddingLeft: "22px",
-            marginLeft: "22px",
+            paddingLeft: "10px",
+            marginLeft: "9px",
             marginTop: "6px",
             borderLeft: "2px solid var(--neu-border)",
-            animation: "fadeUp 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
+            animation: "neu-slide-down 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
           {node.children!.map((child, i) => (

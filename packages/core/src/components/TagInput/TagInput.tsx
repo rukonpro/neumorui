@@ -49,7 +49,7 @@ const Tag: React.FC<{
           : "var(--neu-shadow-raised-sm)",
         transform: hovered ? "translateY(-1px)" : "none",
         transition,
-        animation: "fadeUp 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
+        animation: "neu-cell-fade 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

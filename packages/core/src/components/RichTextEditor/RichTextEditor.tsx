@@ -48,11 +48,14 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
 }, ref) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState(false);
+  const [linkModalOpen, setLinkModalOpen] = useState(false);
+  const [linkUrl, setLinkUrl] = useState("");
 
   const execCommand = useCallback((command: string, value?: string) => {
     if (command === "createLink") {
-      const url = prompt("Enter URL:");
-      if (url) document.execCommand(command, false, url);
+      setLinkUrl("");
+      setLinkModalOpen(true);
+      return;
     } else if (value) {
       document.execCommand(command, false, value);
     } else {
@@ -63,6 +66,18 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
       onChange(editorRef.current.innerHTML);
     }
   }, [onChange]);
+
+  const handleLinkSubmit = useCallback(() => {
+    if (linkUrl.trim()) {
+      document.execCommand("createLink", false, linkUrl.trim());
+    }
+    setLinkModalOpen(false);
+    setLinkUrl("");
+    editorRef.current?.focus();
+    if (onChange && editorRef.current) {
+      onChange(editorRef.current.innerHTML);
+    }
+  }, [linkUrl, onChange]);
 
   const handleInput = () => {
     if (onChange && editorRef.current) {
@@ -130,6 +145,104 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
           }}
         />
       </div>
+
+      {/* Link URL Modal */}
+      {linkModalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgba(0,0,0,0.18)",
+            animation: "fadeIn 0.15s ease",
+          }}
+          onClick={() => setLinkModalOpen(false)}
+        >
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "var(--neu-bg)",
+              borderRadius: "18px",
+              padding: "22px 24px",
+              boxShadow: "var(--neu-shadow-raised-lg)",
+              minWidth: "320px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "14px",
+              animation: "neu-scale-in 0.2s ease",
+            }}
+          >
+            <p style={{ fontSize: "14px", fontWeight: 700, color: "var(--neu-text-primary)", margin: 0 }}>
+              Enter URL
+            </p>
+            <input
+              type="url"
+              value={linkUrl}
+              onChange={(e) => setLinkUrl(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") handleLinkSubmit(); if (e.key === "Escape") setLinkModalOpen(false); }}
+              placeholder="https://example.com"
+              autoFocus
+              style={{
+                width: "100%",
+                padding: "10px 14px",
+                borderRadius: "12px",
+                border: "none",
+                outline: "none",
+                fontSize: "13px",
+                fontWeight: 600,
+                fontFamily: "inherit",
+                color: "var(--neu-text-primary)",
+                background: "var(--neu-bg)",
+                boxShadow: "var(--neu-shadow-inset-sm)",
+              }}
+            />
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
+              <button
+                type="button"
+                onClick={() => setLinkModalOpen(false)}
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: "10px",
+                  border: "none",
+                  cursor: "pointer",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  fontFamily: "inherit",
+                  color: "var(--neu-text-secondary)",
+                  background: "var(--neu-bg)",
+                  boxShadow: "var(--neu-shadow-raised-sm)",
+                  transition,
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleLinkSubmit}
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: "10px",
+                  border: "none",
+                  cursor: "pointer",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  fontFamily: "inherit",
+                  color: "#fff",
+                  background: "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
+                  boxShadow: "var(--neu-shadow-raised-sm)",
+                  transition,
+                }}
+              >
+                Insert
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`
         [data-placeholder]:empty::before {

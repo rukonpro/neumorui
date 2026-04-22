@@ -604,7 +604,7 @@ function KanbanBoardDemo() {
 
 function TreeViewDemo() {
   return (
-    <div style={{ maxWidth: "300px" }}>
+    <div>
       <TreeView
         nodes={[
           {
@@ -772,13 +772,14 @@ function MegaMenuDemo() {
 
 function SpeedDialDemo() {
   return (
-    <div style={{ padding: "200px 0 20px", display: "flex", justifyContent: "center" }}>
+    <div style={{ position: "relative", minHeight: "250px" }}>
       <SpeedDial
         actions={[
           { label: "Copy", icon: "📋", onClick: () => {} },
           { label: "Edit", icon: "✏️", onClick: () => {} },
           { label: "Share", icon: "🔗", onClick: () => {} },
         ]}
+        style={{ position: "absolute", bottom: "16px", right: "16px" }}
       />
     </div>
   );
@@ -2440,9 +2441,23 @@ function App() {
     props: [
       { name: "trigger", type: "ReactNode", default: "-" },
       { name: "items", type: "DropdownEntry[]", default: "[]" },
-      { name: "align", type: '"start" | "center" | "end"', default: '"start"' },
+      { name: "align", type: '"start" | "center" | "end"', default: '"end"' },
       { name: "side", type: '"top" | "right" | "bottom" | "left"', default: '"bottom"' },
     ],
+    component: ((props: Record<string, unknown>) => (
+      <DropdownMenu
+        trigger={<Button variant="raised">Open Menu</Button>}
+        items={[
+          { label: "Edit", icon: <span>E</span> },
+          { label: "Duplicate", icon: <span>D</span> },
+          { type: "separator" as const },
+          { label: "Delete", danger: true, icon: <span>X</span> },
+        ]}
+        align={(props.align as "start" | "center" | "end") || "end"}
+        side={(props.side as "top" | "right" | "bottom" | "left") || "bottom"}
+      />
+    )) as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { align: "end", side: "bottom" },
   },
   {
     slug: "context-menu",
@@ -2530,6 +2545,28 @@ function App() {
       { name: "onCancel", type: "() => void", default: "-" },
       { name: "input", type: "{ placeholder?: string; matchValue?: string }", default: "-" },
     ],
+    component: ((props: Record<string, unknown>) => {
+      const [isOpen, setIsOpen] = React.useState(false);
+      const p = props as Record<string, unknown>;
+      return (
+        <>
+          <Button variant={p.variant === "danger" ? "danger" : "raised"} onClick={() => setIsOpen(true)}>
+            Open Dialog
+          </Button>
+          <ConfirmDialog
+            open={isOpen}
+            onOpenChange={setIsOpen}
+            title={(p.title as string) || "Are you sure?"}
+            description={(p.description as string) || undefined}
+            variant={(p.variant as "default" | "danger") || "default"}
+            confirmLabel={(p.confirmLabel as string) || "Confirm"}
+            cancelLabel={(p.cancelLabel as string) || "Cancel"}
+            onConfirm={() => setIsOpen(false)}
+          />
+        </>
+      );
+    }) as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { title: "Are you sure?", description: "This action cannot be undone.", variant: "default", confirmLabel: "Confirm", cancelLabel: "Cancel" },
   },
 
   /* ═══ FEEDBACK ═══ */
@@ -4179,14 +4216,15 @@ const [step, setStep] = useState(0);
       <div style={{ fontSize: "14px", fontWeight: 500, color: "var(--neu-text-secondary)", lineHeight: 2 }}>
         Check out{" "}
         <LinkPreview
-          href="https://github.com"
-          title="GitHub: Let's build from here"
-          description="GitHub is where over 100 million developers shape the future of software, together."
-          image="https://picsum.photos/seed/github/400/200"
+          href="https://github.com/rukonpro/neumorui"
+          title="NeumorUI — Neumorphic React Components"
+          description="A beautiful neumorphic (clay-style) React component library with TypeScript, Tailwind CSS, and Radix UI."
+          image="https://opengraph.githubassets.com/1/rukonpro/neumorui"
+          favicon="https://github.githubassets.com/favicons/favicon.svg"
         >
-          GitHub
+          NeumorUI
         </LinkPreview>
-        {" "}for open source projects.
+        {" "}on GitHub for neumorphic components.
       </div>
     ),
     code: `import { LinkPreview } from "neumorui";
@@ -4194,14 +4232,15 @@ const [step, setStep] = useState(0);
 <p>
   Check out{" "}
   <LinkPreview
-    href="https://github.com"
-    title="GitHub: Let's build from here"
-    description="Where 100M+ developers build software."
-    image="/github-preview.png"
+    href="https://github.com/rukonpro/neumorui"
+    title="NeumorUI — Neumorphic React Components"
+    description="A beautiful neumorphic React component library."
+    image="https://opengraph.githubassets.com/1/rukonpro/neumorui"
+    favicon="https://github.githubassets.com/favicons/favicon.svg"
   >
-    GitHub
+    NeumorUI
   </LinkPreview>
-  {" "}for projects.
+  {" "}on GitHub.
 </p>`,
     props: [
       { name: "href", type: "string", default: "-" },
@@ -4213,7 +4252,7 @@ const [step, setStep] = useState(0);
       { name: "children", type: "ReactNode", default: "-" },
     ],
     component: LinkPreview as unknown as React.ComponentType<Record<string, unknown>>,
-    defaultProps: { href: "https://github.com", title: "GitHub", description: "Where developers build software", children: "GitHub" },
+    defaultProps: { href: "https://github.com/rukonpro/neumorui", title: "NeumorUI — Neumorphic React Components", description: "A beautiful neumorphic React component library.", children: "NeumorUI" },
   },
 
   // ── CommandMenu ──
@@ -4815,20 +4854,27 @@ const [loading, setLoading] = useState(false);
     name: "NotificationCenter",
     category: "Showpiece",
     description: "Dropdown notification panel with bell trigger, badge count, grouped items, read/unread, and clear.",
-    preview: (
-      <div style={{ display: "flex", justifyContent: "center", minHeight: "60px" }}>
-        <NotificationCenter
-          notifications={[
-            { id: "1", icon: "📦", title: "New order received", description: "Order #1234 placed by John", time: "2m ago", group: "Today" },
-            { id: "2", icon: "💬", title: "New comment", description: "Alex replied to your post", time: "15m ago", group: "Today" },
-            { id: "3", icon: "⭐", title: "New review", description: "5-star rating on NeumorUI", time: "1h ago", group: "Today", read: true },
-            { id: "4", icon: "🔔", title: "System update", description: "v2.0 is available", time: "Yesterday", group: "Earlier", read: true },
-          ]}
-          onReadAll={() => {}}
-          onClear={() => {}}
-        />
-      </div>
-    ),
+    preview: (() => {
+      function NotificationCenterDemo() {
+        const [notifications, setNotifications] = React.useState([
+          { id: "1", icon: "📦", title: "New order received", description: "Order #1234 placed by John", time: "2m ago", group: "Today", read: false },
+          { id: "2", icon: "💬", title: "New comment", description: "Alex replied to your post", time: "15m ago", group: "Today", read: false },
+          { id: "3", icon: "⭐", title: "New review", description: "5-star rating on NeumorUI", time: "1h ago", group: "Today", read: true },
+          { id: "4", icon: "🔔", title: "System update", description: "v2.0 is available", time: "Yesterday", group: "Earlier", read: true },
+        ]);
+        return (
+          <div style={{ display: "flex", justifyContent: "center", minHeight: "60px" }}>
+            <NotificationCenter
+              notifications={notifications}
+              onRead={(id) => setNotifications((prev) => prev.map((n) => n.id === id ? { ...n, read: true } : n))}
+              onReadAll={() => setNotifications((prev) => prev.map((n) => ({ ...n, read: true })))}
+              onClear={(id) => setNotifications((prev) => prev.filter((n) => n.id !== id))}
+            />
+          </div>
+        );
+      }
+      return <NotificationCenterDemo />;
+    })(),
     code: `import { NotificationCenter } from "neumorui";
 
 <NotificationCenter
@@ -4974,21 +5020,28 @@ const [active, setActive] = useState(true);
     name: "TableOfContents",
     category: "Navigation",
     description: "Auto-tracking table of contents with scroll spy, indented headings, and active indicator.",
-    preview: (
-      <div style={{ maxWidth: "240px" }}>
-        <TableOfContents
-          items={[
-            { id: "intro", text: "Introduction", level: 1 },
-            { id: "install", text: "Installation", level: 1 },
-            { id: "npm", text: "Using npm", level: 2 },
-            { id: "pnpm", text: "Using pnpm", level: 2 },
-            { id: "usage", text: "Usage", level: 1 },
-            { id: "api", text: "API Reference", level: 1 },
-          ]}
-          activeId="install"
-        />
-      </div>
-    ),
+    preview: (() => {
+      function TOCDemo() {
+        const [active, setActive] = React.useState("install");
+        return (
+          <div style={{ maxWidth: "240px" }}>
+            <TableOfContents
+              items={[
+                { id: "intro", text: "Introduction", level: 1 },
+                { id: "install", text: "Installation", level: 1 },
+                { id: "npm", text: "Using npm", level: 2 },
+                { id: "pnpm", text: "Using pnpm", level: 2 },
+                { id: "usage", text: "Usage", level: 1 },
+                { id: "api", text: "API Reference", level: 1 },
+              ]}
+              activeId={active}
+              onItemClick={(id) => setActive(id)}
+            />
+          </div>
+        );
+      }
+      return <TOCDemo />;
+    })(),
     code: `import { TableOfContents } from "neumorui";
 
 <TableOfContents
@@ -5000,12 +5053,31 @@ const [active, setActive] = useState(true);
 />`,
     props: [
       { name: "items", type: "TOCItem[]", default: "[]" },
-      { name: "activeId", type: "string", default: "auto (scroll spy)" },
+      { name: "activeId", type: "string (controlled)", default: "auto (scroll spy)" },
       { name: "onItemClick", type: "(id: string) => void", default: "-" },
       { name: "title", type: "string", default: '"On this page"' },
     ],
-    component: TableOfContents as unknown as React.ComponentType<Record<string, unknown>>,
-    defaultProps: { items: [{ id: "intro", text: "Introduction", level: 1 }, { id: "install", text: "Installation", level: 1 }, { id: "usage", text: "Usage", level: 1 }] },
+    component: ((props: Record<string, unknown>) => {
+      const [active, setActive] = React.useState("intro");
+      return (
+        <div style={{ maxWidth: "240px" }}>
+          <TableOfContents
+            {...(props as unknown as React.ComponentProps<typeof TableOfContents>)}
+            items={[
+              { id: "intro", text: "Introduction", level: 1 },
+              { id: "install", text: "Installation", level: 1 },
+              { id: "npm", text: "Using npm", level: 2 },
+              { id: "pnpm", text: "Using pnpm", level: 2 },
+              { id: "usage", text: "Usage", level: 1 },
+              { id: "api", text: "API Reference", level: 1 },
+            ]}
+            activeId={active}
+            onItemClick={(id) => setActive(id)}
+          />
+        </div>
+      );
+    }) as unknown as React.ComponentType<Record<string, unknown>>,
+    defaultProps: { title: "On this page" },
   },
 
   // ── ThemeCustomizer ──
