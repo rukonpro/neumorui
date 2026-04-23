@@ -21,6 +21,11 @@
     "typescript",
     "dark-mode",
     "accessible",
+    "a11y",
+    "clay-design",
+    "soft-shadow",
+    "react-ui",
+    "ai-chat-components",
     "neumorui"
   ],
   "license": "MIT",

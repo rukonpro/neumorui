@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Beautiful clay-style React component library</strong><br/>
-  118 components · Dark mode · Animations · TypeScript · Radix UI
+  124 components · Dark mode · Animations · TypeScript · Radix UI
 </p>
 
 <p align="center">
@@ -66,7 +66,7 @@ function LoginPage() {
 }
 ```
 
-## 118 Components
+## 124 Components
 
 | Category | Components |
 |---|---|
@@ -83,6 +83,7 @@ function LoginPage() {
 | **Showpiece** (5) | MusicPlayerCard, WeatherCard, ChatBubble, NotificationCenter, Onboarding |
 | **Media** (2) | AudioPlayer, VideoPlayer |
 | **Utility** (5) | CopyButton, Kbd, InfiniteScroll, QRCode, ThemeCustomizer |
+| **AI Chat** (6) | ChatInput, MessageList, StreamingText, ThinkingIndicator, PromptCard, PromptGrid |
 
 ## Features
 
@@ -95,7 +96,7 @@ function LoginPage() {
 - **Radix UI** — Accessible primitives for overlays, forms, and navigation
 - **Pure inline styles** — No Tailwind required, zero CSS conflicts
 - **Versioned docs** — Version selector dropdown, each release preserved on its own branch
-- **335 tests** — Smoke tests for every component
+- **380 tests** — Smoke tests for every component
 - **Accessibility** — eslint-plugin-jsx-a11y, ARIA attributes, keyboard navigation
 - **Live playground** — Interactive prop editor on docs pages
 - **Global search** — Cmd+K component search across docs
