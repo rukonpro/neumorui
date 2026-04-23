@@ -6,6 +6,27 @@
 - feat(seo): add viewport, theme color, PWA manifest, dynamic component count, and storybook noindex
 
 ### Bug Fixes
+- fix(storybook): use storybook/manager-api import for Storybook 10
+- fix(seo): remove duplicate mobile-web-app-capable meta tag
+
+### Other
+- docs: auto-generate changelog for v0.3.9 [skip ci]
+- chore: bump version to 0.3.9
+- chore(seo): update README counts, add NPM keywords, add Storybook branding
+- chore: update docs version to 0.3.8
+- docs: auto-generate changelog for v0.3.7 [skip ci]
+
+
+---
+
+# Changelog — v0.3.9
+
+## What's Changed
+
+### Features
+- feat(seo): add viewport, theme color, PWA manifest, dynamic component count, and storybook noindex
+
+### Bug Fixes
 - fix(seo): remove duplicate mobile-web-app-capable meta tag
 
 ### Other
