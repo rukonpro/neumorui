@@ -1,11 +1,22 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import React from "react";
 import Script from "next/script";
 import LayoutInner from "@/components/LayoutInner";
+import { TOTAL_COMPONENTS } from "@/data/component-meta";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-W7NRRR6KM4";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://neumorui.vercel.app";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#e0e5ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1a2e" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -13,8 +24,7 @@ export const metadata: Metadata = {
     default: "NeumorUI — Neumorphic React Component Library",
     template: "%s | NeumorUI",
   },
-  description:
-    "61 clay-style neumorphic React components built with TypeScript, Tailwind CSS, and Radix UI. Open source, accessible, dark mode ready. Copy-paste into your project.",
+  description: `${TOTAL_COMPONENTS} clay-style neumorphic React components built with TypeScript, Tailwind CSS, and Radix UI. Open source, accessible, dark mode ready. Copy-paste into your project.`,
   keywords: [
     "neumorphic",
     "neumorphism",
@@ -40,22 +50,20 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "NeumorUI",
     title: "NeumorUI — Neumorphic React Component Library",
-    description:
-      "61 clay-style neumorphic React components. TypeScript, Tailwind CSS, Radix UI. Open source, accessible, dark mode ready.",
+    description: `${TOTAL_COMPONENTS} clay-style neumorphic React components. TypeScript, Tailwind CSS, Radix UI. Open source, accessible, dark mode ready.`,
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "NeumorUI — 61 Neumorphic React Components",
+        alt: `NeumorUI — ${TOTAL_COMPONENTS} Neumorphic React Components`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "NeumorUI — Neumorphic React Component Library",
-    description:
-      "61 clay-style neumorphic React components. TypeScript, Tailwind CSS, Radix UI.",
+    description: `${TOTAL_COMPONENTS} clay-style neumorphic React components. TypeScript, Tailwind CSS, Radix UI.`,
     images: ["/og-image.png"],
   },
   robots: {
@@ -74,6 +82,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "NeumorUI",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
   },
 };
 
@@ -81,6 +99,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* DNS Prefetch & Preconnect for performance */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
@@ -89,8 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "SoftwareSourceCode",
               name: "NeumorUI",
-              description:
-                "61 clay-style neumorphic React components built with TypeScript, Tailwind CSS, and Radix UI.",
+              description: `${TOTAL_COMPONENTS} clay-style neumorphic React components built with TypeScript, Tailwind CSS, and Radix UI.`,
               programmingLanguage: ["TypeScript", "React", "CSS"],
               runtimePlatform: "Node.js",
               codeRepository: "https://github.com/rukonpro/neumorui",
@@ -117,7 +140,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: "NeumorUI",
               url: SITE_URL,
               description:
-                "Documentation for NeumorUI — 61 neumorphic React components.",
+                `Documentation for NeumorUI — ${TOTAL_COMPONENTS} neumorphic React components.`,
               potentialAction: {
                 "@type": "SearchAction",
                 target: {

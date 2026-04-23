@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { componentMeta, getComponentMeta, getAllSlugs } from "@/data/component-meta";
+import { componentMeta, getComponentMeta, getAllSlugs, TOTAL_COMPONENTS } from "@/data/component-meta";
 import ComponentPageClient from "./ComponentPageClient";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://neumorui.vercel.app";
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const title = `${meta.name} — Neumorphic React ${meta.category} Component`;
-  const description = `${meta.description} Part of NeumorUI — 61 clay-style React components with TypeScript, Tailwind CSS, and Radix UI.`;
+  const description = `${meta.description} Part of NeumorUI — ${TOTAL_COMPONENTS} clay-style React components with TypeScript, Tailwind CSS, and Radix UI.`;
   const url = `${SITE_URL}/docs/${meta.slug}`;
 
   return {

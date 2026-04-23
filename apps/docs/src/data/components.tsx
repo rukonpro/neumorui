@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { TOTAL_COMPONENTS } from "@/data/component-meta";
 import {
   Button,
   Input,
@@ -748,7 +749,7 @@ function MegaMenuDemo() {
             <div style={{ display: "flex", gap: "16px", padding: "8px" }}>
               <div>
                 <div style={{ fontWeight: 700, fontSize: "13px", marginBottom: "4px" }}>Components</div>
-                <div style={{ fontSize: "12px", color: "var(--neu-text-secondary)" }}>61 clay-style components</div>
+                <div style={{ fontSize: "12px", color: "var(--neu-text-secondary)" }}>{TOTAL_COMPONENTS} clay-style components</div>
               </div>
               <div>
                 <div style={{ fontWeight: 700, fontSize: "13px", marginBottom: "4px" }}>Templates</div>
@@ -1002,7 +1003,7 @@ function AccordionDemo() {
     <div style={{ maxWidth: "400px" }}>
       <Accordion
         items={[
-          { value: "item-1", title: "What is NeumorUI?", content: <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)" }}>A neumorphic component library for React with 61 clay-style components.</p> },
+          { value: "item-1", title: "What is NeumorUI?", content: <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)" }}>A neumorphic component library for React with {TOTAL_COMPONENTS} clay-style components.</p> },
           { value: "item-2", title: "How to install?", content: <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)" }}>Run npm install neumorui and import the components you need.</p> },
           { value: "item-3", title: "Is it accessible?", content: <p style={{ fontSize: "13px", color: "var(--neu-text-secondary)" }}>Yes! Built on Radix UI primitives for full keyboard and screen reader support.</p> },
         ]}
@@ -1294,7 +1295,7 @@ function TimelineDemo() {
       items={[
         { title: "Project started", description: "Initial commit and setup", date: "Jan 2025", color: "var(--neu-accent)" },
         { title: "Beta release", description: "First public beta with 30 components", date: "Mar 2025", color: "var(--neu-success)" },
-        { title: "v1.0 launch", description: "Stable release with 61+ components", date: "Apr 2025", color: "var(--neu-danger)" },
+        { title: "v1.0 launch", description: "Stable release with 126+ components", date: "Apr 2025", color: "var(--neu-danger)" },
       ]}
     />
   );
@@ -2319,7 +2320,7 @@ function App() {
         <div style={{ display: "flex", gap: 16, padding: 8 }}>
           <div>
             <strong>Components</strong>
-            <p>61 clay-style components</p>
+            <p>{TOTAL_COMPONENTS} clay-style components</p>
           </div>
         </div>
       ),

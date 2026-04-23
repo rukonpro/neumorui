@@ -158,6 +158,9 @@ export const componentMeta: ComponentMeta[] = [
   { slug: "prompt-card", name: "PromptCard", category: "AI Chat", description: "Clickable AI prompt suggestion card with icon, title, description, and category badge." },
 ];
 
+/** Total number of components — use this instead of hardcoding counts. */
+export const TOTAL_COMPONENTS = componentMeta.length;
+
 export function getComponentMeta(slug: string): ComponentMeta | undefined {
   return componentMeta.find((c) => c.slug === slug);
 }
