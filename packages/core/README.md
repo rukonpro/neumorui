@@ -74,7 +74,7 @@ function LoginPage() {
 | **Layout** (11) | Card, Grid, Col, Divider, Hero, PricingCard, AspectRatio, ScrollArea, ResizablePanels, Masonry, Container |
 | **Data Display** (28) | Badge, Avatar, Progress, Skeleton, Spinner, DataTable, StatsCard, BarChart, DonutChart, LineChart, Heatmap, ComparisonTable, KanbanBoard, TreeView, ActivityFeed, Timeline, Chip, ImageGallery, Countdown, AreaChart, RadarChart, GaugeChart, Sparkline, UserCard, TestimonialCard, NotificationCard, CodeBlock, AvatarGroup |
 | **Navigation** (15) | Tabs, Breadcrumb, Pagination, Navbar, Sidebar, BottomNav, BrowserTabs, MegaMenu, SpeedDial, BackToTop, Dock, Steps, LinkPreview, CommandMenu, TableOfContents |
-| **Overlay** (8) | Modal, Popover, Tooltip, DropdownMenu, ContextMenu, Drawer, ConfirmDialog, Sheet |
+| **Overlay** (9) | Modal, Popover, Tooltip, DropdownMenu, ContextMenu, Drawer, ConfirmDialog, Sheet, AlertDialog |
 | **Feedback** (10) | Alert, Toast, AnnouncementBar, CookieConsent, LoadingOverlay, Stepper, EmptyState, Snackbar, Banner, InlineMessage |
 | **Disclosure** (1) | Accordion |
 | **Date** (4) | Calendar, DatePicker, DateRangePicker, TimePicker |
@@ -83,7 +83,7 @@ function LoginPage() {
 | **Showpiece** (5) | MusicPlayerCard, WeatherCard, ChatBubble, NotificationCenter, Onboarding |
 | **Media** (2) | AudioPlayer, VideoPlayer |
 | **Utility** (5) | CopyButton, Kbd, InfiniteScroll, QRCode, ThemeCustomizer |
-| **AI Chat** (6) | ChatInput, MessageList, StreamingText, ThinkingIndicator, PromptCard, PromptGrid |
+| **AI Chat** (5) | ChatInput, MessageList, StreamingText, ThinkingIndicator, PromptCard |
 
 ## Features
 
