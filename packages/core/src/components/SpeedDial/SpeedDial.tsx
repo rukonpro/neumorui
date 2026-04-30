@@ -92,10 +92,11 @@ const ActionItem: React.FC<{
       <button
         aria-label={action.label}
         onClick={onSelect}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => { setHovered(false); setPressed(false); }}
-        onMouseDown={() => setPressed(true)}
-        onMouseUp={() => setPressed(false)}
+        onPointerEnter={() => setHovered(true)}
+        onPointerLeave={() => { setHovered(false); setPressed(false); }}
+        onPointerDown={() => setPressed(true)}
+        onPointerUp={() => setPressed(false)}
+        onPointerCancel={() => { setHovered(false); setPressed(false); }}
         style={btnStyle}
       >
         {action.icon}
@@ -118,11 +119,11 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
 
   useEffect(() => {
     if (!open) return;
-    const handler = (e: MouseEvent) => {
+    const handler = (e: PointerEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("pointerdown", handler);
+    return () => document.removeEventListener("pointerdown", handler);
   }, [open]);
 
   useEffect(() => {
@@ -208,10 +209,11 @@ export const SpeedDial: React.FC<SpeedDialProps> = ({
       <button
         aria-label="Toggle actions"
         onClick={() => setOpen((prev) => !prev)}
-        onMouseEnter={() => setFabHovered(true)}
-        onMouseLeave={() => { setFabHovered(false); setFabPressed(false); }}
-        onMouseDown={() => setFabPressed(true)}
-        onMouseUp={() => setFabPressed(false)}
+        onPointerEnter={() => setFabHovered(true)}
+        onPointerLeave={() => { setFabHovered(false); setFabPressed(false); }}
+        onPointerDown={() => setFabPressed(true)}
+        onPointerUp={() => setFabPressed(false)}
+        onPointerCancel={() => { setFabHovered(false); setFabPressed(false); }}
         style={fabStyle}
       >
         {icon}

@@ -64,15 +64,16 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
     showScrollbar();
   };
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handlePointerDown = (e: React.PointerEvent) => {
     e.preventDefault();
+    (e.target as Element).setPointerCapture(e.pointerId);
     setDragging(true);
     dragStart.current = { y: e.clientY, scrollTop: contentRef.current?.scrollTop || 0 };
   };
 
   useEffect(() => {
     if (!dragging) return;
-    const handleMove = (e: MouseEvent) => {
+    const handleMove = (e: PointerEvent) => {
       const el = contentRef.current;
       if (!el) return;
       const trackH = el.clientHeight - 8;
@@ -84,11 +85,13 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
       setDragging(false);
       hideTimer.current = setTimeout(() => setVisible(false), 800);
     };
-    document.addEventListener("mousemove", handleMove);
-    document.addEventListener("mouseup", handleUp);
+    document.addEventListener("pointermove", handleMove);
+    document.addEventListener("pointerup", handleUp);
+    document.addEventListener("pointercancel", handleUp);
     return () => {
-      document.removeEventListener("mousemove", handleMove);
-      document.removeEventListener("mouseup", handleUp);
+      document.removeEventListener("pointermove", handleMove);
+      document.removeEventListener("pointerup", handleUp);
+      document.removeEventListener("pointercancel", handleUp);
     };
   }, [dragging]);
 
@@ -113,8 +116,8 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
     <div
       className={className}
       style={{ position: "relative", ...style }}
-      onMouseEnter={showScrollbar}
-      onMouseLeave={() => { if (!dragging) setVisible(false); }}
+      onPointerEnter={showScrollbar}
+      onPointerLeave={() => { if (!dragging) setVisible(false); }}
     >
       <div
         ref={contentRef}
@@ -148,7 +151,7 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
         >
           <div
             ref={thumbRef}
-            onMouseDown={handleMouseDown}
+            onPointerDown={handlePointerDown}
             role="scrollbar"
             aria-controls="scroll-area-content"
             aria-valuenow={Math.round(thumbTop)}
@@ -166,6 +169,7 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
               cursor: "pointer",
               boxShadow: "var(--neu-shadow-raised-sm)",
               transition: dragging ? "none" : "top 0.08s ease",
+              touchAction: "none",
             }}
           />
         </div>

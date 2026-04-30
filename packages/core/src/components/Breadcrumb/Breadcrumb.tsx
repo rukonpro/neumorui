@@ -71,10 +71,11 @@ const BreadcrumbChip: React.FC<{
   const handlers = isLast
     ? {}
     : {
-        onMouseEnter: () => setHovered(true),
-        onMouseLeave: () => { setHovered(false); setPressed(false); },
-        onMouseDown: () => setPressed(true),
-        onMouseUp: () => setPressed(false),
+        onPointerEnter: () => setHovered(true),
+        onPointerLeave: () => { setHovered(false); setPressed(false); },
+        onPointerDown: () => setPressed(true),
+        onPointerUp: () => setPressed(false),
+        onPointerCancel: () => { setHovered(false); setPressed(false); },
       };
 
   if (item.href && !isLast) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 interface DrawerProps {
   /** Whether the drawer is visible */
@@ -9,6 +9,8 @@ interface DrawerProps {
   side?: "left" | "right" | "bottom";
   /** Heading text in the drawer header */
   title?: string;
+  /** Accessible name when no visible title is provided */
+  ariaLabel?: string;
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -91,11 +93,23 @@ export const Drawer: React.FC<DrawerProps> = ({
   onOpenChange,
   side = "right",
   title,
+  ariaLabel,
   children,
   className,
   style,
   ...rest
 }) => {
+  const titleId = React.useId();
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onOpenChange(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open, onOpenChange]);
+
   if (!open) return null;
 
   return (
@@ -108,6 +122,9 @@ export const Drawer: React.FC<DrawerProps> = ({
       />
       <div
         role="dialog"
+        aria-modal="true"
+        aria-labelledby={title ? titleId : undefined}
+        aria-label={!title ? (ariaLabel ?? "Drawer") : undefined}
         className={className}
         style={{ ...basePanelStyle, ...sidePanelStyles[side], ...style }}
         data-testid="drawer-panel"
@@ -117,6 +134,7 @@ export const Drawer: React.FC<DrawerProps> = ({
         <div style={headerStyle}>
           {title && (
             <span
+              id={titleId}
               style={{
                 fontSize: "16px",
                 fontWeight: 800,

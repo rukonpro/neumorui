@@ -96,6 +96,8 @@ export const Stepper: React.FC<StepperProps> = ({
         <div
           key={index}
           role="listitem"
+          aria-current={step.status === "active" ? "step" : undefined}
+          aria-label={`Step ${index + 1}: ${step.label} (${step.status})`}
           style={{
             display: "flex",
             alignItems: "center",

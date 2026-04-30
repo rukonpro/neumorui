@@ -124,10 +124,11 @@ export const Chip: React.FC<ChipProps> = ({
       className={className}
       disabled={disabled}
       onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setPressed(false); }}
-      onMouseDown={() => setPressed(true)}
-      onMouseUp={() => setPressed(false)}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => { setHovered(false); setPressed(false); }}
+      onPointerDown={() => setPressed(true)}
+      onPointerUp={() => setPressed(false)}
+      onPointerCancel={() => { setHovered(false); setPressed(false); }}
       style={chipStyle}
     >
       {icon && <span style={{ display: "flex", alignItems: "center", fontSize: "1.1em" }}>{icon}</span>}

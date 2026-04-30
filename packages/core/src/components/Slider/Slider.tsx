@@ -20,6 +20,8 @@ interface SliderProps {
   showValue?: boolean;
   /** Disable interaction with the slider */
   disabled?: boolean;
+  /** Accessible name for screen readers when no visible label is set */
+  ariaLabel?: string;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -35,9 +37,11 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
   label,
   showValue = true,
   disabled,
+  ariaLabel,
   className,
   style,
 }, ref) => {
+  const labelId = label ? `slider-label-${React.useId()}` : undefined;
   return (
     <div ref={ref} className={className} style={{ width: "100%", ...style, ...(disabled ? { opacity: 0.5, cursor: "not-allowed", pointerEvents: "none" as const } : {}) }}>
       {(label || showValue) && (
@@ -51,6 +55,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         >
           {label && (
             <span
+              id={labelId}
               style={{
                 fontSize: "11px",
                 fontWeight: 700,
@@ -112,6 +117,8 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           />
         </RadixSlider.Track>
         <RadixSlider.Thumb
+          aria-label={ariaLabel ?? (label ? undefined : "Slider")}
+          aria-labelledby={labelId}
           style={{
             display: "block",
             width: "26px",

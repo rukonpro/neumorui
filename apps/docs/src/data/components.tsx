@@ -1555,6 +1555,7 @@ function App() {
       { name: "label", type: "string", default: "-" },
       { name: "showValue", type: "boolean", default: "true" },
       { name: "disabled", type: "boolean", default: "false" },
+      { name: "ariaLabel", type: "string", default: "-" },
     ],
     component: Slider as unknown as React.ComponentType<Record<string, unknown>>,
     defaultProps: { label: "Volume", defaultValue: [50] },
@@ -2506,6 +2507,7 @@ function App() {
       { name: "onOpenChange", type: "(open: boolean) => void", default: "-" },
       { name: "side", type: '"left" | "right" | "bottom"', default: '"right"' },
       { name: "title", type: "string", default: "-" },
+      { name: "ariaLabel", type: "string", default: "-" },
       { name: "children", type: "ReactNode", default: "-" },
     ],
   },
@@ -2695,6 +2697,7 @@ function App() {
     props: [
       { name: "loading", type: "boolean", default: "-" },
       { name: "message", type: "string", default: "-" },
+      { name: "loadingLabel", type: "string", default: '"Loading"' },
       { name: "children", type: "ReactNode", default: "-" },
     ],
   },

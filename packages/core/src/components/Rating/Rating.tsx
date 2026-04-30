@@ -124,10 +124,11 @@ const RatingItem: React.FC<{
       type="button"
       style={style}
       onClick={interactive ? onClick : undefined}
-      onMouseEnter={interactive ? onMouseEnter : undefined}
-      onMouseDown={() => interactive && setPressed(true)}
-      onMouseUp={() => setPressed(false)}
-      onMouseLeave={() => setPressed(false)}
+      onPointerEnter={interactive ? onMouseEnter : undefined}
+      onPointerDown={() => interactive && setPressed(true)}
+      onPointerUp={() => setPressed(false)}
+      onPointerLeave={() => setPressed(false)}
+      onPointerCancel={() => setPressed(false)}
       aria-label={`Rate ${index + 1}`}
       disabled={disabled}
     >
@@ -162,6 +163,36 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
     onChange?.(newVal);
   }, [onChange]);
 
+  const updateValue = useCallback((newVal: number) => {
+    const clamped = Math.max(0, Math.min(max, newVal));
+    setInternalValue(clamped);
+    onChange?.(clamped);
+  }, [max, onChange]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (readOnly || disabled) return;
+    switch (e.key) {
+      case "ArrowRight":
+      case "ArrowUp":
+        e.preventDefault();
+        updateValue(value + 1);
+        break;
+      case "ArrowLeft":
+      case "ArrowDown":
+        e.preventDefault();
+        updateValue(value - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        updateValue(0);
+        break;
+      case "End":
+        e.preventDefault();
+        updateValue(max);
+        break;
+    }
+  }, [value, max, readOnly, disabled, updateValue]);
+
   const displayValue = hoverValue >= 0 ? hoverValue + 1 : value;
 
   return (
@@ -190,10 +221,17 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
           background: "var(--neu-bg)",
           boxShadow: "var(--neu-shadow-inset-sm)",
         }}
-        onMouseLeave={() => setHoverValue(-1)}
-        role="radiogroup"
-        tabIndex={0}
+        onPointerLeave={() => setHoverValue(-1)}
+        onKeyDown={handleKeyDown}
+        role="slider"
+        tabIndex={readOnly || disabled ? -1 : 0}
         aria-label={label || "Rating"}
+        aria-valuenow={value}
+        aria-valuemin={0}
+        aria-valuemax={max}
+        aria-valuetext={`${value} out of ${max}`}
+        aria-readonly={readOnly || undefined}
+        aria-disabled={disabled || undefined}
       >
         {Array.from({ length: max }, (_, i) => {
           const filled = i < Math.floor(displayValue);

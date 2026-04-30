@@ -109,10 +109,11 @@ export const BackToTop: React.FC<BackToTopProps> = ({
       className={className}
       aria-label="Scroll to top"
       onClick={scrollToTop}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setPressed(false); }}
-      onMouseDown={() => setPressed(true)}
-      onMouseUp={() => setPressed(false)}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => { setHovered(false); setPressed(false); }}
+      onPointerDown={() => setPressed(true)}
+      onPointerUp={() => setPressed(false)}
+      onPointerCancel={() => { setHovered(false); setPressed(false); }}
       style={btnStyle}
     >
       {icon || <ArrowUpIcon />}

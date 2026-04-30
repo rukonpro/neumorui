@@ -62,6 +62,8 @@ export const ToastProvider: React.FC<{ children: React.ReactNode; className?: st
       {children}
       <div
         className={className}
+        role="region"
+        aria-label="Notifications"
         style={{
           position: "fixed",
           top: "16px",
@@ -76,9 +78,13 @@ export const ToastProvider: React.FC<{ children: React.ReactNode; className?: st
         {toasts.map((t) => {
           const variant = t.variant ?? "default";
           const isTinted = variant !== "default";
+          const isUrgent = variant === "danger" || variant === "warning";
           return (
             <div
               key={t.id}
+              role={isUrgent ? "alert" : "status"}
+              aria-live={isUrgent ? "assertive" : "polite"}
+              aria-atomic="true"
               style={{
                 pointerEvents: "auto",
                 minWidth: "280px",

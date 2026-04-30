@@ -5,6 +5,8 @@ interface LoadingOverlayProps {
   loading: boolean;
   /** Text displayed below the spinner */
   message?: string;
+  /** Accessible label announced by screen readers when loading starts */
+  loadingLabel?: string;
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -13,6 +15,7 @@ interface LoadingOverlayProps {
 export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
   loading,
   message,
+  loadingLabel = "Loading",
   children,
   className,
   style,
@@ -23,12 +26,16 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
       className={className}
       style={{ position: "relative", ...style }}
       data-testid="loading-overlay-container"
+      aria-busy={loading || undefined}
       {...rest}
     >
       {children}
       {loading && (
         <div
           data-testid="loading-overlay"
+          role="status"
+          aria-live="polite"
+          aria-label={message ?? loadingLabel}
           style={{
             position: "absolute",
             inset: 0,

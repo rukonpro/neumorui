@@ -192,27 +192,26 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         disabled={disabled || loading}
+        aria-busy={loading || undefined}
         onClick={(e) => {
           if (ripple) createRipple(e);
           onClick?.(e);
         }}
-        onMouseEnter={(e) => {
-          setHovered(true);
-          onMouseEnter?.(e);
-        }}
-        onMouseLeave={(e) => {
+        onPointerEnter={() => setHovered(true)}
+        onPointerLeave={() => {
           setHovered(false);
           setPressed(false);
-          onMouseLeave?.(e);
         }}
-        onMouseDown={(e) => {
-          setPressed(true);
-          onMouseDown?.(e);
-        }}
-        onMouseUp={(e) => {
+        onPointerDown={() => setPressed(true)}
+        onPointerUp={() => setPressed(false)}
+        onPointerCancel={() => {
+          setHovered(false);
           setPressed(false);
-          onMouseUp?.(e);
         }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
         className={className}
         style={{ ...computedStyle, ...style }}
         {...props}

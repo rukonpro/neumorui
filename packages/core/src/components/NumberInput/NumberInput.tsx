@@ -102,9 +102,10 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             type="button"
             disabled={disabled || (min !== undefined && currentValue <= min)}
             onClick={() => updateValue(currentValue - step)}
-            onMouseDown={() => setPressedBtn("minus")}
-            onMouseUp={() => setPressedBtn(null)}
-            onMouseLeave={() => setPressedBtn(null)}
+            onPointerDown={() => setPressedBtn("minus")}
+            onPointerUp={() => setPressedBtn(null)}
+            onPointerLeave={() => setPressedBtn(null)}
+            onPointerCancel={() => setPressedBtn(null)}
             style={stepperBtnStyle("minus")}
             tabIndex={-1}
             aria-label="Decrease"
@@ -148,9 +149,10 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             type="button"
             disabled={disabled || (max !== undefined && currentValue >= max)}
             onClick={() => updateValue(currentValue + step)}
-            onMouseDown={() => setPressedBtn("plus")}
-            onMouseUp={() => setPressedBtn(null)}
-            onMouseLeave={() => setPressedBtn(null)}
+            onPointerDown={() => setPressedBtn("plus")}
+            onPointerUp={() => setPressedBtn(null)}
+            onPointerLeave={() => setPressedBtn(null)}
+            onPointerCancel={() => setPressedBtn(null)}
             style={stepperBtnStyle("plus")}
             tabIndex={-1}
             aria-label="Increase"

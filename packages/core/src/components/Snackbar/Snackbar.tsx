@@ -50,6 +50,8 @@ export const SnackbarProvider: React.FC<{ children: React.ReactNode; className?:
       {children}
       <div
         className={className}
+        role="region"
+        aria-label="Notifications"
         style={{
           position: "fixed",
           bottom: "20px",
@@ -64,9 +66,14 @@ export const SnackbarProvider: React.FC<{ children: React.ReactNode; className?:
           width: "100%",
         }}
       >
-        {items.map((item) => (
+        {items.map((item) => {
+          const isUrgent = item.variant === "danger" || item.variant === "warning";
+          return (
           <div
             key={item.id}
+            role={isUrgent ? "alert" : "status"}
+            aria-live={isUrgent ? "assertive" : "polite"}
+            aria-atomic="true"
             style={{
               pointerEvents: "auto",
               display: "flex",
@@ -142,7 +149,8 @@ export const SnackbarProvider: React.FC<{ children: React.ReactNode; className?:
               ×
             </button>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <style>{`
