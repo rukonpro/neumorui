@@ -1,3 +1,17 @@
+# Changelog — v0.3.10
+
+## What's Changed
+
+### Features
+- feat(a11y): improve accessibility, touch support, and screen reader semantics
+
+### Other
+- chore: bump version to 0.3.10
+- docs: auto-generate changelog for v0.3.9 [skip ci]
+
+
+---
+
 # Changelog — v0.3.9
 
 ## What's Changed
