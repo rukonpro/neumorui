@@ -5,7 +5,7 @@ import { DataTable } from "./DataTable";
 
 type Row = { id: number; name: string };
 
-const columns: ColumnDef<Row, any>[] = [
+const columns: ColumnDef<Row, unknown>[] = [
   { accessorKey: "id", header: "ID" },
   { accessorKey: "name", header: "Name" },
 ];

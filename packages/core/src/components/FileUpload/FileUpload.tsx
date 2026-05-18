@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useId, useRef, useState } from "react";
 import { cn } from "../../utils/cn";
 
 export interface UploadedFile {
@@ -103,6 +103,8 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
   const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const idPrefix = useId();
+  const counterRef = useRef(0);
 
   const processFiles = useCallback(
     (list: FileList | null) => {
@@ -112,7 +114,7 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
 
       for (const file of incoming) {
         const entry: UploadedFile = {
-          id: `${file.name}-${file.size}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          id: `${idPrefix}-${counterRef.current++}`,
           file,
           progress: 100,
         };
@@ -129,7 +131,7 @@ export const FileUpload = React.forwardRef<HTMLDivElement, FileUploadProps>(
       const trimmed = maxFiles ? combined.slice(0, maxFiles) : combined;
       setFiles(trimmed);
     },
-    [files, multiple, maxFiles, maxSize]
+    [files, multiple, maxFiles, maxSize, idPrefix]
   );
 
   const remove = (id: string) => {

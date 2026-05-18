@@ -14,7 +14,7 @@ import { Spinner } from "../Spinner/Spinner";
 
 interface DataTableProps<TData> {
   /** Column definitions for the table */
-  columns: ColumnDef<TData, any>[];
+  columns: ColumnDef<TData, unknown>[];
   /** Array of row data to display */
   data: TData[];
   /** Show loading spinner overlay */

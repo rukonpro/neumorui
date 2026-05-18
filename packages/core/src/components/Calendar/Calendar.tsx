@@ -9,8 +9,19 @@ export type CalendarProps = DayPickerProps & {
 
 const transition = "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)";
 
+interface NeuDropdownProps {
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  value?: string | number;
+  children?: React.ReactNode;
+  caption?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  name?: string;
+  "aria-label"?: string;
+}
+
 /** Custom neumorphic dropdown to replace native <select> */
-const NeuDropdown: React.FC<any> = (props) => {
+const NeuDropdown: React.FC<NeuDropdownProps> = (props) => {
   const { onChange, value, children, caption, className, style, name } = props;
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -18,8 +29,8 @@ const NeuDropdown: React.FC<any> = (props) => {
 
   // Parse options from children (React <option> elements)
   const options: { value: string; label: string }[] = [];
-  React.Children.forEach(children, (child: any) => {
-    if (child?.props?.value !== undefined) {
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement<{ value?: string | number; children?: React.ReactNode }>(child) && child.props.value !== undefined) {
       options.push({
         value: String(child.props.value),
         label: String(child.props.children),

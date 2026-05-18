@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useId, useRef, useState } from "react";
 
 type ToastVariant = "default" | "success" | "danger" | "warning";
 
@@ -48,14 +48,16 @@ const variantStyle: Record<ToastVariant, React.CSSProperties> = {
 
 export const ToastProvider: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
+  const idPrefix = useId();
+  const counterRef = useRef(0);
 
   const toast = useCallback((opts: Omit<ToastItem, "id">) => {
-    const id = Math.random().toString(36).slice(2);
+    const id = `${idPrefix}-${counterRef.current++}`;
     setToasts((prev) => [...prev, { id, ...opts }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
     }, opts.duration ?? 4000);
-  }, []);
+  }, [idPrefix]);
 
   return (
     <ToastContext.Provider value={{ toast }}>

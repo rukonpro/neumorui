@@ -22,25 +22,20 @@ class IntersectionObserverPolyfill {
   }
 }
 
-if (typeof globalThis.ResizeObserver === "undefined") {
-  (globalThis as any).ResizeObserver = ResizeObserverPolyfill;
-}
-if (typeof globalThis.IntersectionObserver === "undefined") {
-  (globalThis as any).IntersectionObserver = IntersectionObserverPolyfill;
-}
+type Polyfill = typeof ResizeObserverPolyfill | typeof IntersectionObserverPolyfill;
+const installGlobal = (key: "ResizeObserver" | "IntersectionObserver", impl: Polyfill) => {
+  if (typeof (globalThis as Record<string, unknown>)[key] === "undefined") {
+    (globalThis as Record<string, unknown>)[key] = impl;
+  }
+};
+installGlobal("ResizeObserver", ResizeObserverPolyfill);
+installGlobal("IntersectionObserver", IntersectionObserverPolyfill);
 
 // Radix primitives call these on HTMLElement during pointer interactions.
 if (typeof Element !== "undefined") {
-  if (!(Element.prototype as any).hasPointerCapture) {
-    (Element.prototype as any).hasPointerCapture = () => false;
-  }
-  if (!(Element.prototype as any).setPointerCapture) {
-    (Element.prototype as any).setPointerCapture = () => {};
-  }
-  if (!(Element.prototype as any).releasePointerCapture) {
-    (Element.prototype as any).releasePointerCapture = () => {};
-  }
-  if (!(Element.prototype as any).scrollIntoView) {
-    (Element.prototype as any).scrollIntoView = () => {};
-  }
+  const proto = Element.prototype as unknown as Record<string, unknown>;
+  if (!proto.hasPointerCapture) proto.hasPointerCapture = () => false;
+  if (!proto.setPointerCapture) proto.setPointerCapture = () => {};
+  if (!proto.releasePointerCapture) proto.releasePointerCapture = () => {};
+  if (!proto.scrollIntoView) proto.scrollIntoView = () => {};
 }

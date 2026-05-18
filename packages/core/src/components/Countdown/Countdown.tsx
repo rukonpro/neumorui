@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface CountdownProps {
   /** Target date to count down to */
@@ -129,15 +129,19 @@ export const Countdown: React.FC<CountdownProps> = ({
     ? targetDate
     : new Date(targetDate).getTime();
 
-  const [time, setTime] = useState(() => getTimeLeft(target));
+  // Start with zeros so SSR HTML matches the first client render.
+  // Real countdown begins after mount via useEffect (avoids hydration mismatch).
+  const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const prevTime = useRef(time);
   const completedRef = useRef(false);
 
   useEffect(() => {
     const tick = () => {
       const next = getTimeLeft(target);
-      prevTime.current = time;
-      setTime(next);
+      setTime((current) => {
+        prevTime.current = current;
+        return next;
+      });
       if (
         !completedRef.current &&
         next.days === 0 && next.hours === 0 && next.minutes === 0 && next.seconds === 0
@@ -146,9 +150,10 @@ export const Countdown: React.FC<CountdownProps> = ({
         onComplete?.();
       }
     };
+    tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [target, onComplete, time]);
+  }, [target, onComplete]);
 
   const { gap } = sizeMap[size];
   const units: { key: string; value: number; prev: number; label: string; show: boolean }[] = [

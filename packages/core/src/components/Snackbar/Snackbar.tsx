@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useId, useRef, useState } from "react";
 
 type SnackbarVariant = "default" | "success" | "danger" | "warning" | "info";
 
@@ -32,14 +32,16 @@ const variantColors: Record<SnackbarVariant, string> = {
 
 export const SnackbarProvider: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
   const [items, setItems] = useState<SnackbarItem[]>([]);
+  const idPrefix = useId();
+  const counterRef = useRef(0);
 
   const snackbar = useCallback((opts: Omit<SnackbarItem, "id">) => {
-    const id = Math.random().toString(36).slice(2);
+    const id = `${idPrefix}-${counterRef.current++}`;
     setItems((prev) => [...prev, { id, ...opts }]);
     setTimeout(() => {
       setItems((prev) => prev.filter((s) => s.id !== id));
     }, opts.duration ?? 4000);
-  }, []);
+  }, [idPrefix]);
 
   const dismiss = useCallback((id: string) => {
     setItems((prev) => prev.filter((s) => s.id !== id));

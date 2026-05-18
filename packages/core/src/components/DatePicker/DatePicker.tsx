@@ -154,7 +154,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   ? [
                       minDate ? { before: minDate } : undefined,
                       maxDate ? { after: maxDate } : undefined,
-                    ].filter(Boolean) as any
+                    ].filter((m): m is { before: Date } | { after: Date } => Boolean(m))
                   : undefined
               }
             />

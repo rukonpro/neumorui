@@ -106,7 +106,6 @@ export const Carousel: React.FC<CarouselProps> = ({
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [direction, setDirection] = useState<"left" | "right">("right");
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef(0);
   const dragOffset = useRef(0);
@@ -116,15 +115,14 @@ export const Carousel: React.FC<CarouselProps> = ({
 
   const count = slides.length;
 
-  const goTo = useCallback((idx: number, dir?: "left" | "right") => {
+  const goTo = useCallback((idx: number) => {
     if (!loop && (idx < 0 || idx >= count)) return;
-    setDirection(dir || (idx > current ? "right" : "left"));
     setCurrent(((idx % count) + count) % count);
     setProgress(0);
-  }, [count, current, loop]);
+  }, [count, loop]);
 
-  const next = useCallback(() => goTo(current + 1, "right"), [current, goTo]);
-  const prev = useCallback(() => goTo(current - 1, "left"), [current, goTo]);
+  const next = useCallback(() => goTo(current + 1), [current, goTo]);
+  const prev = useCallback(() => goTo(current - 1), [current, goTo]);
 
   // Auto play + progress bar
   useEffect(() => {

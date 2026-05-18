@@ -17,7 +17,7 @@ describe("Masonry", () => {
   });
 
   it("distributes items across columns", () => {
-    const { container } = render(
+    render(
       <Masonry columns={3}>
         <div>A</div><div>B</div><div>C</div>
         <div>D</div><div>E</div><div>F</div>

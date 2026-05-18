@@ -12,7 +12,7 @@ interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Divider: React.FC<DividerProps> = ({
   orientation = "horizontal",
   label,
-  variant = "inset",
+  variant: _variant = "inset",
   className,
   style,
   ...props
