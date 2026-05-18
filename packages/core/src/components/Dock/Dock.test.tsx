@@ -16,7 +16,7 @@ describe("Dock", () => {
 
   it("shows tooltip on hover", () => {
     render(<Dock items={items} />);
-    fireEvent.mouseEnter(screen.getAllByRole("button")[0]);
+    fireEvent.pointerEnter(screen.getAllByRole("button")[0]);
     expect(screen.getByText("Home")).toBeInTheDocument();
   });
 

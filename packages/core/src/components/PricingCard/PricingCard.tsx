@@ -31,27 +31,19 @@ const PlanCard: React.FC<{
   idx: number;
   onCtaClick?: (planName: string) => void;
 }> = ({ plan, idx, onCtaClick }) => {
-  const [hovered, setHovered] = React.useState(false);
-
   return (
     <div
       data-testid={`pricing-plan-${idx}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className="neu-hover-lift"
       style={{
         padding: "20px",
         borderRadius: "20px",
-        boxShadow: hovered
+        boxShadow: plan.highlighted
           ? "var(--neu-shadow-raised-lg)"
-          : plan.highlighted
-            ? "var(--neu-shadow-raised-lg)"
-            : "var(--neu-shadow-raised)",
+          : "var(--neu-shadow-raised)",
         border: plan.highlighted ? "2px solid rgba(108,126,248,.3)" : undefined,
         position: "relative",
         background: "var(--neu-bg)",
-        transform: hovered ? "translateY(-4px)" : undefined,
-        transition:
-          "transform 0.25s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.25s ease",
       }}
     >
       {plan.badge && plan.highlighted && (

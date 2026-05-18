@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -27,8 +27,6 @@ interface UserCardProps {
   style?: React.CSSProperties;
 }
 
-const transition = "all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)";
-
 export const UserCard: React.FC<UserCardProps> = ({
   name,
   role,
@@ -41,25 +39,19 @@ export const UserCard: React.FC<UserCardProps> = ({
   className,
   style,
 }) => {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <div
-      className={className}
+      className={["neu-hover-lift", className].filter(Boolean).join(" ")}
       onClick={onClick}
       onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick(); } : undefined}
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
         borderRadius: "20px",
         background: "var(--neu-bg)",
-        boxShadow: hovered ? "var(--neu-shadow-raised-lg)" : "var(--neu-shadow-raised)",
+        boxShadow: "var(--neu-shadow-raised)",
         overflow: "hidden",
         cursor: onClick ? "pointer" : "default",
-        transform: hovered ? "translateY(-4px)" : "none",
-        transition,
         ...style,
       }}
     >
@@ -131,15 +123,13 @@ export const UserCard: React.FC<UserCardProps> = ({
 };
 
 const SocialButton: React.FC<{ href: string; label?: string; children: React.ReactNode }> = ({ href, label, children }) => {
-  const [hovered, setHovered] = useState(false);
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className="neu-hover-inset"
       style={{
         width: "34px",
         height: "34px",
@@ -148,10 +138,9 @@ const SocialButton: React.FC<{ href: string; label?: string; children: React.Rea
         alignItems: "center",
         justifyContent: "center",
         fontSize: "15px",
-        color: hovered ? "var(--neu-accent)" : "var(--neu-text-muted)",
+        color: "var(--neu-text-muted)",
         background: "var(--neu-bg)",
-        boxShadow: hovered ? "var(--neu-shadow-inset-sm)" : "var(--neu-shadow-raised-sm)",
-        transition,
+        boxShadow: "var(--neu-shadow-raised-sm)",
         textDecoration: "none",
       }}
     >

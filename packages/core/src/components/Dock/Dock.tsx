@@ -34,13 +34,13 @@ export const Dock: React.FC<DockProps> = ({
   const [tooltipIdx, setTooltipIdx] = useState<number | null>(null);
   const dockRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
     if (!dockRef.current) return;
     const rect = dockRef.current.getBoundingClientRect();
     setMouseX(e.clientX - rect.left);
   }, []);
 
-  const handleMouseLeave = () => {
+  const handlePointerLeave = () => {
     setMouseX(null);
     setTooltipIdx(null);
   };
@@ -66,8 +66,9 @@ export const Dock: React.FC<DockProps> = ({
     >
       <div
         ref={dockRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        onPointerCancel={handlePointerLeave}
         style={{
           display: "flex",
           alignItems: "flex-end",
@@ -85,8 +86,8 @@ export const Dock: React.FC<DockProps> = ({
             <div
               key={i}
               style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}
-              onMouseEnter={() => setTooltipIdx(i)}
-              onMouseLeave={() => setTooltipIdx(null)}
+              onPointerEnter={() => setTooltipIdx(i)}
+              onPointerLeave={() => setTooltipIdx(null)}
             >
               {/* Tooltip */}
               {tooltipIdx === i && (

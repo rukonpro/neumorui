@@ -17,8 +17,6 @@ interface CodeBlockProps {
   style?: React.CSSProperties;
 }
 
-const transition = "all 0.18s cubic-bezier(0.34, 1.2, 0.64, 1)";
-
 export const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language = "tsx",
@@ -152,13 +150,11 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
 };
 
 const CopyBtn: React.FC<{ copied: boolean; onClick: () => void }> = ({ copied, onClick }) => {
-  const [hovered, setHovered] = useState(false);
   return (
     <button
       type="button"
       onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className="neu-hover-inset"
       style={{
         display: "flex",
         alignItems: "center",
@@ -173,8 +169,7 @@ const CopyBtn: React.FC<{ copied: boolean; onClick: () => void }> = ({ copied, o
         fontFamily: "inherit",
         color: copied ? "var(--neu-success)" : "var(--neu-text-muted)",
         background: "var(--neu-bg)",
-        boxShadow: hovered ? "var(--neu-shadow-inset-sm)" : "var(--neu-shadow-raised-sm)",
-        transition,
+        boxShadow: "var(--neu-shadow-raised-sm)",
       }}
     >
       {copied ? (

@@ -50,13 +50,13 @@ const ComboboxItem: React.FC<{
   isSelected: boolean;
   onSelect: () => void;
 }> = ({ opt, isSelected, onSelect }) => {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <Cmdk.Item
       value={opt.value}
       disabled={opt.disabled}
       onSelect={onSelect}
+      className="neu-combo-item"
+      data-selected={isSelected || undefined}
       style={{
         display: "flex",
         alignItems: "center",
@@ -69,16 +69,9 @@ const ComboboxItem: React.FC<{
         fontWeight: isSelected ? 700 : 600,
         color: isSelected ? "var(--neu-accent)" : "var(--neu-text-primary)",
         background: "var(--neu-bg)",
-        boxShadow: isSelected
-          ? "var(--neu-shadow-inset-sm)"
-          : hovered
-            ? "var(--neu-shadow-raised-sm)"
-            : "none",
-        transform: hovered && !isSelected ? "translateX(4px)" : "none",
+        boxShadow: isSelected ? "var(--neu-shadow-inset-sm)" : "none",
         transition,
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       <span
         style={{
@@ -133,7 +126,6 @@ export const Combobox: React.FC<ComboboxProps> = ({
   ...rest
 }) => {
   const [open, setOpen] = useState(false);
-  const [triggerHovered, setTriggerHovered] = useState(false);
   const selected = options.find((o) => o.value === value);
 
   return (
@@ -156,8 +148,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
       <RadixPopover.Root open={open} onOpenChange={setOpen}>
         <RadixPopover.Trigger
           disabled={disabled}
-          onMouseEnter={() => setTriggerHovered(true)}
-          onMouseLeave={() => setTriggerHovered(false)}
+          className="neu-combo-trigger"
           style={{
             display: "flex",
             width: "100%",
@@ -177,10 +168,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
             color: selected ? "var(--neu-text-primary)" : "var(--neu-text-muted)",
             boxShadow: open
               ? "var(--neu-shadow-inset-sm)"
-              : triggerHovered
-                ? "var(--neu-shadow-raised)"
-                : "var(--neu-shadow-raised-sm)",
-            transform: triggerHovered && !open ? "translateY(-1px)" : "none",
+              : "var(--neu-shadow-raised-sm)",
             transition,
           }}
         >

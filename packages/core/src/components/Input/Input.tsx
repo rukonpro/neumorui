@@ -16,7 +16,6 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ label, helperText, error, leftIcon, rightIcon, className, id, style, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s/g, "-");
-    const [focused, setFocused] = React.useState(false);
 
     const inputStyle: React.CSSProperties = {
       width: "100%",
@@ -29,11 +28,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       outline: "none",
       borderRadius: "14px",
       padding: "13px 16px",
-      boxShadow: focused
-        ? "var(--neu-shadow-inset), 0 0 0 3px rgba(108,126,248,.18)"
-        : error
-          ? "var(--neu-shadow-inset), 0 0 0 2px rgba(248,124,108,.4)"
-          : "var(--neu-shadow-inset)",
+      boxShadow: error
+        ? "var(--neu-shadow-inset), 0 0 0 2px rgba(248,124,108,.4)"
+        : "var(--neu-shadow-inset)",
       transition: "box-shadow 0.2s ease",
       ...(leftIcon ? { paddingLeft: "42px" } : {}),
       ...(rightIcon ? { paddingRight: "42px" } : {}),
@@ -75,16 +72,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             id={inputId}
-            className={className}
+            className={["neu-input-focus", className].filter(Boolean).join(" ")}
+            aria-invalid={error ? true : undefined}
             style={inputStyle}
-            onFocus={(e) => {
-              setFocused(true);
-              props.onFocus?.(e);
-            }}
-            onBlur={(e) => {
-              setFocused(false);
-              props.onBlur?.(e);
-            }}
             {...props}
           />
           {rightIcon && (

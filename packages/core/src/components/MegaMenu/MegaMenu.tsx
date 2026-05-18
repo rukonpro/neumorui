@@ -27,6 +27,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
 }) => {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const closeTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = React.useRef<HTMLElement>(null);
 
   const openMenu = (index: number) => {
     if (closeTimerRef.current) {
@@ -42,11 +43,34 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
     }, 150);
   };
 
+  const toggleMenu = (index: number) => {
+    setActiveIndex((prev) => (prev === index ? null : index));
+  };
+
+  React.useEffect(() => {
+    if (activeIndex === null) return;
+    const handlePointer = (e: PointerEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setActiveIndex(null);
+      }
+    };
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveIndex(null);
+    };
+    document.addEventListener("pointerdown", handlePointer);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointer);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [activeIndex]);
+
   return (
     <>
       <style>{scaleInKeyframes}</style>
       {/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */}
       <nav
+        ref={navRef}
         className={className}
         style={{
           display: "flex",
@@ -70,6 +94,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
               role="menuitem"
               aria-haspopup="true"
               aria-expanded={activeIndex === i}
+              onClick={() => toggleMenu(i)}
               style={{
                 padding: "9px 16px",
                 borderRadius: "11px",

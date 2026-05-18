@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export interface TimelineItem {
   title: string;
@@ -28,7 +28,6 @@ const TimelineNode: React.FC<{
   side: "left" | "right";
   orientation: "vertical" | "horizontal";
 }> = ({ item, index, isLast, side, orientation }) => {
-  const [hovered, setHovered] = useState(false);
   const accentColor = item.color || "var(--neu-accent)";
 
   const dotStyle: React.CSSProperties = {
@@ -40,14 +39,11 @@ const TimelineNode: React.FC<{
     justifyContent: "center",
     flexShrink: 0,
     background: "var(--neu-bg)",
-    boxShadow: hovered
-      ? "var(--neu-shadow-raised)"
-      : "var(--neu-shadow-raised-sm)",
+    boxShadow: "var(--neu-shadow-raised-sm)",
     color: accentColor,
     fontSize: "14px",
     fontWeight: 800,
     transition,
-    transform: hovered ? "scale(1.1)" : "none",
     zIndex: 2,
   };
 
@@ -55,10 +51,7 @@ const TimelineNode: React.FC<{
     padding: "14px 18px",
     borderRadius: "16px",
     background: "var(--neu-bg)",
-    boxShadow: hovered
-      ? "var(--neu-shadow-raised)"
-      : "var(--neu-shadow-raised-sm)",
-    transform: hovered ? "translateY(-2px)" : "none",
+    boxShadow: "var(--neu-shadow-raised-sm)",
     transition,
     flex: 1,
   };
@@ -66,6 +59,7 @@ const TimelineNode: React.FC<{
   if (orientation === "horizontal") {
     return (
       <div
+        className="neu-hover-parent"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -73,10 +67,8 @@ const TimelineNode: React.FC<{
           flex: 1,
           position: "relative",
         }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
       >
-        <div style={dotStyle}>
+        <div className="neu-hover-child-scale" style={dotStyle}>
           {item.icon || index + 1}
         </div>
         {!isLast && (
@@ -92,7 +84,7 @@ const TimelineNode: React.FC<{
             }}
           />
         )}
-        <div style={{ ...cardStyle, marginTop: "12px", textAlign: "center" }}>
+        <div className="neu-hover-child-card" style={{ ...cardStyle, marginTop: "12px", textAlign: "center" }}>
           {item.date && (
             <div style={{ fontSize: "10px", fontWeight: 700, color: accentColor, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "4px" }}>
               {item.date}
@@ -114,6 +106,7 @@ const TimelineNode: React.FC<{
   // Vertical
   return (
     <div
+      className="neu-hover-parent"
       style={{
         display: "flex",
         gap: "16px",
@@ -121,8 +114,6 @@ const TimelineNode: React.FC<{
         flexDirection: side === "right" ? "row" : "row-reverse",
         textAlign: side === "right" ? "left" : "right",
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       {/* Connector line */}
       {!isLast && (
@@ -141,12 +132,12 @@ const TimelineNode: React.FC<{
       )}
 
       {/* Dot */}
-      <div style={dotStyle}>
+      <div className="neu-hover-child-scale" style={dotStyle}>
         {item.icon || index + 1}
       </div>
 
       {/* Card */}
-      <div style={cardStyle}>
+      <div className="neu-hover-child-card" style={cardStyle}>
         {item.date && (
           <div style={{ fontSize: "10px", fontWeight: 700, color: accentColor, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "4px" }}>
             {item.date}

@@ -28,14 +28,11 @@ const GalleryThumb: React.FC<{
   rounded: number;
   onClick: () => void;
 }> = ({ image, rounded, onClick }) => {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <button
       type="button"
       onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className="neu-hover-zoom"
       style={{
         display: "block",
         width: "100%",
@@ -46,11 +43,7 @@ const GalleryThumb: React.FC<{
         borderRadius: `${rounded}px`,
         overflow: "hidden",
         background: "var(--neu-bg)",
-        boxShadow: hovered
-          ? "var(--neu-shadow-raised-lg)"
-          : "var(--neu-shadow-raised-sm)",
-        transform: hovered ? "translateY(-4px) scale(1.02)" : "none",
-        transition,
+        boxShadow: "var(--neu-shadow-raised-sm)",
       }}
     >
       <img

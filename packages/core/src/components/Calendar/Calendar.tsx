@@ -13,7 +13,6 @@ const transition = "all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1)";
 const NeuDropdown: React.FC<any> = (props) => {
   const { onChange, value, children, caption, className, style, name } = props;
   const [open, setOpen] = useState(false);
-  const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -64,12 +63,7 @@ const NeuDropdown: React.FC<any> = (props) => {
     fontWeight: 700,
     background: "var(--neu-bg)",
     color: "var(--neu-text-primary)",
-    boxShadow: open
-      ? "var(--neu-shadow-inset-sm)"
-      : hovered
-        ? "var(--neu-shadow-raised)"
-        : "var(--neu-shadow-raised-sm)",
-    transform: hovered && !open ? "translateY(-1px)" : "none",
+    boxShadow: open ? "var(--neu-shadow-inset-sm)" : "var(--neu-shadow-raised-sm)",
     transition,
   };
 
@@ -78,8 +72,8 @@ const NeuDropdown: React.FC<any> = (props) => {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        className="neu-combo-trigger"
+        data-state={open ? "open" : "closed"}
         style={triggerStyle}
         aria-label={props["aria-label"]}
         aria-expanded={open}
@@ -160,8 +154,6 @@ const NeuDropdownItem: React.FC<{
   isActive: boolean;
   onSelect: () => void;
 }> = ({ label, isActive, onSelect }) => {
-  const [hovered, setHovered] = useState(false);
-
   const style: React.CSSProperties = {
     display: "block",
     width: "100%",
@@ -176,23 +168,18 @@ const NeuDropdownItem: React.FC<{
     textAlign: "left",
     background: "var(--neu-bg)",
     color: isActive ? "var(--neu-accent)" : "var(--neu-text-primary)",
-    boxShadow: isActive
-      ? "var(--neu-shadow-inset-sm)"
-      : hovered
-        ? "var(--neu-shadow-raised-sm)"
-        : "none",
-    transform: hovered && !isActive ? "translateX(4px)" : "none",
+    boxShadow: isActive ? "var(--neu-shadow-inset-sm)" : "none",
     transition,
   };
 
   return (
     <button
       type="button"
+      className="neu-combo-item"
       data-active={isActive}
+      data-selected={isActive || undefined}
       style={style}
       onClick={onSelect}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       {label}
     </button>

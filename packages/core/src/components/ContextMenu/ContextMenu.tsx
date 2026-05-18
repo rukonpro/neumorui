@@ -51,11 +51,16 @@ const separatorStyle: React.CSSProperties = {
   margin: "4px 0",
 };
 
+const LONG_PRESS_MS = 500;
+const MOVE_THRESHOLD_PX = 10;
+
 export const ContextMenu: React.FC<ContextMenuProps> = ({ trigger, items, className, style, ...rest }) => {
   const [visible, setVisible] = React.useState(false);
   const [pos, setPos] = React.useState({ x: 0, y: 0 });
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
+  const longPressTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStart = React.useRef<{ x: number; y: number } | null>(null);
 
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -63,9 +68,36 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ trigger, items, classN
     setVisible(true);
   };
 
+  const cancelLongPress = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+    touchStart.current = null;
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType !== "touch") return;
+    touchStart.current = { x: e.clientX, y: e.clientY };
+    longPressTimer.current = setTimeout(() => {
+      setPos({ x: e.clientX, y: e.clientY });
+      setVisible(true);
+      longPressTimer.current = null;
+    }, LONG_PRESS_MS);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!touchStart.current) return;
+    const dx = e.clientX - touchStart.current.x;
+    const dy = e.clientY - touchStart.current.y;
+    if (Math.hypot(dx, dy) > MOVE_THRESHOLD_PX) cancelLongPress();
+  };
+
+  React.useEffect(() => () => cancelLongPress(), []);
+
   React.useEffect(() => {
     if (!visible) return;
-    const handleClick = (e: MouseEvent) => {
+    const handleClick = (e: PointerEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setVisible(false);
       }
@@ -73,17 +105,30 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ trigger, items, classN
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setVisible(false);
     };
-    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("pointerdown", handleClick);
     document.addEventListener("keydown", handleKey);
     return () => {
-      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("pointerdown", handleClick);
       document.removeEventListener("keydown", handleKey);
     };
   }, [visible]);
 
   return (
     <>
-      <div className={className} onContextMenu={handleContextMenu} style={{ display: "inline-block", ...style }} {...rest}>
+      <div
+        className={className}
+        onContextMenu={handleContextMenu}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={cancelLongPress}
+        onPointerCancel={cancelLongPress}
+        style={{
+          display: "inline-block",
+          WebkitTouchCallout: "none",
+          ...style,
+        }}
+        {...rest}
+      >
         {trigger}
       </div>
       {visible && (
