@@ -1,3 +1,16 @@
+# Changelog — v0.5.0
+
+## What's Changed
+
+### Features
+- feat(v0.5.0): SSR safety + TypeScript strict cleanup
+
+### Other
+- docs: auto-generate changelog for v0.4.0 [skip ci]
+
+
+---
+
 # Changelog — v0.4.0
 
 ## What's Changed
