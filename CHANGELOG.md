@@ -1,3 +1,16 @@
+# Changelog — v0.4.0
+
+## What's Changed
+
+### Features
+- feat(v0.4.0): touch fallbacks + hover-state CSS perf refactor
+
+### Other
+- docs: auto-generate changelog for v0.3.10 [skip ci]
+
+
+---
+
 # Changelog — v0.3.10
 
 ## What's Changed
