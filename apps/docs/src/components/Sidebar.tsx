@@ -13,6 +13,15 @@ interface SidebarCategory {
 
 const categories: SidebarCategory[] = [
   {
+    name: "Guides",
+    icon: "📚",
+    items: [
+      { slug: "getting-started", name: "Getting Started" },
+      { slug: "theming", name: "Theming" },
+      { slug: "ssr", name: "SSR & Next.js" },
+    ],
+  },
+  {
     name: "Form",
     icon: "📝",
     items: [
@@ -297,7 +306,7 @@ export const DocsSidebar: React.FC<{
             NeumorUI
           </div>
           <div style={{ fontSize: "10px", color: "var(--neu-text-muted)", fontWeight: 600 }}>
-            {categories.reduce((sum, cat) => sum + cat.items.length, 0)} Components
+            {categories.filter(c => c.name !== "Guides").reduce((sum, cat) => sum + cat.items.length, 0)} Components
           </div>
         </div>
       </Link>
