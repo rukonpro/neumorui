@@ -22,6 +22,13 @@ const categories: SidebarCategory[] = [
     ],
   },
   {
+    name: "Examples",
+    icon: "✨",
+    items: [
+      { slug: "examples/dashboard", name: "Dashboard" },
+    ],
+  },
+  {
     name: "Form",
     icon: "📝",
     items: [
@@ -306,7 +313,7 @@ export const DocsSidebar: React.FC<{
             NeumorUI
           </div>
           <div style={{ fontSize: "10px", color: "var(--neu-text-muted)", fontWeight: 600 }}>
-            {categories.filter(c => c.name !== "Guides").reduce((sum, cat) => sum + cat.items.length, 0)} Components
+            {categories.filter(c => c.name !== "Guides" && c.name !== "Examples").reduce((sum, cat) => sum + cat.items.length, 0)} Components
           </div>
         </div>
       </Link>
