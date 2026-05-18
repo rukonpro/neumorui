@@ -50,7 +50,7 @@ const createButtonStyle: React.CSSProperties = {
   width: "48px",
   height: "48px",
   borderRadius: "16px",
-  background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
+  background: "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
   boxShadow: "var(--neu-shadow-raised)",
   fontSize: "22px",
   color: "#fff",

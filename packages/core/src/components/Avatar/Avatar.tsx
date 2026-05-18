@@ -70,7 +70,7 @@ export const Avatar: React.FC<AvatarProps> = ({
           flexShrink: 0,
           background: src
             ? "transparent"
-            : "linear-gradient(145deg, #8490fa, #5a6cf5)",
+            : "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
           boxShadow: "var(--neu-shadow-raised)",
           ...style,
         }}

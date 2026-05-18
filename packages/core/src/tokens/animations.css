@@ -275,6 +275,28 @@
   color: var(--neu-accent) !important;
 }
 
+/* ── Animation control — opt-in disable via NeuProvider animation prop ── */
+/* "none" mode kills all motion regardless of OS preference */
+[data-neu-animation="none"],
+[data-neu-animation="none"] *,
+[data-neu-animation="none"] *::before,
+[data-neu-animation="none"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* "reduced" mode mimics @media (prefers-reduced-motion: reduce) for any user */
+[data-neu-animation="reduced"],
+[data-neu-animation="reduced"] *,
+[data-neu-animation="reduced"] *::before,
+[data-neu-animation="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
 /* ── Reduced Motion — respects user OS preference ── */
 @media (prefers-reduced-motion: reduce) {
   *,

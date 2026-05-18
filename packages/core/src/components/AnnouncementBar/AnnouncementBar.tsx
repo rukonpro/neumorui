@@ -39,7 +39,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
     gap: "12px",
     ...(isGradient
       ? {
-          background: "linear-gradient(135deg, #8490fa, #5a6cf5)",
+          background: "linear-gradient(135deg, var(--neu-accent-light), var(--neu-accent-dark))",
           color: "#fff",
         }
       : {

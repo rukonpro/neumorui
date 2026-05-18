@@ -168,7 +168,7 @@ export const CookieConsent: React.FC<CookieConsentProps> = ({
                   cursor: opt.required ? "not-allowed" : "pointer",
                   flexShrink: 0,
                   background: toggles[opt.label]
-                    ? "linear-gradient(145deg, #8490fa, #5a6cf5)"
+                    ? "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))"
                     : "var(--neu-bg)",
                   boxShadow: toggles[opt.label]
                     ? "inset 3px 3px 8px rgba(60,78,200,0.35), inset -2px -2px 6px rgba(255,255,255,0.3)"
@@ -233,7 +233,7 @@ export const CookieConsent: React.FC<CookieConsentProps> = ({
             fontSize: "12px",
             fontWeight: 700,
             cursor: "pointer",
-            background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
+            background: "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
             color: "#fff",
             boxShadow:
               "6px 6px 16px rgba(108,126,248,.45), -4px -4px 12px var(--neu-shadow-light)",

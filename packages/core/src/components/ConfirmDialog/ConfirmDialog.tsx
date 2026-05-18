@@ -236,7 +236,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
                 color: "#fff",
                 background: isDanger
                   ? "linear-gradient(145deg, #fa9080, #f5604a)"
-                  : "linear-gradient(145deg, #8490fa, #5a6cf5)",
+                  : "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
                 boxShadow: isDanger
                   ? "5px 5px 14px rgba(248,124,108,.4), -3px -3px 10px var(--neu-shadow-light)"
                   : "5px 5px 14px rgba(108,126,248,.45), -3px -3px 10px var(--neu-shadow-light)",

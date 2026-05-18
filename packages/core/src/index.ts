@@ -2,6 +2,7 @@ import "./tokens/neu.css";
 import "./tokens/animations.css";
 
 export { NeuProvider } from "./components/NeuProvider";
+export type { ThemeOverride } from "./components/NeuProvider";
 export { useNeuTheme } from "./hooks/useNeuTheme";
 export { useReveal, useCountUp, useRipple } from "./hooks/useAnimation";
 

@@ -74,7 +74,7 @@ const KanbanCard: React.FC<{ item: KanbanItem }> = ({ item }) => {
               width: `${item.progress}%`,
               height: "100%",
               borderRadius: "999px",
-              background: "linear-gradient(90deg, #8490fa, #5a6cf5)",
+              background: "linear-gradient(90deg, var(--neu-accent-light), var(--neu-accent-dark))",
             }}
           />
         </div>

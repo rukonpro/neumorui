@@ -76,7 +76,7 @@ const defaultLogoStyle: React.CSSProperties = {
   width: "28px",
   height: "28px",
   borderRadius: "8px",
-  background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
+  background: "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

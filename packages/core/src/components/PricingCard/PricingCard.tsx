@@ -57,7 +57,7 @@ const PlanCard: React.FC<{
             fontWeight: 800,
             padding: "4px 16px",
             borderRadius: "999px",
-            background: "linear-gradient(135deg, #8490fa, #5a6cf5)",
+            background: "linear-gradient(135deg, var(--neu-accent-light), var(--neu-accent-dark))",
             color: "#fff",
             whiteSpace: "nowrap",
           }}
@@ -143,7 +143,7 @@ const PlanCard: React.FC<{
           ...(plan.cta.variant === "primary" || plan.highlighted
             ? {
                 color: "#fff",
-                background: "linear-gradient(145deg, #8490fa, #5a6cf5)",
+                background: "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))",
                 boxShadow:
                   "5px 5px 14px rgba(108,126,248,.45), -3px -3px 10px var(--neu-shadow-light)",
               }

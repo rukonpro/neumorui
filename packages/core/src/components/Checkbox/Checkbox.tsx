@@ -49,7 +49,7 @@ export const Checkbox = React.forwardRef<HTMLDivElement, CheckboxProps>(
           border: "none",
           opacity: disabled ? 0.5 : 1,
           background: isChecked
-            ? "linear-gradient(145deg, #8490fa, #5a6cf5)"
+            ? "linear-gradient(145deg, var(--neu-accent-light), var(--neu-accent-dark))"
             : "var(--neu-bg)",
           boxShadow: isChecked
             ? "3px 3px 9px rgba(108,126,248,.4), -2px -2px 7px var(--neu-shadow-light)"
