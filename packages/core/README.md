@@ -11,6 +11,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/neumorui"><img src="https://img.shields.io/npm/v/neumorui?style=flat-square&color=6c7ef8" alt="npm" /></a>
+  <img src="https://img.shields.io/badge/status-stable_1.0-5ecba1?style=flat-square" alt="stable 1.0" />
   <a href="https://github.com/rukonpro/neumorui/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="license" /></a>
   <a href="https://neumorui.vercel.app"><img src="https://img.shields.io/badge/docs-live-6c7ef8?style=flat-square" alt="docs" /></a>
   <a href="https://rukonpro.github.io/neumorui"><img src="https://img.shields.io/badge/storybook-live-ff4785?style=flat-square" alt="storybook" /></a>
