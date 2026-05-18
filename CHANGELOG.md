@@ -1,3 +1,16 @@
+# Changelog — v0.6.0
+
+## What's Changed
+
+### Features
+- feat(v0.6.0): theme override API + animation control + token cleanup
+
+### Other
+- docs: auto-generate changelog for v0.5.0 [skip ci]
+
+
+---
+
 # Changelog — v0.5.0
 
 ## What's Changed
