@@ -1,3 +1,16 @@
+# Changelog — v0.7.0
+
+## What's Changed
+
+### Features
+- feat(v0.7.0): docs guides — Getting Started, Theming, SSR
+
+### Other
+- docs: auto-generate changelog for v0.6.0 [skip ci]
+
+
+---
+
 # Changelog — v0.6.0
 
 ## What's Changed
