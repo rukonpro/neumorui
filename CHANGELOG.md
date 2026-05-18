@@ -1,3 +1,16 @@
+# Changelog — v0.8.0
+
+## What's Changed
+
+### Features
+- feat(v0.8.0): Dashboard example — first real composed app screen
+
+### Other
+- docs: auto-generate changelog for v0.7.0 [skip ci]
+
+
+---
+
 # Changelog — v0.7.0
 
 ## What's Changed
