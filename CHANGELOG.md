@@ -1,3 +1,13 @@
+# Changelog — v1.0.0
+
+## What's Changed
+
+### Other
+- docs: auto-generate changelog for v0.8.0 [skip ci]
+
+
+---
+
 # Changelog — v0.8.0
 
 ## What's Changed
